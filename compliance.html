@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Compliance & Policy Framework | EcoMark</title>
+    <meta name="description" content="Understand the full regulatory framework governing industrial carbon reporting in India — ISO 14064, GHG Protocol, SEBI BRSR, EU CBAM, BEE PAT Scheme, and more."/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "outline-variant": "#bec9be", "surface-dim": "#d8dad9",
+                "score-a": "#388E3C", "text-main": "#1A1C1A", "text-muted": "#5C635C",
+                "error-container": "#ffdad6", "score-d": "#B71C1C", "on-primary": "#ffffff",
+                "surface-border": "#E1E8E1", "secondary-container": "#a0f399",
+                "surface": "#f8faf8", "surface-variant": "#e1e3e1",
+                "surface-container": "#eceeec", "on-primary-container": "#abffc6",
+                "secondary": "#1b6d24", "outline": "#6f7a70", "on-surface": "#191c1b",
+                "on-error-container": "#93000a", "on-surface-variant": "#3f4941",
+                "on-background": "#191c1b", "surface-container-low": "#f2f4f2",
+                "score-a-plus": "#1B5E20", "score-b": "#F9A825",
+                "surface-container-lowest": "#ffffff", "background": "#f8faf8",
+                "on-secondary-container": "#217128", "primary-fixed": "#9bf6ba",
+                "on-tertiary": "#ffffff", "surface-container-high": "#e6e9e7",
+                "primary": "#006036", "primary-container": "#1a7a4a", "tertiary": "#1c5f21",
+                "surface-bright": "#f8faf8", "error": "#ba1a1a",
+                "surface-container-highest": "#e1e3e1", "score-c": "#E65100"
+            },
+            "spacing": {
+                "stack-sm": "8px", "margin-desktop": "48px", "margin-mobile": "16px",
+                "stack-md": "16px", "gutter": "24px", "container-max": "1200px",
+                "stack-lg": "32px", "base": "4px"
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        .badge-pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(0,96,54,0.08); border: 1px solid rgba(0,96,54,0.2);
+            color: #006036; border-radius: 100px; padding: 4px 12px;
+            font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+        }
+        .policy-tag {
+            display: inline-block; background: #e8f5e9; border: 1px solid #c8e6c9;
+            color: #1B5E20; border-radius: 6px; padding: 3px 8px;
+            font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+        }
+        .nav-anchor { scroll-margin-top: 80px; }
+        .checklist-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid #E1E8E1; }
+        .checklist-item:last-child { border-bottom: none; }
+        .penalty-badge {
+            display: inline-block; background: #ffdad6; border: 1px solid #ffb4ab;
+            color: #B71C1C; border-radius: 6px; padding: 3px 10px;
+            font-size: 11px; font-weight: 700;
+        }
+        .sidebar-link { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; color: #3f4941; transition: all 0.15s; }
+        .sidebar-link:hover { background: #f2f4f2; color: #006036; }
+        .sidebar-link.active { background: #e8f5e9; color: #006036; }
+    </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen font-sans">
+
+<!-- Header -->
+<header class="bg-white/90 backdrop-blur-sm w-full border-b border-surface-border flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40">
+    <a href="index.html" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
+        <span class="material-symbols-outlined text-primary text-3xl font-bold icon-fill">eco</span>
+        <div>
+            <span class="font-bold text-primary text-lg">EcoMark</span>
+            <span class="hidden md:inline text-text-muted text-xs ml-2">Industrial Carbon Platform</span>
+        </div>
+    </a>
+    <div class="flex items-center gap-4">
+        <a href="index.html" class="hidden md:block text-on-surface-variant hover:text-primary text-sm font-semibold transition-colors">← Back to Home</a>
+        <a href="register.html" class="bg-primary text-white px-5 py-2.5 rounded-lg text-sm hover:bg-primary-container transition-all font-bold">Register Company</a>
+    </div>
+</header>
+
+<div class="flex max-w-container-max mx-auto w-full px-margin-mobile md:px-margin-desktop py-stack-lg gap-8">
+
+    <!-- Sticky Sidebar (Desktop) -->
+    <aside class="hidden lg:flex flex-col w-56 shrink-0">
+        <div class="sticky top-[88px] flex flex-col gap-1">
+            <p class="text-[10px] font-bold uppercase tracking-wider text-text-muted px-3 mb-2">Contents</p>
+            <a class="sidebar-link active" href="#overview" id="nav-overview">Overview</a>
+            <a class="sidebar-link" href="#india-mandates" id="nav-india">India Mandates</a>
+            <a class="sidebar-link" href="#international" id="nav-international">International Standards</a>
+            <a class="sidebar-link" href="#penalties" id="nav-penalties">Penalties & Enforcement</a>
+            <a class="sidebar-link" href="#checklist" id="nav-checklist">Compliance Checklist</a>
+            <a class="sidebar-link" href="#ecomark-mapping" id="nav-mapping">EcoMark Mapping</a>
+            <a class="sidebar-link" href="#faq" id="nav-faq">FAQ</a>
+            <div class="mt-4 p-4 bg-[#e8f5e9] rounded-xl border border-[#c8e6c9]">
+                <p class="text-xs font-bold text-[#1B5E20] mb-2">Quick Access</p>
+                <a href="register.html" class="block text-center bg-[#006036] text-white text-xs font-bold py-2 rounded-lg hover:bg-[#1a7a4a] transition-colors mb-2">Register Now</a>
+                <a href="login.html" class="block text-center border border-[#006036] text-[#006036] text-xs font-bold py-2 rounded-lg hover:bg-[#e8f5e9] transition-colors">Login</a>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="flex-1 min-w-0">
+
+        <!-- Page Header -->
+        <div class="mb-[48px] nav-anchor" id="overview">
+            <div class="badge-pill mb-4 inline-flex">
+                <span class="material-symbols-outlined icon-fill text-sm">policy</span>
+                Compliance & Governance Portal
+            </div>
+            <h1 class="text-4xl font-extrabold text-on-surface tracking-tight mb-3">Carbon Reporting Policy Framework</h1>
+            <p class="text-on-surface-variant text-lg leading-relaxed max-w-[700px]">
+                A comprehensive guide to all national and international regulations governing industrial carbon emission disclosure in India — and how EcoMark ensures your facility is fully compliant across every framework.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+                <span class="policy-tag">ISO 14064-1</span>
+                <span class="policy-tag">GHG Protocol</span>
+                <span class="policy-tag">CSRD / ESRS E1</span>
+                <span class="policy-tag">SEBI BRSR</span>
+                <span class="policy-tag">EU CBAM 2026</span>
+                <span class="policy-tag">BEE PAT Scheme</span>
+                <span class="policy-tag">SBTi</span>
+                <span class="policy-tag">India NDC 2030</span>
+            </div>
+        </div>
+
+        <!-- ─── INDIA MANDATES ─── -->
+        <section class="mb-[56px] nav-anchor" id="india-mandates">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-full bg-[#FF6B35]/10 flex items-center justify-center text-lg">🇮🇳</div>
+                <h2 class="text-2xl font-bold text-on-surface">India — Domestic Regulatory Mandates</h2>
+            </div>
+
+            <!-- EPA -->
+            <div class="bg-white rounded-xl border border-surface-border shadow-sm mb-4 overflow-hidden" id="epa1986">
+                <div class="p-5 border-b border-surface-border bg-surface-container-low flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold text-on-surface text-lg">Environment Protection Act, 1986 (EPA)</h3>
+                        <p class="text-text-muted text-sm mt-0.5">MoEF&CC — Ministry of Environment, Forest and Climate Change</p>
+                    </div>
+                    <span class="bg-[#1B5E20] text-white text-xs font-bold px-3 py-1 rounded-full">ACTIVE</span>
+                </div>
+                <div class="p-5 grid md:grid-cols-3 gap-6">
+                    <div>
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">Who It Applies To</p>
+                        <p class="text-sm text-on-surface-variant">All industrial facilities classified as "Red" or "Orange" category by CPCB/SPCB. Includes manufacturing, chemicals, food processing, textiles, steel, cement, paper.</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">What's Required</p>
+                        <p class="text-sm text-on-surface-variant">Annual environmental statement to SPCB. Consent to Operate (CTO) renewal requires emission compliance data. Facilities ≥250 employees must file Form V every year by 30th September.</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">EcoMark Support</p>
+                        <p class="text-sm text-on-surface-variant font-semibold text-[#006036]">EcoMark's quarterly emission reports are pre-formatted for Form V submission. Audit logs serve as supporting documentation for SPCB inspections.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BEE PAT -->
+            <div class="bg-white rounded-xl border border-surface-border shadow-sm mb-4 overflow-hidden" id="bee-pat">
+                <div class="p-5 border-b border-surface-border bg-surface-container-low flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold text-on-surface text-lg">PAT Scheme — Perform Achieve Trade (BEE)</h3>
+                        <p class="text-text-muted text-sm mt-0.5">Bureau of Energy Efficiency — Ministry of Power</p>
+                    </div>
+                    <span class="bg-[#388E3C] text-white text-xs font-bold px-3 py-1 rounded-full">CYCLE 7 ACTIVE</span>
+                </div>
+                <div class="p-5 grid md:grid-cols-3 gap-6">
+                    <div>
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">Designated Consumer (DC) Sectors</p>
+                        <p class="text-sm text-on-surface-variant">Aluminum, Cement, Chlor-Alkali, Fertilizer, Iron & Steel, Paper & Pulp, Petrochemicals, Petroleum Refinery, Textiles, Thermal Power Plants + 3 more.</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">What's Required</p>
+                        <p class="text-sm text-on-surface-variant">Each DC must achieve assigned Specific Energy Consumption (SEC) targets. Overachievers receive tradeable Energy Saving Certificates (ESCerts). Non-achievers must purchase ESCerts or pay penalties.</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">EcoMark Support</p>
+                        <p class="text-sm text-on-surface-variant font-semibold text-[#006036]">EcoMark's energy consumption analytics directly map to SEC calculation. Trend data helps DCs track progress against PAT targets quarterly, not just annually.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEBI BRSR -->
+            <div class="bg-white rounded-xl border border-surface-border shadow-sm mb-4 overflow-hidden" id="sebi">
+                <div class="p-5 border-b border-surface-border bg-surface-container-low flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold text-on-surface text-lg">SEBI BRSR — Business Responsibility & Sustainability Report</h3>
+                        <p class="text-text-muted text-sm mt-0.5">Securities and Exchange Board of India — Circular SEBI/HO/CFD/CMD-2/P/CIR/2021/562</p>
+                    </div>
+                    <span class="bg-[#1B5E20] text-white text-xs font-bold px-3 py-1 rounded-full">MANDATORY FY23</span>
+                </div>
+                <div class="p-5 grid md:grid-cols-3 gap-6">
+                    <div>
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">Who It Applies To</p>
+                        <p class="text-sm text-on-surface-variant">Top 1,000 listed companies by market cap (NSE/BSE). Mandatory since FY 2022-23. Extended to top-5,000 proposed by 2026 under SEBI's BRSR Core expansion.</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">Relevant BRSR Principles</p>
+                        <p class="text-sm text-on-surface-variant"><strong>Principle 6 (Environment)</strong>: Energy consumption, GHG emissions (Scope 1 & 2), water intensity, waste generation. Leadership indicators require third-party verification for A-rated disclosures.</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">EcoMark Support</p>
+                        <p class="text-sm text-on-surface-variant font-semibold text-[#006036]">EcoMark's Scope 1 & 2 reports map to BRSR P6 Essential Indicators 1–7 verbatim. Export BRSR-formatted CSV for direct filing. Audit trail satisfies third-party verification requirement.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- India NDC -->
+            <div class="bg-white rounded-xl border border-surface-border shadow-sm overflow-hidden">
+                <div class="p-5 border-b border-surface-border bg-surface-container-low flex justify-between items-center">
+                    <div>
+                        <h3 class="font-bold text-on-surface text-lg">India NDC — Nationally Determined Contribution (Paris Agreement)</h3>
+                        <p class="text-text-muted text-sm mt-0.5">MoEF&CC — Updated NDC submitted to UNFCCC, August 2022</p>
+                    </div>
+                    <span class="bg-[#F9A825] text-white text-xs font-bold px-3 py-1 rounded-full">2030 TARGET</span>
+                </div>
+                <div class="p-5 grid md:grid-cols-3 gap-6">
+                    <div>
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">National Commitment</p>
+                        <p class="text-sm text-on-surface-variant">45% reduction in emission intensity of GDP by 2030 vs 2005 baseline. 50% cumulative electric power capacity from non-fossil sources by 2030. Net-zero by 2070.</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">Industrial Implication</p>
+                        <p class="text-sm text-on-surface-variant">The government will cascade NDC targets to state PCBs and sectoral regulators. Facilities without verified emission reduction data risk exclusion from government contracts and credit schemes post-2025.</p>
+                    </div>
+                    <div>
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-2">EcoMark Support</p>
+                        <p class="text-sm text-on-surface-variant font-semibold text-[#006036]">Platform aggregates anonymized data for national MRV (Measurement, Reporting, Verification) dashboards, contributing directly to India's UNFCCC country reporting obligations.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── INTERNATIONAL STANDARDS ─── -->
+        <section class="mb-[56px] nav-anchor" id="international">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-lg">🌍</div>
+                <h2 class="text-2xl font-bold text-on-surface">International Standards & Frameworks</h2>
+            </div>
+
+            <!-- Standards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                <!-- ISO 14064 -->
+                <div class="bg-white rounded-xl border border-surface-border shadow-sm p-5" id="iso14064">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-[#006036] flex items-center justify-center shrink-0">
+                            <span class="text-white font-bold text-xs text-center leading-tight">ISO<br/>14064</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-on-surface">ISO 14064-1:2018</h3>
+                            <p class="text-text-muted text-xs mt-0.5">Greenhouse Gas Quantification & Reporting at Organizational Level</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed mb-3">The international standard for quantifying and reporting Scope 1 and Scope 2 GHG emissions. Specifies principles and requirements for designing, developing, managing, and reporting GHG inventories. Required by most global procurement sustainability audits.</p>
+                    <div class="bg-[#e8f5e9] rounded-lg p-3">
+                        <p class="text-xs font-bold text-[#1B5E20] mb-1">EcoMark Alignment</p>
+                        <p class="text-xs text-on-surface-variant">IPCC emission factors used by EcoMark are the same coefficients referenced in ISO 14064-1 Annex B. Our report structure follows Clause 5.4 (Quantification) and Clause 7 (Documentation) verbatim.</p>
+                    </div>
+                </div>
+
+                <!-- GHG Protocol -->
+                <div class="bg-white rounded-xl border border-surface-border shadow-sm p-5" id="ghgprotocol">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-[#388E3C] flex items-center justify-center shrink-0">
+                            <span class="text-white font-bold text-[10px] text-center leading-tight">GHG<br/>PROTO</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-on-surface">GHG Protocol — Corporate Accounting Standard</h3>
+                            <p class="text-text-muted text-xs mt-0.5">World Resources Institute (WRI) & World Business Council for Sustainable Development</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed mb-3">World's most widely used GHG accounting standard. Defines Scope 1 (direct emissions), Scope 2 (indirect from purchased energy), and Scope 3 (value chain). Used as foundation for SEBI BRSR, CDP, TCFD, and SBTi reporting.</p>
+                    <div class="bg-[#e8f5e9] rounded-lg p-3">
+                        <p class="text-xs font-bold text-[#1B5E20] mb-1">EcoMark Alignment</p>
+                        <p class="text-xs text-on-surface-variant">EcoMark covers GHG Protocol Scope 1 (fuel combustion) and Scope 2 (electricity) in full. Scope 3 module is on the product roadmap for Phase 2.</p>
+                    </div>
+                </div>
+
+                <!-- EU CSRD -->
+                <div class="bg-white rounded-xl border border-surface-border shadow-sm p-5">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-[#1A73E8] flex items-center justify-center shrink-0">
+                            <span class="text-white font-bold text-[10px] text-center leading-tight">EU<br/>CSRD</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-on-surface">EU CSRD & ESRS E1 — Climate Change</h3>
+                            <p class="text-text-muted text-xs mt-0.5">Corporate Sustainability Reporting Directive — Effective 2025</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed mb-3">Requires EU-listed companies and non-EU companies with >€150M EU revenue to disclose climate-related risks and emissions under European Sustainability Reporting Standard E1. Applies to Indian MNCs with EU operations from 2026.</p>
+                    <div class="bg-[#e8f5e9] rounded-lg p-3">
+                        <p class="text-xs font-bold text-[#1B5E20] mb-1">EcoMark Alignment</p>
+                        <p class="text-xs text-on-surface-variant">EcoMark's digital audit trail satisfies ESRS E1's "double materiality" verification requirement. Data exports can be uploaded directly to EFRAG's reporting template.</p>
+                    </div>
+                </div>
+
+                <!-- EU CBAM -->
+                <div class="bg-white rounded-xl border border-surface-border shadow-sm p-5" id="cbam">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-[#E65100] flex items-center justify-center shrink-0">
+                            <span class="text-white font-bold text-[10px] text-center leading-tight">EU<br/>CBAM</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-on-surface">EU CBAM — Carbon Border Adjustment Mechanism</h3>
+                            <p class="text-text-muted text-xs mt-0.5">Regulation (EU) 2023/956 — Full enforcement from 2026</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed mb-3">Requires importers of steel, iron, cement, aluminum, electricity, fertilizers, and hydrogen into the EU to declare embedded carbon and purchase CBAM certificates. Affects ₹58,000+ Cr of Indian exports annually. Violators face import bans.</p>
+                    <div class="bg-[#e8f5e9] rounded-lg p-3">
+                        <p class="text-xs font-bold text-[#1B5E20] mb-1">EcoMark Alignment</p>
+                        <p class="text-xs text-on-surface-variant">EcoMark-verified emission data for steel, aluminum, and cement facilities is pre-formatted for CBAM Annex IV declaration forms. Export directly from the Admin portal.</p>
+                    </div>
+                </div>
+
+                <!-- SBTi -->
+                <div class="bg-white rounded-xl border border-surface-border shadow-sm p-5">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-[#1B5E20] flex items-center justify-center shrink-0">
+                            <span class="text-white font-bold text-[10px] text-center leading-tight">SBTi</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-on-surface">SBTi — Science Based Targets Initiative</h3>
+                            <p class="text-text-muted text-xs mt-0.5">CDP, UN Global Compact, WRI, WWF joint initiative</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed mb-3">Over 7,000 companies globally have committed to SBTi targets, including 200+ Indian companies. SBTi requires a 1.5°C-aligned emission reduction trajectory, independently validated. Required by major global supply chains (Apple, Microsoft, Unilever, Walmart).</p>
+                    <div class="bg-[#e8f5e9] rounded-lg p-3">
+                        <p class="text-xs font-bold text-[#1B5E20] mb-1">EcoMark Alignment</p>
+                        <p class="text-xs text-on-surface-variant">EcoMark's trend analytics automatically calculate and visualize 5-year reduction trajectories, showing whether a company is on a 1.5°C, 2°C, or above path for SBTi submission.</p>
+                    </div>
+                </div>
+
+                <!-- TCFD -->
+                <div class="bg-white rounded-xl border border-surface-border shadow-sm p-5">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-xl bg-[#5C635C] flex items-center justify-center shrink-0">
+                            <span class="text-white font-bold text-[10px] text-center leading-tight">TCFD</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-on-surface">TCFD — Task Force on Climate-related Financial Disclosures</h3>
+                            <p class="text-text-muted text-xs mt-0.5">Financial Stability Board — Incorporated into ISSB IFRS S2</p>
+                        </div>
+                    </div>
+                    <p class="text-sm text-on-surface-variant leading-relaxed mb-3">TCFD recommends disclosure of governance, strategy, risk management, and metrics related to climate change. Now incorporated into IFRS Sustainability Disclosure Standards (ISSB S2), which RBI is aligning Indian banking sector to from 2025.</p>
+                    <div class="bg-[#e8f5e9] rounded-lg p-3">
+                        <p class="text-xs font-bold text-[#1B5E20] mb-1">EcoMark Alignment</p>
+                        <p class="text-xs text-on-surface-variant">EcoMark's Metrics & Targets module provides the quantitative data required for TCFD Pillar 4. The audit trail satisfies the "robust verification" requirement for institutional investor reporting.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── PENALTIES ─── -->
+        <section class="mb-[56px] nav-anchor" id="penalties">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-[#ffdad6] flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[#B71C1C] icon-fill">gavel</span>
+                </div>
+                <h2 class="text-2xl font-bold text-on-surface">Penalties for Non-Compliance</h2>
+            </div>
+
+            <div class="bg-[#fff8f7] border border-[#ffb4ab] rounded-xl p-6 mb-6">
+                <p class="font-bold text-[#B71C1C] flex items-center gap-2 mb-2">
+                    <span class="material-symbols-outlined icon-fill text-sm">warning</span>
+                    Non-compliance is not a calculated risk — it is an operational liability.
+                </p>
+                <p class="text-sm text-on-surface-variant">Regulators globally are moving from voluntary to mandatory enforcement. The following penalties are currently enforceable for qualifying facilities.</p>
+            </div>
+
+            <div class="bg-white rounded-xl border border-surface-border shadow-sm overflow-hidden">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead class="bg-surface-container-low border-b border-surface-border">
+                        <tr class="text-xs font-bold text-text-muted uppercase tracking-wider">
+                            <th class="p-4">Regulation</th>
+                            <th class="p-4">Violation</th>
+                            <th class="p-4">Penalty</th>
+                            <th class="p-4">Severity</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-surface-border">
+                        <tr class="hover:bg-surface-container-low transition-colors">
+                            <td class="p-4 font-semibold">EPA 1986 (India)</td>
+                            <td class="p-4 text-on-surface-variant">Failure to file annual environmental statement (Form V)</td>
+                            <td class="p-4">₹1 Lakh/day fine + potential imprisonment (1–5 years) + CTO cancellation</td>
+                            <td class="p-4"><span class="penalty-badge">CRITICAL</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-container-low transition-colors">
+                            <td class="p-4 font-semibold">BEE PAT Scheme</td>
+                            <td class="p-4 text-on-surface-variant">Failure to meet Specific Energy Consumption (SEC) target</td>
+                            <td class="p-4">Must purchase ESCerts or pay ₹10 per kWh equivalent penalty. Repeat: facility shutdown orders</td>
+                            <td class="p-4"><span class="penalty-badge">HIGH</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-container-low transition-colors">
+                            <td class="p-4 font-semibold">SEBI BRSR</td>
+                            <td class="p-4 text-on-surface-variant">Non-filing or materially incorrect BRSR for listed companies</td>
+                            <td class="p-4">SEBI penalty up to ₹25 Cr + delisting risk + credit rating downgrade triggers</td>
+                            <td class="p-4"><span class="penalty-badge">CRITICAL</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-container-low transition-colors">
+                            <td class="p-4 font-semibold">EU CBAM</td>
+                            <td class="p-4 text-on-surface-variant">Exporting regulated goods to EU without CBAM certificate</td>
+                            <td class="p-4">€50 per tonne CO2 undeclared + import confiscation + blacklisting from EU markets</td>
+                            <td class="p-4"><span class="penalty-badge">CRITICAL</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-container-low transition-colors">
+                            <td class="p-4 font-semibold">EU CSRD</td>
+                            <td class="p-4 text-on-surface-variant">Non-disclosure or false sustainability reporting (EU operations)</td>
+                            <td class="p-4">Up to 5% of global annual turnover. Class-action shareholder suits permitted</td>
+                            <td class="p-4"><span class="penalty-badge">HIGH</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-container-low transition-colors">
+                            <td class="p-4 font-semibold">India NDC (post-2025)</td>
+                            <td class="p-4 text-on-surface-variant">Facilities unable to demonstrate emission intensity reduction</td>
+                            <td class="p-4">Progressive carbon tax surcharge + exclusion from PSU procurement lists + MoEF&CC show-cause notice</td>
+                            <td class="p-4"><span class="penalty-badge">MEDIUM</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ─── COMPLIANCE CHECKLIST ─── -->
+        <section class="mb-[56px] nav-anchor" id="checklist">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-[#e8f5e9] flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[#006036] icon-fill">checklist</span>
+                </div>
+                <h2 class="text-2xl font-bold text-on-surface">Your Compliance Checklist</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                <!-- SME Checklist -->
+                <div class="bg-white rounded-xl border border-surface-border shadow-sm p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-[#388E3C] flex items-center justify-center">
+                            <span class="material-symbols-outlined text-white text-sm">factory</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-on-surface">SME / Unlisted Company</h3>
+                            <p class="text-xs text-text-muted">&lt;250 employees or &lt;₹10Cr investment</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="checklist-item">
+                            <span class="material-symbols-outlined text-[#388E3C] icon-fill mt-0.5 shrink-0">check_circle</span>
+                            <div>
+                                <p class="text-sm font-semibold text-on-surface">Register on EcoMark Platform</p>
+                                <p class="text-xs text-text-muted">Free. Earn +100 Eco-Coins immediately</p>
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="material-symbols-outlined text-[#388E3C] icon-fill mt-0.5 shrink-0">check_circle</span>
+                            <div>
+                                <p class="text-sm font-semibold text-on-surface">Submit Quarterly Utility Reports</p>
+                                <p class="text-xs text-text-muted">Fuel & electricity consumption logs (8 min to complete)</p>
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="material-symbols-outlined text-[#388E3C] icon-fill mt-0.5 shrink-0">check_circle</span>
+                            <div>
+                                <p class="text-sm font-semibold text-on-surface">Generate Product Carbon Labels</p>
+                                <p class="text-xs text-text-muted">QR-enabled product badges for packaging</p>
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="material-symbols-outlined text-[#F9A825] icon-fill mt-0.5 shrink-0">circle</span>
+                            <div>
+                                <p class="text-sm font-semibold text-on-surface">SPCB Annual Statement (if "Orange" category)</p>
+                                <p class="text-xs text-text-muted">Use EcoMark PDF export for Form V filing</p>
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="material-symbols-outlined text-surface-border mt-0.5 shrink-0">radio_button_unchecked</span>
+                            <div>
+                                <p class="text-sm font-semibold text-text-muted">Optional: Set Reduction Targets</p>
+                                <p class="text-xs text-text-muted">Earn Eco-Coins for measurable progress</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Large Company Checklist -->
+                <div class="bg-white rounded-xl border border-surface-border shadow-sm p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 rounded-full bg-[#006036] flex items-center justify-center">
+                            <span class="material-symbols-outlined text-white text-sm">domain</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-on-surface">Large / Listed Company</h3>
+                            <p class="text-xs text-text-muted">Top-1000 listed or Designated Consumer (PAT)</p>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="checklist-item">
+                            <span class="material-symbols-outlined text-[#388E3C] icon-fill mt-0.5 shrink-0">check_circle</span>
+                            <div>
+                                <p class="text-sm font-semibold text-on-surface">All SME requirements above</p>
+                                <p class="text-xs text-text-muted">Plus the following mandatory items</p>
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="material-symbols-outlined text-[#F9A825] icon-fill mt-0.5 shrink-0">circle</span>
+                            <div>
+                                <p class="text-sm font-semibold text-on-surface">SEBI BRSR Annual Filing (P6 Environment)</p>
+                                <p class="text-xs text-text-muted">Use EcoMark BRSR-formatted export (Principle 6, Essential Indicators 1–7)</p>
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="material-symbols-outlined text-[#F9A825] icon-fill mt-0.5 shrink-0">circle</span>
+                            <div>
+                                <p class="text-sm font-semibold text-on-surface">BEE PAT SEC Target Tracking</p>
+                                <p class="text-xs text-text-muted">Quarterly progress monitoring against PAT Cycle 7 targets</p>
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="material-symbols-outlined text-[#E65100] icon-fill mt-0.5 shrink-0">warning</span>
+                            <div>
+                                <p class="text-sm font-semibold text-on-surface">EU CBAM Certificate (if exporting to EU)</p>
+                                <p class="text-xs text-text-muted">Mandatory from Jan 2026 — EcoMark CBAM export available Q4 2025</p>
+                            </div>
+                        </div>
+                        <div class="checklist-item">
+                            <span class="material-symbols-outlined text-surface-border mt-0.5 shrink-0">radio_button_unchecked</span>
+                            <div>
+                                <p class="text-sm font-semibold text-text-muted">SBTi Target Setting (Recommended)</p>
+                                <p class="text-xs text-text-muted">Required by major global supply chain partners</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ─── ECOMARK MAPPING ─── -->
+        <section class="mb-[56px] nav-anchor" id="ecomark-mapping">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-[#e8f5e9] flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[#006036] icon-fill">link</span>
+                </div>
+                <h2 class="text-2xl font-bold text-on-surface">How EcoMark Satisfies Each Framework</h2>
+            </div>
+
+            <div class="bg-white rounded-xl border border-surface-border shadow-sm overflow-hidden">
+                <table class="w-full text-left border-collapse text-sm">
+                    <thead class="bg-surface-container-low border-b border-surface-border">
+                        <tr class="text-xs font-bold text-text-muted uppercase tracking-wider">
+                            <th class="p-4">Framework</th>
+                            <th class="p-4">Scope Covered</th>
+                            <th class="p-4">EcoMark Feature</th>
+                            <th class="p-4">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-surface-border">
+                        <tr class="hover:bg-surface-container-low">
+                            <td class="p-4 font-bold">EPA 1986 Form V</td>
+                            <td class="p-4 text-text-muted">Annual emission statement</td>
+                            <td class="p-4">PDF report export, audit log timestamp</td>
+                            <td class="p-4"><span class="policy-tag">Available</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-container-low">
+                            <td class="p-4 font-bold">BEE PAT SEC</td>
+                            <td class="p-4 text-text-muted">Energy intensity tracking</td>
+                            <td class="p-4">Quarterly fuel consumption analytics, trend chart</td>
+                            <td class="p-4"><span class="policy-tag">Available</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-container-low">
+                            <td class="p-4 font-bold">SEBI BRSR P6</td>
+                            <td class="p-4 text-text-muted">Scope 1 & 2 GHG indicators</td>
+                            <td class="p-4">CSV export mapped to BRSR P6 indicators 1–7</td>
+                            <td class="p-4"><span class="policy-tag">Available</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-container-low">
+                            <td class="p-4 font-bold">ISO 14064-1</td>
+                            <td class="p-4 text-text-muted">GHG quantification standard</td>
+                            <td class="p-4">IPCC factors (Annex B compliant), audit trail (Clause 7)</td>
+                            <td class="p-4"><span class="policy-tag">Available</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-container-low">
+                            <td class="p-4 font-bold">GHG Protocol</td>
+                            <td class="p-4 text-text-muted">Scope 1 + Scope 2</td>
+                            <td class="p-4">Scope 1 (fuel combustion), Scope 2 (electricity grid)</td>
+                            <td class="p-4"><span class="policy-tag">Available</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-container-low">
+                            <td class="p-4 font-bold">EU CBAM</td>
+                            <td class="p-4 text-text-muted">Export carbon certificates</td>
+                            <td class="p-4">CBAM-formatted export module</td>
+                            <td class="p-4"><span class="bg-[#F9A825] text-white text-xs font-bold px-2 py-0.5 rounded">Q4 2025</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-container-low">
+                            <td class="p-4 font-bold">SBTi</td>
+                            <td class="p-4 text-text-muted">1.5°C trajectory reporting</td>
+                            <td class="p-4">Reduction trend analytics, trajectory projections</td>
+                            <td class="p-4"><span class="policy-tag">Available</span></td>
+                        </tr>
+                        <tr class="hover:bg-surface-container-low">
+                            <td class="p-4 font-bold">GHG Protocol Scope 3</td>
+                            <td class="p-4 text-text-muted">Supply chain emissions</td>
+                            <td class="p-4">Upstream/downstream supply chain module</td>
+                            <td class="p-4"><span class="bg-[#5C635C] text-white text-xs font-bold px-2 py-0.5 rounded">Phase 2</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ─── FAQ ─── -->
+        <section class="nav-anchor" id="faq">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 rounded-xl bg-[#e8f5e9] flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[#006036] icon-fill">help</span>
+                </div>
+                <h2 class="text-2xl font-bold text-on-surface">Frequently Asked Questions</h2>
+            </div>
+
+            <div class="space-y-3" id="faqContainer">
+                <!-- FAQ items generated by JS -->
+            </div>
+
+            <!-- CTA -->
+            <div class="mt-[48px] bg-[#006036] rounded-xl p-8 text-white text-center">
+                <span class="material-symbols-outlined icon-fill text-4xl mb-3 block text-[#80d9a0]">eco</span>
+                <h3 class="text-xl font-bold mb-2">Ready to become compliant?</h3>
+                <p class="text-white/70 text-sm mb-6 max-w-[460px] mx-auto">Register your facility on EcoMark today. It's free, takes under 5 minutes, and earns 100 Eco-Coins on signup.</p>
+                <div class="flex gap-4 justify-center flex-wrap">
+                    <a href="register.html" class="bg-white text-[#006036] px-8 py-3 rounded-lg font-bold hover:bg-[#f8faf8] transition-colors">Register Now — Free</a>
+                    <a href="login.html" class="border border-white/30 text-white px-8 py-3 rounded-lg font-bold hover:bg-white/10 transition-colors">Login to Portal</a>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<script>
+    // FAQ Data
+    const faqs = [
+        {
+            q: "Is EcoMark registration mandatory for my facility?",
+            a: "If your facility is classified as 'Red' or 'Orange' category by CPCB (Central Pollution Control Board), annual emission disclosure is mandatory under EPA 1986. EcoMark provides the most cost-effective and frictionless pathway to meet this requirement. For BEE Designated Consumers, EcoMark's energy tracking is aligned with PAT Cycle 7 reporting requirements."
+        },
+        {
+            q: "How do I know which sector my facility belongs to under BEE PAT?",
+            a: "BEE PAT covers 13 designated sectors: Aluminum, Cement, Chlor-Alkali, Fertilizer, Iron & Steel, Paper & Pulp, Petrochemicals, Petroleum Refineries, Textile, Thermal Power Stations, Railways, DISCOMs, and Commercial Buildings above a consumption threshold. If your annual energy consumption exceeds the sector-specific threshold (e.g., 30,000 MTOE for steel), you are a Designated Consumer."
+        },
+        {
+            q: "What's the difference between Scope 1, Scope 2, and Scope 3 emissions?",
+            a: "Scope 1: Direct emissions from sources you own or control (e.g., burning diesel in your boiler, coal in your furnace). Scope 2: Indirect emissions from purchased electricity or heat. EcoMark currently covers Scope 1 & 2 in full. Scope 3: All other indirect emissions in your value chain (supplier transport, product use, end-of-life). Scope 3 is on EcoMark's Phase 2 roadmap."
+        },
+        {
+            q: "How does EcoMark ensure the data I submit is trustworthy?",
+            a: "All submitted reports are written to a tamper-evident append-only audit log (WORM — Write Once Read Many). Each entry has a unique timestamp and cannot be retroactively modified. In the production version, reports will additionally be cryptographically signed using SHA-256 hashes. Physical IoT meter integration (pulling consumption data directly from energy meters via MQTT) is on the product roadmap to eliminate manual entry entirely."
+        },
+        {
+            q: "What happens to my Eco-Coins and can I convert them to money?",
+            a: "Eco-Coins (ECT) are EcoMark Carbon Tokens earned for positive environmental actions. In the current prototype they are recorded as balance on your account. In the production platform, ECTs will be redeemable for: (1) Regulatory fee waivers with partner SPCBs; (2) Priority processing on green finance applications with partner banks (SIDBI, Yes Bank Green); (3) Carbon offset purchase credits in the EcoMark marketplace; (4) ESG certification fee discounts with partner bodies."
+        },
+        {
+            q: "My facility is very small (under 50 employees). Do I still need to report?",
+            a: "The EPA 1986 Form V obligation typically applies to facilities with 250+ workers or ₹10 Cr+ plant investment in Red/Orange category industries. However, voluntary reporting on EcoMark — even for micro-enterprises — provides QR-based product carbon labels, which are increasingly demanded by modern retail buyers and export customers. Many EcoMark SME users joined to access green procurement contracts, not regulatory compliance."
+        },
+        {
+            q: "How does the EU CBAM affect Indian steel and aluminum exporters specifically?",
+            a: "From January 2026, EU importers must declare the embedded carbon content of all steel, aluminum, cement, fertilizers, and electricity they import. If the Indian exporter cannot provide a verified carbon certificate, the EU importer will have to pay €50/tonne of CO2 equivalent in CBAM charges — which will invariably be passed back as price pressure to the Indian supplier. EcoMark's verified emission data directly constitutes the 'actual emissions' certificate required under CBAM Annex IV, potentially saving exporters from the full €50/tonne penalty."
+        },
+        {
+            q: "Is EcoMark's data shared with government agencies without my consent?",
+            a: "No. Company-level data is private and visible only to the company and verified EcoMark regulators. Aggregated, anonymized sector-level statistics (e.g., average CO2e per kg for the textile sector in Maharashtra) may be shared with government bodies for national MRV reporting under India's UNFCCC obligations — but individual company identities are never disclosed in these aggregate reports without explicit consent."
+        }
+    ];
+
+    const faqContainer = document.getElementById('faqContainer');
+    faqs.forEach((faq, i) => {
+        const div = document.createElement('div');
+        div.className = 'bg-white rounded-xl border border-surface-border shadow-sm overflow-hidden';
+        div.innerHTML = `
+            <button class="w-full text-left p-5 flex justify-between items-center gap-4 hover:bg-surface-container-low transition-colors" onclick="toggleFaq(${i})">
+                <p class="font-bold text-on-surface text-sm pr-4">${faq.q}</p>
+                <span class="material-symbols-outlined text-text-muted shrink-0 transition-transform" id="faq-icon-${i}">expand_more</span>
+            </button>
+            <div id="faq-body-${i}" class="hidden px-5 pb-5">
+                <p class="text-sm text-on-surface-variant leading-relaxed">${faq.a}</p>
+            </div>
+        `;
+        faqContainer.appendChild(div);
+    });
+
+    function toggleFaq(index) {
+        const body = document.getElementById(`faq-body-${index}`);
+        const icon = document.getElementById(`faq-icon-${index}`);
+        const isOpen = !body.classList.contains('hidden');
+        body.classList.toggle('hidden', isOpen);
+        icon.style.transform = isOpen ? 'rotate(0deg)' : 'rotate(180deg)';
+    }
+
+    // Scroll-based active sidebar link
+    const sections = document.querySelectorAll('.nav-anchor');
+    const navLinks = document.querySelectorAll('.sidebar-link');
+    window.addEventListener('scroll', () => {
+        let current = 'overview';
+        sections.forEach(s => {
+            if (window.scrollY >= s.offsetTop - 120) current = s.id;
+        });
+        navLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+        });
+    });
+</script>
+</body>
+</html>

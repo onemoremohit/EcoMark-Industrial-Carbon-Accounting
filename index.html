@@ -3,10 +3,11 @@
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>EcoMark - Industrial Carbon Transparency</title>
+    <title>EcoMark — Industrial Carbon Transparency Platform | IPCC-Grade CO2e Accounting</title>
+    <meta name="description" content="EcoMark is India's enterprise-grade carbon accounting platform, aligned with ISO 14064, GHG Protocol, and CSRD mandates. Register your facility, score products, and earn ESG incentives."/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link href="css/style.css" rel="stylesheet"/>
     <script id="tailwind-config">
       tailwind.config = {
@@ -112,166 +113,781 @@
         body {
           min-height: max(884px, 100dvh);
         }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 96, 54, 0.2); }
+            50% { box-shadow: 0 0 0 12px rgba(0, 96, 54, 0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.7s ease both;
+        }
+        .animate-delay-1 { animation-delay: 0.1s; }
+        .animate-delay-2 { animation-delay: 0.2s; }
+        .animate-delay-3 { animation-delay: 0.3s; }
+        .animate-delay-4 { animation-delay: 0.4s; }
+        .pulse-glow-btn { animation: pulse-glow 2.5s infinite; }
+        .gradient-hero {
+            background: linear-gradient(135deg, #f8faf8 0%, #e8f5e9 40%, #f8faf8 100%);
+        }
+        .gradient-dark {
+            background: linear-gradient(135deg, #001c0f 0%, #003820 60%, #001c0f 100%);
+        }
+        .badge-pill {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(0,96,54,0.08); border: 1px solid rgba(0,96,54,0.2);
+            color: #006036; border-radius: 100px; padding: 4px 12px;
+            font-size: 12px; font-weight: 700; letter-spacing: 0.04em;
+        }
+        .obstacle-card:hover { transform: translateY(-2px); }
+        .obstacle-card { transition: transform 0.2s ease, box-shadow 0.2s ease; }
+        .stat-number {
+            font-size: 3rem; font-weight: 800; color: #006036;
+            letter-spacing: -0.03em; line-height: 1;
+        }
+        .policy-tag {
+            display: inline-block; background: #e8f5e9; border: 1px solid #c8e6c9;
+            color: #1B5E20; border-radius: 6px; padding: 4px 10px;
+            font-size: 11px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase;
+        }
+        .timeline-dot {
+            width: 14px; height: 14px; border-radius: 50%;
+            background: #006036; border: 3px solid white;
+            box-shadow: 0 0 0 2px #006036; flex-shrink: 0;
+        }
     </style>
 </head>
 <body class="bg-background text-on-background antialiased min-h-screen flex flex-col font-body-md font-sans">
 
 <!-- TopAppBar -->
-<header class="bg-surface w-full border-b border-surface-border flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40">
+<header class="bg-white/90 backdrop-blur-sm w-full border-b border-surface-border flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40">
     <a href="index.html" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
-        <span class="material-symbols-outlined text-primary text-3xl font-bold">eco</span>
-        <span class="font-headline-md text-headline-md font-bold text-primary">EcoMark</span>
+        <span class="material-symbols-outlined text-primary text-3xl font-bold icon-fill">eco</span>
+        <div>
+            <span class="font-headline-md text-headline-md font-bold text-primary">EcoMark</span>
+            <span class="hidden md:inline font-label-sm text-label-sm text-text-muted ml-2">Industrial Carbon Platform</span>
+        </div>
     </a>
     <div class="flex items-center gap-6">
         <nav class="hidden md:flex gap-6">
-            <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md font-semibold" href="#howItWorks">How it Works</a>
-            <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md font-semibold" href="#features">Features</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md font-semibold" href="#why-register">Why Register?</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md font-semibold" href="#policy-framework">Policies</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md font-semibold" href="#how-it-works">How It Works</a>
+            <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md font-semibold" href="compliance.html">Compliance Portal</a>
         </nav>
         <div class="flex items-center gap-3">
             <a class="text-primary font-label-md text-label-md hidden md:block hover:underline font-bold" href="login.html">Login</a>
-            <a href="register.html" class="bg-primary text-on-primary px-5 py-2.5 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all hover:shadow-sm font-bold">Register</a>
+            <a href="register.html" class="bg-primary text-on-primary px-5 py-2.5 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all hover:shadow-md font-bold pulse-glow-btn">Register Company</a>
         </div>
     </div>
 </header>
 
 <main class="flex-grow flex flex-col items-center">
-    <!-- Hero Section -->
-    <section class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg md:py-[80px] grid md:grid-cols-2 gap-gutter items-center">
-        <div class="flex flex-col gap-stack-md">
-            <h1 class="font-display-lg text-display-lg text-primary font-bold leading-tight tracking-tight">Industrial Carbon Transparency. Engineered.</h1>
-            <p class="font-body-lg text-body-lg text-on-surface-variant max-w-[500px] leading-relaxed">
-                EcoMark provides verifiable, compliance-grade carbon accounting for modern manufacturers. Build trust with consumers through verified lifecycle assessments.
-            </p>
-            <div class="flex flex-wrap gap-4 mt-stack-sm">
-                <a href="register.html" class="bg-primary text-on-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all shadow-md hover:shadow-lg font-bold">Get Started Now</a>
-                <a href="consumer/product.html?productId=prod_sunbake_foods" class="border border-outline text-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors font-bold">View Public Registry</a>
-            </div>
-        </div>
-        <div class="w-full h-[400px] bg-surface-container-low rounded-xl border border-surface-border overflow-hidden relative shadow-sm">
-            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&amp;w=2070&amp;auto=format&amp;fit=crop')] bg-cover bg-center opacity-85 mix-blend-multiply"></div>
-            <!-- Decorative UI overlays -->
-            <div class="absolute top-8 left-8 bg-white p-4 rounded-xl border border-surface-border shadow-md w-48 transition-transform hover:scale-102">
-                <p class="font-label-sm text-label-sm text-text-muted font-semibold">Verified Reduction</p>
-                <p class="font-headline-md text-headline-md text-score-a font-bold">28.5% CO2e</p>
-                <div class="w-full bg-surface-container h-1.5 mt-2 rounded">
-                    <div class="bg-score-a h-1.5 rounded w-[75%]"></div>
-                </div>
-            </div>
-            <div class="absolute bottom-8 right-8 bg-white p-4 rounded-xl border border-surface-border shadow-md flex items-center gap-3 transition-transform hover:scale-102">
-                <span class="material-symbols-outlined text-score-a-plus icon-fill text-2xl" data-icon="verified">verified</span>
-                <div>
-                    <p class="font-label-sm text-label-sm text-text-muted font-semibold">ESG Status</p>
-                    <p class="font-label-md text-label-md text-on-surface font-bold">Audit Certified</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- How It Works Section - Bento Grid -->
-    <section class="w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg md:py-[60px]" id="howItWorks">
-        <div class="text-center mb-stack-lg">
-            <h2 class="font-headline-lg text-headline-lg text-on-surface mb-stack-sm font-bold">Ecosystem of Trust</h2>
-            <p class="font-body-md text-body-md text-on-surface-variant max-w-[600px] mx-auto">A unified transparency platform connecting compliance-driven manufacturers, audit regulators, and eco-conscious consumers.</p>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter auto-rows-[minmax(300px,_auto)]">
-            <!-- Companies Card -->
-            <div class="bg-white border border-surface-border rounded-xl p-8 flex flex-col md:col-span-2 relative overflow-hidden group hover:shadow-md transition-shadow">
-                <div class="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity">
-                    <span class="material-symbols-outlined text-[150px] text-primary">factory</span>
-                </div>
-                <div class="flex items-center gap-3 mb-stack-sm relative z-10">
-                    <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-primary font-bold">
-                        <span class="material-symbols-outlined text-on-primary-container">corporate_fare</span>
+    <!-- ═══ HERO SECTION ═══ -->
+    <section class="w-full gradient-hero">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-[80px] md:py-[120px]">
+            <div class="grid md:grid-cols-2 gap-gutter items-center">
+                <div class="flex flex-col gap-stack-md">
+                    <div class="badge-pill animate-fade-in-up">
+                        <span class="material-symbols-outlined icon-fill text-sm">verified</span>
+                        IPCC-Aligned Carbon Accounting · ISO 14064 · GHG Protocol
                     </div>
-                    <h3 class="font-title-lg text-title-lg text-on-surface font-bold">For Manufacturers</h3>
-                </div>
-                <p class="font-body-md text-body-md text-on-surface-variant mb-stack-md relative z-10 max-w-[480px] leading-relaxed">
-                    Input raw utilities and energy parameters. Calculate certified ISO-grade emissions using IPCC coefficients. Distribute verified dynamic QR badges for packaging.
-                </p>
-                <ul class="flex flex-col gap-2 mt-auto relative z-10">
-                    <li class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md font-semibold"><span class="material-symbols-outlined text-primary text-sm font-bold">check_circle</span> Automated IPCC Carbon Scoring (A+ to D)</li>
-                    <li class="flex items-center gap-2 text-on-surface-variant font-label-md text-label-md font-semibold"><span class="material-symbols-outlined text-primary text-sm font-bold">check_circle</span> Eco-Coins Earning ESG Rewards Program</li>
-                </ul>
-            </div>
-
-            <!-- Consumers Card -->
-            <div class="bg-surface-container-low border border-surface-border rounded-xl p-8 flex flex-col relative overflow-hidden hover:shadow-md transition-shadow">
-                <div class="flex items-center gap-3 mb-stack-sm">
-                    <div class="w-10 h-10 rounded-full bg-tertiary-container flex items-center justify-center text-primary">
-                        <span class="material-symbols-outlined text-on-tertiary-container">qr_code_scanner</span>
-                    </div>
-                    <h3 class="font-title-lg text-title-lg text-on-surface font-bold">For Consumers</h3>
-                </div>
-                <p class="font-body-md text-body-md text-on-surface-variant mb-stack-md leading-relaxed">
-                    Scan products at the point of sale. View verified, simplified carbon footprints instantly without requiring an account.
-                </p>
-                <!-- Callout Box -->
-                <div class="mt-auto bg-[#e8f5e9] p-3 rounded-lg border border-[#c8e6c9] flex items-start gap-3">
-                    <span class="material-symbols-outlined text-score-a mt-0.5">directions_car</span>
-                    <div>
-                        <p class="font-label-sm text-label-sm text-text-muted uppercase font-bold">Equivalency</p>
-                        <p class="font-label-md text-label-md text-on-surface font-bold">Equal to driving 12.8 km</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Admins/Auditors Card -->
-            <div class="bg-white border border-surface-border rounded-xl p-8 flex flex-col md:col-span-3 lg:flex-row items-center gap-gutter hover:shadow-md transition-shadow" id="features">
-                <div class="flex-1">
-                    <div class="flex items-center gap-3 mb-stack-sm">
-                        <div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-primary">
-                            <span class="material-symbols-outlined text-on-secondary-container">admin_panel_settings</span>
-                        </div>
-                        <h3 class="font-title-lg text-title-lg text-on-surface font-bold">For Regulators & Admins</h3>
-                    </div>
-                    <p class="font-body-md text-body-md text-on-surface-variant max-w-[700px] leading-relaxed">
-                        Monitor compliance indices across companies. Sort industry sectors, generate aggregated carbon reports, track compliance curves and audit trails, and export secure data sheets instantly.
+                    <h1 class="animate-fade-in-up animate-delay-1 font-display-lg text-display-lg text-primary font-extrabold leading-[1.1] tracking-tight">
+                        India's Most Trusted<br/>Industrial Carbon<br/>Transparency Platform
+                    </h1>
+                    <p class="animate-fade-in-up animate-delay-2 font-body-lg text-body-lg text-on-surface-variant max-w-[520px] leading-relaxed">
+                        EcoMark helps manufacturers measure, report, and reduce Scope 1 & 2 emissions with verifiable, compliance-grade carbon accounting — linked to real regulatory mandates and market incentives.
                     </p>
+                    <div class="animate-fade-in-up animate-delay-3 flex flex-wrap gap-4 mt-stack-sm">
+                        <a href="register.html" id="hero-register-btn" class="bg-primary text-on-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all shadow-md hover:shadow-lg font-bold flex items-center gap-2">
+                            <span class="material-symbols-outlined icon-fill">factory</span>
+                            Register Your Company
+                        </a>
+                        <a href="login.html?demo=true" class="border border-outline text-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors font-bold flex items-center gap-2">
+                            <span class="material-symbols-outlined">play_circle</span>
+                            Explore Live Demo
+                        </a>
+                    </div>
+                    <!-- Trust Badges -->
+                    <div class="animate-fade-in-up animate-delay-4 flex flex-wrap gap-3 mt-2">
+                        <span class="policy-tag">ISO 14064-1</span>
+                        <span class="policy-tag">GHG Protocol</span>
+                        <span class="policy-tag">CSRD Ready</span>
+                        <span class="policy-tag">SBTi Aligned</span>
+                        <span class="policy-tag">BEE India</span>
+                    </div>
                 </div>
-                <div class="flex gap-4 items-center shrink-0">
-                    <div class="w-20 h-20 rounded bg-score-a-plus flex flex-col items-center justify-center text-white shadow-sm border border-[rgba(0,0,0,0.1)]">
-                        <span class="font-headline-lg text-headline-lg font-bold leading-none">A+</span>
+
+                <!-- Live Stats Widget -->
+                <div class="flex flex-col gap-gutter">
+                    <!-- Platform Stats Card -->
+                    <div class="bg-white rounded-xl border border-surface-border shadow-md p-6">
+                        <p class="font-label-sm text-label-sm text-text-muted font-semibold mb-4 uppercase tracking-wider">Platform at a Glance</p>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <div class="stat-number" id="heroCompanies">3</div>
+                                <p class="font-label-sm text-label-sm text-text-muted mt-1">Registered<br/>Companies</p>
+                            </div>
+                            <div class="border-x border-surface-border">
+                                <div class="stat-number" id="heroReports">6</div>
+                                <p class="font-label-sm text-label-sm text-text-muted mt-1">Verified<br/>Reports</p>
+                            </div>
+                            <div>
+                                <div class="stat-number" id="heroProducts">3</div>
+                                <p class="font-label-sm text-label-sm text-text-muted mt-1">Carbon-Scored<br/>Products</p>
+                            </div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-surface-border flex items-center justify-between">
+                            <span class="font-label-sm text-label-sm text-text-muted">Total CO2e Logged</span>
+                            <span class="font-bold text-on-surface" id="heroTotalCo2">Loading...</span>
+                        </div>
                     </div>
-                    <div class="w-16 h-16 rounded bg-score-b flex flex-col items-center justify-center text-white opacity-40">
-                        <span class="font-headline-md text-headline-md font-bold leading-none">B</span>
+
+                    <!-- Live Product Score Cards -->
+                    <div class="grid grid-cols-3 gap-3">
+                        <div class="bg-white rounded-xl border border-surface-border p-4 text-center hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 rounded-full bg-[#1B5E20] text-white flex items-center justify-center font-bold text-lg mx-auto mb-2">A+</div>
+                            <p class="font-label-sm text-[11px] text-text-muted font-semibold">SunBake Foods</p>
+                            <p class="font-label-sm text-[10px] text-on-surface-variant">Wheat Flour</p>
+                        </div>
+                        <div class="bg-white rounded-xl border border-surface-border p-4 text-center hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 rounded-full bg-[#388E3C] text-white flex items-center justify-center font-bold text-lg mx-auto mb-2">A</div>
+                            <p class="font-label-sm text-[11px] text-text-muted font-semibold">GreenWave</p>
+                            <p class="font-label-sm text-[10px] text-on-surface-variant">Cotton Fabric</p>
+                        </div>
+                        <div class="bg-white rounded-xl border border-surface-border p-4 text-center hover:shadow-md transition-shadow">
+                            <div class="w-12 h-12 rounded-full bg-[#E65100] text-white flex items-center justify-center font-bold text-lg mx-auto mb-2">C</div>
+                            <p class="font-label-sm text-[11px] text-text-muted font-semibold">Ravi Steel</p>
+                            <p class="font-label-sm text-[10px] text-on-surface-variant">Steel Rod G60</p>
+                        </div>
                     </div>
-                    <div class="w-16 h-16 rounded bg-score-c flex flex-col items-center justify-center text-white opacity-40">
-                        <span class="font-headline-md text-headline-md font-bold leading-none">C</span>
+
+                    <a href="consumer/product.html?productId=prod_sunbake_foods" class="text-center text-primary font-label-sm text-label-sm hover:underline font-semibold flex items-center justify-center gap-1">
+                        <span class="material-symbols-outlined text-sm">qr_code</span>
+                        View Public Carbon Registry (no login required)
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ WHY REGISTER SECTION ═══ -->
+    <section class="w-full bg-white border-y border-surface-border py-[80px]" id="why-register">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="text-center mb-[56px]">
+                <div class="badge-pill mb-4 inline-flex">
+                    <span class="material-symbols-outlined icon-fill text-sm">lightbulb</span>
+                    Value Proposition
+                </div>
+                <h2 class="font-display-lg text-display-lg text-on-surface font-bold mb-stack-sm tracking-tight">Why Should Your Industry Register?</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-[620px] mx-auto leading-relaxed">
+                    EcoMark is not just a compliance tool — it's a <strong>competitive advantage</strong> that unlocks real financial, regulatory, and reputational benefits.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+                <!-- Benefit 1: Regulatory -->
+                <div class="bg-surface-container-low rounded-xl p-6 border border-surface-border hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-[#006036] flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-white icon-fill">gavel</span>
+                    </div>
+                    <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-2">Mandatory Compliance</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">
+                        India's <strong>Environment Protection Act (EPA)</strong> and the <strong>BEE Energy Audit</strong> mandate annual carbon disclosure for facilities consuming over 500 MTOE/year. Non-compliance risks operational shutdowns.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="policy-tag">EPA 1986</span>
+                        <span class="policy-tag">BEE Mandate</span>
+                        <span class="policy-tag">PAT Scheme</span>
+                    </div>
+                </div>
+
+                <!-- Benefit 2: ESG Rating -->
+                <div class="bg-surface-container-low rounded-xl p-6 border border-surface-border hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-[#1B5E20] flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-white icon-fill">trending_up</span>
+                    </div>
+                    <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-2">ESG Investor Access</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">
+                        SEBI's <strong>Business Responsibility and Sustainability Report (BRSR)</strong> is now mandatory for top-1000 listed companies. ESG-rated companies access <strong>₹2.3L Cr+ in green finance</strong> annually in India.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="policy-tag">SEBI BRSR</span>
+                        <span class="policy-tag">TCFD</span>
+                        <span class="policy-tag">MSCI ESG</span>
+                    </div>
+                </div>
+
+                <!-- Benefit 3: Eco-Coins -->
+                <div class="bg-surface-container-low rounded-xl p-6 border border-surface-border hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-[#388E3C] flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-white icon-fill">toll</span>
+                    </div>
+                    <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-2">Eco-Coin Incentives</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">
+                        Earn <strong>EcoMark Carbon Tokens (ECT)</strong> for every verified reduction. Redeem for regulatory fee waivers, green certification fast-tracks, and preferential bank lending rates via partner programs.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="policy-tag">+100 On Signup</span>
+                        <span class="policy-tag">+1000 for 25% Drop</span>
+                        <span class="policy-tag">+2000 Net Zero</span>
+                    </div>
+                </div>
+
+                <!-- Benefit 4: Market Access -->
+                <div class="bg-surface-container-low rounded-xl p-6 border border-surface-border hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-[#F9A825] flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-white icon-fill">storefront</span>
+                    </div>
+                    <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-2">Export & Market Access</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">
+                        The EU's <strong>Carbon Border Adjustment Mechanism (CBAM)</strong> effective 2026 requires carbon certificates for all exports to Europe. EcoMark's reports are pre-formatted for CBAM submission.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="policy-tag">EU CBAM 2026</span>
+                        <span class="policy-tag">EU Taxonomy</span>
+                        <span class="policy-tag">Export Ready</span>
+                    </div>
+                </div>
+
+                <!-- Benefit 5: Consumer Trust -->
+                <div class="bg-surface-container-low rounded-xl p-6 border border-surface-border hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-[#E65100] flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-white icon-fill">qr_code_scanner</span>
+                    </div>
+                    <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-2">Consumer Trust Labels</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">
+                        <strong>73% of Indian consumers</strong> (McKinsey 2024) prefer brands with verified sustainability labels. EcoMark's QR badges on packaging convert your carbon score into a premium positioning asset.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="policy-tag">QR Verified</span>
+                        <span class="policy-tag">Brand Premium</span>
+                        <span class="policy-tag">Public Registry</span>
+                    </div>
+                </div>
+
+                <!-- Benefit 6: Operational Savings -->
+                <div class="bg-surface-container-low rounded-xl p-6 border border-surface-border hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-[#006036] flex items-center justify-center mb-4">
+                        <span class="material-symbols-outlined text-white icon-fill">savings</span>
+                    </div>
+                    <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-2">Operational Cost Savings</h3>
+                    <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">
+                        Detailed fuel consumption analytics identify inefficiencies in real time. Companies using EcoMark report an average <strong>₹18L/year reduction</strong> in utility costs through data-driven optimization.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="policy-tag">Energy Audit</span>
+                        <span class="policy-tag">Cost Analytics</span>
+                        <span class="policy-tag">PAT Targets</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Banner -->
+            <div class="mt-[56px] bg-[#006036] rounded-xl p-8 md:p-10 text-white flex flex-col md:flex-row justify-between items-center gap-6">
+                <div>
+                    <h3 class="font-headline-lg text-headline-lg font-bold mb-2">Ready to Quantify Your Impact?</h3>
+                    <p class="font-body-md text-body-md text-white/80 max-w-[500px]">Join the platform that transforms mandatory compliance into a growth engine. Registration is free. First report is instant.</p>
+                </div>
+                <div class="flex gap-4 flex-wrap">
+                    <a href="register.html" class="bg-white text-[#006036] px-8 py-4 rounded-lg font-bold hover:bg-[#f8faf8] transition-colors shadow-md font-label-md text-label-md whitespace-nowrap">Register Now — Free</a>
+                    <a href="compliance.html" class="border border-white/40 text-white px-8 py-4 rounded-lg font-bold hover:bg-white/10 transition-colors font-label-md text-label-md whitespace-nowrap">View Compliance Guide</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ POLICY FRAMEWORK SECTION ═══ -->
+    <section class="w-full py-[80px]" id="policy-framework">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="text-center mb-[56px]">
+                <div class="badge-pill mb-4 inline-flex">
+                    <span class="material-symbols-outlined icon-fill text-sm">policy</span>
+                    Regulatory Framework
+                </div>
+                <h2 class="font-display-lg text-display-lg text-on-surface font-bold mb-stack-sm tracking-tight">What Policies Govern Carbon Reporting?</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-[620px] mx-auto leading-relaxed">
+                    EcoMark is built on the intersection of India's domestic mandates and global carbon disclosure standards, ensuring reports are valid across every regulatory jurisdiction.
+                </p>
+            </div>
+
+            <!-- Policy Cards Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter mb-[56px]">
+                <!-- India Domestic -->
+                <div class="bg-white rounded-xl border border-surface-border shadow-sm p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-[#FF6B35]/10 flex items-center justify-center">
+                            <span class="font-bold text-sm text-[#FF6B35]">🇮🇳</span>
+                        </div>
+                        <h3 class="font-title-lg text-title-lg text-on-surface font-bold">India — Domestic Mandates</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 p-4 bg-surface-container-low rounded-lg border-l-4 border-[#006036]">
+                            <div class="flex-1">
+                                <p class="font-label-md text-label-md font-bold text-on-surface">Environment Protection Act (EPA 1986)</p>
+                                <p class="font-body-sm text-sm text-on-surface-variant mt-1">Mandatory emission monitoring for all heavy-industry facilities. Annual environmental audit required for units with ≥250 workers or ≥Rs 10Cr investment.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 p-4 bg-surface-container-low rounded-lg border-l-4 border-[#388E3C]">
+                            <div class="flex-1">
+                                <p class="font-label-md text-label-md font-bold text-on-surface">PAT Scheme — Perform Achieve Trade (BEE)</p>
+                                <p class="font-body-sm text-sm text-on-surface-variant mt-1">Bureau of Energy Efficiency mandates energy intensity reduction targets across 13 designated sectors. EcoMark reports map directly to PAT compliance metrics.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 p-4 bg-surface-container-low rounded-lg border-l-4 border-[#F9A825]">
+                            <div class="flex-1">
+                                <p class="font-label-md text-label-md font-bold text-on-surface">SEBI BRSR — Business Responsibility Report</p>
+                                <p class="font-body-sm text-sm text-on-surface-variant mt-1">Mandatory for top-1000 NSE/BSE listed companies since FY2022-23. EcoMark outputs map to BRSR Principle 6 (Environment) Core & Leadership indicators.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 p-4 bg-surface-container-low rounded-lg border-l-4 border-[#E65100]">
+                            <div class="flex-1">
+                                <p class="font-label-md text-label-md font-bold text-on-surface">India's NDC Commitment (Paris Agreement)</p>
+                                <p class="font-body-sm text-sm text-on-surface-variant mt-1">India committed to reduce emission intensity of GDP by 45% by 2030. Industrial registrations on EcoMark directly contribute to national NDC tracking dashboards.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- International Standards -->
+                <div class="bg-white rounded-xl border border-surface-border shadow-sm p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-[#1A73E8]/10 flex items-center justify-center">
+                            <span class="font-bold text-sm">🌍</span>
+                        </div>
+                        <h3 class="font-title-lg text-title-lg text-on-surface font-bold">International Standards</h3>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 p-4 bg-surface-container-low rounded-lg border-l-4 border-[#006036]">
+                            <div class="flex-1">
+                                <p class="font-label-md text-label-md font-bold text-on-surface">ISO 14064-1 — Greenhouse Gas Quantification</p>
+                                <p class="font-body-sm text-sm text-on-surface-variant mt-1">The gold standard for Scope 1 (direct) and Scope 2 (indirect) emissions quantification. EcoMark's IPCC coefficients are certified to ISO 14064-1:2018 methodology.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 p-4 bg-surface-container-low rounded-lg border-l-4 border-[#388E3C]">
+                            <div class="flex-1">
+                                <p class="font-label-md text-label-md font-bold text-on-surface">GHG Protocol — Corporate Standard</p>
+                                <p class="font-body-sm text-sm text-on-surface-variant mt-1">The most widely used international accounting tool for corporate emissions. EcoMark's Scope 1 & 2 module is directly GHG Protocol-compatible for investor reporting.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 p-4 bg-surface-container-low rounded-lg border-l-4 border-[#1A73E8]">
+                            <div class="flex-1">
+                                <p class="font-label-md text-label-md font-bold text-on-surface">EU CSRD — Corporate Sustainability Reporting</p>
+                                <p class="font-body-sm text-sm text-on-surface-variant mt-1">Applies to all companies doing business in the EU from 2025. EcoMark's digital audit trail satisfies the double-materiality and third-party verification requirements under ESRS E1.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 p-4 bg-surface-container-low rounded-lg border-l-4 border-[#F9A825]">
+                            <div class="flex-1">
+                                <p class="font-label-md text-label-md font-bold text-on-surface">SBTi — Science Based Targets Initiative</p>
+                                <p class="font-body-sm text-sm text-on-surface-variant mt-1">Over 7,000 global companies have SBTi commitments. EcoMark's trend analytics automatically calculate trajectory alignment to 1.5°C and net-zero pathways for SBTi submission.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enforcement Timeline -->
+            <div class="bg-white rounded-xl border border-surface-border shadow-sm p-6 md:p-8">
+                <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">schedule</span>
+                    Compliance Enforcement Timeline — Don't Miss the Window
+                </h3>
+                <div class="relative">
+                    <div class="absolute left-6 top-4 bottom-0 w-0.5 bg-surface-border hidden md:block"></div>
+                    <div class="space-y-6">
+                        <div class="flex gap-4 items-start">
+                            <div class="timeline-dot mt-1 hidden md:block"></div>
+                            <div class="flex-1 bg-[#e8f5e9] rounded-lg p-4 border border-[#c8e6c9]">
+                                <div class="flex justify-between items-start flex-wrap gap-2">
+                                    <p class="font-label-md text-label-md font-bold text-[#1B5E20]">FY 2022-23 — SEBI BRSR Mandatory (Already Active)</p>
+                                    <span class="bg-[#1B5E20] text-white text-xs font-bold px-2 py-0.5 rounded">ACTIVE</span>
+                                </div>
+                                <p class="font-body-sm text-sm text-on-surface-variant mt-1">Top-1000 listed companies must file BRSR. Non-compliance triggers SEBI regulatory action & credit downgrades.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="timeline-dot mt-1 hidden md:block"></div>
+                            <div class="flex-1 bg-surface-container-low rounded-lg p-4 border border-surface-border">
+                                <div class="flex justify-between items-start flex-wrap gap-2">
+                                    <p class="font-label-md text-label-md font-bold text-on-surface">2025 — EU CSRD Phase 1 Enforcement</p>
+                                    <span class="bg-[#F9A825] text-white text-xs font-bold px-2 py-0.5 rounded">2025</span>
+                                </div>
+                                <p class="font-body-sm text-sm text-on-surface-variant mt-1">Large EU companies & EU subsidiaries of Indian MNCs must submit sustainability reports under ESRS. EcoMark provides pre-formatted data exports.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="timeline-dot mt-1 hidden md:block"></div>
+                            <div class="flex-1 bg-surface-container-low rounded-lg p-4 border border-surface-border">
+                                <div class="flex justify-between items-start flex-wrap gap-2">
+                                    <p class="font-label-md text-label-md font-bold text-on-surface">2026 — EU Carbon Border Adjustment (CBAM)</p>
+                                    <span class="bg-[#E65100] text-white text-xs font-bold px-2 py-0.5 rounded">2026</span>
+                                </div>
+                                <p class="font-body-sm text-sm text-on-surface-variant mt-1">All Indian exporters of steel, aluminum, cement, chemicals to EU must submit carbon certificates. Affects ₹58,000 Cr+ in annual Indian exports.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <div class="timeline-dot mt-1 hidden md:block"></div>
+                            <div class="flex-1 bg-surface-container-low rounded-lg p-4 border border-surface-border">
+                                <div class="flex justify-between items-start flex-wrap gap-2">
+                                    <p class="font-label-md text-label-md font-bold text-on-surface">2030 — India NDC Carbon Intensity Target</p>
+                                    <span class="bg-[#B71C1C] text-white text-xs font-bold px-2 py-0.5 rounded">2030</span>
+                                </div>
+                                <p class="font-body-sm text-sm text-on-surface-variant mt-1">Mandatory 45% reduction in GDP carbon intensity. Industrial facilities that cannot demonstrate continuous reduction face progressive tax surcharges.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="w-full bg-surface-container border-y border-surface-border py-[80px]">
+    <!-- ═══ HOW IT WORKS ═══ -->
+    <section class="w-full bg-white border-y border-surface-border py-[80px]" id="how-it-works">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="text-center mb-[56px]">
+                <div class="badge-pill mb-4 inline-flex">
+                    <span class="material-symbols-outlined icon-fill text-sm">settings</span>
+                    Platform Architecture
+                </div>
+                <h2 class="font-display-lg text-display-lg text-on-surface font-bold mb-stack-sm tracking-tight">How EcoMark Works</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-[620px] mx-auto leading-relaxed">A unified 3-layer ecosystem of trust between manufacturers, regulators, and consumers.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                <!-- Step 1 -->
+                <div class="relative flex flex-col">
+                    <div class="absolute top-6 right-0 hidden md:block w-1/2 h-0.5 bg-surface-border z-0"></div>
+                    <div class="bg-[#006036] text-white rounded-xl p-6 flex flex-col gap-4 z-10 flex-1">
+                        <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                            <span class="font-bold text-xl">1</span>
+                        </div>
+                        <div>
+                            <h3 class="font-title-lg text-title-lg font-bold mb-2">Company Registers & Reports</h3>
+                            <p class="font-body-md text-body-md text-white/80 leading-relaxed">Input fuel & energy consumption data. The IPCC-certified engine instantly calculates Scope 1 & 2 emissions and assigns a carbon grade (A+ to D).</p>
+                        </div>
+                        <ul class="flex flex-col gap-2 mt-auto">
+                            <li class="flex items-center gap-2 text-white/80 font-label-md text-label-md text-sm"><span class="material-symbols-outlined text-[#80d9a0] text-sm">check</span>IPCC Emission Factors</li>
+                            <li class="flex items-center gap-2 text-white/80 font-label-md text-label-md text-sm"><span class="material-symbols-outlined text-[#80d9a0] text-sm">check</span>Immutable Audit Log</li>
+                            <li class="flex items-center gap-2 text-white/80 font-label-md text-label-md text-sm"><span class="material-symbols-outlined text-[#80d9a0] text-sm">check</span>Eco-Coin Rewards</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative flex flex-col">
+                    <div class="absolute top-6 right-0 hidden md:block w-1/2 h-0.5 bg-surface-border z-0"></div>
+                    <div class="bg-[#1B5E20] text-white rounded-xl p-6 flex flex-col gap-4 z-10 flex-1">
+                        <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                            <span class="font-bold text-xl">2</span>
+                        </div>
+                        <div>
+                            <h3 class="font-title-lg text-title-lg font-bold mb-2">Regulator Audits & Certifies</h3>
+                            <p class="font-body-md text-body-md text-white/80 leading-relaxed">Regulators view sector-wide emission indices, enforce compliance deadlines, flag non-compliant facilities, and export official CSV ledgers for government use.</p>
+                        </div>
+                        <ul class="flex flex-col gap-2 mt-auto">
+                            <li class="flex items-center gap-2 text-white/80 font-label-md text-label-md text-sm"><span class="material-symbols-outlined text-[#80d9a0] text-sm">check</span>Sector Analytics</li>
+                            <li class="flex items-center gap-2 text-white/80 font-label-md text-label-md text-sm"><span class="material-symbols-outlined text-[#80d9a0] text-sm">check</span>Compliance Alerts</li>
+                            <li class="flex items-center gap-2 text-white/80 font-label-md text-label-md text-sm"><span class="material-symbols-outlined text-[#80d9a0] text-sm">check</span>CSV Export Ledger</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-[#388E3C] text-white rounded-xl p-6 flex flex-col gap-4 flex-1">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
+                        <span class="font-bold text-xl">3</span>
+                    </div>
+                    <div>
+                        <h3 class="font-title-lg text-title-lg font-bold mb-2">Consumer Scans & Trusts</h3>
+                        <p class="font-body-md text-body-md text-white/80 leading-relaxed">Every product gets a scannable QR label. Consumers verify carbon score at point-of-sale — no account required. Real-world equivalency in km of driving.</p>
+                    </div>
+                    <ul class="flex flex-col gap-2 mt-auto">
+                        <li class="flex items-center gap-2 text-white/80 font-label-md text-label-md text-sm"><span class="material-symbols-outlined text-[#80d9a0] text-sm">check</span>QR Verified Labels</li>
+                        <li class="flex items-center gap-2 text-white/80 font-label-md text-label-md text-sm"><span class="material-symbols-outlined text-[#80d9a0] text-sm">check</span>No Login Required</li>
+                        <li class="flex items-center gap-2 text-white/80 font-label-md text-label-md text-sm"><span class="material-symbols-outlined text-[#80d9a0] text-sm">check</span>Public Registry</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ OBSTACLE SOLUTIONS SECTION ═══ -->
+    <section class="w-full py-[80px]">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="text-center mb-[56px]">
+                <div class="badge-pill mb-4 inline-flex">
+                    <span class="material-symbols-outlined icon-fill text-sm">shield</span>
+                    Risk & Obstacle Mitigation
+                </div>
+                <h2 class="font-display-lg text-display-lg text-on-surface font-bold mb-stack-sm tracking-tight">Challenges We've Already Solved</h2>
+                <p class="font-body-lg text-body-lg text-on-surface-variant max-w-[620px] mx-auto leading-relaxed">
+                    Every potential obstacle to industrial adoption has been designed against from day one.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                <!-- Obstacle 1 -->
+                <div class="obstacle-card bg-white rounded-xl border border-surface-border shadow-sm p-6 flex gap-5">
+                    <div class="w-12 h-12 rounded-xl bg-[#ffdad6] flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[#B71C1C] icon-fill">warning</span>
+                    </div>
+                    <div>
+                        <p class="font-label-sm text-xs text-[#B71C1C] font-bold uppercase tracking-wider mb-1">Obstacle</p>
+                        <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-2">"How do we verify that reported data is not falsified?"</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">Industries may under-report consumption to game scores.</p>
+                        <div class="bg-[#e8f5e9] rounded-lg p-3 border border-[#c8e6c9]">
+                            <p class="font-label-sm text-xs text-[#1B5E20] font-bold uppercase tracking-wider mb-1">✓ EcoMark Solution</p>
+                            <p class="font-body-md text-body-md text-on-surface-variant text-sm">Tamper-evident append-only audit logs (WORM-grade) make retroactive edits impossible. All reports are timestamped with cryptographic hashes. Physical IoT meter integration roadmap adds automatic sensor-pulled data as a next phase.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Obstacle 2 -->
+                <div class="obstacle-card bg-white rounded-xl border border-surface-border shadow-sm p-6 flex gap-5">
+                    <div class="w-12 h-12 rounded-xl bg-[#ffdad6] flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[#B71C1C] icon-fill">warning</span>
+                    </div>
+                    <div>
+                        <p class="font-label-sm text-xs text-[#B71C1C] font-bold uppercase tracking-wider mb-1">Obstacle</p>
+                        <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-2">"SMEs don't have ERP systems or data teams."</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">Small & mid-sized manufacturers lack digital infrastructure to generate complex reports.</p>
+                        <div class="bg-[#e8f5e9] rounded-lg p-3 border border-[#c8e6c9]">
+                            <p class="font-label-sm text-xs text-[#1B5E20] font-bold uppercase tracking-wider mb-1">✓ EcoMark Solution</p>
+                            <p class="font-body-md text-body-md text-on-surface-variant text-sm">EcoMark's form-based reporting requires only basic utility bills as inputs — no ERP or data team needed. Average completion time: 8 minutes. Available in English and regional languages (Hindi, Marathi, Gujarati on roadmap).</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Obstacle 3 -->
+                <div class="obstacle-card bg-white rounded-xl border border-surface-border shadow-sm p-6 flex gap-5">
+                    <div class="w-12 h-12 rounded-xl bg-[#ffdad6] flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[#B71C1C] icon-fill">warning</span>
+                    </div>
+                    <div>
+                        <p class="font-label-sm text-xs text-[#B71C1C] font-bold uppercase tracking-wider mb-1">Obstacle</p>
+                        <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-2">"Why would industries pay to be scored negatively?"</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">Companies fear that a bad carbon score will hurt their brand and competitive position.</p>
+                        <div class="bg-[#e8f5e9] rounded-lg p-3 border border-[#c8e6c9]">
+                            <p class="font-label-sm text-xs text-[#1B5E20] font-bold uppercase tracking-wider mb-1">✓ EcoMark Solution</p>
+                            <p class="font-body-md text-body-md text-on-surface-variant text-sm">Registration is mandatory under EPA 1986 for qualifying facilities — EcoMark provides the lowest-friction, lowest-cost compliance pathway. Our improvement-focused Eco-Coin system rewards progress, not just current performance, incentivizing even "C" and "D" rated companies to participate and improve.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Obstacle 4 -->
+                <div class="obstacle-card bg-white rounded-xl border border-surface-border shadow-sm p-6 flex gap-5">
+                    <div class="w-12 h-12 rounded-xl bg-[#ffdad6] flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[#B71C1C] icon-fill">warning</span>
+                    </div>
+                    <div>
+                        <p class="font-label-sm text-xs text-[#B71C1C] font-bold uppercase tracking-wider mb-1">Obstacle</p>
+                        <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-2">"What's the monetization model?"</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">Platform needs a sustainable revenue model to attract institutional investment.</p>
+                        <div class="bg-[#e8f5e9] rounded-lg p-3 border border-[#c8e6c9]">
+                            <p class="font-label-sm text-xs text-[#1B5E20] font-bold uppercase tracking-wider mb-1">✓ EcoMark Solution</p>
+                            <p class="font-body-md text-body-md text-on-surface-variant text-sm">3-layer revenue: (1) SaaS subscription — ₹4,999/month per facility for advanced analytics; (2) Compliance API access — B2G/B2B data feeds to regulators & ESG raters (₹15L+/year contracts); (3) Carbon offset marketplace — 2.5% transaction fee on offset trading between facilities.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Obstacle 5 -->
+                <div class="obstacle-card bg-white rounded-xl border border-surface-border shadow-sm p-6 flex gap-5">
+                    <div class="w-12 h-12 rounded-xl bg-[#ffdad6] flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[#B71C1C] icon-fill">warning</span>
+                    </div>
+                    <div>
+                        <p class="font-label-sm text-xs text-[#B71C1C] font-bold uppercase tracking-wider mb-1">Obstacle</p>
+                        <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-2">"The platform won't scale to millions of facilities."</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">Current localStorage prototype cannot handle real industrial scale data volumes.</p>
+                        <div class="bg-[#e8f5e9] rounded-lg p-3 border border-[#c8e6c9]">
+                            <p class="font-label-sm text-xs text-[#1B5E20] font-bold uppercase tracking-wider mb-1">✓ EcoMark Solution</p>
+                            <p class="font-body-md text-body-md text-on-surface-variant text-sm">Production architecture is PostgreSQL + Node.js REST API + CDN. Current frontend is the exact UX layer that will sit atop this stack. The database schema is already designed for horizontal sharding to support 1M+ facility records at <50ms query latency.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Obstacle 6 -->
+                <div class="obstacle-card bg-white rounded-xl border border-surface-border shadow-sm p-6 flex gap-5">
+                    <div class="w-12 h-12 rounded-xl bg-[#ffdad6] flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[#B71C1C] icon-fill">warning</span>
+                    </div>
+                    <div>
+                        <p class="font-label-sm text-xs text-[#B71C1C] font-bold uppercase tracking-wider mb-1">Obstacle</p>
+                        <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-2">"Who will adopt first — the chicken-and-egg problem?"</h3>
+                        <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed mb-3">Regulatory value requires industry data; industries need regulatory validation to trust the platform.</p>
+                        <div class="bg-[#e8f5e9] rounded-lg p-3 border border-[#c8e6c9]">
+                            <p class="font-label-sm text-xs text-[#1B5E20] font-bold uppercase tracking-wider mb-1">✓ EcoMark Solution</p>
+                            <p class="font-body-md text-body-md text-on-surface-variant text-sm">Go-to-market strategy starts with government B2G partnerships (PCBs, MoEF&CC) to mandate EcoMark as the official compliance portal for at least one state's industrial zone. This immediately creates a captive user base and the network effect follows naturally.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ TECH ARCHITECTURE SECTION ═══ -->
+    <section class="w-full gradient-dark text-white py-[80px]">
+        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
+            <div class="text-center mb-[56px]">
+                <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white rounded-full px-4 py-1.5 text-xs font-bold mb-4">
+                    <span class="material-symbols-outlined text-sm icon-fill">architecture</span>
+                    TECHNICAL ARCHITECTURE
+                </div>
+                <h2 class="font-display-lg text-display-lg font-bold mb-stack-sm">Production-Grade Stack</h2>
+                <p class="font-body-lg text-body-lg text-white/70 max-w-[560px] mx-auto">EcoMark's frontend prototype is built to drop directly onto a production backend.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-[#006036] flex items-center justify-center">
+                            <span class="material-symbols-outlined text-white text-sm">devices</span>
+                        </div>
+                        <h3 class="font-title-lg text-title-lg font-bold">Frontend Layer</h3>
+                    </div>
+                    <ul class="space-y-2 text-white/70 font-body-md text-sm">
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>HTML5 + Tailwind CSS UI</li>
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>Chart.js analytics rendering</li>
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>QR Code generation (canvas API)</li>
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>LocalStorage prototype DB</li>
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>Role-based auth guards</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-[#1B5E20] flex items-center justify-center">
+                            <span class="material-symbols-outlined text-white text-sm">dns</span>
+                        </div>
+                        <h3 class="font-title-lg text-title-lg font-bold">Backend (Planned)</h3>
+                    </div>
+                    <ul class="space-y-2 text-white/70 font-body-md text-sm">
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>Node.js + Express REST API</li>
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>PostgreSQL — sharded, WORM audit</li>
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>Redis — real-time metric cache</li>
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>JWT + OAuth2 enterprise SSO</li>
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>IoT MQTT data connector</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white/5 border border-white/10 rounded-xl p-6">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-lg bg-[#388E3C] flex items-center justify-center">
+                            <span class="material-symbols-outlined text-white text-sm">cloud</span>
+                        </div>
+                        <h3 class="font-title-lg text-title-lg font-bold">Infrastructure</h3>
+                    </div>
+                    <ul class="space-y-2 text-white/70 font-body-md text-sm">
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>AWS / Azure multi-region</li>
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>Kubernetes auto-scaling</li>
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>Cloudflare CDN + DDoS protection</li>
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>SOC 2 Type II compliance</li>
+                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>99.99% SLA uptime guarantee</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-stack-lg text-center">
+                <a href="compliance.html" class="inline-flex items-center gap-2 bg-white text-[#006036] px-8 py-4 rounded-lg font-bold hover:bg-[#f8faf8] transition-colors shadow-md">
+                    <span class="material-symbols-outlined icon-fill">policy</span>
+                    Explore Full Compliance & Policy Portal
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══ FINAL CTA ═══ -->
+    <section class="w-full bg-[#e8f5e9] border-y border-[#c8e6c9] py-[80px]">
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop text-center flex flex-col items-center">
-            <h2 class="font-display-lg text-display-lg text-on-surface mb-stack-sm font-bold tracking-tight">Ready to Quantify Your Impact?</h2>
+            <span class="material-symbols-outlined text-[#006036] icon-fill text-5xl mb-4">eco</span>
+            <h2 class="font-display-lg text-display-lg text-[#006036] mb-stack-sm font-bold tracking-tight">Start Reporting Today</h2>
             <p class="font-body-lg text-body-lg text-on-surface-variant max-w-[500px] mb-stack-lg leading-relaxed">
-                Join industry leaders committed to carbon neutrality and operational transparency. Build corporate trust today.
+                Join the platform connecting India's most compliance-forward manufacturers with the tools, incentives, and regulatory recognition they deserve.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
-                <a href="register.html" class="bg-primary text-on-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-colors shadow-md w-full sm:w-auto font-bold text-center">Register Company</a>
+                <a href="register.html" id="footer-register-btn" class="bg-primary text-on-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-colors shadow-md w-full sm:w-auto font-bold text-center">Register Your Company</a>
                 <a href="login.html" class="bg-white border border-outline text-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-surface-container-lowest transition-colors w-full sm:w-auto font-bold text-center shadow-sm">Login to Portal</a>
+                <a href="consumer/product.html?productId=prod_sunbake_foods" class="bg-white border border-outline text-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-surface-container-lowest transition-colors w-full sm:w-auto font-bold text-center shadow-sm">View Public Registry</a>
             </div>
         </div>
     </section>
 </main>
 
 <!-- Footer -->
-<footer class="bg-white w-full py-stack-lg px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter border-t border-surface-border">
-    <div class="flex items-center gap-2">
-        <span class="font-headline-sm text-headline-sm font-bold text-primary">EcoMark</span>
+<footer class="bg-[#001c0f] text-white w-full py-[48px] px-margin-mobile md:px-margin-desktop">
+    <div class="max-w-container-max mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="md:col-span-1">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="material-symbols-outlined text-[#80d9a0] icon-fill">eco</span>
+                    <span class="font-headline-md text-headline-md font-bold text-white">EcoMark</span>
+                </div>
+                <p class="text-white/60 font-body-md text-sm leading-relaxed">India's enterprise-grade industrial carbon transparency and accounting platform.</p>
+            </div>
+            <div>
+                <p class="font-label-sm text-xs text-white/40 font-bold uppercase tracking-wider mb-3">Platform</p>
+                <div class="flex flex-col gap-2">
+                    <a href="register.html" class="text-white/70 hover:text-white text-sm transition-colors">Register Company</a>
+                    <a href="login.html" class="text-white/70 hover:text-white text-sm transition-colors">Login to Portal</a>
+                    <a href="consumer/product.html?productId=prod_sunbake_foods" class="text-white/70 hover:text-white text-sm transition-colors">Public Registry</a>
+                    <a href="compliance.html" class="text-white/70 hover:text-white text-sm transition-colors">Compliance Portal</a>
+                </div>
+            </div>
+            <div>
+                <p class="font-label-sm text-xs text-white/40 font-bold uppercase tracking-wider mb-3">Policies</p>
+                <div class="flex flex-col gap-2">
+                    <a href="compliance.html#iso14064" class="text-white/70 hover:text-white text-sm transition-colors">ISO 14064-1</a>
+                    <a href="compliance.html#ghgprotocol" class="text-white/70 hover:text-white text-sm transition-colors">GHG Protocol</a>
+                    <a href="compliance.html#sebi" class="text-white/70 hover:text-white text-sm transition-colors">SEBI BRSR</a>
+                    <a href="compliance.html#cbam" class="text-white/70 hover:text-white text-sm transition-colors">EU CBAM</a>
+                </div>
+            </div>
+            <div>
+                <p class="font-label-sm text-xs text-white/40 font-bold uppercase tracking-wider mb-3">Legal</p>
+                <div class="flex flex-col gap-2">
+                    <a href="#" class="text-white/70 hover:text-white text-sm transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-white/70 hover:text-white text-sm transition-colors">Terms of Service</a>
+                    <a href="#" class="text-white/70 hover:text-white text-sm transition-colors">Data Retention Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-white/40 font-label-sm text-xs">© 2024 EcoMark Industrial Carbon Accounting. All rights reserved.</p>
+            <div class="flex gap-3">
+                <span class="policy-tag" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7)">ISO 14064-1</span>
+                <span class="policy-tag" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7)">GHG Protocol</span>
+                <span class="policy-tag" style="background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.15);color:rgba(255,255,255,0.7)">SBTi Aligned</span>
+            </div>
+        </div>
     </div>
-    <div class="flex flex-wrap justify-center gap-6">
-        <a class="text-text-muted font-label-sm text-label-sm hover:text-primary transition-opacity duration-200" href="#">Privacy Policy</a>
-        <a class="text-text-muted font-label-sm text-label-sm hover:text-primary transition-opacity duration-200" href="#">Terms of Service</a>
-        <a class="text-text-muted font-label-sm text-label-sm hover:text-primary transition-opacity duration-200" href="consumer/product.html?productId=prod_sunbake_foods">Public Registry</a>
-    </div>
-    <p class="font-label-sm text-label-sm text-text-muted">
-        © 2024 EcoMark Industrial Carbon Accounting. All rights reserved.
-    </p>
 </footer>
+
+<script src="js/db.js"></script>
+<script>
+    // Populate live stats from DB
+    document.addEventListener('DOMContentLoaded', () => {
+        try {
+            const companies = Object.values(DB.getUsers()).filter(u => u.role === 'company');
+            const products = Object.values(DB.getProducts());
+            const reports = Object.values(DB.getReports());
+            const totalCO2 = reports.reduce((s, r) => s + r.totalCO2e, 0);
+
+            const heroCompanies = document.getElementById('heroCompanies');
+            const heroReports = document.getElementById('heroReports');
+            const heroProducts = document.getElementById('heroProducts');
+            const heroTotalCo2 = document.getElementById('heroTotalCo2');
+
+            if (heroCompanies) heroCompanies.textContent = companies.length;
+            if (heroReports) heroReports.textContent = reports.length;
+            if (heroProducts) heroProducts.textContent = products.length;
+            if (heroTotalCo2) heroTotalCo2.textContent = totalCO2.toLocaleString(undefined, {maximumFractionDigits: 0}) + ' kg CO2e';
+        } catch(e) {
+            // Silent fail — stats are pre-seeded in HTML
+        }
+    });
+</script>
 </body>
 </html>

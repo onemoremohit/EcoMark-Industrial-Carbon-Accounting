@@ -5,7 +5,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>EcoMark - Regulator Dashboard</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link href="../css/style.css" rel="stylesheet"/>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -15,115 +15,76 @@
           theme: {
             extend: {
               "colors": {
-                      "outline-variant": "#bec9be",
-                      "surface-dim": "#d8dad9",
-                      "score-a": "#388E3C",
-                      "text-main": "#1A1C1A",
-                      "text-muted": "#5C635C",
-                      "error-container": "#ffdad6",
-                      "score-d": "#B71C1C",
-                      "on-primary": "#ffffff",
-                      "surface-border": "#E1E8E1",
-                      "tertiary-fixed": "#acf4a4",
-                      "primary-fixed-dim": "#80d9a0",
-                      "on-primary-fixed-variant": "#00522e",
-                      "secondary-container": "#a0f399",
-                      "on-tertiary-fixed": "#002203",
-                      "surface": "#f8faf8",
-                      "surface-variant": "#e1e3e1",
-                      "surface-container": "#eceeec",
-                      "on-primary-container": "#abffc6",
-                      "secondary": "#1b6d24",
-                      "surface-tint": "#006d3f",
-                      "outline": "#6f7a70",
-                      "inverse-primary": "#80d9a0",
-                      "on-tertiary-fixed-variant": "#0c5216",
-                      "on-surface": "#191c1b",
-                      "on-error-container": "#93000a",
-                      "inverse-surface": "#2e3130",
-                      "inverse-on-surface": "#eff1ef",
-                      "on-tertiary-container": "#b6fead",
-                      "tertiary-fixed-dim": "#91d78a",
-                      "on-surface-variant": "#3f4941",
-                      "on-background": "#191c1b",
-                      "surface-container-low": "#f2f4f2",
-                      "score-a-plus": "#1B5E20",
-                      "score-b": "#F9A825",
-                      "surface-container-lowest": "#ffffff",
-                      "background": "#f8faf8",
-                      "on-secondary-container": "#217128",
-                      "on-error": "#ffffff",
-                      "on-secondary-fixed-variant": "#005312",
-                      "on-secondary-fixed": "#002204",
-                      "primary-fixed": "#9bf6ba",
-                      "on-tertiary": "#ffffff",
-                      "secondary-fixed-dim": "#88d982",
-                      "on-primary-fixed": "#00210f",
-                      "on-secondary": "#ffffff",
-                      "surface-container-high": "#e6e9e7",
-                      "tertiary-container": "#377837",
-                      "secondary-fixed": "#a3f69c",
-                      "primary": "#006036",
-                      "primary-container": "#1a7a4a",
-                      "tertiary": "#1c5f21",
-                      "surface-bright": "#f8faf8",
-                      "error": "#ba1a1a",
-                      "surface-container-highest": "#e1e3e1",
-                      "score-c": "#E65100"
-              },
-              "borderRadius": {
-                      "DEFAULT": "0.125rem",
-                      "lg": "0.25rem",
-                      "xl": "0.5rem",
-                      "full": "0.75rem"
+                "outline-variant": "#bec9be", "surface-dim": "#d8dad9",
+                "score-a": "#388E3C", "text-main": "#1A1C1A", "text-muted": "#5C635C",
+                "error-container": "#ffdad6", "score-d": "#B71C1C", "on-primary": "#ffffff",
+                "surface-border": "#E1E8E1", "secondary-container": "#a0f399",
+                "surface": "#f8faf8", "surface-variant": "#e1e3e1",
+                "surface-container": "#eceeec", "on-primary-container": "#abffc6",
+                "secondary": "#1b6d24", "surface-tint": "#006d3f", "outline": "#6f7a70",
+                "on-surface": "#191c1b", "on-error-container": "#93000a",
+                "on-surface-variant": "#3f4941", "on-background": "#191c1b",
+                "surface-container-low": "#f2f4f2", "score-a-plus": "#1B5E20",
+                "score-b": "#F9A825", "surface-container-lowest": "#ffffff",
+                "background": "#f8faf8", "on-secondary-container": "#217128",
+                "on-error": "#ffffff", "primary-fixed": "#9bf6ba",
+                "surface-container-high": "#e6e9e7", "tertiary-container": "#377837",
+                "primary": "#006036", "primary-container": "#1a7a4a", "tertiary": "#1c5f21",
+                "error": "#ba1a1a", "surface-container-highest": "#e1e3e1", "score-c": "#E65100"
               },
               "spacing": {
-                      "stack-sm": "8px",
-                      "margin-desktop": "48px",
-                      "margin-mobile": "16px",
-                      "stack-md": "16px",
-                      "gutter": "24px",
-                      "container-max": "1200px",
-                      "stack-lg": "32px",
-                      "base": "4px"
+                "stack-sm": "8px", "margin-desktop": "48px", "margin-mobile": "16px",
+                "stack-md": "16px", "gutter": "24px", "container-max": "1200px",
+                "stack-lg": "32px", "base": "4px"
               }
             }
           }
         }
-      </script>
+    </script>
     <style>
-        .material-symbols-outlined {
-          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined[data-weight="fill"] { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        .tab-btn { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; transition: all 0.15s; cursor: pointer; border: none; background: transparent; }
+        .tab-btn.active { background: #006036; color: white; }
+        .tab-btn:not(.active) { color: #3f4941; }
+        .tab-btn:not(.active):hover { background: #f2f4f2; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        @keyframes shimmer {
+            0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; }
         }
-        .material-symbols-outlined[data-weight="fill"] {
-          font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24
-        }
+        .alert-pulse { animation: shimmer 2s infinite; }
     </style>
 </head>
-<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col lg:flex-row font-sans">
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col lg:flex-row font-sans" style="font-family:'Inter',sans-serif;">
 
 <!-- Navigation Drawer (Regulator Desktop) -->
 <nav class="hidden lg:flex flex-col h-screen sticky top-0 w-64 border-r border-surface-border bg-surface shrink-0 z-50">
     <div class="p-6 border-b border-surface-border flex items-center gap-4">
         <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-lg shrink-0">R</div>
         <div>
-            <h1 class="font-headline-md text-headline-md font-bold text-primary">EcoMark</h1>
-            <p class="font-label-sm text-label-sm text-on-surface-variant font-semibold">Regulator Portal</p>
+            <h1 class="font-bold text-primary text-lg">EcoMark</h1>
+            <p class="text-xs text-on-surface-variant font-semibold">Regulator Portal</p>
         </div>
     </div>
-    <div class="p-4 flex-grow space-y-2">
-        <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-200" href="#">
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
-            <span class="font-label-md text-label-md">Overview Portal</span>
+    <div class="p-4 flex-grow space-y-1">
+        <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-200 text-sm" href="#">
+            <span class="material-symbols-outlined icon-fill text-xl">dashboard</span>
+            <span>Overview Portal</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg text-sm" href="../compliance.html" target="_blank">
+            <span class="material-symbols-outlined text-xl">policy</span>
+            <span>Policy Framework</span>
         </a>
     </div>
     <div class="p-4 border-t border-surface-border flex flex-col gap-2">
         <div class="px-4 py-2 bg-surface-container rounded-lg mb-2">
-            <p class="font-label-sm text-label-sm text-text-muted">Logged in as:</p>
-            <p class="font-label-md text-label-md font-bold text-on-surface truncate" id="sideUserLabel">Regulator</p>
-            <span class="inline-block mt-1 bg-red-100 text-score-d font-bold font-label-sm text-[10px] px-2 py-0.5 rounded uppercase">Admin</span>
+            <p class="text-xs text-text-muted">Logged in as:</p>
+            <p class="text-sm font-bold text-on-surface truncate" id="sideUserLabel">Regulator</p>
+            <span class="inline-block mt-1 bg-red-100 text-score-d font-bold text-[10px] px-2 py-0.5 rounded uppercase">Admin</span>
         </div>
-        <button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-lg font-label-md text-label-md text-left w-full">
+        <button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-lg text-sm text-left w-full">
             <span class="material-symbols-outlined">logout</span>
             <span>Log Out</span>
         </button>
@@ -132,388 +93,552 @@
 
 <!-- Main Content Wrapper -->
 <div class="flex-1 flex flex-col min-w-0">
-    <!-- TopAppBar (Mobile & Tablet) -->
-    <header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40 bg-surface border-b border-surface-border lg:hidden">
-        <div class="flex items-center gap-4">
-            <span class="font-headline-md text-headline-md font-bold text-primary">EcoMark Regulator</span>
-        </div>
+    <!-- TopAppBar (Mobile) -->
+    <header class="flex justify-between items-center w-full px-4 md:px-12 py-4 sticky top-0 z-40 bg-surface border-b border-surface-border lg:hidden">
+        <span class="font-bold text-primary text-lg">EcoMark Regulator</span>
         <button id="logoutBtnMobile" class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
             <span class="material-symbols-outlined">logout</span>
         </button>
     </header>
 
     <!-- Main Canvas -->
-    <main class="flex-1 p-margin-mobile md:p-margin-desktop bg-surface overflow-y-auto">
-        <div class="max-w-container-max mx-auto space-y-gutter">
-            <!-- Page Header & Actions -->
+    <main class="flex-1 p-4 md:p-12 bg-surface overflow-y-auto">
+        <div class="max-w-container-max mx-auto space-y-6">
+
+            <!-- Page Header -->
             <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                    <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold">Regulator Overview</h2>
-                    <p class="font-body-md text-body-md text-on-surface-variant mt-1">High-level industrial compliance & carbon auditing registry.</p>
+                    <h2 class="text-2xl font-bold text-on-surface">Regulator Overview</h2>
+                    <p class="text-sm text-on-surface-variant mt-1">High-level industrial compliance & carbon auditing registry.</p>
                 </div>
-                <button id="csvExportBtn" class="flex items-center gap-2 px-5 py-3 bg-primary text-white border border-transparent rounded-lg font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm hover:shadow-md font-bold">
-                    <span class="material-symbols-outlined">download</span>
-                    Export Ledger (CSV)
+                <div class="flex gap-3 flex-wrap">
+                    <button id="csvExportBtn" class="flex items-center gap-2 px-4 py-2.5 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary-container transition-colors shadow-sm">
+                        <span class="material-symbols-outlined text-xl">download</span>
+                        Export Ledger (CSV)
+                    </button>
+                    <a href="../compliance.html" target="_blank" class="flex items-center gap-2 px-4 py-2.5 border border-surface-border text-on-surface rounded-lg text-sm font-bold hover:bg-surface-container-low transition-colors">
+                        <span class="material-symbols-outlined text-xl">policy</span>
+                        Policy Guide
+                    </a>
+                </div>
+            </div>
+
+            <!-- ── COMPLIANCE ALERT BANNER ── -->
+            <div id="complianceAlertBanner" class="bg-[#fff8f7] border border-[#ffb4ab] rounded-xl p-4 flex items-start gap-3 alert-pulse">
+                <span class="material-symbols-outlined text-[#B71C1C] icon-fill shrink-0">warning</span>
+                <div class="flex-1">
+                    <p class="font-bold text-[#B71C1C] text-sm">Compliance Alert — Action Required</p>
+                    <p class="text-xs text-on-surface-variant mt-1" id="alertText">Checking compliance status...</p>
+                </div>
+                <button onclick="document.getElementById('complianceAlertBanner').style.display='none'" class="text-text-muted hover:text-on-surface">
+                    <span class="material-symbols-outlined text-sm">close</span>
                 </button>
             </div>
 
             <!-- KPI Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-                <!-- KPI 1 -->
-                <div class="bg-white border border-surface-border rounded-xl p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">Regulated Enterprises</span>
-                        <span class="material-symbols-outlined text-primary">domain</span>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+                <div class="bg-white border border-surface-border rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Registered</span>
+                        <span class="material-symbols-outlined text-primary text-xl">domain</span>
                     </div>
-                    <div>
-                        <div class="font-display-lg text-display-lg text-on-surface font-bold" id="kpiCompanies">0</div>
-                        <div class="flex items-center gap-1 mt-2 text-score-a font-label-md text-label-md font-semibold">
-                            <span class="material-symbols-outlined text-sm font-bold">verified</span>
-                            <span>Fully verified ESG profiles</span>
-                        </div>
+                    <div class="text-3xl font-extrabold text-on-surface" id="kpiCompanies">0</div>
+                    <div class="text-xs text-score-a font-semibold mt-1 flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs icon-fill">verified</span> Verified Enterprises
                     </div>
                 </div>
-                <!-- KPI 2 -->
-                <div class="bg-white border border-surface-border rounded-xl p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">Total Audited CO2e</span>
-                        <span class="material-symbols-outlined text-score-d">co2</span>
+                <div class="bg-white border border-surface-border rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Total CO2e</span>
+                        <span class="material-symbols-outlined text-score-d text-xl">co2</span>
                     </div>
-                    <div>
-                        <div class="font-display-lg text-display-lg text-on-surface font-bold"><span id="kpiCo2">0.0</span> <span class="text-title-lg text-on-surface-variant font-normal">kg</span></div>
-                        <div class="flex items-center gap-1 mt-2 text-score-c font-label-md text-label-md font-semibold">
-                            <span class="material-symbols-outlined text-sm">trending_up</span>
-                            <span>Aggregate compliance logs</span>
-                        </div>
+                    <div class="text-3xl font-extrabold text-on-surface"><span id="kpiCo2">0</span></div>
+                    <div class="text-xs text-text-muted font-semibold mt-1">kg · Audited</div>
+                </div>
+                <div class="bg-white border border-surface-border rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Avg Grade</span>
+                        <span class="material-symbols-outlined text-score-b text-xl">speed</span>
+                    </div>
+                    <div class="flex items-end gap-3">
+                        <div class="w-12 h-12 rounded-xl flex items-center justify-center text-white font-extrabold text-lg" id="kpiScore">A</div>
+                        <p class="text-xs text-text-muted leading-tight pb-1">Platform average</p>
                     </div>
                 </div>
-                <!-- KPI 3 -->
-                <div class="bg-white border border-surface-border rounded-xl p-6 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider font-semibold">ESG Certificate Status</span>
-                        <span class="material-symbols-outlined text-score-b">speed</span>
+                <div class="bg-white border border-surface-border rounded-xl p-5 shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-3">
+                        <span class="text-xs font-bold text-on-surface-variant uppercase tracking-wider">Non-Compliant</span>
+                        <span class="material-symbols-outlined text-error text-xl">error</span>
                     </div>
-                    <div class="flex items-end gap-4">
-                        <div class="w-14 h-14 rounded-xl flex items-center justify-center bg-score-a text-white font-headline-md text-headline-md font-bold" id="kpiScore">A</div>
-                        <div class="pb-1 font-body-md text-body-md text-text-muted leading-tight font-medium">
-                            Average rating across active facilities.
-                        </div>
-                    </div>
+                    <div class="text-3xl font-extrabold text-error" id="kpiNonCompliant">0</div>
+                    <div class="text-xs text-error font-semibold mt-1">Facilities requiring action</div>
                 </div>
             </div>
 
-            <!-- Charts Section -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
-                <!-- Bar Chart: Industry Comparison -->
-                <div class="bg-white border border-surface-border rounded-xl p-6 shadow-sm">
-                    <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-4">Sector Carbon Footprints</h3>
-                    <div class="relative h-64 w-full">
-                        <canvas id="sectorChart"></canvas>
-                    </div>
+            <!-- Tab Navigation -->
+            <div class="bg-white border border-surface-border rounded-xl overflow-hidden shadow-sm">
+                <div class="flex gap-2 p-3 border-b border-surface-border bg-surface-container-low">
+                    <button class="tab-btn active" onclick="switchTab('analytics')" id="tab-analytics">Analytics</button>
+                    <button class="tab-btn" onclick="switchTab('compliance')" id="tab-compliance">
+                        Compliance Enforcement
+                        <span id="complianceBadge" class="ml-1 bg-error text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full">!</span>
+                    </button>
+                    <button class="tab-btn" onclick="switchTab('registry')" id="tab-registry">Facility Registry</button>
+                    <button class="tab-btn" onclick="switchTab('auditlog')" id="tab-auditlog">Audit Log</button>
                 </div>
-                <!-- Doughnut Chart: Fuel Breakdown -->
-                <div class="bg-white border border-surface-border rounded-xl p-6 shadow-sm">
-                    <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-4">Resource Consumption Shares</h3>
-                    <div class="relative h-64 w-full">
-                        <canvas id="fuelChart"></canvas>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Regulator Filter Table -->
-            <div class="bg-white border border-surface-border rounded-xl shadow-sm overflow-hidden flex flex-col">
-                <div class="p-6 border-b border-surface-border flex flex-col md:flex-row md:items-center justify-between gap-4 bg-surface-container-low">
-                    <div>
-                        <h3 class="font-title-lg text-title-lg text-on-surface font-bold">Facility Emissions Registry</h3>
-                        <p class="font-label-sm text-text-muted">Sort and filter all submitted utility audits.</p>
+                <!-- ── TAB: Analytics ── -->
+                <div class="tab-content active p-6" id="tabContent-analytics">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
+                        <div>
+                            <h3 class="font-bold text-on-surface mb-4">Sector Carbon Footprints (kg CO2e)</h3>
+                            <div class="relative h-64 w-full">
+                                <canvas id="sectorChart"></canvas>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-on-surface mb-4">Resource Consumption Shares</h3>
+                            <div class="relative h-64 w-full">
+                                <canvas id="fuelChart"></canvas>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Filters -->
-                    <div class="flex gap-4 w-full md:w-auto">
-                        <select id="sectorFilter" class="flex-1 md:w-40 bg-white border border-surface-border rounded-md px-3 py-2 font-body-md text-body-md">
-                            <option value="All">All Sectors</option>
-                            <option value="Manufacturing">Manufacturing</option>
-                            <option value="Textile">Textiles</option>
-                            <option value="Food Processing">Food Processing</option>
-                        </select>
-                        <select id="sortOption" class="flex-1 md:w-40 bg-white border border-surface-border rounded-md px-3 py-2 font-body-md text-body-md">
-                            <option value="newest">Sort: Newest</option>
-                            <option value="co2_desc">Sort: Footprint (High)</option>
-                            <option value="co2_asc">Sort: Footprint (Low)</option>
-                            <option value="score">Sort: Carbon Grade</option>
-                        </select>
+
+                    <!-- Eco-Coins leaderboard -->
+                    <div class="mt-6 pt-6 border-t border-surface-border">
+                        <h3 class="font-bold text-on-surface mb-4 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-score-b icon-fill">military_tech</span>
+                            ESG Eco-Coins Leaderboard
+                        </h3>
+                        <div id="leaderboardContainer" class="space-y-3"></div>
                     </div>
                 </div>
-                
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead class="bg-surface border-b border-surface-border">
-                            <tr class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider font-semibold">
-                                <th class="p-4">Enterprise</th>
-                                <th class="p-4">Product / Item</th>
-                                <th class="p-4">Sector</th>
-                                <th class="p-4">Location</th>
-                                <th class="p-4">Report Period</th>
-                                <th class="p-4">Footprint (CO2e/Unit)</th>
-                                <th class="p-4 text-center">Grade</th>
-                            </tr>
-                        </thead>
-                        <tbody class="font-data-tabular text-data-tabular" id="auditsTableBody">
-                            <tr>
-                                <td colspan="7" class="p-8 text-center text-text-muted">Loading audit entries...</td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                <!-- ── TAB: Compliance Enforcement ── -->
+                <div class="tab-content p-6" id="tabContent-compliance">
+                    <div class="mb-6">
+                        <h3 class="font-bold text-on-surface text-lg mb-1">Compliance Enforcement Controls</h3>
+                        <p class="text-sm text-text-muted">Review facility compliance status, issue notices, and enforce mandatory reporting deadlines.</p>
+                    </div>
+
+                    <!-- Compliance Thresholds -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="bg-[#e8f5e9] border border-[#c8e6c9] rounded-xl p-4 text-center">
+                            <p class="text-xs font-bold text-[#1B5E20] uppercase tracking-wider mb-1">Compliant</p>
+                            <div class="text-3xl font-extrabold text-[#1B5E20]" id="countCompliant">—</div>
+                            <p class="text-xs text-on-surface-variant mt-1">Filed reports this quarter</p>
+                        </div>
+                        <div class="bg-[#fffde7] border border-[#fff176] rounded-xl p-4 text-center">
+                            <p class="text-xs font-bold text-[#F57F17] uppercase tracking-wider mb-1">At Risk</p>
+                            <div class="text-3xl font-extrabold text-[#F57F17]" id="countAtRisk">—</div>
+                            <p class="text-xs text-on-surface-variant mt-1">Only 1 report filed (need quarterly)</p>
+                        </div>
+                        <div class="bg-[#ffdad6] border border-[#ffb4ab] rounded-xl p-4 text-center">
+                            <p class="text-xs font-bold text-[#B71C1C] uppercase tracking-wider mb-1">Non-Compliant</p>
+                            <div class="text-3xl font-extrabold text-[#B71C1C]" id="countNonCompliant">—</div>
+                            <p class="text-xs text-on-surface-variant mt-1">Score D or zero reports filed</p>
+                        </div>
+                    </div>
+
+                    <!-- Compliance Policy Context -->
+                    <div class="bg-surface-container-low rounded-xl p-4 mb-6 border border-surface-border">
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-3">Active Regulatory Mandates</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                            <div class="flex items-center gap-3 bg-white p-3 rounded-lg border border-surface-border">
+                                <span class="material-symbols-outlined text-[#1B5E20] icon-fill text-sm">check_circle</span>
+                                <div>
+                                    <p class="text-xs font-bold text-on-surface">SEBI BRSR P6 — FY 2024-25</p>
+                                    <p class="text-xs text-text-muted">Filing deadline: 30 Sep 2025</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 bg-white p-3 rounded-lg border border-surface-border">
+                                <span class="material-symbols-outlined text-[#1B5E20] icon-fill text-sm">check_circle</span>
+                                <div>
+                                    <p class="text-xs font-bold text-on-surface">EPA 1986 Form V — Annual</p>
+                                    <p class="text-xs text-text-muted">Filing deadline: 30 Sep 2025</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 bg-white p-3 rounded-lg border border-surface-border">
+                                <span class="material-symbols-outlined text-[#F57F17] icon-fill text-sm">warning</span>
+                                <div>
+                                    <p class="text-xs font-bold text-on-surface">BEE PAT Cycle 7 — SEC Target</p>
+                                    <p class="text-xs text-text-muted">Verification period: FY 2022-2024</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 bg-white p-3 rounded-lg border border-surface-border">
+                                <span class="material-symbols-outlined text-[#B71C1C] icon-fill text-sm">schedule</span>
+                                <div>
+                                    <p class="text-xs font-bold text-on-surface">EU CBAM — Phased Transition</p>
+                                    <p class="text-xs text-text-muted">Full enforcement: January 2026</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Enforcement Table -->
+                    <div class="bg-white rounded-xl border border-surface-border overflow-hidden">
+                        <div class="p-4 border-b border-surface-border bg-surface-container-low flex justify-between items-center">
+                            <h4 class="font-bold text-on-surface">Facility Compliance Status</h4>
+                            <select id="complianceFilter" class="text-sm border border-surface-border rounded-lg px-3 py-1.5 bg-white">
+                                <option value="all">All Facilities</option>
+                                <option value="compliant">Compliant Only</option>
+                                <option value="at_risk">At Risk Only</option>
+                                <option value="non_compliant">Non-Compliant Only</option>
+                            </select>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-sm">
+                                <thead class="bg-surface border-b border-surface-border text-xs font-bold text-text-muted uppercase tracking-wider">
+                                    <tr>
+                                        <th class="p-4">Company</th>
+                                        <th class="p-4">Sector</th>
+                                        <th class="p-4">Reports Filed</th>
+                                        <th class="p-4">Latest Grade</th>
+                                        <th class="p-4">Eco-Coins</th>
+                                        <th class="p-4 text-center">Status</th>
+                                        <th class="p-4 text-center">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="complianceTableBody">
+                                    <tr><td colspan="7" class="p-8 text-center text-text-muted">Loading...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ── TAB: Facility Registry ── -->
+                <div class="tab-content p-6" id="tabContent-registry">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
+                        <div>
+                            <h3 class="font-bold text-on-surface text-lg">Facility Emissions Registry</h3>
+                            <p class="text-xs text-text-muted">Sort and filter all submitted utility audits.</p>
+                        </div>
+                        <div class="flex gap-3 flex-wrap">
+                            <select id="sectorFilter" class="bg-white border border-surface-border rounded-lg px-3 py-2 text-sm">
+                                <option value="All">All Sectors</option>
+                                <option value="Manufacturing">Manufacturing</option>
+                                <option value="Textile">Textiles</option>
+                                <option value="Food Processing">Food Processing</option>
+                            </select>
+                            <select id="sortOption" class="bg-white border border-surface-border rounded-lg px-3 py-2 text-sm">
+                                <option value="newest">Sort: Newest</option>
+                                <option value="co2_desc">Footprint (High)</option>
+                                <option value="co2_asc">Footprint (Low)</option>
+                                <option value="score">Carbon Grade</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto bg-white rounded-xl border border-surface-border">
+                        <table class="w-full text-left border-collapse text-sm">
+                            <thead class="bg-surface border-b border-surface-border">
+                                <tr class="text-xs font-bold text-text-muted uppercase tracking-wider">
+                                    <th class="p-4">Enterprise</th>
+                                    <th class="p-4">Product / Item</th>
+                                    <th class="p-4">Sector</th>
+                                    <th class="p-4">Location</th>
+                                    <th class="p-4">Report Period</th>
+                                    <th class="p-4">Footprint (CO2e/Unit)</th>
+                                    <th class="p-4 text-center">Grade</th>
+                                </tr>
+                            </thead>
+                            <tbody id="auditsTableBody">
+                                <tr><td colspan="7" class="p-8 text-center text-text-muted">Loading...</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ── TAB: Audit Log ── -->
+                <div class="tab-content p-6" id="tabContent-auditlog">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="font-bold text-on-surface text-lg">Immutable Audit Log</h3>
+                            <p class="text-xs text-text-muted">WORM-grade tamper-evident system log. All entries are append-only.</p>
+                        </div>
+                        <div class="flex items-center gap-2 bg-[#e8f5e9] border border-[#c8e6c9] px-3 py-1.5 rounded-full">
+                            <span class="material-symbols-outlined text-[#1B5E20] icon-fill text-sm">lock</span>
+                            <span class="text-xs text-[#1B5E20] font-bold">Tamper-Evident</span>
+                        </div>
+                    </div>
+                    <div id="auditLogContainer" class="space-y-2 max-h-[600px] overflow-y-auto">
+                        <p class="text-center text-text-muted p-8 text-sm">Loading audit logs...</p>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="w-full py-stack-lg px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-white border-t border-surface-border shrink-0">
-        <div class="font-headline-sm text-headline-sm font-bold text-primary">EcoMark</div>
-        <div class="font-label-sm text-label-sm text-text-muted">© 2024 EcoMark Industrial Carbon Accounting. All rights reserved.</div>
+    <footer class="w-full py-4 px-12 flex flex-col md:flex-row justify-between items-center bg-white border-t border-surface-border shrink-0">
+        <div class="font-bold text-primary">EcoMark</div>
+        <div class="text-xs text-text-muted">© 2024 EcoMark Industrial Carbon Accounting. All rights reserved.</div>
     </footer>
 </div>
 
 <script src="../js/db.js"></script>
 <script src="../js/auth.js"></script>
 <script>
-    // Verify Admin authentication
     const user = checkAuth('admin');
+
+    function switchTab(name) {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        document.getElementById('tab-' + name).classList.add('active');
+        document.getElementById('tabContent-' + name).classList.add('active');
+    }
 
     document.addEventListener('DOMContentLoaded', () => {
         if (!user) return;
-
-        // Set name
         document.getElementById('sideUserLabel').textContent = user.companyName;
 
-        // Load DB collections
         const allUsers = DB.getUsers();
         const allProducts = DB.getProducts();
         const allReports = Object.values(DB.getReports());
-
-        // Count stats
         const companies = Object.values(allUsers).filter(u => u.role === 'company');
+
+        // ── KPI: Basic ──
         document.getElementById('kpiCompanies').textContent = companies.length;
 
         let totalCO2e = 0;
         let scoreWeights = { "A+": 5, "A": 4, "B": 3, "C": 2, "D": 1 };
         let totalWeight = 0;
-
         allReports.forEach(r => {
             totalCO2e += r.totalCO2e;
             totalWeight += scoreWeights[r.score] || 3;
         });
+        document.getElementById('kpiCo2').textContent = totalCO2e.toLocaleString(undefined, {maximumFractionDigits: 0});
 
-        document.getElementById('kpiCo2').textContent = totalCO2e.toLocaleString(undefined, {minimumFractionDigits:1, maximumFractionDigits:1});
-
-        // Average score
         let avgScore = "B";
         if (allReports.length > 0) {
-            const avgWeight = totalWeight / allReports.length;
-            if (avgWeight >= 4.5) avgScore = "A+";
-            else if (avgWeight >= 3.5) avgScore = "A";
-            else if (avgWeight >= 2.5) avgScore = "B";
-            else if (avgWeight >= 1.5) avgScore = "C";
+            const avg = totalWeight / allReports.length;
+            if (avg >= 4.5) avgScore = "A+";
+            else if (avg >= 3.5) avgScore = "A";
+            else if (avg >= 2.5) avgScore = "B";
+            else if (avg >= 1.5) avgScore = "C";
             else avgScore = "D";
         }
-        
+        const scoreColorMap = { "A+": "bg-[#1B5E20]", "A": "bg-[#388E3C]", "B": "bg-[#F9A825]", "C": "bg-[#E65100]", "D": "bg-[#B71C1C]" };
         const kpiScore = document.getElementById('kpiScore');
         kpiScore.textContent = avgScore;
-        const scoreColors = {
-            "A+": "bg-[#1B5E20]", "A": "bg-[#388E3C]", "B": "bg-[#F9A825]", "C": "bg-[#E65100]", "D": "bg-[#B71C1C]"
-        };
-        kpiScore.className = `w-14 h-14 rounded-xl flex items-center justify-center text-white font-headline-md text-headline-md font-bold ${scoreColors[avgScore] || 'bg-primary'}`;
+        kpiScore.className = `w-12 h-12 rounded-xl flex items-center justify-center text-white font-extrabold text-lg ${scoreColorMap[avgScore] || 'bg-primary'}`;
 
-        // 1. Sector Carbon Footprints Charts
-        const sectorTotals = { Manufacturing: 0, Textile: 0, "Food Processing": 0, Energy: 0, Logistics: 0 };
+        // ── Compliance Assessment ──
+        let nonCompliantCount = 0;
+        let compliantCount = 0;
+        let atRiskCount = 0;
+        const complianceRows = companies.map(company => {
+            const compReports = allReports.filter(r => r.companyId === company.uid);
+            const latestReport = compReports.sort((a,b) => new Date(b.submittedAt) - new Date(a.submittedAt))[0];
+            const latestProduct = latestReport ? allProducts[latestReport.productId] : null;
+            const latestGrade = latestReport ? latestReport.score : null;
+            let status = 'compliant';
+            if (!latestReport || latestGrade === 'D') { status = 'non_compliant'; nonCompliantCount++; }
+            else if (compReports.length < 2) { status = 'at_risk'; atRiskCount++; }
+            else { compliantCount++; }
+            return { ...company, compReports, latestReport, latestGrade, status, latestProductName: latestProduct ? latestProduct.productName : '—' };
+        });
+
+        document.getElementById('kpiNonCompliant').textContent = nonCompliantCount;
+        document.getElementById('countCompliant').textContent = compliantCount;
+        document.getElementById('countAtRisk').textContent = atRiskCount;
+        document.getElementById('countNonCompliant').textContent = nonCompliantCount;
+
+        // Alert banner
+        const alertBanner = document.getElementById('complianceAlertBanner');
+        const alertText = document.getElementById('alertText');
+        if (nonCompliantCount > 0) {
+            alertText.textContent = `${nonCompliantCount} facilit${nonCompliantCount > 1 ? 'ies' : 'y'} classified as Non-Compliant (Score D or missing reports). Review the Compliance Enforcement tab to issue notices.`;
+        } else if (atRiskCount > 0) {
+            alertBanner.className = alertBanner.className.replace('bg-[#fff8f7] border-[#ffb4ab]', 'bg-[#fffde7] border-[#fff176]');
+            alertBanner.querySelector('.material-symbols-outlined').className = 'material-symbols-outlined text-[#F57F17] icon-fill shrink-0';
+            alertBanner.querySelector('p.font-bold').className = 'font-bold text-[#F57F17] text-sm';
+            alertText.textContent = `${atRiskCount} facilit${atRiskCount > 1 ? 'ies' : 'y'} at risk — only 1 quarterly report filed. Deadline monitoring active.`;
+        } else {
+            alertBanner.className = alertBanner.className.replace('bg-[#fff8f7] border-[#ffb4ab]', 'bg-[#e8f5e9] border-[#c8e6c9]');
+            alertBanner.querySelector('.material-symbols-outlined').className = 'material-symbols-outlined text-[#1B5E20] icon-fill shrink-0';
+            alertBanner.querySelector('p.font-bold').className = 'font-bold text-[#1B5E20] text-sm';
+            alertText.textContent = 'All registered facilities are currently compliant. No action required.';
+            document.getElementById('complianceBadge').style.display = 'none';
+        }
+
+        // ── Charts ──
+        const sectorTotals = {};
         allReports.forEach(r => {
             const prod = allProducts[r.productId];
             const sector = prod ? prod.category : 'Manufacturing';
-            if (sectorTotals[sector] !== undefined) {
-                sectorTotals[sector] += r.totalCO2e;
-            } else {
-                sectorTotals[sector] = r.totalCO2e;
-            }
+            sectorTotals[sector] = (sectorTotals[sector] || 0) + r.totalCO2e;
         });
-
-        const sectorCtx = document.getElementById('sectorChart').getContext('2d');
-        new Chart(sectorCtx, {
+        new Chart(document.getElementById('sectorChart').getContext('2d'), {
             type: 'bar',
             data: {
                 labels: Object.keys(sectorTotals),
-                datasets: [{
-                    label: 'Aggregate CO2e (kg)',
-                    data: Object.values(sectorTotals),
-                    backgroundColor: ['#1B5E20', '#388E3C', '#F9A825', '#E65100', '#B71C1C'],
-                    borderRadius: 4
-                }]
+                datasets: [{ label: 'Total CO2e (kg)', data: Object.values(sectorTotals), backgroundColor: ['#1B5E20','#388E3C','#F9A825','#E65100','#B71C1C'], borderRadius: 6 }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: {
-                    y: { beginAtZero: true, grid: { color: '#E1E8E1' } },
-                    x: { grid: { display: false } }
-                }
-            }
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, grid: { color: '#E1E8E1' } }, x: { grid: { display: false } } } }
         });
 
-        // 2. Resource Consumption Shares Chart
         const fuelShares = {};
         allReports.forEach(r => {
             r.fuelEntries.forEach(f => {
-                // Approximate quantity in kg equivalent for plotting
-                const coeff = window.EMISSION_FACTORS[f.fuel_type] || 1;
-                const co2Contribution = f.quantity * coeff;
-                fuelShares[f.fuel_type] = (fuelShares[f.fuel_type] || 0) + co2Contribution;
+                const co2c = f.quantity * (window.EMISSION_FACTORS[f.fuel_type] || 1);
+                fuelShares[f.fuel_type.replace('_',' ').toUpperCase()] = (fuelShares[f.fuel_type.replace('_',' ').toUpperCase()] || 0) + co2c;
             });
         });
-
-        const fuelCtx = document.getElementById('fuelChart').getContext('2d');
-        new Chart(fuelCtx, {
+        new Chart(document.getElementById('fuelChart').getContext('2d'), {
             type: 'doughnut',
-            data: {
-                labels: Object.keys(fuelShares).map(k => k.replace('_', ' ').toUpperCase()),
-                datasets: [{
-                    data: Object.values(fuelShares),
-                    backgroundColor: ['#006036', '#388E3C', '#acf4a4', '#F9A825', '#E65100', '#B71C1C', '#80d9a0', '#2E7D32']
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'right',
-                        labels: { boxWidth: 12, font: { size: 10 } }
-                    }
-                }
-            }
+            data: { labels: Object.keys(fuelShares), datasets: [{ data: Object.values(fuelShares), backgroundColor: ['#006036','#388E3C','#acf4a4','#F9A825','#E65100','#B71C1C','#80d9a0','#2E7D32'] }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 10 } } } } }
         });
 
-        // 3. Render Audit Table
+        // ── Leaderboard ──
+        const leaderboard = companies.sort((a,b) => (b.ecoCoins||0) - (a.ecoCoins||0));
+        const medals = ['🥇','🥈','🥉'];
+        document.getElementById('leaderboardContainer').innerHTML = leaderboard.map((c,i) => `
+            <div class="flex items-center gap-4 bg-white border border-surface-border rounded-xl px-5 py-3 hover:shadow-sm transition-shadow">
+                <span class="text-2xl">${medals[i] || '#' + (i+1)}</span>
+                <div class="flex-1">
+                    <p class="font-bold text-on-surface text-sm">${c.companyName}</p>
+                    <p class="text-xs text-text-muted">${c.industry} · ${c.location}</p>
+                </div>
+                <div class="text-right">
+                    <p class="font-extrabold text-[#F9A825] text-lg">${(c.ecoCoins||0).toLocaleString()}</p>
+                    <p class="text-xs text-text-muted">ECT Earned</p>
+                </div>
+            </div>
+        `).join('');
+
+        // ── Compliance Table ──
+        const renderComplianceTable = (filter = 'all') => {
+            const statusConfig = {
+                compliant: { label: 'Compliant', cls: 'bg-[#e8f5e9] text-[#1B5E20]', dot: 'bg-[#388E3C]' },
+                at_risk:   { label: 'At Risk',   cls: 'bg-[#fffde7] text-[#F57F17]', dot: 'bg-[#F9A825]' },
+                non_compliant: { label: 'Non-Compliant', cls: 'bg-[#ffdad6] text-[#B71C1C]', dot: 'bg-[#B71C1C]' }
+            };
+            const gradeColors = { "A+": "bg-[#1B5E20] text-white", "A": "bg-[#388E3C] text-white", "B": "bg-[#F9A825] text-white", "C": "bg-[#E65100] text-white", "D": "bg-[#B71C1C] text-white" };
+            const filtered = filter === 'all' ? complianceRows : complianceRows.filter(r => r.status === filter);
+            document.getElementById('complianceTableBody').innerHTML = filtered.length === 0 
+                ? `<tr><td colspan="7" class="p-8 text-center text-text-muted">No facilities match this filter.</td></tr>`
+                : filtered.map(c => {
+                    const sc = statusConfig[c.status];
+                    const actionHtml = c.status === 'non_compliant'
+                        ? `<button onclick="issueNotice('${c.uid}')" class="text-xs bg-error text-white px-3 py-1.5 rounded-lg font-bold hover:opacity-90 transition-opacity">Issue Notice</button>`
+                        : c.status === 'at_risk'
+                        ? `<button onclick="sendReminder('${c.uid}')" class="text-xs bg-[#F9A825] text-white px-3 py-1.5 rounded-lg font-bold hover:opacity-90 transition-opacity">Send Reminder</button>`
+                        : `<span class="text-xs text-score-a font-bold flex items-center gap-1 justify-center"><span class="material-symbols-outlined text-sm icon-fill">check_circle</span> OK</span>`;
+                    return `
+                        <tr class="border-b border-surface-border hover:bg-surface-container-low transition-colors">
+                            <td class="p-4 font-bold text-on-surface text-sm">${c.companyName}</td>
+                            <td class="p-4 text-sm text-text-muted">${c.industry || '—'}</td>
+                            <td class="p-4 text-sm font-semibold">${c.compReports.length} filed</td>
+                            <td class="p-4">
+                                ${c.latestGrade ? `<span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold ${gradeColors[c.latestGrade]}">${c.latestGrade}</span>` : '<span class="text-xs text-text-muted">None</span>'}
+                            </td>
+                            <td class="p-4 text-sm font-bold text-[#F9A825]">${(c.ecoCoins||0).toLocaleString()} ECT</td>
+                            <td class="p-4 text-center">
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${sc.cls}">
+                                    <span class="w-1.5 h-1.5 rounded-full ${sc.dot} inline-block"></span>
+                                    ${sc.label}
+                                </span>
+                            </td>
+                            <td class="p-4 text-center">${actionHtml}</td>
+                        </tr>`;
+                }).join('');
+        };
+        renderComplianceTable();
+        document.getElementById('complianceFilter').addEventListener('change', e => renderComplianceTable(e.target.value));
+
+        // ── Registry Table ──
         const renderAuditTable = () => {
             const sectorVal = document.getElementById('sectorFilter').value;
             const sortVal = document.getElementById('sortOption').value;
-
-            // Assemble complete audit rows
-            let auditRows = allReports.map(r => {
+            let rows = allReports.map(r => {
                 const comp = allUsers[r.companyId] || {};
                 const prod = allProducts[r.productId] || {};
-                return {
-                    ...r,
-                    companyName: comp.companyName || 'Unknown Corp',
-                    productName: prod.productName || 'Unknown Product',
-                    sector: prod.category || 'Manufacturing',
-                    location: comp.location || 'Unknown'
-                };
+                return { ...r, companyName: comp.companyName||'Unknown', productName: prod.productName||'Unknown', sector: prod.category||'Manufacturing', location: comp.location||'Unknown' };
             });
-
-            // Filter
-            if (sectorVal !== "All") {
-                auditRows = auditRows.filter(row => row.sector.toLowerCase() === sectorVal.toLowerCase());
-            }
-
-            // Sort
-            if (sortVal === "newest") {
-                auditRows.sort((a,b) => new Date(b.submittedAt) - new Date(a.submittedAt));
-            } else if (sortVal === "co2_desc") {
-                auditRows.sort((a,b) => b.totalCO2e - a.totalCO2e);
-            } else if (sortVal === "co2_asc") {
-                auditRows.sort((a,b) => a.totalCO2e - b.totalCO2e);
-            } else if (sortVal === "score") {
-                const scoreRanks = { "A+": 5, "A": 4, "B": 3, "C": 2, "D": 1 };
-                auditRows.sort((a,b) => scoreRanks[b.score] - scoreRanks[a.score]);
-            }
-
-            const tableBody = document.getElementById('auditsTableBody');
-            if (auditRows.length === 0) {
-                tableBody.innerHTML = `
-                    <tr>
-                        <td colspan="7" class="p-8 text-center text-text-muted">No facility audits found matching the filters.</td>
-                    </tr>
-                `;
-            } else {
-                tableBody.innerHTML = auditRows.map(row => {
-                    const gradeColors = {
-                        "A+": "bg-[#1B5E20] text-white", "A": "bg-[#388E3C] text-white", "B": "bg-[#F9A825] text-white", "C": "bg-[#E65100] text-white", "D": "bg-[#B71C1C] text-white"
-                    };
-                    return `
-                        <tr class="border-b border-surface-border hover:bg-surface-container-low transition-colors">
-                            <td class="p-4 font-bold text-on-surface text-sm">${row.companyName}</td>
-                            <td class="p-4 font-semibold text-sm">${row.productName}</td>
-                            <td class="p-4 text-sm">${row.sector}</td>
-                            <td class="p-4 text-sm">${row.location}</td>
-                            <td class="p-4 font-semibold text-sm">${row.period}</td>
-                            <td class="p-4 text-sm">${row.totalCO2e.toLocaleString()} kg (${row.co2ePerUnit.toFixed(3)} kg/unit)</td>
-                            <td class="p-4 text-center">
-                                <span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold ${gradeColors[row.score]}">${row.score}</span>
-                            </td>
-                        </tr>
-                    `;
-                }).join('');
-            }
+            if (sectorVal !== 'All') rows = rows.filter(r => r.sector.toLowerCase() === sectorVal.toLowerCase());
+            if (sortVal === 'newest') rows.sort((a,b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+            else if (sortVal === 'co2_desc') rows.sort((a,b) => b.totalCO2e - a.totalCO2e);
+            else if (sortVal === 'co2_asc') rows.sort((a,b) => a.totalCO2e - b.totalCO2e);
+            else if (sortVal === 'score') { const r = {"A+":5,"A":4,"B":3,"C":2,"D":1}; rows.sort((a,b) => r[b.score]-r[a.score]); }
+            const gradeColors = { "A+": "bg-[#1B5E20] text-white", "A": "bg-[#388E3C] text-white", "B": "bg-[#F9A825] text-white", "C": "bg-[#E65100] text-white", "D": "bg-[#B71C1C] text-white" };
+            document.getElementById('auditsTableBody').innerHTML = rows.length === 0
+                ? `<tr><td colspan="7" class="p-8 text-center text-text-muted">No audit entries match the filter.</td></tr>`
+                : rows.map(r => `
+                    <tr class="border-b border-surface-border hover:bg-surface-container-low transition-colors">
+                        <td class="p-4 font-bold text-on-surface text-sm">${r.companyName}</td>
+                        <td class="p-4 font-semibold text-sm">${r.productName}</td>
+                        <td class="p-4 text-sm">${r.sector}</td>
+                        <td class="p-4 text-sm">${r.location}</td>
+                        <td class="p-4 font-semibold text-sm">${r.period}</td>
+                        <td class="p-4 text-sm">${r.totalCO2e.toLocaleString()} kg (${r.co2ePerUnit.toFixed(3)} kg/unit)</td>
+                        <td class="p-4 text-center"><span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold ${gradeColors[r.score]}">${r.score}</span></td>
+                    </tr>`).join('');
         };
-
-        // Bind filter events
+        renderAuditTable();
         document.getElementById('sectorFilter').addEventListener('change', renderAuditTable);
         document.getElementById('sortOption').addEventListener('change', renderAuditTable);
-        
-        renderAuditTable();
 
-        // 4. CSV Exporter
+        // ── Audit Log ──
+        const auditLogs = DB.getAuditLogs();
+        const actionLabels = { company_registered: { icon: 'how_to_reg', color: 'text-score-a', label: 'Company Registered' }, report_submitted: { icon: 'assignment', color: 'text-primary', label: 'Report Submitted' } };
+        document.getElementById('auditLogContainer').innerHTML = auditLogs.length === 0
+            ? '<p class="text-center text-text-muted p-8 text-sm">No audit logs found.</p>'
+            : auditLogs.map(log => {
+                const al = actionLabels[log.action] || { icon: 'info', color: 'text-text-muted', label: log.action };
+                const comp = allUsers[log.companyId];
+                return `
+                    <div class="flex items-start gap-3 p-4 bg-white border border-surface-border rounded-xl hover:bg-surface-container-low transition-colors">
+                        <span class="material-symbols-outlined ${al.color} icon-fill shrink-0">${al.icon}</span>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between gap-2 flex-wrap">
+                                <p class="font-bold text-on-surface text-sm">${al.label} — ${comp ? comp.companyName : log.companyId}</p>
+                                <p class="text-xs text-text-muted shrink-0">${new Date(log.timestamp).toLocaleString()}</p>
+                            </div>
+                            <p class="text-xs text-on-surface-variant mt-1">${log.detail}</p>
+                            ${log.reportId ? `<p class="text-xs text-primary mt-0.5 font-mono">Report ID: ${log.reportId}</p>` : ''}
+                        </div>
+                        <span class="material-symbols-outlined text-score-a icon-fill text-sm shrink-0 mt-0.5" title="Tamper-evident log">lock</span>
+                    </div>`;
+            }).join('');
+
+        // ── CSV Export ──
         document.getElementById('csvExportBtn').addEventListener('click', () => {
-            let csvContent = "data:text/csv;charset=utf-8,";
-            
-            // Header
-            csvContent += "Report ID,Company,Product,Sector,HQ Location,Period,Batch Size,Total CO2e (kg),CO2e Per Unit (kg),Carbon Score,Submitted At\n";
-
+            let csv = "data:text/csv;charset=utf-8,";
+            csv += "Report ID,Company,Product,Sector,Location,Period,Batch Size,Total CO2e (kg),CO2e Per Unit (kg),Carbon Score,Submitted At\n";
             allReports.forEach(r => {
                 const comp = allUsers[r.companyId] || {};
                 const prod = allProducts[r.productId] || {};
-                
-                const companyName = `"${(comp.companyName || 'Unknown Corp').replace(/"/g, '""')}"`;
-                const productName = `"${(prod.productName || 'Unknown Product').replace(/"/g, '""')}"`;
-                const sector = `"${prod.category || 'Manufacturing'}"`;
-                const location = `"${(comp.location || 'Unknown').replace(/"/g, '""')}"`;
-                const period = `"${r.period}"`;
-
-                const row = [
-                    r.reportId,
-                    companyName,
-                    productName,
-                    sector,
-                    location,
-                    period,
-                    r.batchSize,
-                    r.totalCO2e,
-                    r.co2ePerUnit,
-                    r.score,
-                    r.submittedAt
-                ].join(",");
-
-                csvContent += row + "\n";
+                csv += [r.reportId, `"${comp.companyName||''}"`, `"${prod.productName||''}"`, `"${prod.category||''}"`, `"${comp.location||''}"`, r.period, r.batchSize, r.totalCO2e, r.co2ePerUnit, r.score, r.submittedAt].join(',') + '\n';
             });
-
-            // Trigger download
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "ecomark_emissions_ledger.csv");
+            const link = document.createElement('a');
+            link.setAttribute('href', encodeURI(csv));
+            link.setAttribute('download', 'ecomark_emissions_ledger.csv');
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
         });
 
-        // Logout securely
-        const doLogout = () => {
-            DB.logout();
-        };
+        // Logout
+        const doLogout = () => DB.logout();
         document.getElementById('logoutBtn').addEventListener('click', doLogout);
         document.getElementById('logoutBtnMobile').addEventListener('click', doLogout);
     });
+
+    // Action stubs (investor demo functions)
+    function issueNotice(uid) {
+        const allUsers = DB.getUsers();
+        const company = allUsers[uid];
+        DB.addAuditLog('compliance_notice_issued', uid, null, `Regulatory notice issued to ${company?.companyName || uid}. Facility must file a corrective report within 30 days or face SPCB action under EPA 1986 Section 15.`);
+        alert(`✅ Compliance notice issued to ${company?.companyName || uid}.\n\nThis has been logged in the immutable audit trail. The company has 30 days to file a corrective report.`);
+    }
+
+    function sendReminder(uid) {
+        const allUsers = DB.getUsers();
+        const company = allUsers[uid];
+        DB.addAuditLog('reminder_sent', uid, null, `Automated quarterly report reminder sent to ${company?.companyName || uid}.`);
+        alert(`📧 Reminder sent to ${company?.companyName || uid}.\n\nThey have been reminded to file their pending quarterly report to maintain compliance status.`);
+    }
 </script>
 </body>
 </html>

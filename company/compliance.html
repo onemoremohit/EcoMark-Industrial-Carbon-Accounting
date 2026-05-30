@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>My Compliance Status | EcoMark</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "outline-variant":"#bec9be","surface-dim":"#d8dad9","score-a":"#388E3C",
+                "text-main":"#1A1C1A","text-muted":"#5C635C","error-container":"#ffdad6",
+                "score-d":"#B71C1C","on-primary":"#ffffff","surface-border":"#E1E8E1",
+                "secondary-container":"#a0f399","surface":"#f8faf8","surface-variant":"#e1e3e1",
+                "surface-container":"#eceeec","on-primary-container":"#abffc6","secondary":"#1b6d24",
+                "outline":"#6f7a70","on-surface":"#191c1b","on-error-container":"#93000a",
+                "on-surface-variant":"#3f4941","on-background":"#191c1b",
+                "surface-container-low":"#f2f4f2","score-a-plus":"#1B5E20","score-b":"#F9A825",
+                "surface-container-lowest":"#ffffff","background":"#f8faf8",
+                "on-secondary-container":"#217128","on-error":"#ffffff","primary-fixed":"#9bf6ba",
+                "surface-container-high":"#e6e9e7","tertiary-container":"#377837",
+                "primary":"#006036","primary-container":"#1a7a4a","tertiary":"#1c5f21",
+                "surface-bright":"#f8faf8","error":"#ba1a1a",
+                "surface-container-highest":"#e1e3e1","score-c":"#E65100"
+              },
+              "spacing": {
+                "stack-sm":"8px","margin-desktop":"48px","margin-mobile":"16px",
+                "stack-md":"16px","gutter":"24px","container-max":"1200px","stack-lg":"32px","base":"4px"
+              }
+            }
+          }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8faf8; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        .policy-tag { display:inline-block;background:#e8f5e9;border:1px solid #c8e6c9;color:#1B5E20;border-radius:6px;padding:3px 8px;font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col lg:flex-row font-sans">
+
+<!-- Nav Drawer (Desktop) -->
+<nav class="w-64 h-screen border-r border-surface-border bg-surface hidden lg:flex flex-col sticky top-0 z-50">
+    <div class="p-6 border-b border-surface-border">
+        <a href="../index.html" class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-3xl font-bold icon-fill">eco</span>
+            <div>
+                <h2 class="font-bold text-primary text-lg">EcoMark</h2>
+                <p class="text-xs text-text-muted">Carbon Transparency</p>
+            </div>
+        </a>
+    </div>
+    <div class="p-4 flex flex-col gap-1 flex-grow">
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg text-sm font-semibold" href="dashboard.html">
+            <span class="material-symbols-outlined">dashboard</span><span>Dashboard</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg text-sm font-semibold" href="submit-report.html">
+            <span class="material-symbols-outlined">post_add</span><span>Submit Report</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg text-sm font-semibold" href="my-products.html">
+            <span class="material-symbols-outlined">inventory_2</span><span>My Products</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg text-sm font-semibold" href="eco-coins.html">
+            <span class="material-symbols-outlined">payments</span><span>Eco-Coins</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold text-sm" href="compliance.html">
+            <span class="material-symbols-outlined icon-fill">policy</span><span>My Compliance</span>
+        </a>
+    </div>
+    <div class="p-4 border-t border-surface-border flex flex-col gap-2">
+        <div class="px-4 py-2 bg-surface-container rounded-lg mb-2">
+            <p class="text-xs text-text-muted">Logged in as:</p>
+            <p class="text-sm font-bold text-on-surface truncate" id="sideCompanyLabel">Loading...</p>
+            <span class="inline-block mt-1 bg-primary/10 text-primary font-bold text-[10px] px-2 py-0.5 rounded uppercase">Company</span>
+        </div>
+        <button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 transition-colors rounded-lg text-sm text-left w-full">
+            <span class="material-symbols-outlined">logout</span><span>Log Out</span>
+        </button>
+    </div>
+</nav>
+
+<!-- Main -->
+<div class="flex-1 flex flex-col min-h-screen">
+    <!-- Mobile Header -->
+    <header class="flex justify-between items-center w-full px-4 md:px-12 py-4 sticky top-0 z-40 bg-surface border-b border-surface-border lg:hidden">
+        <h1 class="font-bold text-primary text-lg" id="topCompanyLabel">My Compliance</h1>
+        <button id="logoutBtnMobile" class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
+            <span class="material-symbols-outlined">logout</span>
+        </button>
+    </header>
+
+    <main class="flex-1 px-4 md:px-12 py-8 max-w-container-max mx-auto w-full">
+        <div class="mb-8">
+            <h2 class="text-2xl font-extrabold text-on-background mb-1">My Compliance Status</h2>
+            <p class="text-sm text-text-muted">Track your facility's compliance with all applicable carbon reporting mandates and certifications.</p>
+        </div>
+
+        <!-- ── Overall Score Card ── -->
+        <div class="bg-white border border-surface-border rounded-xl p-6 shadow-sm mb-6 flex flex-col md:flex-row justify-between gap-6" id="overallComplianceCard">
+            <div class="flex items-center gap-5">
+                <div class="w-20 h-20 rounded-xl flex items-center justify-center text-white font-extrabold text-3xl" id="complianceScoreCircle" style="background:#388E3C">A</div>
+                <div>
+                    <p class="text-xs text-text-muted uppercase tracking-wider font-bold mb-1">Overall Compliance Level</p>
+                    <p class="text-2xl font-bold text-on-surface" id="complianceLevelLabel">Loading...</p>
+                    <p class="text-sm text-text-muted mt-1" id="complianceSublabel">Checking your reports...</p>
+                </div>
+            </div>
+            <div class="flex flex-col gap-3 shrink-0">
+                <a href="submit-report.html" class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-primary-container transition-colors">
+                    <span class="material-symbols-outlined text-sm">post_add</span>
+                    Submit Quarterly Report
+                </a>
+                <a href="../compliance.html" target="_blank" class="flex items-center gap-2 border border-surface-border text-on-surface px-5 py-2.5 rounded-lg text-sm font-semibold hover:bg-surface-container-low transition-colors">
+                    <span class="material-symbols-outlined text-sm">open_in_new</span>
+                    Full Compliance Guide
+                </a>
+            </div>
+        </div>
+
+        <!-- ── Compliance Checklist by Regulation ── -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-6">
+
+            <!-- EPA 1986 -->
+            <div class="bg-white border border-surface-border rounded-xl shadow-sm overflow-hidden">
+                <div class="p-4 border-b border-surface-border bg-surface-container-low flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-primary icon-fill">gavel</span>
+                        <div>
+                            <h3 class="font-bold text-on-surface text-sm">EPA 1986 — Annual Statement</h3>
+                            <p class="text-xs text-text-muted">MoEF&CC · Deadline: Sep 30 annually</p>
+                        </div>
+                    </div>
+                    <span id="epaStatus" class="text-xs font-bold px-3 py-1 rounded-full bg-[#fffde7] text-[#F57F17]">Checking...</span>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined icon-fill text-score-a shrink-0 mt-0.5">check_circle</span>
+                        <div>
+                            <p class="text-sm font-semibold text-on-surface">Company registered on EcoMark</p>
+                            <p class="text-xs text-text-muted">✓ Satisfies CPCB identification requirement</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3" id="epaReportCheck">
+                        <span class="material-symbols-outlined icon-fill text-text-muted shrink-0 mt-0.5">radio_button_unchecked</span>
+                        <div>
+                            <p class="text-sm font-semibold text-on-surface">Quarterly emission reports filed</p>
+                            <p class="text-xs text-text-muted">Required: minimum 1 report per quarter</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined icon-fill text-score-a shrink-0 mt-0.5">check_circle</span>
+                        <div>
+                            <p class="text-sm font-semibold text-on-surface">Fuel type classification recorded</p>
+                            <p class="text-xs text-text-muted">✓ IPCC-standard categories used</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 p-3 bg-surface-container-low rounded-lg border border-surface-border flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm text-primary">info</span>
+                        <p class="text-xs text-on-surface-variant">Export your EcoMark reports as PDF for Form V submission to your State PCB before September 30.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEBI BRSR -->
+            <div class="bg-white border border-surface-border rounded-xl shadow-sm overflow-hidden">
+                <div class="p-4 border-b border-surface-border bg-surface-container-low flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-[#1A73E8] icon-fill">trending_up</span>
+                        <div>
+                            <h3 class="font-bold text-on-surface text-sm">SEBI BRSR — Principle 6</h3>
+                            <p class="text-xs text-text-muted">Top-1000 listed companies · Mandatory FY23+</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-[#e8f5e9] text-[#1B5E20]">Supported</span>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined icon-fill text-score-a shrink-0 mt-0.5">check_circle</span>
+                        <div>
+                            <p class="text-sm font-semibold text-on-surface">Scope 1 emissions quantified (P6, Ind. 4)</p>
+                            <p class="text-xs text-text-muted">✓ Fuel combustion data logged with IPCC factors</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined icon-fill text-score-a shrink-0 mt-0.5">check_circle</span>
+                        <div>
+                            <p class="text-sm font-semibold text-on-surface">Scope 2 emissions quantified (P6, Ind. 5)</p>
+                            <p class="text-xs text-text-muted">✓ Grid electricity consumption at 0.82 kg CO2e/kWh</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined icon-fill text-score-a shrink-0 mt-0.5">check_circle</span>
+                        <div>
+                            <p class="text-sm font-semibold text-on-surface">GHG intensity tracked (P6, Ind. 6)</p>
+                            <p class="text-xs text-text-muted">✓ CO2e per unit of output is automatically computed</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined icon-fill text-text-muted shrink-0 mt-0.5">radio_button_unchecked</span>
+                        <div>
+                            <p class="text-sm font-semibold text-text-muted">Scope 3 reporting (P6, Leadership)</p>
+                            <p class="text-xs text-text-muted">Available in Phase 2 — supply chain module</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BEE PAT -->
+            <div class="bg-white border border-surface-border rounded-xl shadow-sm overflow-hidden">
+                <div class="p-4 border-b border-surface-border bg-surface-container-low flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-score-b icon-fill">bolt</span>
+                        <div>
+                            <h3 class="font-bold text-on-surface text-sm">BEE PAT Scheme — Cycle 7</h3>
+                            <p class="text-xs text-text-muted">Bureau of Energy Efficiency · Designated Consumers</p>
+                        </div>
+                    </div>
+                    <span id="patStatus" class="text-xs font-bold px-3 py-1 rounded-full bg-[#fffde7] text-[#F57F17]">Check Eligibility</span>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined icon-fill text-score-a shrink-0 mt-0.5">check_circle</span>
+                        <div>
+                            <p class="text-sm font-semibold text-on-surface">Energy consumption data logged</p>
+                            <p class="text-xs text-text-muted">✓ Fuel and electricity entries form the basis of SEC calculation</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined icon-fill text-score-a shrink-0 mt-0.5">check_circle</span>
+                        <div>
+                            <p class="text-sm font-semibold text-on-surface">Quarterly energy trend tracking</p>
+                            <p class="text-xs text-text-muted">✓ EcoMark chart shows reduction trajectory</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 p-3 bg-[#fffde7] rounded-lg border border-[#fff176] flex items-start gap-2">
+                        <span class="material-symbols-outlined text-sm text-[#F57F17]">info</span>
+                        <p class="text-xs text-on-surface-variant">If your facility consumes more than 30,000 MTOE/year (steel), 7,500 MTOE (cement), or thresholds for other PAT sectors, register as a Designated Consumer with BEE to get official SEC targets.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EU CBAM -->
+            <div class="bg-white border border-surface-border rounded-xl shadow-sm overflow-hidden">
+                <div class="p-4 border-b border-surface-border bg-surface-container-low flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="material-symbols-outlined text-error icon-fill">public</span>
+                        <div>
+                            <h3 class="font-bold text-on-surface text-sm">EU CBAM — Export Compliance</h3>
+                            <p class="text-xs text-text-muted">Full enforcement: January 2026 · EU Regulation 2023/956</p>
+                        </div>
+                    </div>
+                    <span class="text-xs font-bold px-3 py-1 rounded-full bg-[#ffdad6] text-[#B71C1C]">2026 Deadline</span>
+                </div>
+                <div class="p-4 space-y-3">
+                    <div class="flex items-start gap-3" id="cbamProductCheck">
+                        <span class="material-symbols-outlined icon-fill text-text-muted shrink-0 mt-0.5">radio_button_unchecked</span>
+                        <div>
+                            <p class="text-sm font-semibold text-on-surface">Verify if your product is CBAM-regulated</p>
+                            <p class="text-xs text-text-muted">Applies to: steel, aluminum, cement, fertilizers, hydrogen, electricity</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined icon-fill text-score-a shrink-0 mt-0.5">check_circle</span>
+                        <div>
+                            <p class="text-sm font-semibold text-on-surface">Embedded carbon quantified per unit</p>
+                            <p class="text-xs text-text-muted">✓ EcoMark's CO2e/unit figure is the CBAM "actual emissions" value</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined icon-fill text-text-muted shrink-0 mt-0.5">radio_button_unchecked</span>
+                        <div>
+                            <p class="text-sm font-semibold text-text-muted">CBAM-formatted export (Q4 2025)</p>
+                            <p class="text-xs text-text-muted">Annex IV declaration form — coming soon</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── SBTi / ESG Certifications ── -->
+        <div class="bg-white border border-surface-border rounded-xl shadow-sm p-6 mb-6">
+            <h3 class="font-bold text-on-surface text-lg mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary icon-fill">workspace_premium</span>
+                ESG Certifications & Target Setting
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="border border-surface-border rounded-xl p-4 text-center hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-[#1B5E20] flex items-center justify-center mx-auto mb-3">
+                        <span class="text-white font-bold text-xs">SBTi</span>
+                    </div>
+                    <h4 class="font-bold text-on-surface text-sm mb-1">Science Based Targets</h4>
+                    <p class="text-xs text-text-muted mb-3">Set 1.5°C-aligned emission reduction targets, validated by SBTi.</p>
+                    <span class="text-xs bg-surface-container-low px-3 py-1 rounded-full font-semibold text-text-muted">Recommended</span>
+                </div>
+                <div class="border border-surface-border rounded-xl p-4 text-center hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-[#006036] flex items-center justify-center mx-auto mb-3">
+                        <span class="material-symbols-outlined text-white text-xl icon-fill">verified</span>
+                    </div>
+                    <h4 class="font-bold text-on-surface text-sm mb-1">ISO 14064 Certification</h4>
+                    <p class="text-xs text-text-muted mb-3">Get third-party verification of your EcoMark reports under ISO 14064-1.</p>
+                    <span class="text-xs bg-[#e8f5e9] px-3 py-1 rounded-full font-semibold text-[#1B5E20]">EcoMark Supported</span>
+                </div>
+                <div class="border border-surface-border rounded-xl p-4 text-center hover:shadow-md transition-shadow">
+                    <div class="w-12 h-12 rounded-xl bg-[#1A73E8] flex items-center justify-center mx-auto mb-3">
+                        <span class="text-white font-bold text-xs">CDP</span>
+                    </div>
+                    <h4 class="font-bold text-on-surface text-sm mb-1">CDP Disclosure</h4>
+                    <p class="text-xs text-text-muted mb-3">Disclose to CDP (Carbon Disclosure Project) for investor ESG ratings access.</p>
+                    <span class="text-xs bg-surface-container-low px-3 py-1 rounded-full font-semibold text-text-muted">Phase 2</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── Your Reduction Trajectory ── -->
+        <div class="bg-white border border-surface-border rounded-xl shadow-sm p-6">
+            <h3 class="font-bold text-on-surface text-lg mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary icon-fill">trending_down</span>
+                Your Carbon Reduction Trajectory
+            </h3>
+            <div id="trajectoryContent">
+                <p class="text-text-muted text-sm">Loading trajectory data...</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full py-4 px-12 flex justify-between items-center bg-surface-container-lowest border-t border-surface-border mt-auto">
+        <div class="font-bold text-primary text-sm">EcoMark</div>
+        <div class="text-xs text-text-muted">© 2024 EcoMark Industrial Carbon Accounting. All rights reserved.</div>
+    </footer>
+</div>
+
+<script src="../js/db.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+    const user = checkAuth('company');
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (!user) return;
+
+        document.getElementById('sideCompanyLabel').textContent = user.companyName;
+        document.getElementById('topCompanyLabel').textContent = user.companyName;
+
+        const allReports = Object.values(DB.getReports()).filter(r => r.companyId === user.uid);
+        allReports.sort((a, b) => new Date(a.submittedAt) - new Date(b.submittedAt));
+
+        // ── Overall Compliance Score ──
+        const circle = document.getElementById('complianceScoreCircle');
+        const label = document.getElementById('complianceLevelLabel');
+        const sublabel = document.getElementById('complianceSublabel');
+        const epaStatus = document.getElementById('epaStatus');
+        const epaReportCheck = document.getElementById('epaReportCheck');
+
+        if (allReports.length === 0) {
+            circle.style.background = '#B71C1C';
+            circle.textContent = '!';
+            label.textContent = 'Non-Compliant';
+            sublabel.textContent = 'No emission reports filed. Submit your first report to achieve compliance.';
+            epaStatus.className = 'text-xs font-bold px-3 py-1 rounded-full bg-[#ffdad6] text-[#B71C1C]';
+            epaStatus.textContent = 'Non-Compliant';
+        } else if (allReports.length < 2) {
+            circle.style.background = '#F9A825';
+            circle.textContent = '~';
+            label.textContent = 'At Risk';
+            sublabel.textContent = 'Only 1 report filed. File quarterly reports to demonstrate continuous compliance.';
+            epaStatus.className = 'text-xs font-bold px-3 py-1 rounded-full bg-[#fffde7] text-[#F57F17]';
+            epaStatus.textContent = 'At Risk';
+            epaReportCheck.querySelector('.material-symbols-outlined').className = 'material-symbols-outlined icon-fill text-score-b shrink-0 mt-0.5';
+            epaReportCheck.querySelector('.material-symbols-outlined').textContent = 'warning';
+        } else {
+            const latestScore = allReports[allReports.length - 1].score;
+            if (latestScore === 'D') {
+                circle.style.background = '#E65100';
+                circle.textContent = 'D';
+                label.textContent = 'Reporting Compliant — Score Needs Improvement';
+                sublabel.textContent = 'Reports are filed, but current carbon rating is "D" (Very High). A compliance notice may be issued if improvement is not observed.';
+            } else {
+                const colors = { 'A+': '#1B5E20', 'A': '#388E3C', 'B': '#F9A825', 'C': '#E65100' };
+                circle.style.background = colors[latestScore] || '#388E3C';
+                circle.textContent = latestScore;
+                label.textContent = 'Fully Compliant';
+                sublabel.textContent = `${allReports.length} verified reports filed. Current carbon grade: ${latestScore}. No regulatory action pending.`;
+            }
+            epaStatus.className = 'text-xs font-bold px-3 py-1 rounded-full bg-[#e8f5e9] text-[#1B5E20]';
+            epaStatus.textContent = 'Compliant';
+            epaReportCheck.querySelector('.material-symbols-outlined').className = 'material-symbols-outlined icon-fill text-score-a shrink-0 mt-0.5';
+            epaReportCheck.querySelector('.material-symbols-outlined').textContent = 'check_circle';
+            epaReportCheck.querySelector('p.text-xs').textContent = `✓ ${allReports.length} report(s) filed — satisfies Form V documentation requirement`;
+        }
+
+        // ── CBAM check based on company industry ──
+        const cbamSectors = ['manufacturing', 'steel', 'aluminum', 'cement', 'chemical'];
+        const isCBAM = cbamSectors.some(s => (user.industry || '').toLowerCase().includes(s));
+        if (isCBAM) {
+            document.getElementById('cbamProductCheck').querySelector('.material-symbols-outlined').className = 'material-symbols-outlined icon-fill text-[#F57F17] shrink-0 mt-0.5';
+            document.getElementById('cbamProductCheck').querySelector('.material-symbols-outlined').textContent = 'warning';
+            document.getElementById('cbamProductCheck').querySelector('p.text-sm').textContent = '⚠ Your sector may be CBAM-regulated';
+            document.getElementById('cbamProductCheck').querySelector('p.text-xs').textContent = 'Manufacturing sector — verify if your specific products fall under CBAM Annex I categories.';
+        }
+
+        // ── PAT Status ──
+        const patSectors = ['manufacturing', 'textile', 'steel', 'cement', 'chemical', 'fertilizer'];
+        if (patSectors.some(s => (user.industry || '').toLowerCase().includes(s))) {
+            document.getElementById('patStatus').textContent = 'Potentially Applicable';
+        } else {
+            document.getElementById('patStatus').textContent = 'Verify with BEE';
+        }
+
+        // ── Trajectory ──
+        const trajDiv = document.getElementById('trajectoryContent');
+        if (allReports.length < 2) {
+            trajDiv.innerHTML = `
+                <div class="bg-surface-container-low rounded-xl p-6 text-center border border-surface-border">
+                    <span class="material-symbols-outlined text-text-muted text-4xl mb-3 block">show_chart</span>
+                    <p class="font-semibold text-on-surface mb-2">Need at least 2 reports for trajectory analysis</p>
+                    <p class="text-sm text-text-muted mb-4">Submit your next quarterly report and we'll automatically calculate your carbon reduction trajectory and SBTi alignment.</p>
+                    <a href="submit-report.html" class="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-primary-container transition-colors">
+                        <span class="material-symbols-outlined text-sm">post_add</span>Submit Next Report
+                    </a>
+                </div>`;
+        } else {
+            const first = allReports[0];
+            const last = allReports[allReports.length - 1];
+            const reduction = ((first.co2ePerUnit - last.co2ePerUnit) / first.co2ePerUnit) * 100;
+            const numPeriods = allReports.length - 1;
+            const annualizedReduction = (reduction / numPeriods) * 4; // 4 quarters per year
+            let trajectory, tColor, tIcon;
+            if (annualizedReduction >= 7) { trajectory = '1.5°C Aligned ✓'; tColor = '#1B5E20'; tIcon = 'check_circle'; }
+            else if (annualizedReduction >= 3) { trajectory = '2°C Pathway'; tColor = '#388E3C'; tIcon = 'trending_down'; }
+            else if (annualizedReduction >= 0) { trajectory = 'Below 2°C Pace — Accelerate'; tColor = '#F9A825'; tIcon = 'warning'; }
+            else { trajectory = 'Emissions Increasing — Urgent Action Required'; tColor = '#B71C1C'; tIcon = 'trending_up'; }
+
+            trajDiv.innerHTML = `
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                    <div class="bg-surface-container-low rounded-xl p-4 text-center border border-surface-border">
+                        <p class="text-xs text-text-muted uppercase tracking-wider font-bold mb-1">First Report</p>
+                        <p class="text-2xl font-extrabold text-on-surface">${first.co2ePerUnit.toFixed(3)}</p>
+                        <p class="text-xs text-text-muted">kg CO2e/unit · ${first.period}</p>
+                    </div>
+                    <div class="bg-surface-container-low rounded-xl p-4 text-center border border-surface-border">
+                        <p class="text-xs text-text-muted uppercase tracking-wider font-bold mb-1">Latest Report</p>
+                        <p class="text-2xl font-extrabold text-on-surface">${last.co2ePerUnit.toFixed(3)}</p>
+                        <p class="text-xs text-text-muted">kg CO2e/unit · ${last.period}</p>
+                    </div>
+                    <div class="rounded-xl p-4 text-center border" style="background:${tColor}10;border-color:${tColor}30">
+                        <p class="text-xs font-bold mb-1 uppercase tracking-wider" style="color:${tColor}">Cumulative Reduction</p>
+                        <p class="text-2xl font-extrabold" style="color:${tColor}">${reduction >= 0 ? '-' : '+'}${Math.abs(reduction).toFixed(1)}%</p>
+                        <p class="text-xs" style="color:${tColor}">vs first baseline</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3 p-4 rounded-xl border" style="background:${tColor}08;border-color:${tColor}30">
+                    <span class="material-symbols-outlined icon-fill text-2xl" style="color:${tColor}">${tIcon}</span>
+                    <div>
+                        <p class="font-bold text-sm" style="color:${tColor}">SBTi Trajectory: ${trajectory}</p>
+                        <p class="text-xs text-on-surface-variant mt-0.5">Estimated annualized reduction rate: <strong>${annualizedReduction.toFixed(1)}%/year</strong>. SBTi requires ≥4.2%/year for 1.5°C alignment. Keep submitting quarterly reports to refine this projection.</p>
+                    </div>
+                </div>`;
+        }
+
+        document.getElementById('logoutBtn').addEventListener('click', () => DB.logout());
+        document.getElementById('logoutBtnMobile').addEventListener('click', () => DB.logout());
+    });
+</script>
+</body>
+</html>
