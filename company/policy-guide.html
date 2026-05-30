@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Green Action Plan & Policy Guide | EcoMark</title>
+    <meta name="description" content="Personalised green energy recommendations and a score-specific improvement roadmap for your facility."/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "outline-variant":"#bec9be","surface-dim":"#d8dad9","score-a":"#388E3C",
+                "text-main":"#1A1C1A","text-muted":"#5C635C","error-container":"#ffdad6",
+                "score-d":"#B71C1C","on-primary":"#ffffff","surface-border":"#E1E8E1",
+                "secondary-container":"#a0f399","surface":"#f8faf8","surface-variant":"#e1e3e1",
+                "surface-container":"#eceeec","on-primary-container":"#abffc6","secondary":"#1b6d24",
+                "outline":"#6f7a70","on-surface":"#191c1b","on-surface-variant":"#3f4941",
+                "on-background":"#191c1b","surface-container-low":"#f2f4f2","score-a-plus":"#1B5E20",
+                "score-b":"#F9A825","surface-container-lowest":"#ffffff","background":"#f8faf8",
+                "on-secondary-container":"#217128","on-error":"#ffffff",
+                "surface-container-high":"#e6e9e7","primary":"#006036","primary-container":"#1a7a4a",
+                "tertiary":"#1c5f21","error":"#ba1a1a","score-c":"#E65100"
+              },
+              "spacing": {
+                "stack-sm":"8px","margin-desktop":"48px","margin-mobile":"16px",
+                "stack-md":"16px","gutter":"24px","container-max":"1200px","stack-lg":"32px","base":"4px"
+              }
+            }
+          }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+
+        /* Animated step connector */
+        .step-connector { width: 2px; background: linear-gradient(to bottom, #006036, #c8e6c9); margin: 0 auto; }
+
+        /* Progress ring */
+        .progress-ring-circle {
+            transition: stroke-dashoffset 0.8s ease;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+
+        /* Checklist step styles */
+        .roadmap-step { transition: all 0.2s ease; }
+        .roadmap-step:hover { transform: translateX(4px); }
+
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in { animation: fadeSlideIn 0.5s ease both; }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col lg:flex-row font-sans">
+
+<!-- Desktop Sidebar Nav -->
+<nav class="w-64 h-screen border-r border-surface-border bg-surface hidden lg:flex flex-col sticky top-0 z-50 shrink-0">
+    <div class="p-6 border-b border-surface-border">
+        <a href="../index.html" class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-3xl icon-fill">eco</span>
+            <div>
+                <h2 class="font-bold text-primary text-lg">EcoMark</h2>
+                <p class="text-xs text-text-muted">Carbon Transparency</p>
+            </div>
+        </a>
+    </div>
+    <div class="p-4 flex flex-col gap-1 flex-grow overflow-y-auto">
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg text-sm font-semibold" href="dashboard.html">
+            <span class="material-symbols-outlined">dashboard</span><span>Dashboard</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg text-sm font-semibold" href="submit-report.html">
+            <span class="material-symbols-outlined">post_add</span><span>Submit Report</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg text-sm font-semibold" href="my-products.html">
+            <span class="material-symbols-outlined">inventory_2</span><span>My Products</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg text-sm font-semibold" href="eco-coins.html">
+            <span class="material-symbols-outlined">payments</span><span>Eco-Coins</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg text-sm font-semibold" href="compliance.html">
+            <span class="material-symbols-outlined">policy</span><span>My Compliance</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold text-sm" href="policy-guide.html">
+            <span class="material-symbols-outlined icon-fill">auto_fix_high</span><span>Policy Guide</span>
+        </a>
+    </div>
+    <div class="p-4 border-t border-surface-border">
+        <div class="px-4 py-2 bg-surface-container rounded-lg mb-2">
+            <p class="text-xs text-text-muted">Logged in as:</p>
+            <p class="text-sm font-bold text-on-surface truncate" id="sideCompanyLabel">Loading...</p>
+        </div>
+        <button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 transition-colors rounded-lg text-sm text-left w-full">
+            <span class="material-symbols-outlined">logout</span><span>Log Out</span>
+        </button>
+    </div>
+</nav>
+
+<!-- Main Canvas -->
+<div class="flex-1 flex flex-col min-h-screen">
+    <!-- Mobile Header -->
+    <header class="flex justify-between items-center px-4 py-4 sticky top-0 z-40 bg-surface border-b border-surface-border lg:hidden">
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary icon-fill">eco</span>
+            <h1 class="font-bold text-primary text-lg">EcoMark</h1>
+        </div>
+        <button id="logoutBtnMobile" class="p-2 text-error hover:bg-error-container/20 rounded-full">
+            <span class="material-symbols-outlined">logout</span>
+        </button>
+    </header>
+
+    <main class="flex-1 px-4 md:px-12 py-8 max-w-container-max mx-auto w-full space-y-8">
+
+        <!-- Page Header -->
+        <div class="fade-in">
+            <div class="inline-flex items-center gap-2 bg-[#e8f5e9] border border-[#c8e6c9] text-[#006036] rounded-full px-3 py-1 text-xs font-bold mb-3">
+                <span class="material-symbols-outlined icon-fill text-sm">auto_fix_high</span>
+                Personalised to your latest report
+            </div>
+            <h2 class="text-3xl font-extrabold text-on-background mb-2">Green Action Plan</h2>
+            <p class="text-sm text-text-muted max-w-2xl leading-relaxed">
+                Analysed from your last submitted fuel report. Fuel-switching recommendations and a grade-specific roadmap to improve your carbon score and ESG standing.
+            </p>
+        </div>
+
+        <!-- ══ SECTION 1: Current Score Summary ══ -->
+        <div id="scoreSummarySection" class="fade-in delay-1 bg-white border border-surface-border rounded-xl shadow-sm p-6 flex flex-col sm:flex-row items-center gap-6">
+            <!-- Score ring -->
+            <div class="relative shrink-0">
+                <svg width="100" height="100" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="42" fill="none" stroke="#E1E8E1" stroke-width="10"/>
+                    <circle cx="50" cy="50" r="42" fill="none" stroke="#006036" stroke-width="10"
+                        stroke-dasharray="264" id="scoreRing"
+                        class="progress-ring-circle" stroke-linecap="round"/>
+                </svg>
+                <div class="absolute inset-0 flex items-center justify-center flex-col">
+                    <span class="font-extrabold text-2xl text-on-surface" id="scoreRingLabel">—</span>
+                    <span class="text-[9px] text-text-muted font-bold uppercase tracking-wider">Grade</span>
+                </div>
+            </div>
+            <div class="flex-1 text-center sm:text-left">
+                <p class="text-xs text-text-muted font-bold uppercase tracking-wider mb-1">Current Carbon Rating</p>
+                <h3 class="text-2xl font-extrabold text-on-surface mb-1" id="scoreFullLabel">Loading...</h3>
+                <p class="text-sm text-text-muted" id="scoreContext">Calculating from your report history...</p>
+                <div class="mt-3 flex flex-wrap gap-2 justify-center sm:justify-start" id="scoreBadges"></div>
+            </div>
+            <div class="text-center shrink-0">
+                <p class="text-xs text-text-muted font-bold uppercase tracking-wider mb-1">Latest Report</p>
+                <p class="text-sm font-bold text-on-surface" id="latestPeriod">—</p>
+                <p class="text-xs text-text-muted mt-0.5" id="latestCo2">—</p>
+                <a href="submit-report.html" class="mt-3 inline-flex items-center gap-1 bg-primary text-white px-4 py-2 rounded-lg text-xs font-bold hover:bg-primary-container transition-colors">
+                    <span class="material-symbols-outlined text-sm">add</span>Submit Next Report
+                </a>
+            </div>
+        </div>
+
+        <!-- ══ SECTION 2: Green Energy Recommendations ══ -->
+        <div class="fade-in delay-2">
+            <h3 class="text-xl font-bold text-on-surface mb-1 flex items-center gap-2">
+                <span class="material-symbols-outlined text-[#388E3C] icon-fill">energy_savings_leaf</span>
+                Green Energy Switching Recommendations
+            </h3>
+            <p class="text-sm text-text-muted mb-4">Based on fuel types detected in your most recent submission.</p>
+            <div id="recommendationCards">
+                <div class="bg-surface-container-low border border-surface-border rounded-xl p-8 text-center">
+                    <span class="material-symbols-outlined text-text-muted text-4xl mb-3 block">hourglass_empty</span>
+                    <p class="font-semibold text-on-surface mb-1">No report data yet</p>
+                    <p class="text-sm text-text-muted">Submit your first quarterly report and recommendations will appear here automatically.</p>
+                    <a href="submit-report.html" class="mt-4 inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-primary-container transition-colors">
+                        <span class="material-symbols-outlined text-sm">post_add</span>Submit Report
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ SECTION 3: Score Improvement Roadmap ══ -->
+        <div class="fade-in delay-3">
+            <h3 class="text-xl font-bold text-on-surface mb-1 flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary icon-fill">route</span>
+                Score Improvement Roadmap
+            </h3>
+            <p class="text-sm text-text-muted mb-4">A 3-step action plan personalised to your current carbon grade.</p>
+            <div id="roadmapContainer">
+                <div class="bg-surface-container-low border border-surface-border rounded-xl p-8 text-center">
+                    <span class="material-symbols-outlined text-text-muted text-4xl mb-3 block">map</span>
+                    <p class="text-sm text-text-muted">Your roadmap will generate once a report is on file.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ SECTION 4: Policy Actions Panel ══ -->
+        <div class="fade-in delay-4 bg-[#001c0f] text-white rounded-xl p-6 md:p-8">
+            <h3 class="text-lg font-bold mb-4 flex items-center gap-2">
+                <span class="material-symbols-outlined icon-fill text-[#80d9a0]">policy</span>
+                Quick Policy Actions
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <a href="compliance.html" class="bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 transition-colors flex flex-col gap-2">
+                    <span class="material-symbols-outlined text-[#80d9a0] icon-fill">checklist</span>
+                    <p class="font-bold text-sm">Compliance Checklist</p>
+                    <p class="text-xs text-white/60">View per-regulation status and filing deadlines.</p>
+                </a>
+                <a href="submit-report.html" class="bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 transition-colors flex flex-col gap-2">
+                    <span class="material-symbols-outlined text-[#80d9a0] icon-fill">post_add</span>
+                    <p class="font-bold text-sm">File Quarterly Report</p>
+                    <p class="text-xs text-white/60">BEE PAT requires quarterly DC energy data. File now.</p>
+                </a>
+                <a href="../compliance.html" target="_blank" class="bg-white/5 border border-white/10 rounded-xl p-4 hover:bg-white/10 transition-colors flex flex-col gap-2">
+                    <span class="material-symbols-outlined text-[#80d9a0] icon-fill">open_in_new</span>
+                    <p class="font-bold text-sm">Full Policy Framework</p>
+                    <p class="text-xs text-white/60">ISO 14064, GHG Protocol, SEBI BRSR, EU CBAM deep-dive.</p>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="w-full py-4 px-12 flex justify-between items-center bg-surface-container-lowest border-t border-surface-border mt-auto">
+        <div class="font-bold text-primary text-sm">EcoMark</div>
+        <div class="text-xs text-text-muted">© 2024 EcoMark Industrial Carbon Accounting. All rights reserved.</div>
+    </footer>
+</div>
+
+<script src="../js/db.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+    const user = checkAuth('company');
+
+    // ── Constants ─────────────────────────────────────────────────────────────
+    const FUEL_ALTERNATIVES = {
+        diesel:      { alt: 'CNG (Compressed Natural Gas)',    saving: 24, why: 'CNG produces 24% less CO₂e than diesel per MJ of energy, and is already widely available at industrial scale across India.' },
+        coal:        { alt: 'Grid Electricity (Renewable Mix)',saving: 83, why: 'Switching from coal combustion to India\'s grid electricity (with its improving renewable mix) eliminates 83% of direct Scope 1 emissions from this fuel.' },
+        furnace_oil: { alt: 'Natural Gas',                    saving: 35, why: 'Natural gas produces roughly 35% fewer emissions than furnace oil per unit of heat output, and has lower particulate co-emissions.' },
+        petrol:      { alt: 'CNG or Electric Vehicle Fleet',  saving: 28, why: 'CNG fleet vehicles deliver 28% fewer emissions per km; electric alternatives eliminate Scope 1 entirely at the vehicle.' },
+        lpg:         { alt: 'Solar Thermal or Biomass',       saving: 15, why: 'Solar thermal systems for industrial heat processes can offset 15–30% of LPG consumption at current MNRE incentive rates.' },
+    };
+
+    const SCORE_ORDER = ['A+', 'A', 'B', 'C', 'D'];
+    const SCORE_COLORS = {
+        'A+': { bg: 'bg-[#1B5E20]', border: 'border-[#1B5E20]', text: 'text-[#1B5E20]', light: 'bg-[#e8f5e9]', ring: '#1B5E20' },
+        'A':  { bg: 'bg-[#388E3C]', border: 'border-[#388E3C]', text: 'text-[#388E3C]', light: 'bg-[#f1fdf3]', ring: '#388E3C' },
+        'B':  { bg: 'bg-[#F9A825]', border: 'border-[#F9A825]', text: 'text-[#F57F17]', light: 'bg-[#fffde7]', ring: '#F9A825' },
+        'C':  { bg: 'bg-[#E65100]', border: 'border-[#E65100]', text: 'text-[#E65100]', light: 'bg-[#fff3e0]', ring: '#E65100' },
+        'D':  { bg: 'bg-[#B71C1C]', border: 'border-[#B71C1C]', text: 'text-[#B71C1C]', light: 'bg-[#fff8f7]', ring: '#B71C1C' },
+    };
+
+    const ROADMAPS = {
+        'D': {
+            title: 'Priority: Immediate Emission Reduction',
+            subtitle: 'Grade D indicates very high carbon intensity. These 3 steps address the most impactful changes first.',
+            color: '#B71C1C',
+            steps: [
+                {
+                    num: 1, done: false,
+                    title: 'Reduce your highest-emission fuel by 30%',
+                    detail: 'Identify the single fuel type contributing the most CO₂e in your last report. Reduce its consumption by 30% through process optimisation, load scheduling, or equipment maintenance. Even a 30% cut in your dominant fuel can lift you from D to C.',
+                    impact: 'Expected grade: C',
+                    action: 'submit-report.html',
+                    actionLabel: 'Submit Corrective Report',
+                    policy: 'BEE PAT — Energy Intensity Target',
+                    coins: '+300 ECT on achievement'
+                },
+                {
+                    num: 2, done: false,
+                    title: 'Diversify to at least 2 fuel types',
+                    detail: 'Single-fuel dependency creates both emission risk and supply risk. Introduce a secondary, lower-carbon fuel source (e.g., add biomass or natural gas alongside coal). This diversification lowers average emission factor and demonstrates proactive management to auditors.',
+                    impact: 'Expected grade: C → B',
+                    action: 'submit-report.html',
+                    actionLabel: 'Log New Fuel Mix',
+                    policy: 'ISO 14064-1 — Diversified Inventory',
+                    coins: '+200 ECT on next report'
+                },
+                {
+                    num: 3, done: false,
+                    title: 'Add at least one renewable energy source',
+                    detail: 'Install rooftop solar or procure renewable energy certificates (RECs) to offset a portion of electricity consumption. MNRE\'s PM Kusum scheme provides 30% capital subsidy for industrial solar. Even 10% renewable electricity reduces Scope 2 significantly.',
+                    impact: 'Expected grade: B',
+                    action: '../compliance.html',
+                    actionLabel: 'View MNRE Solar Guide',
+                    policy: 'India NDC 2030 — Renewable Commitment',
+                    coins: '+500 ECT on first renewable entry'
+                }
+            ]
+        },
+        'C': {
+            title: 'On Track: Structured Reduction Programme',
+            subtitle: 'Grade C means you\'re reporting — now focus on systematic fuel substitution and consistency.',
+            color: '#E65100',
+            steps: [
+                {
+                    num: 1, done: false,
+                    title: 'Shift 20% of diesel consumption to CNG',
+                    detail: 'Contact your nearest IGL/MGL piped gas network or procure CNG cylinders for generators and boilers currently running on diesel. CNG substitution at 20% of diesel volume reduces your Scope 1 emissions by approximately 4.8% per report — pushing your CO₂e/unit down measurably.',
+                    impact: 'Diesel saved: ~24% CO₂e per litre switched',
+                    action: 'submit-report.html',
+                    actionLabel: 'Log Updated Fuel Mix',
+                    policy: 'BEE PAT — Fuel Substitution Credit',
+                    coins: '+250 ECT on 20% diesel reduction'
+                },
+                {
+                    num: 2, done: false,
+                    title: 'Submit reports every quarter (not just annually)',
+                    detail: 'Regulators (BEE PAT, SEBI BRSR) require quarterly energy data, not just an annual snapshot. Consistent quarterly reporting builds a credible reduction narrative and earns you Eco-Coins each quarter. Facilities with 4+ reports in a year are flagged as "Active Compliant" on regulator dashboards.',
+                    impact: 'Compliance status: Active → Fully Compliant',
+                    action: 'submit-report.html',
+                    actionLabel: 'Submit This Quarter',
+                    policy: 'SEBI BRSR P6 — Continuous Disclosure',
+                    coins: '+100 ECT per quarterly submission'
+                },
+                {
+                    num: 3, done: false,
+                    title: 'Target a 10% CO₂e/unit reduction next quarter',
+                    detail: 'Set an explicit internal target: reduce CO₂e per unit of output by 10% vs your current report. Mechanisms: upgrade furnace insulation, improve combustion efficiency, reduce idle running time. Log the baseline now so the reduction is measurable and auditable in your next submission.',
+                    impact: 'Expected grade: B',
+                    action: null,
+                    actionLabel: null,
+                    policy: 'SBTi — Annual Reduction Trajectory',
+                    coins: '+1000 ECT on 10% reduction verified'
+                }
+            ]
+        },
+        'B': {
+            title: 'Good Progress: One Fuel Switch Away from Grade A',
+            subtitle: 'Grade B means your operations are materially cleaner than average. A single strategic fuel switch gets you to A.',
+            color: '#F9A825',
+            steps: [
+                {
+                    num: 1, done: false,
+                    title: 'Switch your second-highest emission fuel to a renewable',
+                    detail: 'Review your last report\'s fuel breakdown. Identify the second-largest CO₂e contributor and plan a renewable replacement. For electricity-heavy operations: procure Renewable Energy Certificates (RECs) from POSOCO or install captive solar (MNRE 30% subsidy available). For heat processes: biomass pellets or solar thermal.',
+                    impact: '15–35% reduction in total CO₂e',
+                    action: 'submit-report.html',
+                    actionLabel: 'Log Renewable Entry',
+                    policy: 'ISO 14064-1 — Scope 2 Market-Based Method',
+                    coins: '+750 ECT on first renewable submission'
+                },
+                {
+                    num: 2, done: false,
+                    title: 'Achieve Grade A — unlock investor & export benefits',
+                    detail: 'Grade A unlocks: (1) SEBI BRSR "Leadership" indicator status — required for MSCI ESG index inclusion; (2) priority processing on green loans (SBI Green Home, SIDBI Clean Energy); (3) EU CBAM lower carbon price because your certificate shows verified low embedded carbon.',
+                    impact: 'Expected grade: A',
+                    action: 'eco-coins.html',
+                    actionLabel: 'View ECT Rewards',
+                    policy: 'SEBI BRSR — Leadership Indicator',
+                    coins: '+2000 ECT on Grade A achievement'
+                },
+                {
+                    num: 3, done: false,
+                    title: 'File an SBTi commitment letter',
+                    detail: 'Once at Grade A, formalize your trajectory by submitting an SBTi commitment letter (sbtiindia.com). This signals to global supply chain partners (Apple, Microsoft, Unilever) that your facility is aligned with 1.5°C. SBTi-committed suppliers are preferred in global procurement decisions.',
+                    impact: 'Supply chain ESG advantage',
+                    action: '../compliance.html#sbti',
+                    actionLabel: 'Learn About SBTi',
+                    policy: 'SBTi — 1.5°C Pathway Commitment',
+                    coins: '+5000 ECT on SBTi certification'
+                }
+            ]
+        },
+        'A': {
+            title: 'Excellent: Maintain & Document for ESG Leadership',
+            subtitle: 'Grade A is industry-leading. Focus on documentation, continuous disclosure, and ESG rating access.',
+            color: '#388E3C',
+            steps: [
+                {
+                    num: 1, done: true,
+                    title: 'Maintain Grade A for 4 consecutive quarters',
+                    detail: 'Consistency is the key differentiator for ESG raters. Maintain your current fuel mix and energy practices. Submit every quarter without gaps. Facilities with 4+ consecutive A-grade reports are flagged as "Sustained Green" on EcoMark\'s public registry.',
+                    impact: 'ESG rating access: MSCI, Sustainalytics, CDP',
+                    action: 'submit-report.html',
+                    actionLabel: 'Submit Next Quarter',
+                    policy: 'SEBI BRSR — Sustained Leadership',
+                    coins: '+200 ECT per quarter maintained'
+                },
+                {
+                    num: 2, done: false,
+                    title: 'Generate ESG Summary Report for investors',
+                    detail: 'Download your annual EcoMark report as a PDF and attach it to your BRSR filing, annual report, and any investor ESG questionnaires (CDP, Sustainalytics). Your Scope 1 & 2 data, reduction trajectory, and Eco-Coin balance constitute a credible third-party verified ESG disclosure.',
+                    impact: 'ESG investor disclosure requirement met',
+                    action: 'dashboard.html',
+                    actionLabel: 'Go to Dashboard',
+                    policy: 'TCFD — Metrics & Targets Pillar',
+                    coins: 'Qualifies for SEBI BRSR Leadership'
+                },
+                {
+                    num: 3, done: false,
+                    title: 'Target Grade A+ — Scope 3 supply chain reporting',
+                    detail: 'Grade A+ requires full Scope 3 transparency (supplier and logistics emissions). Begin mapping your top-5 suppliers\' carbon intensity. EcoMark\'s Phase 2 Scope 3 module (coming Q2 2025) will allow upstream supplier data ingestion. Reaching A+ unlocks the highest Eco-Coin multiplier and EcoMark\'s "Verified Net-Zero Pathway" badge.',
+                    impact: 'Expected grade: A+',
+                    action: null,
+                    actionLabel: null,
+                    policy: 'GHG Protocol — Scope 3 Standard',
+                    coins: '+10,000 ECT on A+ certification'
+                }
+            ]
+        },
+        'A+': {
+            title: 'Exceptional: ESG Leader & Net-Zero Pioneer',
+            subtitle: 'Grade A+ means you\'re operating at the frontier of industrial carbon performance. Document and leverage this.',
+            color: '#1B5E20',
+            steps: [
+                {
+                    num: 1, done: true,
+                    title: 'Maintain & document Scope 1, 2, and 3 transparency',
+                    detail: 'You\'re at the top. Ensure quarterly Scope 1 & 2 reports remain consistent and begin the Scope 3 programme with your top-5 upstream suppliers. A+ grade with Scope 3 coverage is sufficient for SBTi validation and CDP A-list consideration.',
+                    impact: 'CDP A-list · SBTi validated',
+                    action: 'submit-report.html',
+                    actionLabel: 'Continue Reporting',
+                    policy: 'ISO 14064-3 — Verification Level',
+                    coins: '+200 ECT per quarter at A+'
+                },
+                {
+                    num: 2, done: true,
+                    title: 'Publish an annual sustainability report (GRI or BRSR)',
+                    detail: 'Formalise your disclosure. EcoMark\'s data satisfies GRI 305 (Emissions) and SEBI BRSR Principle 6 Leadership indicators. Engage a third-party verifier (Bureau Veritas, KPMG ESG, Ernst & Young Climate Change) to issue an ISO 14064-3 assurance letter — this is required for CDP submission.',
+                    impact: 'Institutional investor ESG access unlocked',
+                    action: 'dashboard.html',
+                    actionLabel: 'Export Annual Data',
+                    policy: 'GRI 305 · SEBI BRSR Leadership',
+                    coins: 'Eligible for EcoMark Platinum Badge'
+                },
+                {
+                    num: 3, done: false,
+                    title: 'Participate in India\'s voluntary carbon market',
+                    detail: 'With an A+ verified footprint, you can register reduction credits on India\'s Carbon Credit Trading Scheme (CCTS), which MoEF&CC launched in 2023. Sell surplus credits to lower-rated facilities or hold them as ESG assets. EcoMark\'s carbon marketplace (Phase 2) will facilitate this exchange.',
+                    impact: 'Revenue from carbon credit sales',
+                    action: '../compliance.html',
+                    actionLabel: 'Learn About CCTS',
+                    policy: 'India CCTS — MoEF&CC 2023',
+                    coins: '+15,000 ECT on first credit sale'
+                }
+            ]
+        }
+    };
+
+    function projectedScore(currentScore, savingPct) {
+        const idx = SCORE_ORDER.indexOf(currentScore);
+        const stepsUp = Math.floor(savingPct / 22);
+        return SCORE_ORDER[Math.max(0, idx - stepsUp)] || 'A+';
+    }
+
+    function renderProgressRing(score) {
+        const pct = { 'A+': 1.0, 'A': 0.85, 'B': 0.65, 'C': 0.45, 'D': 0.20 }[score] || 0.5;
+        const circumference = 2 * Math.PI * 42;
+        const offset = circumference * (1 - pct);
+        const ring = document.getElementById('scoreRing');
+        ring.style.strokeDasharray = circumference;
+        ring.style.strokeDashoffset = offset;
+        ring.style.stroke = SCORE_COLORS[score]?.ring || '#006036';
+    }
+
+    function renderScoreSummary(score, latestReport) {
+        const sc = SCORE_COLORS[score] || SCORE_COLORS['B'];
+        const labels = {
+            'A+': 'Ultra-Green — Top 5% of Industry',
+            'A':  'Green — Well Below Sector Average',
+            'B':  'Moderate — Near Sector Average',
+            'C':  'High Carbon — Above Sector Average',
+            'D':  'Very High Carbon — Immediate Action Required'
+        };
+        document.getElementById('scoreRingLabel').textContent = score;
+        document.getElementById('scoreFullLabel').textContent = labels[score] || score;
+        document.getElementById('scoreContext').textContent = `Based on ${latestReport ? latestReport.period : 'your'} submission · ${latestReport ? latestReport.co2ePerUnit.toFixed(3) + ' kg CO₂e/unit' : 'no data yet'}`;
+        document.getElementById('latestPeriod').textContent = latestReport ? latestReport.period : '—';
+        document.getElementById('latestCo2').textContent = latestReport ? `${latestReport.totalCO2e.toLocaleString()} kg CO₂e total` : '—';
+        document.getElementById('scoreBadges').innerHTML = `
+            <span class="inline-block px-2.5 py-1 rounded-full text-xs font-bold text-white ${sc.bg}">${score}</span>
+            <span class="inline-block px-2.5 py-1 rounded-full text-xs font-bold border ${sc.border} ${sc.text}">${latestReport ? 'Latest Submission' : 'No Report'}</span>
+        `;
+        renderProgressRing(score);
+    }
+
+    function renderRecommendations(fuelEntries, currentScore) {
+        const container = document.getElementById('recommendationCards');
+        if (!fuelEntries || fuelEntries.length === 0) return;
+
+        const detected = [...new Set(fuelEntries.map(f => f.fuel_type).filter(ft => FUEL_ALTERNATIVES[ft]))];
+        if (detected.length === 0) {
+            container.innerHTML = `
+                <div class="bg-[#e8f5e9] border border-[#c8e6c9] rounded-xl p-5 flex items-start gap-4">
+                    <span class="material-symbols-outlined text-[#388E3C] icon-fill text-2xl shrink-0">check_circle</span>
+                    <div>
+                        <p class="font-bold text-[#1B5E20] mb-1">✓ No High-Carbon Fuel Substitutions Needed</p>
+                        <p class="text-sm text-on-surface-variant">Your reported fuel types (${fuelEntries.map(f=>f.fuel_type.replace('_',' ')).join(', ')}) are already in the cleaner-end spectrum. Focus on reducing consumption volume to improve your score further.</p>
+                    </div>
+                </div>`;
+            return;
+        }
+
+        const sc = SCORE_COLORS[currentScore] || SCORE_COLORS['B'];
+        container.innerHTML = detected.map((fuel, i) => {
+            const rec = FUEL_ALTERNATIVES[fuel];
+            const projected = projectedScore(currentScore, rec.saving);
+            const projSc = SCORE_COLORS[projected] || sc;
+            const fuelLabel = fuel.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+            const sameGrade = projected === currentScore;
+            return `
+            <div class="bg-white border border-surface-border rounded-xl shadow-sm overflow-hidden mb-4">
+                <div class="p-5 flex flex-col md:flex-row gap-5 items-start">
+                    <!-- Icon -->
+                    <div class="w-14 h-14 rounded-xl bg-[#e8f5e9] flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-[#388E3C] icon-fill text-2xl">energy_savings_leaf</span>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex flex-wrap items-center gap-2 mb-2">
+                            <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Fuel Switch Recommendation ${i + 1}</span>
+                            <span class="text-xs bg-[#ffdad6] text-[#B71C1C] font-bold px-2 py-0.5 rounded-full">High Impact</span>
+                        </div>
+                        <h4 class="font-bold text-on-surface text-base mb-1">
+                            Replace <span class="text-error">${fuelLabel}</span> → <span class="text-[#1B5E20]">${rec.alt}</span>
+                        </h4>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-3">${rec.why}</p>
+
+                        <!-- Score projection -->
+                        <div class="flex items-center gap-3 flex-wrap">
+                            <span class="text-sm font-semibold text-on-surface">If you switch, score improves from</span>
+                            <span class="inline-block px-3 py-1 rounded-full text-white text-sm font-bold ${sc.bg}">${currentScore}</span>
+                            <span class="material-symbols-outlined text-text-muted">arrow_forward</span>
+                            <span class="inline-block px-3 py-1 rounded-full text-white text-sm font-bold ${sameGrade ? sc.bg : projSc.bg}">${projected}</span>
+                            <span class="text-xs text-text-muted">(projected)</span>
+                        </div>
+                    </div>
+                    <!-- Saving badge -->
+                    <div class="shrink-0 text-center bg-[#e8f5e9] border border-[#c8e6c9] rounded-xl px-4 py-3">
+                        <p class="text-2xl font-extrabold text-[#1B5E20]">-${rec.saving}%</p>
+                        <p class="text-[10px] text-[#388E3C] font-bold uppercase tracking-wider">CO₂e Reduction</p>
+                    </div>
+                </div>
+                <div class="px-5 pb-4 flex gap-3 flex-wrap">
+                    <a href="submit-report.html" class="text-xs bg-primary text-white px-4 py-2 rounded-lg font-bold hover:bg-primary-container transition-colors flex items-center gap-1">
+                        <span class="material-symbols-outlined text-sm">post_add</span>Log Updated Fuel Mix
+                    </a>
+                    <a href="../compliance.html" target="_blank" class="text-xs border border-surface-border text-on-surface-variant px-4 py-2 rounded-lg font-semibold hover:bg-surface-container-low transition-colors">View Policy Context</a>
+                </div>
+            </div>`;
+        }).join('');
+    }
+
+    function renderRoadmap(score) {
+        const plan = ROADMAPS[score] || ROADMAPS['B'];
+        const sc = SCORE_COLORS[score] || SCORE_COLORS['B'];
+        const container = document.getElementById('roadmapContainer');
+
+        container.innerHTML = `
+            <div class="bg-white border border-surface-border rounded-xl shadow-sm overflow-hidden">
+                <div class="p-5 border-b border-surface-border" style="background:${plan.color}10;border-color:${plan.color}30">
+                    <div class="flex items-center gap-3 mb-1">
+                        <span class="inline-block px-3 py-1 rounded-full text-white text-sm font-bold ${sc.bg}">${score}</span>
+                        <h4 class="font-bold text-on-surface">${plan.title}</h4>
+                    </div>
+                    <p class="text-sm text-text-muted">${plan.subtitle}</p>
+                </div>
+                <div class="p-5 space-y-0" id="roadmapSteps"></div>
+            </div>`;
+
+        const stepsContainer = document.getElementById('roadmapSteps');
+        plan.steps.forEach((step, idx) => {
+            const isLast = idx === plan.steps.length - 1;
+            const stepEl = document.createElement('div');
+            stepEl.className = 'roadmap-step';
+            stepEl.innerHTML = `
+                <div class="flex gap-4">
+                    <!-- Step indicator column -->
+                    <div class="flex flex-col items-center" style="width:40px;flex-shrink:0;">
+                        <div class="w-10 h-10 rounded-full flex items-center justify-center font-bold text-white text-sm shrink-0 shadow-sm"
+                             style="background:${step.done ? '#388E3C' : plan.color}">
+                            ${step.done ? '<span class="material-symbols-outlined text-sm" style="font-variation-settings:\'FILL\' 1">check</span>' : step.num}
+                        </div>
+                        ${!isLast ? `<div class="step-connector flex-1 my-2" style="min-height:32px;width:2px;"></div>` : ''}
+                    </div>
+                    <!-- Step content -->
+                    <div class="flex-1 pb-6">
+                        <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+                            <h5 class="font-bold text-on-surface">${step.title}</h5>
+                            <span class="text-xs font-bold px-2 py-0.5 rounded-full" 
+                                  style="background:${step.done ? '#e8f5e9' : plan.color + '15'};color:${step.done ? '#1B5E20' : plan.color}">
+                                ${step.done ? '✓ Complete' : 'Step ' + step.num}
+                            </span>
+                        </div>
+                        <p class="text-sm text-on-surface-variant leading-relaxed mb-3">${step.detail}</p>
+                        <div class="flex flex-wrap gap-2 items-center">
+                            ${step.action ? `<a href="${step.action}" class="text-xs bg-primary text-white px-3 py-1.5 rounded-lg font-bold hover:bg-primary-container transition-colors">${step.actionLabel}</a>` : ''}
+                            <span class="text-xs bg-surface-container px-2.5 py-1 rounded-full font-semibold text-text-muted flex items-center gap-1">
+                                <span class="material-symbols-outlined text-xs" style="font-variation-settings:'FILL' 1">policy</span>
+                                ${step.policy}
+                            </span>
+                            <span class="text-xs bg-[#fffde7] border border-[#fff176] px-2.5 py-1 rounded-full font-bold text-[#F57F17] flex items-center gap-1">
+                                <span class="material-symbols-outlined text-xs" style="font-variation-settings:'FILL' 1">toll</span>
+                                ${step.coins}
+                            </span>
+                        </div>
+                        ${step.impact ? `<div class="mt-2 text-xs font-semibold flex items-center gap-1" style="color:${plan.color}">
+                            <span class="material-symbols-outlined text-xs" style="font-variation-settings:'FILL' 1">trending_up</span>
+                            ${step.impact}
+                        </div>` : ''}
+                    </div>
+                </div>`;
+            stepsContainer.appendChild(stepEl);
+        });
+    }
+
+    // ── Main Init ─────────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+        if (!user) return;
+        document.getElementById('sideCompanyLabel').textContent = user.companyName;
+
+        const allReports = Object.values(DB.getReports())
+            .filter(r => r.companyId === user.uid)
+            .sort((a, b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+
+        const latestReport = allReports[0] || null;
+
+        // Determine effective score
+        let score = 'B'; // default for no reports
+        if (latestReport) score = latestReport.score;
+
+        // Render score summary
+        renderScoreSummary(score, latestReport);
+
+        // Render recommendations from latest report's fuel entries
+        if (latestReport && latestReport.fuelEntries) {
+            renderRecommendations(latestReport.fuelEntries, score);
+        }
+
+        // Render roadmap
+        renderRoadmap(score);
+
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', () => DB.logout());
+        document.getElementById('logoutBtnMobile').addEventListener('click', () => DB.logout());
+    });
+</script>
+</body>
+</html>

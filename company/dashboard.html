@@ -147,6 +147,10 @@
             <span class="material-symbols-outlined">policy</span>
             <span>My Compliance</span>
         </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="policy-guide.html">
+            <span class="material-symbols-outlined">auto_fix_high</span>
+            <span>Policy Guide</span>
+        </a>
     </div>
     <div class="p-4 border-t border-surface-border flex flex-col gap-2">
         <div class="px-4 py-2 bg-surface-container rounded-lg mb-2">
@@ -282,6 +286,76 @@
                 <div class="mt-auto flex gap-2">
                     <a href="eco-coins.html" class="flex-1 text-center bg-primary text-on-primary py-2 px-4 rounded font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm font-semibold">Redeem Coins</a>
                     <a href="eco-coins.html" class="flex-1 text-center border border-primary text-primary py-2 px-4 rounded font-label-md text-label-md hover:bg-surface-container-low transition-colors font-semibold">History</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ Policy Compliance Panel ══ -->
+        <div class="bg-white border border-surface-border rounded-xl mb-stack-lg shadow-sm overflow-hidden" id="compliancePanelCard">
+            <div class="p-5 border-b border-surface-border bg-surface-container-low flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">policy</span>
+                    <div>
+                        <h3 class="font-title-lg text-title-lg text-on-background font-bold">Regulatory Compliance Status</h3>
+                        <p class="font-label-sm text-label-sm text-text-muted">BEE PAT Scheme &amp; SEBI BRSR — live status from your report history</p>
+                    </div>
+                </div>
+                <a href="policy-guide.html" class="shrink-0 text-xs font-bold text-primary border border-primary px-3 py-1.5 rounded-lg hover:bg-[#e8f5e9] transition-colors flex items-center gap-1">
+                    <span class="material-symbols-outlined text-sm">auto_fix_high</span>
+                    View Action Plan
+                </a>
+            </div>
+            <div class="p-5 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- BEE PAT status -->
+                <div class="rounded-xl border p-4 flex flex-col gap-3" id="beePatCard">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-xl" id="beePatIcon">bolt</span>
+                        <p class="font-label-md text-label-md font-bold text-on-surface">BEE PAT Scheme</p>
+                    </div>
+                    <div id="beePatStatus" class="text-sm text-text-muted">Checking...</div>
+                    <div class="mt-auto">
+                        <p class="text-xs text-text-muted font-semibold">Designated Consumer (DC) filing</p>
+                        <div class="flex items-center gap-2 mt-1">
+                            <div class="flex-1 h-1.5 rounded-full bg-surface-border overflow-hidden">
+                                <div class="h-full rounded-full" id="beePatBar" style="width:0%;background:#006036"></div>
+                            </div>
+                            <span class="text-xs font-bold" id="beePatPct">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEBI BRSR status -->
+                <div class="rounded-xl border p-4 flex flex-col gap-3" id="brsrCard">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-xl" id="brsrIcon">trending_up</span>
+                        <p class="font-label-md text-label-md font-bold text-on-surface">SEBI BRSR (P6)</p>
+                    </div>
+                    <div id="brsrStatus" class="text-sm text-text-muted">Checking...</div>
+                    <div class="mt-auto">
+                        <p class="text-xs text-text-muted font-semibold">Annual disclosure · Top-1000 listed</p>
+                        <div class="flex items-center gap-2 mt-1">
+                            <div class="flex-1 h-1.5 rounded-full bg-surface-border overflow-hidden">
+                                <div class="h-full rounded-full" id="brsrBar" style="width:0%;background:#006036"></div>
+                            </div>
+                            <span class="text-xs font-bold" id="brsrPct">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next deadline card -->
+                <div class="rounded-xl border border-surface-border bg-surface-container-low p-4 flex flex-col gap-2">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-xl text-primary" style="font-variation-settings:'FILL' 1">schedule</span>
+                        <p class="font-label-md text-label-md font-bold text-on-surface">Next Submission Deadline</p>
+                    </div>
+                    <div class="mt-1">
+                        <p class="text-2xl font-extrabold text-primary" id="deadlineDays">—</p>
+                        <p class="text-xs text-text-muted" id="deadlineLabel">days remaining</p>
+                    </div>
+                    <div class="mt-auto pt-3 border-t border-surface-border">
+                        <p class="text-xs text-text-muted font-semibold">Deadline: <span id="deadlineDate" class="text-on-surface font-bold">30 Sep 2025</span></p>
+                        <p class="text-xs text-text-muted mt-0.5">EPA 1986 Form V + SEBI BRSR P6</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -526,6 +600,86 @@
                 }
             }
         });
+
+        // ── 4. Policy Compliance Panel Logic ──────────────────────────────────
+        (function renderCompliancePanel() {
+            const now = new Date();
+            const ninetyDaysAgo = new Date(now - 90 * 24 * 60 * 60 * 1000);
+
+            // Was any report submitted in the last 90 days?
+            const recentReports = allReports.filter(r => new Date(r.submittedAt) >= ninetyDaysAgo);
+            const isCompliant = recentReports.length > 0;
+            const totalCount  = allReports.length;
+
+            // ── BEE PAT card ──
+            const beeCard   = document.getElementById('beePatCard');
+            const beeIcon   = document.getElementById('beePatIcon');
+            const beeStatus = document.getElementById('beePatStatus');
+            const beeBar    = document.getElementById('beePatBar');
+            const beePct    = document.getElementById('beePatPct');
+
+            if (isCompliant) {
+                beeCard.classList.add('border-[#c8e6c9]', 'bg-[#f1fdf3]');
+                beeIcon.className = 'material-symbols-outlined text-xl text-[#388E3C]';
+                beeStatus.innerHTML = '<span class="font-bold text-[#1B5E20]">✓ Compliant</span><br><span class="text-text-muted text-xs">Report filed within last 90 days. Satisfies quarterly DC energy audit obligation.</span>';
+                const pct = Math.min(100, Math.round((recentReports.length / 4) * 100)); // 4 quarters target
+                beeBar.style.width = pct + '%';
+                beeBar.style.background = '#388E3C';
+                beePct.textContent = pct + '%';
+                beePct.style.color = '#388E3C';
+            } else {
+                beeCard.classList.add('border-[#ffb4ab]', 'bg-[#fff8f7]');
+                beeIcon.className = 'material-symbols-outlined text-xl text-[#B71C1C]';
+                beeStatus.innerHTML = '<span class="font-bold text-[#B71C1C]">⚠ Overdue</span><br><span class="text-text-muted text-xs">No report in last 90 days. Risk of non-compliance under BEE PAT Cycle 7. File a report now.</span>';
+                beeBar.style.width = '10%';
+                beeBar.style.background = '#B71C1C';
+                beePct.textContent = '!';
+                beePct.style.color = '#B71C1C';
+            }
+
+            // ── SEBI BRSR card (annual — any report in last 365 days) ──
+            const brsrCard   = document.getElementById('brsrCard');
+            const brsrIcon   = document.getElementById('brsrIcon');
+            const brsrStatus = document.getElementById('brsrStatus');
+            const brsrBar    = document.getElementById('brsrBar');
+            const brsrPct    = document.getElementById('brsrPct');
+            const oneYearAgo = new Date(now - 365 * 24 * 60 * 60 * 1000);
+            const annualReports = allReports.filter(r => new Date(r.submittedAt) >= oneYearAgo);
+            const brsrOk = annualReports.length > 0;
+
+            if (brsrOk) {
+                brsrCard.classList.add('border-[#c8e6c9]', 'bg-[#f1fdf3]');
+                brsrIcon.className = 'material-symbols-outlined text-xl text-[#388E3C]';
+                brsrStatus.innerHTML = '<span class="font-bold text-[#1B5E20]">✓ Compliant</span><br><span class="text-text-muted text-xs">Scope 1 &amp; 2 data logged this year. Satisfies BRSR Principle 6 Essential Indicators 1–7.</span>';
+                const pctBrsr = Math.min(100, Math.round((annualReports.length / 4) * 100));
+                brsrBar.style.width = pctBrsr + '%';
+                brsrBar.style.background = '#388E3C';
+                brsrPct.textContent = pctBrsr + '%';
+                brsrPct.style.color = '#388E3C';
+            } else {
+                brsrCard.classList.add('border-[#fff176]', 'bg-[#fffde7]');
+                brsrIcon.className = 'material-symbols-outlined text-xl text-[#F57F17]';
+                brsrStatus.innerHTML = '<span class="font-bold text-[#F57F17]">⚠ At Risk</span><br><span class="text-text-muted text-xs">No annual Scope 1/2 data. File a report to satisfy BRSR P6 mandatory indicator before deadline.</span>';
+                brsrBar.style.width = '5%';
+                brsrBar.style.background = '#F9A825';
+                brsrPct.textContent = '0%';
+                brsrPct.style.color = '#F57F17';
+            }
+
+            // ── Deadline countdown (next Sep 30) ──
+            let deadline = new Date(now.getFullYear(), 8, 30); // Sep 30 this year
+            if (now > deadline) deadline = new Date(now.getFullYear() + 1, 8, 30); // next year
+            const daysLeft = Math.ceil((deadline - now) / (1000 * 60 * 60 * 24));
+            document.getElementById('deadlineDays').textContent = daysLeft;
+            document.getElementById('deadlineDate').textContent =
+                deadline.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+            if (daysLeft <= 30) {
+                document.getElementById('deadlineDays').style.color = '#B71C1C';
+                document.getElementById('deadlineLabel').textContent = 'days remaining — URGENT';
+            } else if (daysLeft <= 90) {
+                document.getElementById('deadlineDays').style.color = '#F57F17';
+            }
+        })();
 
         // Logout Secure Triggers
         const doLogout = () => {

@@ -165,21 +165,29 @@
 
     <!-- Success Modal Popup -->
     <div id="successModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 text-center border border-surface-border">
+        <div class="bg-white rounded-xl shadow-xl max-w-lg w-full p-6 text-center border border-surface-border max-h-[90vh] overflow-y-auto">
             <div class="w-16 h-16 bg-[#e8f5e9] text-score-a rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-[#c8e6c9]">
                 <span class="material-symbols-outlined text-3xl font-bold">verified</span>
             </div>
             <h3 class="font-headline-md text-headline-md font-bold text-primary mb-2">Report Submitted Successfully!</h3>
             <p class="font-body-md text-body-md text-text-muted mb-4">Your lifecycle data has been calculated and sealed in the immutable log.</p>
             
-            <div class="bg-surface-container-low rounded-lg p-4 mb-6 space-y-2 border border-surface-border text-left">
+            <div class="bg-surface-container-low rounded-lg p-4 mb-4 space-y-2 border border-surface-border text-left">
                 <div class="flex justify-between font-label-md"><span class="text-text-muted">Total Emissions:</span> <strong id="modalCo2">0 kg</strong></div>
                 <div class="flex justify-between font-label-md"><span class="text-text-muted">CO2e per Unit:</span> <strong id="modalUnit">0 kg</strong></div>
                 <div class="flex justify-between font-label-md"><span class="text-text-muted">Assigned Rating:</span> <strong id="modalScore" class="px-2 py-0.5 rounded text-white bg-score-a">A</strong></div>
                 <div class="flex justify-between font-label-md border-t border-surface-border pt-2 mt-2 font-bold"><span class="text-primary">Eco-Coins Credited:</span> <strong id="modalCoins" class="text-secondary">+0 ECT</strong></div>
             </div>
 
-            <button id="modalRedirectBtn" class="w-full bg-primary text-white py-3 rounded-lg font-bold hover:bg-primary-container transition-all">Go to Dashboard</button>
+            <!-- Green Energy Recommendation Slot (hidden until populated) -->
+            <div id="modalRecommendation" class="hidden mb-4"></div>
+
+            <div class="flex gap-3">
+                <button id="modalRedirectBtn" class="flex-1 bg-primary text-white py-3 rounded-lg font-bold hover:bg-primary-container transition-all">Go to Dashboard</button>
+                <a href="policy-guide.html" class="flex-1 border border-primary text-primary py-3 rounded-lg font-bold hover:bg-[#e8f5e9] transition-colors text-center text-sm flex items-center justify-center gap-1">
+                    <span class="material-symbols-outlined text-sm">auto_fix_high</span>View Action Plan
+                </a>
+            </div>
         </div>
     </div>
 
@@ -212,6 +220,10 @@
                 <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="compliance.html">
                     <span class="material-symbols-outlined">policy</span>
                     <span>My Compliance</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="policy-guide.html">
+                    <span class="material-symbols-outlined">auto_fix_high</span>
+                    <span>Policy Guide</span>
                 </a>
             </div>
         </div>
@@ -466,6 +478,59 @@
                         "D": "bg-[#B71C1C]"
                     };
                     document.getElementById('modalScore').className = `px-3 py-0.5 rounded text-white font-bold text-sm ${scoreColors[res.score]}`;
+
+                    // ── Green Energy Recommendation Engine ────────────────────
+                    const FUEL_ALTERNATIVES = {
+                        diesel:      { alt: 'CNG (Compressed Natural Gas)', saving: 24, icon: 'local_gas_station' },
+                        coal:        { alt: 'Grid Electricity (Renewable Mix)', saving: 83, icon: 'bolt' },
+                        furnace_oil: { alt: 'Natural Gas', saving: 35, icon: 'flame' },
+                        petrol:      { alt: 'CNG or Electric',              saving: 28, icon: 'electric_car' },
+                        lpg:         { alt: 'Solar Thermal or Biomass',     saving: 15, icon: 'wb_sunny' },
+                    };
+                    const SCORE_ORDER = ['A+','A','B','C','D'];
+                    function projectedScore(currentScore, savingPct) {
+                        // Each grade boundary is ~20% improvement; model projected jump
+                        const idx = SCORE_ORDER.indexOf(currentScore);
+                        const stepsUp = Math.floor(savingPct / 22); // ~22% per grade step
+                        return SCORE_ORDER[Math.max(0, idx - stepsUp)] || 'A+';
+                    }
+
+                    const detectedFuels = fuelEntries
+                        .map(f => f.fuel_type)
+                        .filter(ft => FUEL_ALTERNATIVES[ft]);
+                    const uniqueFuels = [...new Set(detectedFuels)];
+
+                    const recSlot = document.getElementById('modalRecommendation');
+                    if (uniqueFuels.length > 0) {
+                        const cards = uniqueFuels.map(fuel => {
+                            const rec = FUEL_ALTERNATIVES[fuel];
+                            const projected = projectedScore(res.score, rec.saving);
+                            const fuelLabel = fuel.replace('_', ' ').replace(/\b\w/g, c => c.toUpperCase());
+                            const sameGrade = projected === res.score;
+                            return `
+                            <div class="text-left rounded-xl border border-[#c8e6c9] bg-[#f1fdf3] p-4 mb-3">
+                                <div class="flex items-start gap-3">
+                                    <span class="material-symbols-outlined text-[#388E3C] text-2xl" style="font-variation-settings:'FILL' 1">energy_savings_leaf</span>
+                                    <div class="flex-1">
+                                        <p class="font-bold text-[#1B5E20] text-sm mb-1">💡 Green Switch Recommendation</p>
+                                        <p class="text-xs text-on-surface-variant leading-relaxed">
+                                            If you replace <strong>${fuelLabel}</strong> with <strong>${rec.alt}</strong>,
+                                            your emissions could drop by <strong>${rec.saving}%</strong>.
+                                        </p>
+                                        <div class="flex items-center gap-2 mt-2">
+                                            <span class="text-xs font-bold">Score could improve from</span>
+                                            <span class="inline-block px-2 py-0.5 rounded text-white text-xs font-bold ${scoreColors[res.score]}">${res.score}</span>
+                                            <span class="text-xs">→</span>
+                                            <span class="inline-block px-2 py-0.5 rounded text-white text-xs font-bold ${sameGrade ? scoreColors[res.score] : (scoreColors[projected] || 'bg-[#1B5E20]')}">${projected}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>`;
+                        }).join('');
+                        recSlot.innerHTML = cards;
+                        recSlot.classList.remove('hidden');
+                    }
+                    // ─────────────────────────────────────────────────────────
 
                     // Show success Modal
                     const modal = document.getElementById('successModal');
