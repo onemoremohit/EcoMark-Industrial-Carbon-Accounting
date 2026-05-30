@@ -118,11 +118,17 @@
 
 <!-- TopAppBar -->
 <header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40 bg-surface border-b border-surface-border">
-    <a href="../index.html" class="flex items-center gap-2 cursor-pointer transition-colors hover:bg-surface-container-low p-2 rounded">
-        <span class="material-symbols-outlined text-primary">eco</span>
+    <a href="../index.html" class="flex items-center gap-2 cursor-pointer transition-colors hover:opacity-80">
+        <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">eco</span>
         <span class="font-headline-md text-headline-md font-bold text-primary">EcoMark</span>
     </a>
-    <span class="text-sm bg-primary/10 text-primary border border-primary/20 font-bold px-3 py-1 rounded-full uppercase tracking-wider">Public Registry</span>
+    <div class="flex items-center gap-3">
+        <span class="text-sm bg-primary/10 text-primary border border-primary/20 font-bold px-3 py-1 rounded-full uppercase tracking-wider hidden sm:block">Public Registry</span>
+        <a href="search.html" class="flex items-center gap-1 text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-sm">search</span>
+            <span class="hidden md:inline">Search All Products</span>
+        </a>
+    </div>
 </header>
 
 <main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg">
@@ -210,10 +216,36 @@
         </div>
     </div>
     
+    <!-- ── Better Alternatives Section ────────────────────────────────── -->
+    <div id="alternativesSection" class="mb-stack-lg hidden">
+        <div class="flex items-center gap-2 mb-4">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">recommend</span>
+            <h2 class="font-title-lg text-title-lg text-on-surface font-bold">Better Alternatives in This Category</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-gutter" id="alternativesGrid"></div>
+    </div>
+
+    <!-- ── Sustainability Tip Block ───────────────────────────────────── -->
+    <div id="sustainTip" class="mb-stack-lg rounded-xl p-6 border flex items-start gap-5">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" id="tipIcon"></div>
+        <div>
+            <p class="font-label-sm text-xs font-bold uppercase tracking-wider mb-1" id="tipLabel"></p>
+            <p class="font-body-lg text-body-lg" id="tipText"></p>
+        </div>
+    </div>
+
     <div class="flex justify-center mt-8 gap-4 flex-wrap">
         <a href="../index.html" class="bg-primary text-on-primary px-8 py-3 rounded hover:bg-surface-tint transition-colors shadow-sm hover:shadow-md font-label-md text-label-md flex items-center gap-2 font-bold">
             Learn More About EcoMark
             <span class="material-symbols-outlined text-sm">open_in_new</span>
+        </a>
+        <a id="labelGenLink" href="label-generator.html" class="border border-primary text-primary px-8 py-3 rounded hover:bg-[#e8f5e9] transition-colors font-label-md text-label-md flex items-center gap-2 font-bold">
+            <span class="material-symbols-outlined text-sm">label</span>
+            Download Print Label
+        </a>
+        <a href="search.html" class="border border-surface-border text-on-surface-variant px-8 py-3 rounded hover:bg-surface-container-low transition-colors font-label-md text-label-md flex items-center gap-2 font-bold">
+            <span class="material-symbols-outlined text-sm">search</span>
+            Search All Products
         </a>
     </div>
 </main>
@@ -345,7 +377,87 @@
             document.getElementById('trendPill').querySelector('.material-symbols-outlined').textContent = "stars";
             document.getElementById('trendPct').className = "font-headline-md text-headline-md text-primary font-bold";
         }
-    });
-</script>
+        // ── Sustainability Tip Block ──────────────────────────────────────────
+        const TIPS = {
+            'D': {
+                bg: 'bg-[#fff8f7]', border: 'border-[#ffb4ab]',
+                iconBg: 'bg-[#ffdad6]', iconColor: 'text-[#B71C1C]', icon: 'warning',
+                labelColor: 'text-[#B71C1C]', label: 'High Impact',
+                text: `This product emits the equivalent of a <strong>${((product.latestCO2ePerUnit||0)*6).toFixed(0)} km car journey</strong> per unit produced — one of the highest in its category. Consider verified lower-carbon alternatives from the registry below.`
+            },
+            'C': {
+                bg: 'bg-[#fff3e0]', border: 'border-[#FFCC80]',
+                iconBg: 'bg-[#FFE0B2]', iconColor: 'text-[#E65100]', icon: 'info',
+                labelColor: 'text-[#E65100]', label: 'Above Average Emissions',
+                text: `This product's footprint is above the sector average. Equivalent to driving <strong>${((product.latestCO2ePerUnit||0)*6).toFixed(0)} km</strong> per unit. The manufacturer is reporting and working toward improvement — check the trend above.`
+            },
+            'B': {
+                bg: 'bg-[#fffde7]', border: 'border-[#FFF176]',
+                iconBg: 'bg-[#FFF9C4]', iconColor: 'text-[#F57F17]', icon: 'eco',
+                labelColor: 'text-[#F57F17]', label: 'Near Sector Average',
+                text: `This product is close to the sector average in carbon intensity. Equivalent to <strong>${((product.latestCO2ePerUnit||0)*6).toFixed(0)} km</strong> of driving per unit. Look for Grade A alternatives to make a more climate-conscious choice.`
+            },
+            'A': {
+                bg: 'bg-[#f1fdf3]', border: 'border-[#c8e6c9]',
+                iconBg: 'bg-[#e8f5e9]', iconColor: 'text-[#388E3C]', icon: 'verified',
+                labelColor: 'text-[#388E3C]', label: 'Low-Carbon Choice',
+                text: `This is one of the lowest-emission products in its category — equivalent to just <strong>${((product.latestCO2ePerUnit||0)*6).toFixed(0)} km</strong> of driving per unit. Choosing this product over a Grade C equivalent saves approximately <strong>${(((product.latestCO2ePerUnit||0)*3)*6).toFixed(0)} km</strong> worth of CO₂e emissions.`
+            },
+            'A+': {
+                bg: 'bg-[#e8f5e9]', border: 'border-[#a5d6a7]',
+                iconBg: 'bg-[#1B5E20]', iconColor: 'text-white', icon: 'workspace_premium',
+                labelColor: 'text-[#1B5E20]', label: 'Exceptional — Ultra-Green Product',
+                text: `This product is among the very best in its category — verified as ultra-low emission by EcoMark's IPCC-certified methodology. Its footprint is just <strong>${((product.latestCO2ePerUnit||0)*6).toFixed(0)} km</strong> per unit in driving equivalency. This is what industrial sustainability leadership looks like.`
+            }
+        };
+        const tip = TIPS[product.latestScore] || TIPS['B'];
+        const tipEl  = document.getElementById('sustainTip');
+        tipEl.className = `mb-stack-lg rounded-xl p-6 border flex items-start gap-5 ${tip.bg} ${tip.border}`;
+        document.getElementById('tipIcon').className = `w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${tip.iconBg}`;
+        document.getElementById('tipIcon').innerHTML = `<span class="material-symbols-outlined ${tip.iconColor}" style="font-variation-settings:'FILL' 1">${tip.icon}</span>`;
+        document.getElementById('tipLabel').className = `font-label-sm text-xs font-bold uppercase tracking-wider mb-1 ${tip.labelColor}`;
+        document.getElementById('tipLabel').textContent = tip.label;
+        document.getElementById('tipText').innerHTML = tip.text;
+
+        // ── Better Alternatives ──────────────────────────────────────────────
+        const SCORE_RANK_ALT = { 'A+': 5, 'A': 4, 'B': 3, 'C': 2, 'D': 1 };
+        const SCORE_BG = { 'A+':'#1B5E20','A':'#388E3C','B':'#F9A825','C':'#E65100','D':'#B71C1C' };
+        const currentRank = SCORE_RANK_ALT[product.latestScore] || 3;
+        const allProducts = DB.getProducts();
+        const alts = Object.values(allProducts)
+            .filter(p =>
+                p.productId !== productId &&
+                p.latestScore &&
+                (SCORE_RANK_ALT[p.latestScore] || 0) >= currentRank &&
+                (p.category || '').toLowerCase() === (product.category || '').toLowerCase()
+            )
+            .sort((a,b) => (SCORE_RANK_ALT[b.latestScore]||0) - (SCORE_RANK_ALT[a.latestScore]||0))
+            .slice(0, 3);
+
+        if (alts.length > 0) {
+            document.getElementById('alternativesSection').classList.remove('hidden');
+            document.getElementById('alternativesGrid').innerHTML = alts.map(alt => {
+                const altMfr = users[alt.companyId]?.companyName || 'Manufacturer';
+                const bg = SCORE_BG[alt.latestScore] || '#388E3C';
+                return `
+                <a href="product.html?productId=${alt.productId}"
+                   class="bg-white border border-surface-border rounded-xl p-4 hover:shadow-md transition-shadow flex items-center gap-3 no-underline">
+                    <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm shrink-0" style="background:${bg}">
+                        ${alt.latestScore}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="font-bold text-on-surface text-sm truncate">${alt.productName}</p>
+                        <p class="text-xs text-text-muted truncate">${altMfr}</p>
+                        <p class="text-xs font-semibold mt-0.5" style="color:${bg}">${alt.latestCO2ePerUnit.toFixed(3)} kg CO₂e/unit</p>
+                    </div>
+                    <span class="material-symbols-outlined text-text-muted text-sm shrink-0">arrow_forward</span>
+                </a>`;
+            }).join('');
+        }
+
+        // ── Label generator link ─────────────────────────────────────────────
+        const labelLink = document.getElementById('labelGenLink');
+        if (labelLink) labelLink.href = `label-generator.html?productId=${productId}`;
+    });</script>
 </body>
 </html>

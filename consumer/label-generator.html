@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Print Carbon Label | EcoMark</title>
+    <meta name="description" content="Generate a printable EcoMark carbon label for any verified product. 90×50mm print-ready with QR code placeholder."/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background: #f8faf8; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+
+        /* ── Physical label dimensions: 90mm × 50mm at 96dpi ── */
+        /* 90mm = 340px, 50mm = 189px */
+        #printLabel {
+            width: 340px;
+            height: 189px;
+            background: white;
+            border: 1.5px solid #E1E8E1;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: row;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            font-family: 'Inter', sans-serif;
+            position: relative;
+        }
+
+        /* Left accent stripe */
+        #printLabel .label-stripe {
+            width: 8px;
+            flex-shrink: 0;
+        }
+
+        /* Score badge in label */
+        #printLabel .score-badge {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 22px;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        /* QR placeholder */
+        #labelQrCanvas {
+            width: 60px !important;
+            height: 60px !important;
+            display: block;
+        }
+
+        /* ── Print rules: ONLY the label div renders ── */
+        @media print {
+            @page {
+                size: 90mm 50mm;
+                margin: 0;
+            }
+            * { visibility: hidden !important; }
+            #printLabel,
+            #printLabel * {
+                visibility: visible !important;
+            }
+            #printLabel {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                width: 340px !important;
+                height: 189px !important;
+                box-shadow: none !important;
+                border: none !important;
+                border-radius: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+<!-- Header (hidden on print) -->
+<header class="flex justify-between items-center w-full px-4 md:px-12 py-4 sticky top-0 z-40 bg-white border-b border-surface-border" id="pageHeader">
+    <a href="../index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <span class="material-symbols-outlined text-primary icon-fill">eco</span>
+        <span class="font-bold text-primary text-lg">EcoMark</span>
+    </a>
+    <div class="flex items-center gap-3">
+        <a href="search.html" class="text-sm font-semibold text-on-surface-variant hover:text-primary flex items-center gap-1 transition-colors">
+            <span class="material-symbols-outlined text-sm">search</span>
+            Registry
+        </a>
+        <button onclick="window.print()" id="printBtn"
+            class="flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-lg text-sm font-bold hover:bg-primary-container transition-colors shadow-sm">
+            <span class="material-symbols-outlined text-sm icon-fill">print</span>
+            Print Label
+        </button>
+    </div>
+</header>
+
+<main class="flex-grow flex flex-col items-center px-4 py-10" id="pageMain">
+
+    <!-- Error state -->
+    <div id="errorState" class="hidden text-center py-16">
+        <span class="material-symbols-outlined text-text-muted text-5xl mb-4 block">error</span>
+        <h2 class="font-bold text-on-surface text-xl mb-2">Product Not Found</h2>
+        <p class="text-text-muted text-sm mb-6">No verified product matches this ID in the EcoMark registry.</p>
+        <a href="search.html" class="inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg font-bold hover:bg-primary-container transition-colors">
+            <span class="material-symbols-outlined text-sm">search</span>Search Registry
+        </a>
+    </div>
+
+    <!-- Instructions -->
+    <div class="max-w-2xl w-full mb-8 text-center" id="instructions">
+        <div class="inline-flex items-center gap-2 bg-[#e8f5e9] border border-[#c8e6c9] text-[#006036] rounded-full px-3 py-1 text-xs font-bold mb-3">
+            <span class="material-symbols-outlined icon-fill text-sm">print</span>
+            Print-ready · 90mm × 50mm · ISO 14064-1 Verified
+        </div>
+        <h1 class="text-2xl font-extrabold text-on-surface mb-2">Carbon Product Label Generator</h1>
+        <p class="text-sm text-text-muted mb-1">Preview your official EcoMark carbon label below. Click <strong>Print Label</strong> to send directly to your printer on 90×50mm label stock.</p>
+        <p class="text-xs text-text-muted">Tip: Set paper size to "Custom 90×50mm" in your print dialog for exact physical dimensions.</p>
+    </div>
+
+    <!-- ═══ THE LABEL (this is what prints) ═══ -->
+    <div id="printLabel" class="mb-8">
+        <!-- Colour stripe -->
+        <div class="label-stripe" id="labelStripe"></div>
+
+        <!-- Main body -->
+        <div class="flex flex-col justify-between flex-1 p-3">
+
+            <!-- Top row: EcoMark brand + score badge -->
+            <div class="flex items-start justify-between">
+                <div>
+                    <!-- EcoMark logo text -->
+                    <div class="flex items-center gap-1 mb-0.5">
+                        <span style="font-size:12px;color:#006036;font-weight:900;letter-spacing:-0.3px;">Eco</span><span style="font-size:12px;color:#1B5E20;font-weight:900;letter-spacing:-0.3px;">Mark</span>
+                        <span style="font-size:7px;color:#006036;font-weight:700;background:#e8f5e9;border-radius:3px;padding:1px 4px;margin-left:2px;">VERIFIED</span>
+                    </div>
+                    <!-- Product name -->
+                    <p style="font-size:10px;font-weight:700;color:#191c1b;line-height:1.2;max-width:170px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;" id="labelProductName">Product Name</p>
+                    <!-- Company name -->
+                    <p style="font-size:8px;color:#5C635C;font-weight:600;margin-top:1px;" id="labelCompanyName">Company Name</p>
+                </div>
+                <!-- Score badge -->
+                <div class="score-badge" id="labelScoreBadge">A+</div>
+            </div>
+
+            <!-- Middle row: CO2e stat + grade label -->
+            <div class="flex items-center gap-3">
+                <div style="flex:1;">
+                    <p style="font-size:7px;color:#5C635C;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;">Carbon Footprint</p>
+                    <p style="font-size:20px;font-weight:900;color:#191c1b;line-height:1;margin:1px 0;" id="labelCo2">0.000</p>
+                    <p style="font-size:8px;color:#5C635C;font-weight:600;">kg CO₂e per unit</p>
+                </div>
+                <div id="labelGradeBlock" style="text-align:center;padding:6px 10px;border-radius:6px;">
+                    <p style="font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:1px;" id="labelGradeTag">Carbon Grade</p>
+                    <p style="font-size:28px;font-weight:900;line-height:1;color:white;" id="labelGradeChar">A</p>
+                </div>
+            </div>
+
+            <!-- Bottom row: ISO note + QR -->
+            <div class="flex items-end justify-between">
+                <div>
+                    <p style="font-size:6.5px;color:#5C635C;font-weight:700;text-transform:uppercase;letter-spacing:0.4px;">IPCC · ISO 14064-1 · GHG Protocol</p>
+                    <p style="font-size:7px;color:#006036;font-weight:700;margin-top:1px;">Scan to verify at ecomark.app</p>
+                </div>
+                <!-- QR code -->
+                <div style="display:flex;flex-direction:column;align-items:center;gap:2px;">
+                    <canvas id="labelQrCanvas" width="60" height="60"></canvas>
+                    <p style="font-size:6px;color:#5C635C;font-weight:600;text-align:center;">Scan QR</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Variant selector (different sizes) -->
+    <div class="flex flex-wrap gap-3 mb-8 justify-center" id="variantBtns">
+        <button onclick="setLabelSize(340,189,1)" class="variant-btn px-4 py-2 text-xs font-bold border border-surface-border bg-white rounded-lg hover:border-primary hover:text-primary transition-colors">
+            90×50mm (Standard)
+        </button>
+        <button onclick="setLabelSize(440,245,1.3)" class="variant-btn px-4 py-2 text-xs font-bold border border-surface-border bg-white rounded-lg hover:border-primary hover:text-primary transition-colors">
+            Enlarge 130%
+        </button>
+        <button onclick="setLabelSize(255,142,0.75)" class="variant-btn px-4 py-2 text-xs font-bold border border-surface-border bg-white rounded-lg hover:border-primary hover:text-primary transition-colors">
+            Reduce 75%
+        </button>
+    </div>
+
+    <!-- Details table (below label, not printed) -->
+    <div class="max-w-2xl w-full bg-white border border-surface-border rounded-xl p-6 shadow-sm mb-8" id="detailsTable">
+        <h3 class="font-bold text-on-surface mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary icon-fill text-xl">info</span>
+            Label Details
+        </h3>
+        <div class="grid grid-cols-2 gap-3 text-sm" id="detailsGrid">
+            <div class="text-text-muted font-semibold">Product</div><div class="font-bold text-on-surface" id="detailProduct">—</div>
+            <div class="text-text-muted font-semibold">Company</div><div class="font-bold text-on-surface" id="detailCompany">—</div>
+            <div class="text-text-muted font-semibold">Category</div><div class="font-bold text-on-surface" id="detailCategory">—</div>
+            <div class="text-text-muted font-semibold">Carbon Grade</div><div class="font-bold text-on-surface" id="detailScore">—</div>
+            <div class="text-text-muted font-semibold">CO₂e / Unit</div><div class="font-bold text-on-surface" id="detailCo2">—</div>
+            <div class="text-text-muted font-semibold">Methodology</div><div class="font-bold text-on-surface">IPCC AR5 · ISO 14064-1:2018</div>
+            <div class="text-text-muted font-semibold">Registry ID</div><div class="font-bold text-on-surface font-mono text-xs" id="detailId">—</div>
+        </div>
+    </div>
+
+    <!-- Footer CTAs -->
+    <div class="flex flex-wrap gap-3 justify-center" id="footerCtAs">
+        <button onclick="window.print()" class="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-lg text-sm font-bold hover:bg-primary-container transition-colors shadow-sm">
+            <span class="material-symbols-outlined text-sm icon-fill">print</span>Print Label
+        </button>
+        <a id="backToProduct" href="product.html" class="flex items-center gap-2 border border-surface-border text-on-surface px-6 py-3 rounded-lg text-sm font-bold hover:bg-surface-container-low transition-colors">
+            <span class="material-symbols-outlined text-sm">arrow_back</span>Back to Product
+        </a>
+        <a href="search.html" class="flex items-center gap-2 border border-surface-border text-on-surface px-6 py-3 rounded-lg text-sm font-bold hover:bg-surface-container-low transition-colors">
+            <span class="material-symbols-outlined text-sm">search</span>Search Registry
+        </a>
+    </div>
+
+</main>
+
+<footer class="bg-white border-t border-surface-border py-5 px-12 flex justify-between items-center mt-auto" id="pageFooter">
+    <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary icon-fill text-sm">eco</span>
+        <span class="font-bold text-primary text-sm">EcoMark</span>
+        <span class="text-text-muted text-xs ml-3">© 2024 EcoMark Industrial Carbon Accounting</span>
+    </div>
+    <span class="text-xs text-text-muted">Label version 1.0 · IPCC AR5 methodology</span>
+</footer>
+
+<script src="../js/db.js"></script>
+<script>
+    const SCORE_BG = { 'A+':'#1B5E20','A':'#388E3C','B':'#F9A825','C':'#E65100','D':'#B71C1C' };
+    const SCORE_LABEL = { 'A+':'Ultra-Green','A':'Green','B':'Moderate','C':'High Carbon','D':'Very High Carbon' };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get('productId');
+
+        if (!productId) { showError(); return; }
+
+        const products = DB.getProducts();
+        const product  = products[productId];
+        if (!product || !product.latestScore) { showError(); return; }
+
+        const users  = DB.getUsers();
+        const company = users[product.companyId]?.companyName || 'Verified Manufacturer';
+        const score   = product.latestScore;
+        const co2     = product.latestCO2ePerUnit;
+        const bg      = SCORE_BG[score] || '#388E3C';
+        const verifyUrl = `https://ecomark.app/verify?id=${productId}`;
+
+        // ── Populate label ──────────────────────────────────────────────
+        document.getElementById('labelProductName').textContent = product.productName;
+        document.getElementById('labelCompanyName').textContent = company;
+        document.getElementById('labelCo2').textContent = co2.toFixed(3);
+
+        // Score badge
+        const badge = document.getElementById('labelScoreBadge');
+        badge.textContent = score;
+        badge.style.background = bg;
+
+        // Colour stripe
+        document.getElementById('labelStripe').style.background = bg;
+
+        // Grade block
+        const gradeBlock = document.getElementById('labelGradeBlock');
+        gradeBlock.style.background = bg;
+        document.getElementById('labelGradeChar').textContent = score;
+        document.getElementById('labelGradeTag').textContent = SCORE_LABEL[score] || score;
+
+        // QR code
+        QRCode.toCanvas(
+            document.getElementById('labelQrCanvas'),
+            verifyUrl,
+            { width: 60, margin: 1, color: { dark: '#191c1b', light: '#ffffff' } },
+            err => { if (err) console.warn('QR error', err); }
+        );
+
+        // ── Populate details table ──────────────────────────────────────
+        document.getElementById('detailProduct').textContent  = product.productName;
+        document.getElementById('detailCompany').textContent  = company;
+        document.getElementById('detailCategory').textContent = product.category || '—';
+        document.getElementById('detailScore').innerHTML      = `<span style="background:${bg};color:white;padding:2px 8px;border-radius:4px;font-weight:800">${score}</span>`;
+        document.getElementById('detailCo2').textContent      = `${co2.toFixed(4)} kg CO₂e`;
+        document.getElementById('detailId').textContent       = productId;
+
+        // ── Back link ───────────────────────────────────────────────────
+        document.getElementById('backToProduct').href = `product.html?productId=${productId}`;
+
+        // ── Page title ──────────────────────────────────────────────────
+        document.title = `Label — ${product.productName} | EcoMark`;
+    });
+
+    function showError() {
+        document.getElementById('errorState').classList.remove('hidden');
+        document.getElementById('instructions').classList.add('hidden');
+        document.getElementById('printLabel').classList.add('hidden');
+        document.getElementById('variantBtns').classList.add('hidden');
+        document.getElementById('detailsTable').classList.add('hidden');
+        document.getElementById('footerCtAs').classList.add('hidden');
+        document.getElementById('printBtn').classList.add('hidden');
+    }
+
+    // Live-resize preview
+    function setLabelSize(w, h, scale) {
+        const label = document.getElementById('printLabel');
+        label.style.width  = w + 'px';
+        label.style.height = h + 'px';
+        label.style.transform = `scale(${scale})`;
+        label.style.transformOrigin = 'top center';
+    }
+</script>
+</body>
+</html>
