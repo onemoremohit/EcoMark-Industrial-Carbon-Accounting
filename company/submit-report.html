@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Submit Report | EcoMark</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#bec9be",
+                        "surface-dim": "#d8dad9",
+                        "score-a": "#388E3C",
+                        "text-main": "#1A1C1A",
+                        "text-muted": "#5C635C",
+                        "error-container": "#ffdad6",
+                        "score-d": "#B71C1C",
+                        "on-primary": "#ffffff",
+                        "surface-border": "#E1E8E1",
+                        "tertiary-fixed": "#acf4a4",
+                        "primary-fixed-dim": "#80d9a0",
+                        "on-primary-fixed-variant": "#00522e",
+                        "secondary-container": "#a0f399",
+                        "on-tertiary-fixed": "#002203",
+                        "surface": "#f8faf8",
+                        "surface-variant": "#e1e3e1",
+                        "surface-container": "#eceeec",
+                        "on-primary-container": "#abffc6",
+                        "secondary": "#1b6d24",
+                        "surface-tint": "#006d3f",
+                        "outline": "#6f7a70",
+                        "inverse-primary": "#80d9a0",
+                        "on-tertiary-fixed-variant": "#0c5216",
+                        "on-surface": "#191c1b",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#2e3130",
+                        "inverse-on-surface": "#eff1ef",
+                        "on-tertiary-container": "#b6fead",
+                        "tertiary-fixed-dim": "#91d78a",
+                        "on-surface-variant": "#3f4941",
+                        "on-background": "#191c1b",
+                        "surface-container-low": "#f2f4f2",
+                        "score-a-plus": "#1B5E20",
+                        "score-b": "#F9A825",
+                        "surface-container-lowest": "#ffffff",
+                        "background": "#f8faf8",
+                        "on-secondary-container": "#217128",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed-variant": "#005312",
+                        "on-secondary-fixed": "#002204",
+                        "primary-fixed": "#9bf6ba",
+                        "on-tertiary": "#ffffff",
+                        "secondary-fixed-dim": "#88d982",
+                        "on-primary-fixed": "#00210f",
+                        "on-secondary": "#ffffff",
+                        "surface-container-high": "#e6e9e7",
+                        "tertiary-container": "#377837",
+                        "secondary-fixed": "#a3f69c",
+                        "primary": "#006036",
+                        "primary-container": "#1a7a4a",
+                        "tertiary": "#1c5f21",
+                        "surface-bright": "#f8faf8",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e1e3e1",
+                        "score-c": "#E65100"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-sm": "8px",
+                        "margin-desktop": "48px",
+                        "margin-mobile": "16px",
+                        "stack-md": "16px",
+                        "gutter": "24px",
+                        "container-max": "1200px",
+                        "stack-lg": "32px",
+                        "base": "4px"
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8faf8; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen flex flex-col lg:flex-row font-sans">
+
+<!-- Navigation Drawer (Desktop) -->
+<nav class="w-64 h-screen border-r border-surface-border bg-surface hidden lg:flex flex-col sticky top-0 z-50">
+    <div class="p-6 border-b border-surface-border">
+        <a href="../index.html" class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-3xl font-bold">eco</span>
+            <div>
+                <h2 class="font-headline-md text-headline-md font-bold text-primary">EcoMark</h2>
+                <p class="font-label-sm text-label-sm text-text-muted">Carbon Transparency</p>
+            </div>
+        </a>
+    </div>
+    <div class="p-4 flex flex-col gap-2 flex-grow">
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="dashboard.html">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Dashboard</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-200 active:scale-95 font-label-md text-label-md" href="submit-report.html">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">post_add</span>
+            <span>Submit Report</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="my-products.html">
+            <span class="material-symbols-outlined">inventory_2</span>
+            <span>My Products</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="eco-coins.html">
+            <span class="material-symbols-outlined">payments</span>
+            <span>Eco-Coins</span>
+        </a>
+    </div>
+    <div class="p-4 border-t border-surface-border flex flex-col gap-2">
+        <div class="px-4 py-2 bg-surface-container rounded-lg mb-2">
+            <p class="font-label-sm text-label-sm text-text-muted">Logged in as:</p>
+            <p class="font-label-md text-label-md font-bold text-on-surface truncate" id="sideCompanyLabel">Loading...</p>
+            <span class="inline-block mt-1 bg-primary/10 text-primary font-bold font-label-sm text-[10px] px-2 py-0.5 rounded uppercase">Company</span>
+        </div>
+        <button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-lg font-label-md text-label-md text-left w-full">
+            <span class="material-symbols-outlined">logout</span>
+            <span>Log Out</span>
+        </button>
+    </div>
+</nav>
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-h-screen">
+    <!-- TopAppBar (Mobile Header) -->
+    <header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40 bg-surface border-b border-surface-border lg:hidden">
+        <div class="flex items-center gap-4">
+            <button class="text-on-surface-variant p-2 hover:bg-surface-container-low rounded-full transition-colors" id="mobileMenuBtn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <h1 class="font-title-lg text-title-lg text-primary font-bold" id="topCompanyLabel">Submit Report</h1>
+        </div>
+        <button id="logoutBtnMobile" class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
+            <span class="material-symbols-outlined">logout</span>
+        </button>
+    </header>
+
+    <!-- Success Modal Popup -->
+    <div id="successModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-xl max-w-md w-full p-6 text-center border border-surface-border">
+            <div class="w-16 h-16 bg-[#e8f5e9] text-score-a rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-[#c8e6c9]">
+                <span class="material-symbols-outlined text-3xl font-bold">verified</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md font-bold text-primary mb-2">Report Submitted Successfully!</h3>
+            <p class="font-body-md text-body-md text-text-muted mb-4">Your lifecycle data has been calculated and sealed in the immutable log.</p>
+            
+            <div class="bg-surface-container-low rounded-lg p-4 mb-6 space-y-2 border border-surface-border text-left">
+                <div class="flex justify-between font-label-md"><span class="text-text-muted">Total Emissions:</span> <strong id="modalCo2">0 kg</strong></div>
+                <div class="flex justify-between font-label-md"><span class="text-text-muted">CO2e per Unit:</span> <strong id="modalUnit">0 kg</strong></div>
+                <div class="flex justify-between font-label-md"><span class="text-text-muted">Assigned Rating:</span> <strong id="modalScore" class="px-2 py-0.5 rounded text-white bg-score-a">A</strong></div>
+                <div class="flex justify-between font-label-md border-t border-surface-border pt-2 mt-2 font-bold"><span class="text-primary">Eco-Coins Credited:</span> <strong id="modalCoins" class="text-secondary">+0 ECT</strong></div>
+            </div>
+
+            <button id="modalRedirectBtn" class="w-full bg-primary text-white py-3 rounded-lg font-bold hover:bg-primary-container transition-all">Go to Dashboard</button>
+        </div>
+    </div>
+
+    <!-- Mobile Drawer overlay -->
+    <div id="mobileDrawer" class="fixed inset-0 bg-black/50 z-50 hidden">
+        <div class="w-64 h-full bg-white flex flex-col">
+            <div class="p-6 border-b border-surface-border flex justify-between items-center">
+                <span class="font-headline-sm text-headline-sm font-bold text-primary">Menu</span>
+                <button id="closeDrawerBtn" class="p-2 rounded-full hover:bg-surface-container">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="p-4 flex flex-col gap-2 flex-grow">
+                <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="dashboard.html">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold" href="submit-report.html">
+                    <span class="material-symbols-outlined">post_add</span>
+                    <span>Submit Report</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="my-products.html">
+                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span>My Products</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="eco-coins.html">
+                    <span class="material-symbols-outlined">payments</span>
+                    <span>Eco-Coins</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <main class="flex-1 px-margin-mobile md:px-margin-desktop py-stack-lg max-w-container-max mx-auto w-full">
+        <div class="mb-stack-lg">
+            <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface font-bold mb-1">Submit New Utility Report</h2>
+            <p class="font-body-md text-body-md text-text-muted">Enter production and utility consumption metrics. Calculations utilize IPCC verified emission coefficients.</p>
+        </div>
+
+        <form class="space-y-stack-lg" id="reportForm">
+            <!-- Section 1: Basic Information -->
+            <div class="bg-surface-container-lowest border border-surface-border rounded-xl p-6 md:p-8 bg-white shadow-sm">
+                <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-6 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary">info</span>
+                    Production Details
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                    <div>
+                        <label class="block font-label-sm text-label-sm text-text-muted mb-2 font-semibold" for="period">Reporting Quarter</label>
+                        <input class="w-full border border-surface-border rounded-lg px-4 py-3 font-body-md text-body-md focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors bg-surface-bright" id="period" name="period" placeholder="e.g., 2024-Q3" required type="text"/>
+                    </div>
+                    <div>
+                        <label class="block font-label-sm text-label-sm text-text-muted mb-2 font-semibold" for="product_name">Product Label / Name</label>
+                        <input class="w-full border border-surface-border rounded-lg px-4 py-3 font-body-md text-body-md focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors bg-surface-bright" id="product_name" name="product_name" placeholder="e.g. Steel Rod Grade-60" required type="text"/>
+                    </div>
+                    <div>
+                        <label class="block font-label-sm text-label-sm text-text-muted mb-2 font-semibold" for="category">Product Sector / Category</label>
+                        <select class="w-full border border-surface-border rounded-lg px-4 py-3 font-body-md text-body-md focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors bg-surface-bright" id="category" name="category" required>
+                            <option value="Manufacturing">Manufacturing</option>
+                            <option value="Energy">Energy</option>
+                            <option value="Logistics">Logistics</option>
+                            <option value="Construction">Construction</option>
+                            <option value="Chemical Processing">Chemical Processing</option>
+                            <option value="Food Processing">Food Processing</option>
+                            <option value="Textile">Textiles</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-label-sm text-label-sm text-text-muted mb-2 font-semibold" for="batch_size">Batch Quantity (Units Manufactured)</label>
+                        <input class="w-full border border-surface-border rounded-lg px-4 py-3 font-body-md text-body-md focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors bg-surface-bright" id="batch_size" name="batch_size" placeholder="Total number of units produced in batch" required min="1" type="number"/>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2: Fuel Entries -->
+            <div class="bg-surface-container-lowest border border-surface-border rounded-xl p-6 md:p-8 bg-white shadow-sm">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="font-title-lg text-title-lg text-on-surface font-bold flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">local_gas_station</span>
+                        Fuel & Energy Consumption
+                    </h3>
+                    <button class="text-primary font-label-md text-label-md font-bold flex items-center gap-1 hover:text-primary-container transition-colors" type="button" id="addEntryBtn">
+                        <span class="material-symbols-outlined text-sm">add</span> Add Fuel Type
+                    </button>
+                </div>
+                
+                <div class="space-y-4" id="fuelEntriesContainer">
+                    <!-- Fuel Entry Row 1 (Seeded) -->
+                    <div class="flex flex-col md:flex-row gap-4 items-start md:items-end bg-surface p-4 rounded-lg border border-surface-border fuel-row">
+                        <div class="w-full md:w-1/2">
+                            <label class="block font-label-sm text-label-sm text-text-muted mb-2 font-semibold">Fuel / Energy Resource</label>
+                            <select class="w-full border border-surface-border rounded-lg px-4 py-3 font-body-md text-body-md focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors bg-surface-container-lowest select-fuel-type" required>
+                                <option value="diesel">Diesel Fuel</option>
+                                <option value="electricity">Electricity (Grid avg)</option>
+                                <option value="coal">Coal (Standard Bituminous)</option>
+                                <option value="natural_gas">Natural Gas</option>
+                                <option value="lpg">LPG (Liquified Petroleum Gas)</option>
+                                <option value="petrol">Petrol / Gasoline</option>
+                                <option value="furnace_oil">Furnace Oil</option>
+                                <option value="biomass">Biomass (Wood chips / agricultural residue)</option>
+                            </select>
+                        </div>
+                        <div class="w-full md:w-1/3 font-sans">
+                            <label class="block font-label-sm text-label-sm text-text-muted mb-2 font-semibold">Quantity Consumed</label>
+                            <div class="relative">
+                                <input class="w-full border border-surface-border rounded-lg px-4 py-3 font-data-tabular text-data-tabular focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors bg-surface-container-lowest pr-16 fuel-quantity" placeholder="0.00" required min="0.01" step="any" type="number"/>
+                                <span class="absolute right-4 top-1/2 transform -translate-y-1/2 font-label-sm text-text-muted font-bold fuel-unit">L</span>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-auto flex justify-end">
+                            <button class="p-3 text-text-muted hover:text-error transition-colors rounded-lg hover:bg-error-container/20 delete-row-btn" type="button">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Submit Action -->
+            <div class="flex flex-col sm:flex-row justify-end items-center gap-4 pt-6 border-t border-surface-border">
+                <a href="dashboard.html" class="w-full sm:w-auto px-6 py-3 border border-outline text-text-main font-label-md text-label-md rounded-lg hover:bg-surface-container-low transition-colors text-center font-bold" type="button">
+                    Cancel & Return
+                </a>
+                <button class="w-full sm:w-auto px-8 py-3 bg-primary text-white font-label-md text-label-md rounded-lg hover:bg-primary-container transition-all hover:shadow-lg flex items-center justify-center gap-2 font-bold" type="submit" id="submitBtn">
+                    <span class="material-symbols-outlined">check_circle</span>
+                    Calculate & Submit Report
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-stack-lg px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-lowest border-t border-surface-border mt-auto">
+        <div class="font-headline-sm text-headline-sm font-bold text-primary">EcoMark</div>
+        <div class="font-label-sm text-label-sm text-text-main">© 2024 EcoMark Industrial Carbon Accounting. All rights reserved.</div>
+    </footer>
+</div>
+
+<script src="../js/db.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+    // Verify Company authentication
+    const user = checkAuth('company');
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (!user) return;
+
+        // Set labels
+        document.getElementById('sideCompanyLabel').textContent = user.companyName;
+        document.getElementById('topCompanyLabel').textContent = user.companyName;
+
+        // 1. Mobile Menu Drawer Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+        
+        if (mobileMenuBtn && mobileDrawer && closeDrawerBtn) {
+            mobileMenuBtn.addEventListener('click', () => mobileDrawer.classList.remove('hidden'));
+            closeDrawerBtn.addEventListener('click', () => mobileDrawer.classList.add('hidden'));
+        }
+
+        // 2. Map Fuel Types to Units
+        const fuelUnits = {
+            diesel: "L",
+            petrol: "L",
+            lpg: "L",
+            natural_gas: "m³",
+            coal: "kg",
+            furnace_oil: "L",
+            biomass: "kg",
+            electricity: "kWh"
+        };
+
+        // Update units label when fuel type is selected
+        const bindSelectEvent = (row) => {
+            const selectEl = row.querySelector('.select-fuel-type');
+            const unitEl = row.querySelector('.fuel-unit');
+            if (selectEl && unitEl) {
+                selectEl.addEventListener('change', () => {
+                    unitEl.textContent = fuelUnits[selectEl.value] || "";
+                });
+                // Initial trigger
+                unitEl.textContent = fuelUnits[selectEl.value] || "";
+            }
+
+            // Bind Delete row button
+            const deleteBtn = row.querySelector('.delete-row-btn');
+            if (deleteBtn) {
+                deleteBtn.addEventListener('click', () => {
+                    const totalRows = document.querySelectorAll('.fuel-row').length;
+                    if (totalRows > 1) {
+                        row.remove();
+                    } else {
+                        alert("You must include at least one fuel or energy entry.");
+                    }
+                });
+            }
+        };
+
+        // Initial setup for default row
+        document.querySelectorAll('.fuel-row').forEach(row => bindSelectEvent(row));
+
+        // 3. Dynamic Addition of Fuel rows
+        const addEntryBtn = document.getElementById('addEntryBtn');
+        const container = document.getElementById('fuelEntriesContainer');
+
+        addEntryBtn.addEventListener('click', () => {
+            const newRow = document.createElement('div');
+            newRow.className = "flex flex-col md:flex-row gap-4 items-start md:items-end bg-surface p-4 rounded-lg border border-surface-border fuel-row";
+            newRow.innerHTML = `
+                <div class="w-full md:w-1/2">
+                    <label class="block font-label-sm text-label-sm text-text-muted mb-2 font-semibold">Fuel / Energy Resource</label>
+                    <select class="w-full border border-surface-border rounded-lg px-4 py-3 font-body-md text-body-md focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors bg-surface-container-lowest select-fuel-type" required>
+                        <option value="diesel">Diesel Fuel</option>
+                        <option value="electricity">Electricity (Grid avg)</option>
+                        <option value="coal">Coal (Standard Bituminous)</option>
+                        <option value="natural_gas">Natural Gas</option>
+                        <option value="lpg">LPG (Liquified Petroleum Gas)</option>
+                        <option value="petrol">Petrol / Gasoline</option>
+                        <option value="furnace_oil">Furnace Oil</option>
+                        <option value="biomass">Biomass (Wood chips / agricultural residue)</option>
+                    </select>
+                </div>
+                <div class="w-full md:w-1/3 font-sans">
+                    <label class="block font-label-sm text-label-sm text-text-muted mb-2 font-semibold">Quantity Consumed</label>
+                    <div class="relative">
+                        <input class="w-full border border-surface-border rounded-lg px-4 py-3 font-data-tabular text-data-tabular focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary transition-colors bg-surface-container-lowest pr-16 fuel-quantity" placeholder="0.00" required min="0.01" step="any" type="number"/>
+                        <span class="absolute right-4 top-1/2 transform -translate-y-1/2 font-label-sm text-text-muted font-bold fuel-unit">L</span>
+                    </div>
+                </div>
+                <div class="w-full md:w-auto flex justify-end">
+                    <button class="p-3 text-text-muted hover:text-error transition-colors rounded-lg hover:bg-error-container/20 delete-row-btn" type="button">
+                        <span class="material-symbols-outlined">delete</span>
+                    </button>
+                </div>
+            `;
+            container.appendChild(newRow);
+            bindSelectEvent(newRow);
+        });
+
+        // 4. Form Submission and Calculation trigger
+        const form = document.getElementById('reportForm');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const period = document.getElementById('period').value.trim();
+            const productName = document.getElementById('product_name').value.trim();
+            const category = document.getElementById('category').value;
+            const batchSize = parseFloat(document.getElementById('batch_size').value);
+
+            // Assemble fuel entries
+            const fuelEntries = [];
+            const rows = document.querySelectorAll('.fuel-row');
+            rows.forEach(row => {
+                const fuelType = row.querySelector('.select-fuel-type').value;
+                const quantity = parseFloat(row.querySelector('.fuel-quantity').value);
+                const unit = row.querySelector('.fuel-unit').textContent;
+                fuelEntries.push({ fuel_type: fuelType, quantity, unit });
+            });
+
+            const submitBtn = document.getElementById('submitBtn');
+            const originalHTML = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<span class="material-symbols-outlined animate-spin">refresh</span> Processing Math...`;
+
+            setTimeout(() => {
+                const res = DB.submitReport(user.uid, productName, category, period, fuelEntries, batchSize);
+                if (res.success) {
+                    // Update Modal Stats
+                    document.getElementById('modalCo2').textContent = `${res.totalCO2e.toLocaleString()} kg`;
+                    document.getElementById('modalUnit').textContent = `${res.co2ePerUnit.toFixed(4)} kg/unit`;
+                    document.getElementById('modalScore').textContent = res.score;
+                    document.getElementById('modalCoins').textContent = `+${res.coinsEarned} ECT`;
+
+                    const scoreColors = {
+                        "A+": "bg-[#1B5E20]",
+                        "A": "bg-[#388E3C]",
+                        "B": "bg-[#F9A825]",
+                        "C": "bg-[#E65100]",
+                        "D": "bg-[#B71C1C]"
+                    };
+                    document.getElementById('modalScore').className = `px-3 py-0.5 rounded text-white font-bold text-sm ${scoreColors[res.score]}`;
+
+                    // Show success Modal
+                    const modal = document.getElementById('successModal');
+                    modal.classList.remove('hidden');
+
+                    document.getElementById('modalRedirectBtn').addEventListener('click', () => {
+                        window.location.href = 'dashboard.html';
+                    });
+                } else {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalHTML;
+                    alert("Submission failed: " + res.message);
+                }
+            }, 1200);
+        });
+
+        // Logout securely
+        document.getElementById('logoutBtn').addEventListener('click', () => DB.logout());
+    });
+</script>
+</body>
+</html>

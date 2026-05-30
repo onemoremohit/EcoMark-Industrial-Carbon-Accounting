@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>EcoMark - Consumer Product Info</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#bec9be",
+                      "surface-dim": "#d8dad9",
+                      "score-a": "#388E3C",
+                      "text-main": "#1A1C1A",
+                      "text-muted": "#5C635C",
+                      "error-container": "#ffdad6",
+                      "score-d": "#B71C1C",
+                      "on-primary": "#ffffff",
+                      "surface-border": "#E1E8E1",
+                      "tertiary-fixed": "#acf4a4",
+                      "primary-fixed-dim": "#80d9a0",
+                      "on-primary-fixed-variant": "#00522e",
+                      "secondary-container": "#a0f399",
+                      "on-tertiary-fixed": "#002203",
+                      "surface": "#f8faf8",
+                      "surface-variant": "#e1e3e1",
+                      "surface-container": "#eceeec",
+                      "on-primary-container": "#abffc6",
+                      "secondary": "#1b6d24",
+                      "surface-tint": "#006d3f",
+                      "outline": "#6f7a70",
+                      "inverse-primary": "#80d9a0",
+                      "on-tertiary-fixed-variant": "#0c5216",
+                      "on-surface": "#191c1b",
+                      "on-error-container": "#93000a",
+                      "inverse-surface": "#2e3130",
+                      "inverse-on-surface": "#eff1ef",
+                      "on-tertiary-container": "#b6fead",
+                      "tertiary-fixed-dim": "#91d78a",
+                      "on-surface-variant": "#3f4941",
+                      "on-background": "#191c1b",
+                      "surface-container-low": "#f2f4f2",
+                      "score-a-plus": "#1B5E20",
+                      "score-b": "#F9A825",
+                      "surface-container-lowest": "#ffffff",
+                      "background": "#f8faf8",
+                      "on-secondary-container": "#217128",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed-variant": "#005312",
+                      "on-secondary-fixed": "#002204",
+                      "primary-fixed": "#9bf6ba",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#88d982",
+                      "on-primary-fixed": "#00210f",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#e6e9e7",
+                      "tertiary-container": "#377837",
+                      "secondary-fixed": "#a3f69c",
+                      "primary": "#006036",
+                      "primary-container": "#1a7a4a",
+                      "tertiary": "#1c5f21",
+                      "surface-bright": "#f8faf8",
+                      "error": "#ba1a1a",
+                      "surface-container-highest": "#e1e3e1",
+                      "score-c": "#E65100"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "margin-desktop": "48px",
+                      "margin-mobile": "16px",
+                      "stack-md": "16px",
+                      "gutter": "24px",
+                      "container-max": "1200px",
+                      "stack-lg": "32px",
+                      "base": "4px"
+              }
+            }
+          }
+        }
+      </script>
+    <style>
+        body {
+            background-color: #f8faf8;
+            color: #191c1b;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+        .bento-item {
+            background: #ffffff;
+            border: 1px solid #E1E8E1;
+            border-radius: 0.5rem;
+            padding: 24px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-body-md text-body-md bg-background text-on-background font-sans">
+
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40 bg-surface border-b border-surface-border">
+    <a href="../index.html" class="flex items-center gap-2 cursor-pointer transition-colors hover:bg-surface-container-low p-2 rounded">
+        <span class="material-symbols-outlined text-primary">eco</span>
+        <span class="font-headline-md text-headline-md font-bold text-primary">EcoMark</span>
+    </a>
+    <span class="text-sm bg-primary/10 text-primary border border-primary/20 font-bold px-3 py-1 rounded-full uppercase tracking-wider">Public Registry</span>
+</header>
+
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg">
+    <!-- Hero Section -->
+    <section class="flex flex-col items-center justify-center text-center mb-stack-lg py-8">
+        <h2 class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider mb-2 font-semibold" id="companyLabel">Sustainable Solutions Inc.</h2>
+        <h1 class="font-display-lg text-display-lg text-on-surface font-bold mb-6" id="productLabel">EcoBrew Organic Coffee Beans</h1>
+        
+        <!-- Grade Badge -->
+        <div id="scoreBadge" class="w-40 h-40 rounded-full flex items-center justify-center text-white shadow-lg mb-6 transform hover:scale-105 transition-transform duration-300">
+            <span class="font-display-lg text-display-lg font-bold" id="scoreText">A+</span>
+        </div>
+        
+        <p class="font-title-lg text-title-lg text-primary font-bold mb-2" id="scoreTitle">Ultra Green Rating</p>
+        <p class="font-body-lg text-body-lg text-text-muted max-w-2xl mx-auto" id="scoreDescription">This product exemplifies industry-leading carbon efficiency and sustainable sourcing practices.</p>
+    </section>
+
+    <!-- Bento Grid -->
+    <div class="bento-grid mb-stack-lg">
+        <!-- CO2e Metric -->
+        <div class="bento-item col-span-12 md:col-span-6 lg:col-span-4 flex flex-col justify-center items-center text-center relative overflow-hidden shadow-sm">
+            <div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+            <span class="material-symbols-outlined text-4xl text-primary mb-4">co2</span>
+            <span class="font-headline-lg text-headline-lg font-bold text-on-surface" id="footprintVal">1.34 kg</span>
+            <span class="font-label-md text-label-md text-text-muted mt-2 font-semibold">CO2e per manufactured unit</span>
+        </div>
+
+        <!-- Equivalency -->
+        <div class="bento-item col-span-12 md:col-span-6 lg:col-span-8 flex flex-col justify-center bg-secondary-container bg-opacity-20 border-primary-fixed-dim shadow-sm">
+            <div class="flex items-start gap-4">
+                <div class="p-3 bg-white rounded-full shadow-sm">
+                    <span class="material-symbols-outlined text-primary text-3xl">directions_car</span>
+                </div>
+                <div>
+                    <h3 class="font-title-lg text-title-lg text-on-surface mb-2 font-bold">Real-world Impact Equivalency</h3>
+                    <p class="font-body-lg text-body-lg text-on-surface-variant" id="equivalencyText">The carbon footprint of this product is roughly equal to driving <strong class="text-primary font-bold" id="kmDriven">8 km</strong> in an average passenger vehicle.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trend -->
+        <div class="bento-item col-span-12 lg:col-span-12 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm" id="trendContainer">
+            <div class="flex-1">
+                <h3 class="font-title-lg text-title-lg text-on-surface mb-2 font-bold">Emissions Trend</h3>
+                <p class="font-body-md text-body-md text-text-muted" id="trendDesc">Compared to the previous year, emissions per unit have decreased.</p>
+            </div>
+            <div class="flex items-center gap-3 bg-surface-container-low px-6 py-4 rounded-full border border-surface-border" id="trendPill">
+                <span class="material-symbols-outlined text-score-a text-3xl" style="font-variation-settings: 'FILL' 1;">trending_down</span>
+                <span class="font-headline-md text-headline-md text-score-a font-bold" id="trendPct">-12%</span>
+            </div>
+        </div>
+
+        <!-- Transparency Details -->
+        <div class="bento-item col-span-12 shadow-sm">
+            <h3 class="font-title-lg text-title-lg text-on-surface font-bold mb-4 border-b border-surface-border pb-2">Lifecycle Breakdown</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                <div class="flex flex-col gap-2">
+                    <div class="flex justify-between items-center">
+                        <span class="font-label-sm text-label-sm text-text-muted uppercase font-semibold">Sourcing & Raw Materials</span>
+                        <span class="font-data-tabular text-data-tabular font-bold" id="shareSourcingVal">0.40 kg</span>
+                    </div>
+                    <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+                        <div class="bg-primary h-full" style="width: 30%"></div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <div class="flex justify-between items-center">
+                        <span class="font-label-sm text-label-sm text-text-muted uppercase font-semibold">Manufacturing & Processing</span>
+                        <span class="font-data-tabular text-data-tabular font-bold" id="shareMfgVal">0.67 kg</span>
+                    </div>
+                    <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+                        <div class="bg-score-b h-full" style="width: 50%"></div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-2">
+                    <div class="flex justify-between items-center">
+                        <span class="font-label-sm text-label-sm text-text-muted uppercase font-semibold">Transport & Distribution</span>
+                        <span class="font-data-tabular text-data-tabular font-bold" id="shareTransVal">0.27 kg</span>
+                    </div>
+                    <div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+                        <div class="bg-primary-fixed-dim h-full" style="width: 20%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="flex justify-center mt-8 gap-4 flex-wrap">
+        <a href="../index.html" class="bg-primary text-on-primary px-8 py-3 rounded hover:bg-surface-tint transition-colors shadow-sm hover:shadow-md font-label-md text-label-md flex items-center gap-2 font-bold">
+            Learn More About EcoMark
+            <span class="material-symbols-outlined text-sm">open_in_new</span>
+        </a>
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-white border-t border-surface-border mt-auto">
+    <div class="flex items-center gap-2">
+        <span class="font-headline-sm text-headline-sm font-bold text-primary">EcoMark</span>
+    </div>
+    <p class="font-label-sm text-label-sm text-text-muted text-center">© 2024 EcoMark Industrial Carbon Accounting. All rights reserved.</p>
+</footer>
+
+<script src="../js/db.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Read URL parameter productId
+        const params = new URLSearchParams(window.location.search);
+        let productId = params.get('productId') || "prod_sunbake_foods"; // Seeded fallback
+
+        const products = DB.getProducts();
+        const product = products[productId];
+        const reports = DB.getReports();
+        const users = DB.getUsers();
+
+        if (!product) {
+            // Product not found
+            document.getElementById('companyLabel').textContent = "ERROR";
+            document.getElementById('productLabel').textContent = "Product Not Found";
+            document.getElementById('scoreBadge').className = "w-40 h-40 rounded-full bg-score-d flex items-center justify-center text-white shadow-lg mb-6";
+            document.getElementById('scoreText').textContent = "!";
+            document.getElementById('scoreTitle').textContent = "Carbon audit missing";
+            document.getElementById('scoreDescription').textContent = "The requested product code does not match any verified lifecycle records in the EcoMark public registry.";
+            document.getElementById('footprintVal').textContent = "N/A";
+            document.getElementById('equivalencyText').textContent = "No certified calculations available.";
+            document.getElementById('trendContainer').classList.add('hidden');
+            return;
+        }
+
+        // Retrieve manufacturer name
+        const manufacturer = users[product.companyId] || { companyName: "Certified Manufacturer" };
+        document.getElementById('companyLabel').textContent = manufacturer.companyName;
+        document.getElementById('productLabel').textContent = product.productName;
+
+        // Render Carbon Score Badge
+        const scoreColors = {
+            "A+": "bg-[#1B5E20] border-[#1B5E20]",
+            "A": "bg-[#388E3C] border-[#388E3C]",
+            "B": "bg-[#F9A825] border-[#F9A825]",
+            "C": "bg-[#E65100] border-[#E65100]",
+            "D": "bg-[#B71C1C] border-[#B71C1C]"
+        };
+
+        const scoreTitles = {
+            "A+": "Ultra Green Carbon Rating",
+            "A": "Green Carbon Rating",
+            "B": "Moderate Carbon Rating",
+            "C": "High Carbon Rating",
+            "D": "Very High Carbon Rating"
+        };
+
+        const scoreDescriptions = {
+            "A+": "This product has a negligible greenhouse gas footprint, leading its sector in eco-efficiency.",
+            "A": "This product possesses a highly sustainable carbon index, well below average sectoral benchmarks.",
+            "B": "This product falls within typical operational emission parameters with moderate environmental load.",
+            "C": "This product exhibits standard carbon levels with substantial opportunities for recovery and optimization.",
+            "D": "This product demonstrates significant emission intensity and carries a high greenhouse impact."
+        };
+
+        document.getElementById('scoreText').textContent = product.latestScore;
+        document.getElementById('scoreBadge').className = `w-40 h-40 rounded-full flex items-center justify-center text-white shadow-lg mb-6 border-4 ${scoreColors[product.latestScore]}`;
+        document.getElementById('scoreTitle').textContent = scoreTitles[product.latestScore];
+        document.getElementById('scoreDescription').textContent = scoreDescriptions[product.latestScore];
+
+        // Footprint value
+        document.getElementById('footprintVal').textContent = `${product.latestCO2ePerUnit.toFixed(4)} kg`;
+
+        // Driving equivalency (1 kg = 6 km of driving)
+        const kmVal = (product.latestCO2ePerUnit * 6).toFixed(1);
+        document.getElementById('kmDriven').textContent = `${kmVal} km`;
+        document.getElementById('equivalencyText').innerHTML = `The carbon footprint of this unit is roughly equivalent to driving <strong class="text-primary font-bold">${kmVal} km</strong> in an average passenger car.`;
+
+        // Lifecycle Breakdown
+        const sourcingVal = product.latestCO2ePerUnit * 0.3;
+        const mfgVal = product.latestCO2ePerUnit * 0.5;
+        const transVal = product.latestCO2ePerUnit * 0.2;
+
+        document.getElementById('shareSourcingVal').textContent = `${sourcingVal.toFixed(3)} kg`;
+        document.getElementById('shareMfgVal').textContent = `${mfgVal.toFixed(3)} kg`;
+        document.getElementById('shareTransVal').textContent = `${transVal.toFixed(3)} kg`;
+
+        // Trends indicator compared to previous reports in history
+        if (product.reportHistory.length > 1) {
+            const reportsList = product.reportHistory.map(id => reports[id]).filter(Boolean);
+            // Sort chronologically
+            reportsList.sort((a,b) => new Date(a.submittedAt) - new Date(b.submittedAt));
+            const latestRep = reportsList[reportsList.length - 1];
+            const prevRep = reportsList[reportsList.length - 2];
+
+            const reduction = ((prevRep.co2ePerUnit - latestRep.co2ePerUnit) / prevRep.co2ePerUnit) * 100;
+            const trendDesc = document.getElementById('trendDesc');
+            const trendPct = document.getElementById('trendPct');
+            const trendPill = document.getElementById('trendPill');
+
+            if (reduction > 0) {
+                trendDesc.textContent = `Emissions per unit have improved by ${reduction.toFixed(1)}% compared to the previous quarter report (${prevRep.period}).`;
+                trendPct.textContent = `-${reduction.toFixed(1)}%`;
+                trendPill.className = "flex items-center gap-3 bg-green-50 text-score-a px-6 py-4 rounded-full border border-green-200";
+                trendPill.querySelector('.material-symbols-outlined').textContent = "trending_down";
+                trendPill.querySelector('.material-symbols-outlined').className = "material-symbols-outlined text-score-a text-3xl font-bold";
+                trendPct.className = "font-headline-md text-headline-md text-score-a font-bold";
+            } else if (reduction < 0) {
+                trendDesc.textContent = `Emissions per unit have risen by ${Math.abs(reduction).toFixed(1)}% compared to the previous quarter report (${prevRep.period}).`;
+                trendPct.textContent = `+${Math.abs(reduction).toFixed(1)}%`;
+                trendPill.className = "flex items-center gap-3 bg-red-50 text-score-d px-6 py-4 rounded-full border border-red-200";
+                trendPill.querySelector('.material-symbols-outlined').textContent = "trending_up";
+                trendPill.querySelector('.material-symbols-outlined').className = "material-symbols-outlined text-score-d text-3xl font-bold";
+                trendPct.className = "font-headline-md text-headline-md text-score-d font-bold";
+            } else {
+                trendDesc.textContent = `Emissions per unit remained exactly consistent with the previous report (${prevRep.period}).`;
+                trendPct.textContent = "0%";
+                trendPill.className = "flex items-center gap-3 bg-surface-container-low text-text-muted px-6 py-4 rounded-full border border-surface-border";
+                trendPill.querySelector('.material-symbols-outlined').textContent = "trending_flat";
+            }
+        } else {
+            // Only 1 report, no history
+            document.getElementById('trendDesc').textContent = "This product has successfully completed its first verified environmental lifecycle carbon audit.";
+            document.getElementById('trendPct').textContent = "NEW";
+            document.getElementById('trendPill').className = "flex items-center gap-3 bg-green-50 text-primary px-6 py-4 rounded-full border border-green-200";
+            document.getElementById('trendPill').querySelector('.material-symbols-outlined').textContent = "stars";
+            document.getElementById('trendPct').className = "font-headline-md text-headline-md text-primary font-bold";
+        }
+    });
+</script>
+</body>
+</html>

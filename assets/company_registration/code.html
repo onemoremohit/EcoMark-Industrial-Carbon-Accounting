@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EcoMark | Company Registration</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-bright": "#f8faf8",
+                      "outline-variant": "#bec9be",
+                      "primary-fixed-dim": "#80d9a0",
+                      "on-surface-variant": "#3f4941",
+                      "inverse-surface": "#2e3130",
+                      "secondary-fixed": "#a3f69c",
+                      "secondary": "#1b6d24",
+                      "on-background": "#191c1b",
+                      "secondary-fixed-dim": "#88d982",
+                      "surface-container-high": "#e6e9e7",
+                      "error-container": "#ffdad6",
+                      "score-b": "#F9A825",
+                      "tertiary-fixed": "#acf4a4",
+                      "on-tertiary-container": "#b6fead",
+                      "on-surface": "#191c1b",
+                      "secondary-container": "#a0f399",
+                      "on-primary": "#ffffff",
+                      "surface": "#f8faf8",
+                      "score-a": "#388E3C",
+                      "score-d": "#B71C1C",
+                      "on-secondary-fixed": "#002204",
+                      "score-c": "#E65100",
+                      "on-error": "#ffffff",
+                      "text-muted": "#5C635C",
+                      "primary-fixed": "#9bf6ba",
+                      "on-tertiary": "#ffffff",
+                      "primary": "#006036",
+                      "score-a-plus": "#1B5E20",
+                      "inverse-primary": "#80d9a0",
+                      "error": "#ba1a1a",
+                      "tertiary": "#1c5f21",
+                      "on-secondary": "#ffffff",
+                      "surface-tint": "#006d3f",
+                      "surface-border": "#E1E8E1",
+                      "tertiary-container": "#377837",
+                      "surface-variant": "#e1e3e1",
+                      "surface-container-low": "#f2f4f2",
+                      "primary-container": "#1a7a4a",
+                      "surface-container-lowest": "#ffffff",
+                      "surface-container": "#eceeec",
+                      "on-secondary-container": "#217128",
+                      "on-primary-fixed-variant": "#00522e",
+                      "outline": "#6f7a70",
+                      "tertiary-fixed-dim": "#91d78a",
+                      "on-secondary-fixed-variant": "#005312",
+                      "on-primary-container": "#abffc6",
+                      "surface-container-highest": "#e1e3e1",
+                      "background": "#f8faf8",
+                      "on-tertiary-fixed-variant": "#0c5216",
+                      "surface-dim": "#d8dad9",
+                      "on-error-container": "#93000a",
+                      "text-main": "#1A1C1A",
+                      "on-primary-fixed": "#00210f",
+                      "inverse-on-surface": "#eff1ef",
+                      "on-tertiary-fixed": "#002203"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "margin-mobile": "16px",
+                      "container-max": "1200px",
+                      "stack-md": "16px",
+                      "stack-sm": "8px",
+                      "margin-desktop": "48px",
+                      "base": "4px",
+                      "stack-lg": "32px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-lg-mobile": ["Inter"],
+                      "data-tabular": ["Inter"],
+                      "label-md": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "title-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "data-tabular": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8faf8; }
+        .industrial-grid {
+            background-image: radial-gradient(#E1E8E1 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen text-on-surface">
+<main class="flex-grow flex flex-col items-center justify-center industrial-grid p-margin-mobile md:p-margin-desktop">
+<div class="w-full max-w-[480px] bg-surface-container-lowest border border-surface-border rounded-lg shadow-sm overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-700">
+<div class="p-stack-lg flex flex-col items-center text-center">
+<img alt="EcoMark Logo" class="w-16 h-16 mb-stack-md" src="https://lh3.googleusercontent.com/aida/ADBb0ug9F2ZDBhOg-5seTdACBq85hvGHqaPgheWayvDsrg4EeExFjYuMLVOcq-HzbtAeZ_jBWObl5nnhdetfhxFhCV5H2WXcsZsVGN88jTUjdlvpmyi40N42wejuPpA34aRZZtf7oPCFrdrDNpY1WvY9ZP3Zedw6fki931fBG25MS5quOgB9e-MLmds7SG-lxDAGpNPMESCqSJaEc1csG6CbYOUxOeL8tGV5GxqGxneHjZr5O-HR72OXnWhqb-YV"/>
+<h1 class="font-headline-md text-headline-md text-primary mb-base">Register Your Company</h1>
+<p class="font-body-md text-body-md text-text-muted">Join the global standard for industrial carbon transparency.</p>
+</div>
+<form class="px-stack-lg pb-stack-lg space-y-stack-md" onsubmit="return false;">
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="company_name">Company Name</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">corporate_fare</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface rounded border border-surface-border focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all font-body-md text-body-md" id="company_name" placeholder="Acme Industrial Corp" type="text"/>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="industry">Industry</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">factory</span>
+<select class="w-full pl-10 pr-4 py-3 bg-surface rounded border border-surface-border focus:border-secondary focus:ring-1 focus:ring-secondary outline-none appearance-none transition-all font-body-md text-body-md" id="industry">
+<option disabled="" selected="" value="">Select industry</option>
+<option value="manufacturing">Manufacturing</option>
+<option value="energy">Energy &amp; Utilities</option>
+<option value="logistics">Logistics &amp; Transport</option>
+<option value="construction">Construction</option>
+<option value="chemical">Chemical Processing</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-outline pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="location">HQ Location</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">location_on</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface rounded border border-surface-border focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all font-body-md text-body-md" id="location" placeholder="City, Country" type="text"/>
+</div>
+</div>
+</div>
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="email">Corporate Email</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">mail</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface rounded border border-surface-border focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all font-body-md text-body-md" id="email" placeholder="admin@company.com" type="email"/>
+</div>
+</div>
+<div class="space-y-base">
+<label class="font-label-sm text-label-sm text-on-surface-variant" for="password">Password</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">lock</span>
+<input class="w-full pl-10 pr-12 py-3 bg-surface rounded border border-surface-border focus:border-secondary focus:ring-1 focus:ring-secondary outline-none transition-all font-body-md text-body-md" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-primary transition-colors" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+<p class="font-label-sm text-[10px] text-text-muted mt-1 uppercase tracking-wider">Minimum 12 characters with industrial-grade complexity</p>
+</div>
+<div class="pt-stack-md">
+<button class="w-full bg-primary text-on-primary py-4 px-6 rounded font-label-md text-label-md font-bold hover:bg-primary-container hover:text-on-primary-container transition-all active:scale-[0.98] flex items-center justify-center gap-2 shadow-sm" type="submit">
+<span>Create Account</span>
+<span class="material-symbols-outlined text-[20px]">arrow_forward</span>
+</button>
+</div>
+<div class="text-center pt-stack-md border-t border-surface-border mt-stack-lg">
+<p class="font-body-md text-body-md text-text-muted">
+                        Already registered? 
+                        <a class="text-primary font-bold hover:underline transition-all" href="#">Login to Portal</a>
+</p>
+</div>
+</form>
+</div>
+<div class="mt-stack-lg text-center max-w-md">
+<div class="flex items-center justify-center gap-4 mb-stack-sm opacity-60">
+<div class="h-[1px] w-12 bg-outline-variant"></div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-widest">Compliance Standards</span>
+<div class="h-[1px] w-12 bg-outline-variant"></div>
+</div>
+<p class="font-label-sm text-label-sm text-outline px-margin-mobile">
+                By registering, you agree to the EcoMark Data Integrity Protocol and ISO 14064 Carbon Accounting Standards.
+            </p>
+</div>
+</main>
+<footer class="w-full py-stack-lg px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-lowest border-t border-surface-border">
+<div class="flex flex-col items-center md:items-start gap-1">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">EcoMark</span>
+<p class="font-label-sm text-label-sm text-text-muted">© 2024 EcoMark Industrial Carbon Accounting. All rights reserved.</p>
+</div>
+<div class="flex flex-wrap justify-center gap-stack-md">
+<a class="font-label-sm text-label-sm text-text-muted hover:text-primary transition-opacity duration-200" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-text-muted hover:text-primary transition-opacity duration-200" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-text-muted hover:text-primary transition-opacity duration-200" href="#">Public Verification</a>
+<a class="font-label-sm text-label-sm text-text-muted hover:text-primary transition-opacity duration-200" href="#">API Documentation</a>
+</div>
+</footer>
+<script>
+        // Simple interactivity for the password toggle
+        const toggleBtn = document.querySelector('button[type="button"]');
+        const passInput = document.querySelector('#password');
+        const visibilityIcon = toggleBtn ? toggleBtn.querySelector('.material-symbols-outlined') : null;
+
+        if (toggleBtn && passInput && visibilityIcon) {
+            toggleBtn.addEventListener('click', () => {
+                const isPassword = passInput.type === 'password';
+                passInput.type = isPassword ? 'text' : 'password';
+                visibilityIcon.textContent = isPassword ? 'visibility_off' : 'visibility';
+            });
+        }
+
+        // Form submission micro-interaction
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            const btn = form.querySelector('button[type="submit"]');
+            const originalContent = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = `<span class="material-symbols-outlined animate-spin">refresh</span> Processing...`;
+            
+            setTimeout(() => {
+                btn.innerHTML = `<span class="material-symbols-outlined">check_circle</span> Account Created`;
+                btn.classList.replace('bg-primary', 'bg-score-a');
+            }, 1500);
+        });
+    </script>
+</body></html>

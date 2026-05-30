@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EcoMark - Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#bec9be",
+                      "surface-dim": "#d8dad9",
+                      "score-a": "#388E3C",
+                      "text-main": "#1A1C1A",
+                      "text-muted": "#5C635C",
+                      "error-container": "#ffdad6",
+                      "score-d": "#B71C1C",
+                      "on-primary": "#ffffff",
+                      "surface-border": "#E1E8E1",
+                      "tertiary-fixed": "#acf4a4",
+                      "primary-fixed-dim": "#80d9a0",
+                      "on-primary-fixed-variant": "#00522e",
+                      "secondary-container": "#a0f399",
+                      "on-tertiary-fixed": "#002203",
+                      "surface": "#f8faf8",
+                      "surface-variant": "#e1e3e1",
+                      "surface-container": "#eceeec",
+                      "on-primary-container": "#abffc6",
+                      "secondary": "#1b6d24",
+                      "surface-tint": "#006d3f",
+                      "outline": "#6f7a70",
+                      "inverse-primary": "#80d9a0",
+                      "on-tertiary-fixed-variant": "#0c5216",
+                      "on-surface": "#191c1b",
+                      "on-error-container": "#93000a",
+                      "inverse-surface": "#2e3130",
+                      "inverse-on-surface": "#eff1ef",
+                      "on-tertiary-container": "#b6fead",
+                      "tertiary-fixed-dim": "#91d78a",
+                      "on-surface-variant": "#3f4941",
+                      "on-background": "#191c1b",
+                      "surface-container-low": "#f2f4f2",
+                      "score-a-plus": "#1B5E20",
+                      "score-b": "#F9A825",
+                      "surface-container-lowest": "#ffffff",
+                      "background": "#f8faf8",
+                      "on-secondary-container": "#217128",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed-variant": "#005312",
+                      "on-secondary-fixed": "#002204",
+                      "primary-fixed": "#9bf6ba",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#88d982",
+                      "on-primary-fixed": "#00210f",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#e6e9e7",
+                      "tertiary-container": "#377837",
+                      "secondary-fixed": "#a3f69c",
+                      "primary": "#006036",
+                      "primary-container": "#1a7a4a",
+                      "tertiary": "#1c5f21",
+                      "surface-bright": "#f8faf8",
+                      "error": "#ba1a1a",
+                      "surface-container-highest": "#e1e3e1",
+                      "score-c": "#E65100"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "margin-desktop": "48px",
+                      "margin-mobile": "16px",
+                      "stack-md": "16px",
+                      "gutter": "24px",
+                      "container-max": "1200px",
+                      "stack-lg": "32px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "data-tabular": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "title-lg": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "data-tabular": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "title-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings:
+          'FILL' 0,
+          'wght' 400,
+          'GRAD' 0,
+          'opsz' 24
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col md:flex-row">
+<!-- Navigation Drawer (Desktop) -->
+<nav class="hidden lg:flex flex-col h-screen sticky top-0 w-64 border-r border-surface-border bg-surface shrink-0 z-50">
+<div class="p-6 border-b border-surface-border flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-lg shrink-0">E</div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">EcoMark</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Industrial Carbon Transparency</p>
+</div>
+</div>
+<div class="p-4 flex-1 overflow-y-auto space-y-2">
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-200 active:scale-95 font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">post_add</span>
+                Submit Report
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">inventory_2</span>
+                My Products
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">payments</span>
+                Eco-Coins
+            </a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col min-w-0">
+<!-- TopAppBar (Mobile & Desktop) -->
+<header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40 bg-surface lg:hidden border-b border-surface-border">
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:bg-surface-container-low p-2 rounded-lg lg:hidden">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline-md text-headline-md font-bold text-primary">EcoMark</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden shrink-0">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A small, circular avatar portrait of a professional individual looking slightly off-camera. The lighting is soft and corporate, matching a clean, modern user interface. The background is a neutral light gray. This image is used as a standard user profile picture placeholder in a high-end web application." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4RjM57zcY29E3XbS_KvA_jjw8uNEagX8LGRM6uO6vL7gpN_djExiBhrot-zCAsvzFuc4cQt1mI39mHs9xqvGLFewQnR8KI_7M6kJNbzxQdm0i-NBF0cKOqtPKiThyxQXxUtS5GUfzzh3kCuAZeGvKuFQoar8azuGVlloc__UXvwnxO2S1S4t8SRhPNNNRT-7SlLPaS4ZIhgVmm3ZBLTm6sFnerxUixEuZ4mmdH4I08nKcxwR2jnvizPw10DkAj1kioY0bhShzdAnO"/>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 p-margin-mobile md:p-margin-desktop bg-surface overflow-y-auto">
+<div class="max-w-container-max mx-auto space-y-gutter">
+<!-- Page Header & Actions -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">Regulator Overview</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">High-level industrial carbon tracking metrics.</p>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-container-lowest border border-surface-border rounded-lg text-primary font-label-md text-label-md hover:bg-surface-container-low transition-colors shadow-sm self-start sm:self-auto">
+<span class="material-symbols-outlined">download</span>
+                        Export CSV
+                    </button>
+</div>
+<!-- KPI Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- KPI 1 -->
+<div class="bg-surface-container-lowest border border-surface-border rounded-xl p-6 shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Total Regulated Companies</span>
+<span class="material-symbols-outlined text-primary">domain</span>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-on-surface">1,248</div>
+<div class="flex items-center gap-1 mt-2 text-score-a font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+12 this month</span>
+</div>
+</div>
+</div>
+<!-- KPI 2 -->
+<div class="bg-surface-container-lowest border border-surface-border rounded-xl p-6 shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Total CO2e Processed</span>
+<span class="material-symbols-outlined text-score-d">co2</span>
+</div>
+<div>
+<div class="font-display-lg text-display-lg text-on-surface">45.2M <span class="text-title-lg text-on-surface-variant font-normal">tons</span></div>
+<div class="flex items-center gap-1 mt-2 text-score-c font-label-md text-label-md">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>+2.4% vs last year</span>
+</div>
+</div>
+</div>
+<!-- KPI 3 -->
+<div class="bg-surface-container-lowest border border-surface-border rounded-xl p-6 shadow-sm flex flex-col justify-between">
+<div class="flex justify-between items-start mb-4">
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Global Average Score</span>
+<span class="material-symbols-outlined text-score-b">speed</span>
+</div>
+<div class="flex items-end gap-4">
+<div class="w-16 h-16 rounded flex items-center justify-center bg-score-b text-on-primary font-headline-lg text-headline-lg">C+</div>
+<div class="pb-1 font-body-md text-body-md text-on-surface-variant">
+                                Trending positive across Top 100.
+                            </div>
+</div>
+</div>
+</div>
+<!-- Charts & Tables Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Chart Section -->
+<div class="lg:col-span-2 bg-surface-container-lowest border border-surface-border rounded-xl p-6 shadow-sm">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-6">Industry-wide CO2e Breakdown</h3>
+<div class="relative h-72 w-full">
+<canvas id="co2Chart"></canvas>
+</div>
+</div>
+<!-- Ranking Table Section -->
+<div class="lg:col-span-1 bg-surface-container-lowest border border-surface-border rounded-xl shadow-sm overflow-hidden flex flex-col">
+<div class="p-6 border-b border-surface-border flex justify-between items-center bg-surface-container-lowest">
+<h3 class="font-title-lg text-title-lg text-on-surface">Industry Ranking</h3>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<div class="overflow-x-auto flex-1">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-surface-border">
+<tr>
+<th class="p-4 font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold">Sector</th>
+<th class="p-4 font-label-sm text-label-sm text-on-surface-variant uppercase font-semibold text-right">Trend</th>
+</tr>
+</thead>
+<tbody class="font-data-tabular text-data-tabular">
+<tr class="border-b border-surface-border hover:bg-surface-container-lowest transition-colors">
+<td class="p-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-score-a/10 text-score-a flex items-center justify-center font-bold">A</div>
+<span class="text-on-surface">Technology</span>
+</td>
+<td class="p-4 text-right">
+<span class="text-score-a flex items-center justify-end gap-1"><span class="material-symbols-outlined text-sm">arrow_downward</span> 4.2%</span>
+</td>
+</tr>
+<tr class="border-b border-surface-border hover:bg-surface-container-lowest transition-colors">
+<td class="p-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-score-b/10 text-score-b flex items-center justify-center font-bold">B</div>
+<span class="text-on-surface">Manufacturing</span>
+</td>
+<td class="p-4 text-right">
+<span class="text-score-b flex items-center justify-end gap-1"><span class="material-symbols-outlined text-sm">horizontal_rule</span> 0.5%</span>
+</td>
+</tr>
+<tr class="border-b border-surface-border hover:bg-surface-container-lowest transition-colors">
+<td class="p-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-score-c/10 text-score-c flex items-center justify-center font-bold">C</div>
+<span class="text-on-surface">Textiles</span>
+</td>
+<td class="p-4 text-right">
+<span class="text-score-c flex items-center justify-end gap-1"><span class="material-symbols-outlined text-sm">arrow_upward</span> 1.8%</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="p-4 flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-score-d/10 text-score-d flex items-center justify-center font-bold">D</div>
+<span class="text-on-surface">Logistics</span>
+</td>
+<td class="p-4 text-right">
+<span class="text-score-d flex items-center justify-end gap-1"><span class="material-symbols-outlined text-sm">arrow_upward</span> 5.1%</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-surface-border text-center bg-surface-container-lowest">
+<a class="font-label-md text-label-md text-primary hover:underline" href="#">View Full Report</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-lowest border-t border-surface-border shrink-0">
+<div class="font-headline-sm text-headline-sm font-bold text-primary">EcoMark</div>
+<div class="font-label-sm text-label-sm text-text-muted">© 2024 EcoMark Industrial Carbon Accounting. All rights reserved.</div>
+<div class="flex gap-4 font-label-sm text-label-sm">
+<a class="text-text-muted hover:text-primary transition-opacity duration-200" href="#">Privacy Policy</a>
+<a class="text-text-muted hover:text-primary transition-opacity duration-200" href="#">Terms of Service</a>
+<a class="text-text-muted hover:text-primary transition-opacity duration-200" href="#">Public Verification</a>
+<a class="text-text-muted hover:text-primary transition-opacity duration-200" href="#">API Documentation</a>
+</div>
+</footer>
+</div>
+<!-- Chart Initialization -->
+<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('co2Chart').getContext('2d');
+            
+            // Getting colors from Tailwind config for consistency
+            const colors = {
+                primary: '#006036',
+                surfaceDim: '#d8dad9',
+                scoreA: '#388E3C',
+                scoreB: '#F9A825',
+                scoreC: '#E65100',
+                scoreD: '#B71C1C'
+            };
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                    datasets: [{
+                        label: 'Technology',
+                        data: [65, 59, 80, 81, 56, 55, 40],
+                        backgroundColor: colors.scoreA,
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Manufacturing',
+                        data: [85, 92, 90, 88, 95, 91, 89],
+                        backgroundColor: colors.scoreB,
+                        borderRadius: 4
+                    },
+                    {
+                        label: 'Logistics',
+                        data: [110, 115, 105, 120, 125, 130, 135],
+                        backgroundColor: colors.scoreD,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                font: {
+                                    family: "'Inter', sans-serif",
+                                    size: 12
+                                },
+                                color: '#3f4941' // text-on-surface-variant
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#E1E8E1', // surface-border
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: {
+                                    family: "'Inter', sans-serif"
+                                },
+                                color: '#5C635C' // text-muted
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false,
+                                drawBorder: false
+                            },
+                            ticks: {
+                                font: {
+                                    family: "'Inter', sans-serif"
+                                },
+                                color: '#5C635C' // text-muted
+                            }
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body></html>

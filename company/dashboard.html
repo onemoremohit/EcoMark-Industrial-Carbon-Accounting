@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>EcoMark - Company Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#bec9be",
+                    "surface-dim": "#d8dad9",
+                    "score-a": "#388E3C",
+                    "text-main": "#1A1C1A",
+                    "text-muted": "#5C635C",
+                    "error-container": "#ffdad6",
+                    "score-d": "#B71C1C",
+                    "on-primary": "#ffffff",
+                    "surface-border": "#E1E8E1",
+                    "tertiary-fixed": "#acf4a4",
+                    "primary-fixed-dim": "#80d9a0",
+                    "on-primary-fixed-variant": "#00522e",
+                    "secondary-container": "#a0f399",
+                    "on-tertiary-fixed": "#002203",
+                    "surface": "#f8faf8",
+                    "surface-variant": "#e1e3e1",
+                    "surface-container": "#eceeec",
+                    "on-primary-container": "#abffc6",
+                    "secondary": "#1b6d24",
+                    "surface-tint": "#006d3f",
+                    "outline": "#6f7a70",
+                    "inverse-primary": "#80d9a0",
+                    "on-tertiary-fixed-variant": "#0c5216",
+                    "on-surface": "#191c1b",
+                    "on-error-container": "#93000a",
+                    "inverse-surface": "#2e3130",
+                    "inverse-on-surface": "#eff1ef",
+                    "on-tertiary-container": "#b6fead",
+                    "tertiary-fixed-dim": "#91d78a",
+                    "on-surface-variant": "#3f4941",
+                    "on-background": "#191c1b",
+                    "surface-container-low": "#f2f4f2",
+                    "score-a-plus": "#1B5E20",
+                    "score-b": "#F9A825",
+                    "surface-container-lowest": "#ffffff",
+                    "background": "#f8faf8",
+                    "on-secondary-container": "#217128",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed-variant": "#005312",
+                    "on-secondary-fixed": "#002204",
+                    "primary-fixed": "#9bf6ba",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed-dim": "#88d982",
+                    "on-primary-fixed": "#00210f",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#e6e9e7",
+                    "tertiary-container": "#377837",
+                    "secondary-fixed": "#a3f69c",
+                    "primary": "#006036",
+                    "primary-container": "#1a7a4a",
+                    "tertiary": "#1c5f21",
+                    "surface-bright": "#f8faf8",
+                    "error": "#ba1a1a",
+                    "surface-container-highest": "#e1e3e1",
+                    "score-c": "#E65100"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-sm": "8px",
+                    "margin-desktop": "48px",
+                    "margin-mobile": "16px",
+                    "stack-md": "16px",
+                    "gutter": "24px",
+                    "container-max": "1200px",
+                    "stack-lg": "32px",
+                    "base": "4px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "data-tabular": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "title-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8faf8; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col lg:flex-row font-body-md font-sans">
+
+<!-- Navigation Drawer (Desktop) -->
+<nav class="w-64 h-screen border-r border-surface-border bg-surface hidden lg:flex flex-col sticky top-0 z-50">
+    <div class="p-6 border-b border-surface-border">
+        <a href="../index.html" class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-3xl font-bold">eco</span>
+            <div>
+                <h2 class="font-headline-md text-headline-md font-bold text-primary">EcoMark</h2>
+                <p class="font-label-sm text-label-sm text-text-muted">Carbon Transparency</p>
+            </div>
+        </a>
+    </div>
+    <div class="p-4 flex flex-col gap-2 flex-grow">
+        <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-200 active:scale-95 font-label-md text-label-md" href="dashboard.html">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+            <span>Dashboard</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="submit-report.html">
+            <span class="material-symbols-outlined">post_add</span>
+            <span>Submit Report</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="my-products.html">
+            <span class="material-symbols-outlined">inventory_2</span>
+            <span>My Products</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="eco-coins.html">
+            <span class="material-symbols-outlined">payments</span>
+            <span>Eco-Coins</span>
+        </a>
+    </div>
+    <div class="p-4 border-t border-surface-border flex flex-col gap-2">
+        <div class="px-4 py-2 bg-surface-container rounded-lg mb-2">
+            <p class="font-label-sm text-label-sm text-text-muted">Logged in as:</p>
+            <p class="font-label-md text-label-md font-bold text-on-surface truncate" id="sideCompanyLabel">Loading...</p>
+            <span class="inline-block mt-1 bg-primary/10 text-primary font-bold font-label-sm text-[10px] px-2 py-0.5 rounded uppercase">Company</span>
+        </div>
+        <button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-lg font-label-md text-label-md text-left w-full">
+            <span class="material-symbols-outlined">logout</span>
+            <span>Log Out</span>
+        </button>
+    </div>
+</nav>
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-h-screen relative">
+    <!-- TopAppBar (Mobile Header) -->
+    <header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40 bg-surface border-b border-surface-border lg:hidden">
+        <div class="flex items-center gap-4">
+            <button class="text-on-surface-variant p-2 hover:bg-surface-container-low rounded-full transition-colors" id="mobileMenuBtn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <h1 class="font-title-lg text-title-lg text-primary font-bold" id="topCompanyLabel">EcoMark</h1>
+        </div>
+        <div class="flex items-center gap-3">
+            <button id="logoutBtnMobile" class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
+                <span class="material-symbols-outlined">logout</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Drawer overlay -->
+    <div id="mobileDrawer" class="fixed inset-0 bg-black/50 z-50 hidden transition-opacity">
+        <div class="w-64 h-full bg-white flex flex-col">
+            <div class="p-6 border-b border-surface-border flex justify-between items-center">
+                <span class="font-headline-sm text-headline-sm font-bold text-primary">Menu</span>
+                <button id="closeDrawerBtn" class="p-2 rounded-full hover:bg-surface-container">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="p-4 flex flex-col gap-2 flex-grow">
+                <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold" href="dashboard.html">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="submit-report.html">
+                    <span class="material-symbols-outlined">post_add</span>
+                    <span>Submit Report</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="my-products.html">
+                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span>My Products</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="eco-coins.html">
+                    <span class="material-symbols-outlined">payments</span>
+                    <span>Eco-Coins</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Canvas -->
+    <main class="flex-grow p-margin-mobile md:p-margin-desktop overflow-y-auto w-full max-w-container-max mx-auto">
+        <div class="mb-stack-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <h2 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background font-bold mb-1" id="welcomeMessage">Welcome back!</h2>
+                <p class="font-body-md text-body-md text-text-muted" id="subWelcomeMessage">Loading your sustainability index...</p>
+            </div>
+            <a href="submit-report.html" class="bg-primary text-white font-label-md text-label-md px-6 py-3 rounded-lg hover:bg-primary-container transition-all hover:shadow-md flex items-center gap-2 font-semibold">
+                <span class="material-symbols-outlined">add</span>
+                Submit Utility Report
+            </a>
+        </div>
+
+        <!-- Key Metrics Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-stack-lg">
+            <!-- Score Card -->
+            <div class="bg-surface-container-lowest border border-surface-border rounded-xl p-6 flex flex-col items-center justify-center relative overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                <h3 class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider mb-2 self-start w-full font-semibold">Carbon Rating</h3>
+                <div class="flex items-center justify-center flex-1 w-full my-4">
+                    <div class="w-24 h-24 rounded-full flex flex-col items-center justify-center border-4" id="scoreCircle">
+                        <span class="font-display-lg text-display-lg font-bold" id="scoreText">-</span>
+                    </div>
+                </div>
+                <div class="self-start w-full flex justify-between items-center mt-2 pt-4 border-t border-surface-border">
+                    <span class="font-label-sm text-label-sm text-text-muted" id="scoreLabel">Loading...</span>
+                    <a class="font-label-sm text-label-sm text-primary hover:underline flex items-center gap-1 font-semibold" href="my-products.html">My Products <span class="material-symbols-outlined" style="font-size: 14px;">arrow_forward</span></a>
+                </div>
+            </div>
+
+            <!-- Total CO2e Card -->
+            <div class="bg-surface-container-lowest border border-surface-border rounded-xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider font-semibold">Total Carbon Output</h3>
+                    <span class="material-symbols-outlined text-outline">co2</span>
+                </div>
+                <div class="mb-4">
+                    <div class="flex items-baseline gap-2">
+                        <span class="font-headline-lg text-headline-lg text-on-background font-bold" id="totalCo2Val">0.0</span>
+                        <span class="font-body-md text-body-md text-text-muted">kg CO2e</span>
+                    </div>
+                    <div class="flex items-center gap-1 mt-1" id="trendIndicator">
+                        <span class="material-symbols-outlined text-score-a" style="font-size: 16px;">trending_flat</span>
+                        <span class="font-label-sm text-label-sm text-text-muted">No historical data</span>
+                    </div>
+                </div>
+                <div class="mt-auto p-3 bg-[#e8f5e9] rounded border border-[#c8e6c9] flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary text-xl">directions_car</span>
+                    <span class="font-label-sm text-label-sm text-on-secondary-container" id="equivalencyText">Equal to driving 0 km in an average car.</span>
+                </div>
+            </div>
+
+            <!-- Eco-Coins Card -->
+            <div class="bg-surface-container-lowest border border-surface-border rounded-xl p-6 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider font-semibold">Eco-Coin Balance</h3>
+                    <span class="material-symbols-outlined text-score-b">toll</span>
+                </div>
+                <div class="mb-4">
+                    <div class="flex items-baseline gap-2">
+                        <span class="font-headline-lg text-headline-lg text-on-background font-bold" id="ecoCoinsVal">0</span>
+                        <span class="font-body-md text-body-md text-text-muted">ECT</span>
+                    </div>
+                    <div class="flex items-center gap-1 mt-1">
+                        <span class="material-symbols-outlined text-score-a text-sm" data-weight="fill">verified</span>
+                        <span class="font-label-sm text-label-sm text-score-a">Verifiable ESG tokens</span>
+                    </div>
+                </div>
+                <div class="mt-auto flex gap-2">
+                    <a href="eco-coins.html" class="flex-1 text-center bg-primary text-on-primary py-2 px-4 rounded font-label-md text-label-md hover:bg-primary-container transition-colors shadow-sm font-semibold">Redeem Coins</a>
+                    <a href="eco-coins.html" class="flex-1 text-center border border-primary text-primary py-2 px-4 rounded font-label-md text-label-md hover:bg-surface-container-low transition-colors font-semibold">History</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="bg-surface-container-lowest border border-surface-border rounded-xl p-6 mb-stack-lg shadow-sm">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h3 class="font-title-lg text-title-lg text-on-background font-bold">Emissions Trend</h3>
+                    <p class="font-body-md text-body-md text-text-muted">Carbon efficiency history per product.</p>
+                </div>
+                <div class="text-sm font-label-md text-text-muted">
+                    Quarterly YTD View
+                </div>
+            </div>
+            <div class="w-full h-[320px] relative">
+                <canvas id="emissionChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Recent Reports Table -->
+        <div class="bg-surface-container-lowest border border-surface-border rounded-xl overflow-hidden shadow-sm">
+            <div class="p-5 border-b border-surface-border flex justify-between items-center bg-surface-container-low">
+                <h3 class="font-title-lg text-title-lg text-on-background font-bold">Recent Submissions</h3>
+                <span class="font-label-sm text-label-sm text-text-muted">Tamper-evident audit logged</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-surface border-b border-surface-border font-label-sm text-label-sm text-text-muted uppercase tracking-wider">
+                            <th class="p-4 font-semibold">Report ID</th>
+                            <th class="p-4 font-semibold">Period</th>
+                            <th class="p-4 font-semibold">Product</th>
+                            <th class="p-4 font-semibold">CO2e Output</th>
+                            <th class="p-4 font-semibold">Grade</th>
+                            <th class="p-4 font-semibold">Submitted At</th>
+                        </tr>
+                    </thead>
+                    <tbody class="font-data-tabular text-data-tabular text-on-surface" id="reportsTableBody">
+                        <tr>
+                            <td colspan="6" class="p-8 text-center text-text-muted">Loading reports database...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-stack-lg px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-lowest border-t border-surface-border mt-auto">
+        <div class="flex items-center gap-2">
+            <span class="font-headline-sm text-headline-sm font-bold text-primary">EcoMark</span>
+            <span class="font-label-sm text-label-sm text-text-muted ml-4">© 2024 EcoMark Industrial Carbon Accounting. All rights reserved.</span>
+        </div>
+        <div class="flex gap-4">
+            <a class="font-label-sm text-label-sm text-text-muted hover:text-primary transition-opacity" href="#">Privacy Policy</a>
+            <a class="font-label-sm text-label-sm text-text-muted hover:text-primary transition-opacity" href="#">Terms of Service</a>
+        </div>
+    </footer>
+</div>
+
+<script src="../js/db.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+    // Verify Company authentication
+    const user = checkAuth('company');
+    
+    document.addEventListener('DOMContentLoaded', () => {
+        if (!user) return;
+
+        // Set Labels
+        document.getElementById('sideCompanyLabel').textContent = user.companyName;
+        document.getElementById('topCompanyLabel').textContent = user.companyName;
+        document.getElementById('welcomeMessage').textContent = `Welcome back, ${user.companyName}!`;
+        document.getElementById('ecoCoinsVal').textContent = (user.ecoCoins || 0).toLocaleString();
+
+        // 1. Mobile Menu Drawer Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+        
+        if (mobileMenuBtn && mobileDrawer && closeDrawerBtn) {
+            mobileMenuBtn.addEventListener('click', () => mobileDrawer.classList.remove('hidden'));
+            closeDrawerBtn.addEventListener('click', () => mobileDrawer.classList.add('hidden'));
+            mobileDrawer.addEventListener('click', (e) => {
+                if (e.target === mobileDrawer) mobileDrawer.classList.add('hidden');
+            });
+        }
+
+        // 2. Fetch Reports & Products
+        const allReports = Object.values(DB.getReports()).filter(r => r.companyId === user.uid);
+        const allProducts = Object.values(DB.getProducts()).filter(p => p.companyId === user.uid);
+
+        // Populate YTD stats
+        let totalCO2eYTD = 0;
+        let scoreCount = { "A+": 0, "A": 0, "B": 0, "C": 0, "D": 0 };
+        let scoresAvailable = [];
+
+        allReports.forEach(r => {
+            totalCO2eYTD += r.totalCO2e;
+            scoreCount[r.score] = (scoreCount[r.score] || 0) + 1;
+            scoresAvailable.push(r.score);
+        });
+
+        document.getElementById('totalCo2Val').textContent = totalCO2eYTD.toLocaleString(undefined, {minimumFractionDigits: 1, maximumFractionDigits: 1});
+
+        // Determine average rating
+        let finalScore = "-";
+        let scoreColor = "border-surface-border text-text-muted bg-surface";
+        let scoreLabel = "No Active Ratings";
+
+        if (scoresAvailable.length > 0) {
+            // Find most frequent score or highest weight
+            const scoreWeights = { "A+": 5, "A": 4, "B": 3, "C": 2, "D": 1 };
+            let totalWeight = 0;
+            scoresAvailable.forEach(s => totalWeight += scoreWeights[s]);
+            const avgWeight = totalWeight / scoresAvailable.length;
+
+            if (avgWeight >= 4.5) { finalScore = "A+"; scoreColor = "border-score-a-plus text-score-a-plus bg-green-50"; scoreLabel = "Ultra Green Rating"; }
+            else if (avgWeight >= 3.5) { finalScore = "A"; scoreColor = "border-score-a text-score-a bg-green-50"; scoreLabel = "Green Rating"; }
+            else if (avgWeight >= 2.5) { finalScore = "B"; scoreColor = "border-score-b text-score-b bg-yellow-50"; scoreLabel = "Moderate Rating"; }
+            else if (avgWeight >= 1.5) { finalScore = "C"; scoreColor = "border-score-c text-score-c bg-orange-50"; scoreLabel = "High Carbon Rating"; }
+            else { finalScore = "D"; scoreColor = "border-score-d text-score-d bg-red-50"; scoreLabel = "Very High Carbon Rating"; }
+        }
+
+        document.getElementById('scoreText').textContent = finalScore;
+        document.getElementById('scoreCircle').className = `w-24 h-24 rounded-full flex flex-col items-center justify-center border-4 ${scoreColor}`;
+        document.getElementById('scoreLabel').textContent = scoreLabel;
+
+        // Equivalency Text (1 kg CO2e = 6 km of driving in standard car)
+        const kmDriven = Math.round(totalCO2eYTD * 6);
+        document.getElementById('equivalencyText').textContent = `Equal to driving ${kmDriven.toLocaleString()} km in a passenger vehicle.`;
+
+        // Trend calculations
+        if (allReports.length > 1) {
+            // Sort by submittedAt desc
+            allReports.sort((a,b) => new Date(b.submittedAt) - new Date(a.submittedAt));
+            const latestRep = allReports[0];
+            const prevRep = allReports[1];
+            const reduction = ((prevRep.co2ePerUnit - latestRep.co2ePerUnit) / prevRep.co2ePerUnit) * 100;
+            
+            const trendIndicator = document.getElementById('trendIndicator');
+            if (reduction > 0) {
+                trendIndicator.innerHTML = `
+                    <span class="material-symbols-outlined text-score-a" style="font-size: 16px;">trending_down</span>
+                    <span class="font-label-sm text-label-sm text-score-a">-${reduction.toFixed(1)}% co2e/unit vs prev</span>
+                `;
+            } else if (reduction < 0) {
+                trendIndicator.innerHTML = `
+                    <span class="material-symbols-outlined text-score-d" style="font-size: 16px;">trending_up</span>
+                    <span class="font-label-sm text-label-sm text-score-d">+${Math.abs(reduction).toFixed(1)}% co2e/unit vs prev</span>
+                `;
+            } else {
+                trendIndicator.innerHTML = `
+                    <span class="material-symbols-outlined text-text-muted" style="font-size: 16px;">trending_flat</span>
+                    <span class="font-label-sm text-label-sm text-text-muted">Unchanged from prev</span>
+                `;
+            }
+        }
+
+        // Render Reports Table
+        const tableBody = document.getElementById('reportsTableBody');
+        if (allReports.length === 0) {
+            tableBody.innerHTML = `
+                <tr>
+                    <td colspan="6" class="p-8 text-center text-text-muted">No fuel reports submitted yet.</td>
+                </tr>
+            `;
+        } else {
+            tableBody.innerHTML = allReports.map(r => {
+                const prod = allProducts.find(p => p.productId === r.productId);
+                const scoreColors = {
+                    "A+": "bg-[#1B5E20] text-white",
+                    "A": "bg-[#388E3C] text-white",
+                    "B": "bg-[#F9A825] text-white",
+                    "C": "bg-[#E65100] text-white",
+                    "D": "bg-[#B71C1C] text-white"
+                };
+                return `
+                    <tr class="border-b border-surface-border hover:bg-surface-container-low transition-colors">
+                        <td class="p-4 text-primary font-medium text-sm">${r.reportId}</td>
+                        <td class="p-4 font-semibold text-sm">${r.period}</td>
+                        <td class="p-4 text-sm font-semibold">${prod ? prod.productName : 'Product'}</td>
+                        <td class="p-4 text-sm">${r.totalCO2e.toLocaleString()} kg (${r.co2ePerUnit.toFixed(3)} kg/unit)</td>
+                        <td class="p-4">
+                            <span class="inline-block px-2.5 py-0.5 rounded text-xs font-bold ${scoreColors[r.score]}">${r.score}</span>
+                        </td>
+                        <td class="p-4 text-sm text-text-muted">${new Date(r.submittedAt).toLocaleDateString()}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // 3. Render Chart
+        const chartCtx = document.getElementById('emissionChart').getContext('2d');
+        const primaryColor = '#006036';
+        
+        // Group reports by period chronologically
+        const reportsChronological = [...allReports].sort((a,b) => new Date(a.submittedAt) - new Date(b.submittedAt));
+        const chartLabels = reportsChronological.map(r => `${r.period} (${allProducts.find(p => p.productId === r.productId)?.productName || ''})`);
+        const chartData = reportsChronological.map(r => r.co2ePerUnit);
+
+        new Chart(chartCtx, {
+            type: 'line',
+            data: {
+                labels: chartLabels.length > 0 ? chartLabels : ['No Data'],
+                datasets: [{
+                    label: 'CO2e per Unit (kg)',
+                    data: chartData.length > 0 ? chartData : [0],
+                    borderColor: primaryColor,
+                    backgroundColor: 'rgba(0, 96, 54, 0.04)',
+                    borderWidth: 3,
+                    pointBackgroundColor: '#FFFFFF',
+                    pointBorderColor: primaryColor,
+                    pointBorderWidth: 2,
+                    pointRadius: 5,
+                    pointHoverRadius: 7,
+                    fill: true,
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                        backgroundColor: '#191c1b',
+                        titleFont: { family: 'Inter', size: 12 },
+                        bodyFont: { family: 'Inter', size: 14, weight: 'bold' }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#E1E8E1' },
+                        ticks: { font: { family: 'Inter' } }
+                    },
+                    x: {
+                        grid: { display: false }
+                    }
+                }
+            }
+        });
+
+        // Logout Secure Triggers
+        const doLogout = () => {
+            DB.logout();
+        };
+        document.getElementById('logoutBtn').addEventListener('click', doLogout);
+        document.getElementById('logoutBtnMobile').addEventListener('click', doLogout);
+    });
+</script>
+</body>
+</html>

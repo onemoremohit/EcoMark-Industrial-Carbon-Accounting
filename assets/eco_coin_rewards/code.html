@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Eco-Coins Tracker - EcoMark</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#bec9be",
+                      "surface-dim": "#d8dad9",
+                      "score-a": "#388E3C",
+                      "text-main": "#1A1C1A",
+                      "text-muted": "#5C635C",
+                      "error-container": "#ffdad6",
+                      "score-d": "#B71C1C",
+                      "on-primary": "#ffffff",
+                      "surface-border": "#E1E8E1",
+                      "tertiary-fixed": "#acf4a4",
+                      "primary-fixed-dim": "#80d9a0",
+                      "on-primary-fixed-variant": "#00522e",
+                      "secondary-container": "#a0f399",
+                      "on-tertiary-fixed": "#002203",
+                      "surface": "#f8faf8",
+                      "surface-variant": "#e1e3e1",
+                      "surface-container": "#eceeec",
+                      "on-primary-container": "#abffc6",
+                      "secondary": "#1b6d24",
+                      "surface-tint": "#006d3f",
+                      "outline": "#6f7a70",
+                      "inverse-primary": "#80d9a0",
+                      "on-tertiary-fixed-variant": "#0c5216",
+                      "on-surface": "#191c1b",
+                      "on-error-container": "#93000a",
+                      "inverse-surface": "#2e3130",
+                      "inverse-on-surface": "#eff1ef",
+                      "on-tertiary-container": "#b6fead",
+                      "tertiary-fixed-dim": "#91d78a",
+                      "on-surface-variant": "#3f4941",
+                      "on-background": "#191c1b",
+                      "surface-container-low": "#f2f4f2",
+                      "score-a-plus": "#1B5E20",
+                      "score-b": "#F9A825",
+                      "surface-container-lowest": "#ffffff",
+                      "background": "#f8faf8",
+                      "on-secondary-container": "#217128",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed-variant": "#005312",
+                      "on-secondary-fixed": "#002204",
+                      "primary-fixed": "#9bf6ba",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#88d982",
+                      "on-primary-fixed": "#00210f",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#e6e9e7",
+                      "tertiary-container": "#377837",
+                      "secondary-fixed": "#a3f69c",
+                      "primary": "#006036",
+                      "primary-container": "#1a7a4a",
+                      "tertiary": "#1c5f21",
+                      "surface-bright": "#f8faf8",
+                      "error": "#ba1a1a",
+                      "surface-container-highest": "#e1e3e1",
+                      "score-c": "#E65100"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "margin-desktop": "48px",
+                      "margin-mobile": "16px",
+                      "stack-md": "16px",
+                      "gutter": "24px",
+                      "container-max": "1200px",
+                      "stack-lg": "32px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "label-md": ["Inter"],
+                      "data-tabular": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "title-lg": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "headline-lg-mobile": ["Inter"]
+              },
+              "fontSize": {
+                      "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                      "data-tabular": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                      "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                      "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                      "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                      "display-lg": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                      "title-lg": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                      "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                      "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                      "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface flex min-h-screen">
+<!-- NavigationDrawer (Desktop) -->
+<nav class="w-64 h-screen border-r border-surface-border bg-surface hidden lg:flex flex-col sticky top-0 z-50">
+<div class="px-6 py-8 border-b border-surface-border flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-headline-md text-headline-md">
+                E
+            </div>
+<div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">EcoMark</h1>
+<p class="font-label-sm text-label-sm text-on-surface-variant">Industrial Carbon Transparency</p>
+</div>
+</div>
+<div class="flex-1 py-6 px-4 flex flex-col gap-2">
+<!-- Inactive Tab: Dashboard -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 active:scale-95 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- Inactive Tab: Submit Report -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 active:scale-95 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="post_add">post_add</span>
+<span class="font-label-md text-label-md">Submit Report</span>
+</a>
+<!-- Inactive Tab: My Products -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-all duration-200 active:scale-95 rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors" data-icon="inventory_2">inventory_2</span>
+<span class="font-label-md text-label-md">My Products</span>
+</a>
+<!-- Active Tab: Eco-Coins -->
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="payments" data-weight="fill" style="font-variation-settings: 'FILL' 1;">payments</span>
+<span class="font-label-md text-label-md">Eco-Coins</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col min-w-0 bg-surface">
+<!-- TopAppBar (Mobile & Global Header Elements) -->
+<header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40 bg-surface border-b border-surface-border lg:hidden">
+<button class="text-primary hover:bg-surface-container-low p-2 rounded-full transition-colors active:scale-95 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">EcoMark</h2>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden border border-surface-border cursor-pointer hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined w-full h-full flex items-center justify-center text-text-muted text-[20px]" data-icon="account_circle">account_circle</span>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg flex flex-col gap-gutter">
+<!-- Header Section -->
+<div class="flex flex-col gap-stack-sm md:flex-row md:items-end justify-between border-b border-surface-border pb-stack-md">
+<div>
+<h1 class="font-headline-lg text-headline-lg hidden md:block">Eco-Coins Tracker</h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile md:hidden">Eco-Coins Tracker</h1>
+<p class="font-body-md text-body-md text-text-muted mt-2">Monitor your rewards for sustainable practices.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded hover:bg-surface-tint hover:shadow-[0_4px_10px_rgba(0,0,0,0.1)] transition-all duration-200 active:scale-95 font-label-md text-label-md font-semibold flex items-center gap-2 w-max">
+<span class="material-symbols-outlined text-[18px]" data-icon="redeem">redeem</span>
+                    Redeem Coins
+                </button>
+</div>
+<!-- Dashboard Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Hero Counter Card (Span 8) -->
+<div class="lg:col-span-8 bg-surface-container-lowest border border-surface-border rounded-xl p-8 flex flex-col relative overflow-hidden group">
+<!-- Decorative Graphic element -->
+<div class="absolute -right-10 -bottom-10 w-64 h-64 bg-score-b opacity-5 rounded-full blur-3xl pointer-events-none group-hover:opacity-10 transition-opacity duration-700"></div>
+<div class="absolute -top-10 -right-10 w-48 h-48 bg-primary opacity-5 rounded-full blur-2xl pointer-events-none"></div>
+<div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between h-full gap-stack-lg">
+<div class="flex flex-col gap-stack-sm">
+<span class="font-label-md text-label-md text-text-muted uppercase tracking-wider">Current Balance</span>
+<div class="flex items-baseline gap-3">
+<span class="material-symbols-outlined text-score-b text-[48px] md:text-[64px]" data-icon="monetization_on" data-weight="fill" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+<span class="font-display-lg text-display-lg text-text-main tabular-nums tracking-tight">12,450</span>
+</div>
+<p class="font-body-md text-body-md text-score-a font-medium mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="trending_up">trending_up</span>
+                                +850 this month
+                            </p>
+</div>
+<div class="bg-surface border border-surface-border rounded-lg p-6 min-w-[240px]">
+<h3 class="font-title-lg text-title-lg mb-4">Next Milestone</h3>
+<div class="flex justify-between font-label-md text-label-md text-text-muted mb-2">
+<span>Gold Tier</span>
+<span class="text-text-main font-semibold">15,000</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden mb-2">
+<div class="bg-score-b h-full rounded-full w-[83%]"></div>
+</div>
+<p class="font-label-sm text-label-sm text-text-muted">2,550 coins to next tier</p>
+</div>
+</div>
+</div>
+<!-- How to Earn Info (Span 4) -->
+<div class="lg:col-span-4 bg-primary text-on-primary rounded-xl p-6 flex flex-col relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-primary to-surface-tint opacity-80 pointer-events-none"></div>
+<div class="relative z-10 flex flex-col h-full">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 bg-on-primary/20 rounded flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</div>
+<h3 class="font-title-lg text-title-lg">How to Earn</h3>
+</div>
+<ul class="flex flex-col gap-4 flex-1">
+<li class="flex items-start gap-3 bg-on-primary/10 rounded p-3">
+<span class="material-symbols-outlined text-score-a" data-icon="add_circle" data-weight="fill" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-primary">Submit Report (+200)</p>
+<p class="font-label-sm text-label-sm text-on-primary/80 mt-1">Timely monthly carbon emissions data submission.</p>
+</div>
+</li>
+<li class="flex items-start gap-3 bg-on-primary/10 rounded p-3">
+<span class="material-symbols-outlined text-score-b" data-icon="stars" data-weight="fill" style="font-variation-settings: 'FILL' 1;">stars</span>
+<div>
+<p class="font-label-md text-label-md font-semibold text-on-primary">Achieve A+ Score (+300)</p>
+<p class="font-label-sm text-label-sm text-on-primary/80 mt-1">Significantly reducing carbon footprint relative to industry baseline.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- Transaction History (Full Width Below) -->
+<div class="lg:col-span-12 bg-surface-container-lowest border border-surface-border rounded-xl flex flex-col overflow-hidden">
+<div class="p-6 border-b border-surface-border flex items-center justify-between bg-surface/50">
+<h3 class="font-title-lg text-title-lg">Transaction History</h3>
+<div class="flex gap-2">
+<button class="px-3 py-1.5 border border-surface-border rounded font-label-md text-label-md text-text-muted hover:bg-surface transition-colors">Filter</button>
+<button class="px-3 py-1.5 border border-surface-border rounded font-label-md text-label-md text-text-muted hover:bg-surface transition-colors">Export CSV</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface font-label-sm text-label-sm text-text-muted uppercase border-b border-surface-border">
+<th class="py-3 px-6 font-semibold">Date</th>
+<th class="py-3 px-6 font-semibold">Description</th>
+<th class="py-3 px-6 font-semibold">Category</th>
+<th class="py-3 px-6 font-semibold text-right">Amount</th>
+</tr>
+</thead>
+<tbody class="font-data-tabular text-data-tabular text-text-main divide-y divide-surface-border">
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-6 whitespace-nowrap text-text-muted">Oct 12, 2024</td>
+<td class="py-4 px-6 font-medium">Achieved Score A+ for Q3 Logistics</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded bg-score-b/10 text-score-b border border-score-b/20 font-label-sm text-label-sm">Bonus</span>
+</td>
+<td class="py-4 px-6 text-right font-semibold text-score-a flex justify-end items-center gap-1">
+                                        +300 <span class="material-symbols-outlined text-[16px]" data-icon="monetization_on">monetization_on</span>
+</td>
+</tr>
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-6 whitespace-nowrap text-text-muted">Oct 01, 2024</td>
+<td class="py-4 px-6 font-medium">Submitted Monthly Operations Report</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-high text-text-muted border border-surface-border font-label-sm text-label-sm">Compliance</span>
+</td>
+<td class="py-4 px-6 text-right font-semibold text-score-a flex justify-end items-center gap-1">
+                                        +200 <span class="material-symbols-outlined text-[16px]" data-icon="monetization_on">monetization_on</span>
+</td>
+</tr>
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-6 whitespace-nowrap text-text-muted">Sep 15, 2024</td>
+<td class="py-4 px-6 font-medium">Redeemed: Corporate Carbon Offset Tier 1</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded bg-error-container text-on-error-container border border-error-container font-label-sm text-label-sm">Redemption</span>
+</td>
+<td class="py-4 px-6 text-right font-semibold text-text-main flex justify-end items-center gap-1">
+                                        -500 <span class="material-symbols-outlined text-[16px]" data-icon="monetization_on">monetization_on</span>
+</td>
+</tr>
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-6 whitespace-nowrap text-text-muted">Sep 01, 2024</td>
+<td class="py-4 px-6 font-medium">Submitted Monthly Operations Report</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container-high text-text-muted border border-surface-border font-label-sm text-label-sm">Compliance</span>
+</td>
+<td class="py-4 px-6 text-right font-semibold text-score-a flex justify-end items-center gap-1">
+                                        +200 <span class="material-symbols-outlined text-[16px]" data-icon="monetization_on">monetization_on</span>
+</td>
+</tr>
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-6 whitespace-nowrap text-text-muted">Aug 28, 2024</td>
+<td class="py-4 px-6 font-medium">Data Transparency Verification Badge</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded bg-secondary-container text-on-secondary-container border border-secondary-container font-label-sm text-label-sm">Achievement</span>
+</td>
+<td class="py-4 px-6 text-right font-semibold text-score-a flex justify-end items-center gap-1">
+                                        +150 <span class="material-symbols-outlined text-[16px]" data-icon="monetization_on">monetization_on</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-surface-border flex justify-center bg-surface/50">
+<button class="font-label-md text-label-md text-primary hover:text-surface-tint font-medium flex items-center gap-1 transition-colors">
+                            Load More Transactions <span class="material-symbols-outlined text-[18px]" data-icon="expand_more">expand_more</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter border-t border-surface-border bg-surface-container-lowest">
+<div class="font-headline-sm text-headline-sm font-bold text-primary">
+                EcoMark
+            </div>
+<div class="flex gap-6 items-center flex-wrap justify-center">
+<a class="font-label-sm text-label-sm text-text-muted hover:text-primary transition-opacity duration-200" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-text-muted hover:text-primary transition-opacity duration-200" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-text-muted hover:text-primary transition-opacity duration-200" href="#">Public Verification</a>
+<a class="font-label-sm text-label-sm text-text-muted hover:text-primary transition-opacity duration-200" href="#">API Documentation</a>
+</div>
+<div class="font-label-sm text-label-sm text-text-muted">
+                © 2024 EcoMark Industrial Carbon Accounting. All rights reserved.
+            </div>
+</footer>
+</div>
+</body></html>

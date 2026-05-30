@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Login | EcoMark Industrial Carbon Accounting</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+              "surface-bright": "#f8faf8",
+              "outline-variant": "#bec9be",
+              "primary-fixed-dim": "#80d9a0",
+              "on-surface-variant": "#3f4941",
+              "inverse-surface": "#2e3130",
+              "secondary-fixed": "#a3f69c",
+              "secondary": "#1b6d24",
+              "on-background": "#191c1b",
+              "secondary-fixed-dim": "#88d982",
+              "surface-container-high": "#e6e9e7",
+              "error-container": "#ffdad6",
+              "score-b": "#F9A825",
+              "tertiary-fixed": "#acf4a4",
+              "on-tertiary-container": "#b6fead",
+              "on-surface": "#191c1b",
+              "secondary-container": "#a0f399",
+              "on-primary": "#ffffff",
+              "surface": "#f8faf8",
+              "score-a": "#388E3C",
+              "score-d": "#B71C1C",
+              "on-secondary-fixed": "#002204",
+              "score-c": "#E65100",
+              "on-error": "#ffffff",
+              "text-muted": "#5C635C",
+              "primary-fixed": "#9bf6ba",
+              "on-tertiary": "#ffffff",
+              "primary": "#006036",
+              "score-a-plus": "#1B5E20",
+              "inverse-primary": "#80d9a0",
+              "error": "#ba1a1a",
+              "tertiary": "#1c5f21",
+              "on-secondary": "#ffffff",
+              "surface-tint": "#006d3f",
+              "surface-border": "#E1E8E1",
+              "tertiary-container": "#377837",
+              "surface-variant": "#e1e3e1",
+              "surface-container-low": "#f2f4f2",
+              "primary-container": "#1a7a4a",
+              "surface-container-lowest": "#ffffff",
+              "surface-container": "#eceeec",
+              "on-secondary-container": "#217128",
+              "on-primary-fixed-variant": "#00522e",
+              "outline": "#6f7a70",
+              "tertiary-fixed-dim": "#91d78a",
+              "on-secondary-fixed-variant": "#005312",
+              "on-primary-container": "#abffc6",
+              "surface-container-highest": "#e1e3e1",
+              "background": "#f8faf8",
+              "on-tertiary-fixed-variant": "#0c5216",
+              "surface-dim": "#d8dad9",
+              "on-error-container": "#93000a",
+              "text-main": "#1A1C1A",
+              "on-primary-fixed": "#00210f",
+              "inverse-on-surface": "#eff1ef",
+              "on-tertiary-fixed": "#002203"
+            },
+            "borderRadius": {
+              "DEFAULT": "0.125rem",
+              "lg": "0.25rem",
+              "xl": "0.5rem",
+              "full": "0.75rem"
+            },
+            "spacing": {
+              "margin-mobile": "16px",
+              "container-max": "1200px",
+              "stack-md": "16px",
+              "stack-sm": "8px",
+              "margin-desktop": "48px",
+              "base": "4px",
+              "stack-lg": "32px",
+              "gutter": "24px"
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        background-color: #F9FBF9;
+      }
+      .industrial-card {
+        border: 1px solid #E1E8E1;
+        background: #FFFFFF;
+      }
+      .input-focus-ring:focus {
+        border-color: #2E7D32;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.1);
+      }
+    </style>
+</head>
+<body class="font-body-md text-on-surface min-h-screen flex flex-col font-sans">
+
+<header class="w-full px-margin-mobile md:px-margin-desktop py-4 flex justify-between items-center border-b border-surface-border bg-surface">
+    <a href="index.html" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
+        <span class="material-symbols-outlined text-primary text-3xl font-bold">eco</span>
+        <span class="font-headline-md text-headline-md font-bold text-primary">EcoMark</span>
+    </a>
+    <div class="hidden md:flex gap-6">
+        <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="index.html">Main Website</a>
+        <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-colors" href="register.html">Register Facility</a>
+    </div>
+</header>
+
+<main class="flex-grow flex items-center justify-center px-margin-mobile py-stack-lg">
+    <div class="max-w-[1200px] w-full grid grid-cols-1 lg:grid-cols-2 gap-gutter items-center">
+        <!-- Left Side: Brand Identity -->
+        <div class="hidden lg:flex flex-col space-y-stack-lg pr-stack-lg">
+            <div class="space-y-stack-md">
+                <h1 class="font-display-lg text-display-lg text-primary tracking-tight leading-tight">Industrial Carbon Transparency</h1>
+                <p class="font-body-lg text-body-lg text-text-muted leading-relaxed">
+                    Access the leading industrial accounting platform for carbon emission reporting and product life-cycle transparency. Trusted by global manufacturers and compliance agencies.
+                </p>
+            </div>
+            <div class="grid grid-cols-2 gap-stack-md">
+                <div class="industrial-card p-stack-md rounded-lg shadow-sm">
+                    <span class="material-symbols-outlined text-primary mb-2" data-icon="verified_user">verified_user</span>
+                    <h3 class="font-title-lg text-title-lg text-primary">IPCC Factors</h3>
+                    <p class="font-label-md text-label-md text-text-muted">Compliant with international calculation rules.</p>
+                </div>
+                <div class="industrial-card p-stack-md rounded-lg shadow-sm">
+                    <span class="material-symbols-outlined text-primary mb-2" data-icon="monitoring">monitoring</span>
+                    <h3 class="font-title-lg text-title-lg text-primary">Audit Logged</h3>
+                    <p class="font-label-md text-label-md text-text-muted">Every transaction logged in our immutable ledger.</p>
+                </div>
+            </div>
+            <div class="relative h-48 w-full rounded-xl overflow-hidden border border-surface-border">
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop')"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                <div class="absolute bottom-4 left-4 text-white">
+                    <p class="font-label-sm text-label-sm uppercase tracking-widest opacity-80">Global Network</p>
+                    <p class="font-title-lg text-title-lg">Over 4,200 Certified Facilities</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Login Form -->
+        <div class="w-full flex justify-center">
+            <div class="industrial-card w-full max-w-md p-stack-lg rounded-xl shadow-md bg-white border border-surface-border">
+                <div class="text-center mb-stack-lg">
+                    <h2 class="font-headline-lg text-headline-lg text-primary font-bold mb-2">Company Login</h2>
+                    <p class="font-body-md text-body-md text-text-muted">Enter your institutional credentials to continue</p>
+                </div>
+
+                <!-- Error Notification Banner -->
+                <div id="errorBanner" class="hidden mb-4 p-4 bg-error-container text-on-error-container rounded-lg border border-red-200 flex items-start gap-3">
+                    <span class="material-symbols-outlined text-error">error</span>
+                    <div class="font-label-md text-label-md" id="errorMessage">Invalid email or password.</div>
+                </div>
+
+                <form class="space-y-stack-md" id="loginForm">
+                    <div class="space-y-stack-sm">
+                        <label class="font-label-md text-label-md text-on-surface-variant block font-medium" for="email">Institutional Email</label>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">corporate_fare</span>
+                            <input class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-surface-border rounded-lg font-body-md text-on-surface input-focus-ring transition-all" id="email" name="email" placeholder="e.g. company1@ecomark.com" required type="email"/>
+                        </div>
+                    </div>
+                    <div class="space-y-stack-sm">
+                        <div class="flex justify-between items-center">
+                            <label class="font-label-md text-label-md text-on-surface-variant block font-medium" for="password">Password</label>
+                            <span class="font-label-sm text-label-sm text-text-muted">Hint: company123</span>
+                        </div>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">lock</span>
+                            <input class="w-full pl-10 pr-4 py-3 bg-surface-container-lowest border border-surface-border rounded-lg font-body-md text-on-surface input-focus-ring transition-all" id="password" name="password" placeholder="••••••••" required type="password"/>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 pt-2">
+                        <input class="w-4 h-4 text-primary border-surface-border rounded focus:ring-primary" id="remember" type="checkbox" checked/>
+                        <label class="font-label-md text-label-md text-on-surface-variant" for="remember">Remember this device for 30 days</label>
+                    </div>
+                    <button class="w-full bg-primary text-white py-4 rounded-lg font-title-lg text-title-lg hover:bg-primary-container transition-all active:scale-[0.98] flex justify-center items-center gap-2 mt-4 font-bold" type="submit">
+                        <span>Secure Login</span>
+                        <span class="material-symbols-outlined">arrow_forward</span>
+                    </button>
+                </form>
+
+                <!-- Admin Bypass Info -->
+                <div class="mt-4 p-3 bg-surface-container-low rounded-lg border border-surface-border flex items-start gap-2">
+                    <span class="material-symbols-outlined text-primary text-sm mt-0.5">info</span>
+                    <p class="font-label-sm text-label-sm text-text-muted leading-tight">
+                        <strong>Regulator Access:</strong> Use <code class="bg-white px-1 rounded border">admin@ecomark.com</code> with password <code class="bg-white px-1 rounded border">admin</code>.
+                    </p>
+                </div>
+
+                <div class="mt-stack-lg pt-stack-lg border-t border-surface-border text-center">
+                    <p class="font-body-md text-body-md text-text-muted">
+                        New facility or company? 
+                        <a class="font-title-lg text-title-lg text-secondary font-bold ml-1 hover:underline text-primary" href="register.html">Register Platform</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="w-full py-stack-lg px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-stack-md border-t border-surface-border bg-surface-container-lowest">
+    <div class="flex items-center gap-2">
+        <span class="font-headline-sm text-headline-sm font-bold text-primary">EcoMark</span>
+        <p class="font-label-sm text-label-sm text-outline">© 2024 Industrial Carbon Accounting. All rights reserved.</p>
+    </div>
+    <div class="flex gap-stack-md">
+        <a class="font-label-sm text-label-sm text-outline hover:text-primary transition-opacity" href="#">Privacy Policy</a>
+        <a class="font-label-sm text-label-sm text-outline hover:text-primary transition-opacity" href="#">Terms of Service</a>
+        <a class="font-label-sm text-label-sm text-outline hover:text-primary transition-opacity" href="#">API Docs</a>
+    </div>
+</footer>
+
+<script src="js/db.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

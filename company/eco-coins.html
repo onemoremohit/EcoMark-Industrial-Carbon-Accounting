@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Eco-Coins Rewards Wallet - EcoMark</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#bec9be",
+                      "surface-dim": "#d8dad9",
+                      "score-a": "#388E3C",
+                      "text-main": "#1A1C1A",
+                      "text-muted": "#5C635C",
+                      "error-container": "#ffdad6",
+                      "score-d": "#B71C1C",
+                      "on-primary": "#ffffff",
+                      "surface-border": "#E1E8E1",
+                      "tertiary-fixed": "#acf4a4",
+                      "primary-fixed-dim": "#80d9a0",
+                      "on-primary-fixed-variant": "#00522e",
+                      "secondary-container": "#a0f399",
+                      "on-tertiary-fixed": "#002203",
+                      "surface": "#f8faf8",
+                      "surface-variant": "#e1e3e1",
+                      "surface-container": "#eceeec",
+                      "on-primary-container": "#abffc6",
+                      "secondary": "#1b6d24",
+                      "surface-tint": "#006d3f",
+                      "outline": "#6f7a70",
+                      "inverse-primary": "#80d9a0",
+                      "on-tertiary-fixed-variant": "#0c5216",
+                      "on-surface": "#191c1b",
+                      "on-error-container": "#93000a",
+                      "inverse-surface": "#2e3130",
+                      "inverse-on-surface": "#eff1ef",
+                      "on-tertiary-container": "#b6fead",
+                      "tertiary-fixed-dim": "#91d78a",
+                      "on-surface-variant": "#3f4941",
+                      "on-background": "#191c1b",
+                      "surface-container-low": "#f2f4f2",
+                      "score-a-plus": "#1B5E20",
+                      "score-b": "#F9A825",
+                      "surface-container-lowest": "#ffffff",
+                      "background": "#f8faf8",
+                      "on-secondary-container": "#217128",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed-variant": "#005312",
+                      "on-secondary-fixed": "#002204",
+                      "primary-fixed": "#9bf6ba",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#88d982",
+                      "on-primary-fixed": "#00210f",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#e6e9e7",
+                      "tertiary-container": "#377837",
+                      "secondary-fixed": "#a3f69c",
+                      "primary": "#006036",
+                      "primary-container": "#1a7a4a",
+                      "tertiary": "#1c5f21",
+                      "surface-bright": "#f8faf8",
+                      "error": "#ba1a1a",
+                      "surface-container-highest": "#e1e3e1",
+                      "score-c": "#E65100"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "margin-desktop": "48px",
+                      "margin-mobile": "16px",
+                      "stack-md": "16px",
+                      "gutter": "24px",
+                      "container-max": "1200px",
+                      "stack-lg": "32px",
+                      "base": "4px"
+              }
+            }
+          }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8faf8; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface flex min-h-screen font-sans">
+
+<!-- Navigation Drawer (Desktop) -->
+<nav class="w-64 h-screen border-r border-surface-border bg-surface hidden lg:flex flex-col sticky top-0 z-50">
+    <div class="p-6 border-b border-surface-border">
+        <a href="../index.html" class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-primary text-3xl font-bold">eco</span>
+            <div>
+                <h2 class="font-headline-md text-headline-md font-bold text-primary">EcoMark</h2>
+                <p class="font-label-sm text-label-sm text-text-muted">Carbon Transparency</p>
+            </div>
+        </a>
+    </div>
+    <div class="p-4 flex flex-col gap-2 flex-grow">
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="dashboard.html">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Dashboard</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="submit-report.html">
+            <span class="material-symbols-outlined">post_add</span>
+            <span>Submit Report</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="my-products.html">
+            <span class="material-symbols-outlined">inventory_2</span>
+            <span>My Products</span>
+        </a>
+        <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-200 active:scale-95 font-label-md text-label-md" href="eco-coins.html">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">payments</span>
+            <span>Eco-Coins</span>
+        </a>
+    </div>
+    <div class="p-4 border-t border-surface-border flex flex-col gap-2">
+        <div class="px-4 py-2 bg-surface-container rounded-lg mb-2">
+            <p class="font-label-sm text-label-sm text-text-muted">Logged in as:</p>
+            <p class="font-label-md text-label-md font-bold text-on-surface truncate" id="sideCompanyLabel">Loading...</p>
+            <span class="inline-block mt-1 bg-primary/10 text-primary font-bold font-label-sm text-[10px] px-2 py-0.5 rounded uppercase">Company</span>
+        </div>
+        <button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-lg font-label-md text-label-md text-left w-full">
+            <span class="material-symbols-outlined">logout</span>
+            <span>Log Out</span>
+        </button>
+    </div>
+</nav>
+
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col min-w-0 bg-surface">
+    <!-- TopAppBar (Mobile Header) -->
+    <header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40 bg-surface border-b border-surface-border lg:hidden">
+        <div class="flex items-center gap-4">
+            <button class="text-on-surface-variant p-2 hover:bg-surface-container-low rounded-full transition-colors" id="mobileMenuBtn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <h1 class="font-headline-md text-headline-md font-bold text-primary" id="topCompanyLabel">Eco-Coins</h1>
+        </div>
+        <button id="logoutBtnMobile" class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
+            <span class="material-symbols-outlined">logout</span>
+        </button>
+    </header>
+
+    <!-- Success Redemption Modal -->
+    <div id="successRedeemModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-xl max-w-sm w-full p-6 text-center border border-surface-border">
+            <div class="w-16 h-16 bg-[#e8f5e9] text-score-a rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-[#c8e6c9]">
+                <span class="material-symbols-outlined text-3xl font-bold">celebration</span>
+            </div>
+            <h3 class="font-headline-md text-headline-md font-bold text-primary mb-2">Benefit Redeemed!</h3>
+            <p class="font-body-md text-body-md text-text-muted mb-4" id="redeemModalText">Your perk request has been approved and coins successfully debited.</p>
+            <button id="modalCloseBtn" class="w-full bg-primary text-white py-3 rounded-lg font-bold hover:bg-primary-container transition-all">Close</button>
+        </div>
+    </div>
+
+    <!-- Mobile Drawer overlay -->
+    <div id="mobileDrawer" class="fixed inset-0 bg-black/50 z-50 hidden">
+        <div class="w-64 h-full bg-white flex flex-col">
+            <div class="p-6 border-b border-surface-border flex justify-between items-center">
+                <span class="font-headline-sm text-headline-sm font-bold text-primary">Menu</span>
+                <button id="closeDrawerBtn" class="p-2 rounded-full hover:bg-surface-container">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="p-4 flex flex-col gap-2 flex-grow">
+                <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="dashboard.html">
+                    <span class="material-symbols-outlined">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="submit-report.html">
+                    <span class="material-symbols-outlined">post_add</span>
+                    <span>Submit Report</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container rounded-lg" href="my-products.html">
+                    <span class="material-symbols-outlined">inventory_2</span>
+                    <span>My Products</span>
+                </a>
+                <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold" href="eco-coins.html">
+                    <span class="material-symbols-outlined">payments</span>
+                    <span>Eco-Coins</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Canvas -->
+    <main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg flex flex-col gap-gutter overflow-y-auto">
+        <!-- Header Section -->
+        <div class="flex flex-col gap-stack-sm md:flex-row md:items-end justify-between border-b border-surface-border pb-stack-md">
+            <div>
+                <h1 class="font-headline-lg text-headline-lg font-bold">Eco-Coins rewards</h1>
+                <p class="font-body-md text-body-md text-text-muted mt-2">Earn Eco-Coins (ECT) by minimizing emissions and redeem them for platform privileges.</p>
+            </div>
+            <a href="#redemptionSection" class="bg-primary text-white px-6 py-3 rounded-lg hover:bg-primary-container transition-all font-label-md text-label-md font-bold flex items-center gap-2">
+                <span class="material-symbols-outlined text-[18px]">redeem</span>
+                Redeem Perks
+            </a>
+        </div>
+
+        <!-- Dashboard Bento Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+            <!-- Hero Counter Card (Span 8) -->
+            <div class="lg:col-span-8 bg-white border border-surface-border rounded-xl p-8 flex flex-col relative overflow-hidden group shadow-sm">
+                <div class="absolute -right-10 -bottom-10 w-64 h-64 bg-score-b opacity-5 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between h-full gap-stack-lg">
+                    <div class="flex flex-col gap-stack-sm">
+                        <span class="font-label-md text-label-md text-text-muted uppercase tracking-wider font-semibold">Available Wallet Balance</span>
+                        <div class="flex items-baseline gap-3">
+                            <span class="material-symbols-outlined text-score-b text-[48px] md:text-[64px]" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+                            <span class="font-display-lg text-display-lg text-text-main font-bold tabular-nums tracking-tight" id="ecoCoinsDisplay">0</span>
+                        </div>
+                        <p class="font-body-md text-body-md text-score-a font-bold mt-1 flex items-center gap-1">
+                            <span class="material-symbols-outlined text-[16px]">verified</span>
+                            Verifiable ESG Carbon tokens (ECT)
+                        </p>
+                    </div>
+                    <div class="bg-surface border border-surface-border rounded-lg p-6 min-w-[240px]">
+                        <h3 class="font-title-lg text-title-lg mb-4 font-bold">Rewards Milestone</h3>
+                        <div class="flex justify-between font-label-md text-label-md text-text-muted mb-2 font-medium">
+                            <span>Silver Badge</span>
+                            <span class="text-text-main font-bold">3,000 ECT</span>
+                        </div>
+                        <div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden mb-2">
+                            <div class="bg-score-b h-full rounded-full" id="progressBar" style="width: 30%"></div>
+                        </div>
+                        <p class="font-label-sm text-label-sm text-text-muted" id="progressText">Loading...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How to Earn Info (Span 4) -->
+            <div class="lg:col-span-4 bg-primary text-white rounded-xl p-6 flex flex-col relative overflow-hidden shadow-sm">
+                <div class="relative z-10 flex flex-col h-full">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-white/20 rounded flex items-center justify-center">
+                            <span class="material-symbols-outlined">help_outline</span>
+                        </div>
+                        <h3 class="font-title-lg text-title-lg font-bold">ECT Earning Grid</h3>
+                    </div>
+                    <ul class="flex flex-col gap-2.5 flex-1">
+                        <li class="flex items-start gap-3 bg-white/10 rounded p-2.5">
+                            <span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+                            <div>
+                                <p class="font-label-md text-label-md font-bold">Submit Report (+200)</p>
+                                <p class="font-label-sm text-white/80 text-[11px]">Submission of first data report.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 bg-white/10 rounded p-2.5">
+                            <span class="material-symbols-outlined text-[#acf4a4]" style="font-variation-settings: 'FILL' 1;">stars</span>
+                            <div>
+                                <p class="font-label-md text-label-md font-bold">Rating A or A+ (+300)</p>
+                                <p class="font-label-sm text-white/80 text-[11px]">Carbon footprint rating in Green sectors.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Redemption Perks Section -->
+        <div class="bg-white border border-surface-border rounded-xl p-6 shadow-sm" id="redemptionSection">
+            <h3 class="font-title-lg text-title-lg font-bold text-primary mb-2 flex items-center gap-2">
+                <span class="material-symbols-outlined">redeem</span>
+                Redeemable Platform Perks
+            </h3>
+            <p class="font-body-md text-body-md text-text-muted mb-6">Spend ECT tokens to unlock carbon reduction badges, certificate waiver fees, or audit compensations.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Perk 1 -->
+                <div class="border border-surface-border rounded-lg p-5 flex flex-col justify-between hover:border-primary transition-colors bg-surface">
+                    <div>
+                        <div class="w-10 h-10 bg-[#e8f5e9] text-primary rounded-full flex items-center justify-center mb-3">
+                            <span class="material-symbols-outlined">badge</span>
+                        </div>
+                        <h4 class="font-title-lg text-title-lg font-bold">Premium Green profile</h4>
+                        <p class="font-label-sm text-label-sm text-text-muted mt-2">Unlock a verified premium green badge visible across public client indexes.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-surface-border">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="font-label-sm font-semibold text-text-muted">Cost</span>
+                            <span class="font-title-lg font-bold text-score-b">300 ECT</span>
+                        </div>
+                        <button onclick="redeemPerk('Premium Green Profile', 300)" class="w-full bg-primary text-white py-2 rounded-lg font-bold text-sm hover:bg-primary-container transition-all">Redeem</button>
+                    </div>
+                </div>
+
+                <!-- Perk 2 -->
+                <div class="border border-surface-border rounded-lg p-5 flex flex-col justify-between hover:border-primary transition-colors bg-surface">
+                    <div>
+                        <div class="w-10 h-10 bg-[#e8f5e9] text-primary rounded-full flex items-center justify-center mb-3">
+                            <span class="material-symbols-outlined">description</span>
+                        </div>
+                        <h4 class="font-title-lg text-title-lg font-bold">Certificate Waiver</h4>
+                        <p class="font-label-sm text-label-sm text-text-muted mt-2">Waives all carbon registration certificate filing fees for new batches.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-surface-border">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="font-label-sm font-semibold text-text-muted">Cost</span>
+                            <span class="font-title-lg font-bold text-score-b">500 ECT</span>
+                        </div>
+                        <button onclick="redeemPerk('Certificate Filing Fee Waiver', 500)" class="w-full bg-primary text-white py-2 rounded-lg font-bold text-sm hover:bg-primary-container transition-all">Redeem</button>
+                    </div>
+                </div>
+
+                <!-- Perk 3 -->
+                <div class="border border-surface-border rounded-lg p-5 flex flex-col justify-between hover:border-primary transition-colors bg-surface">
+                    <div>
+                        <div class="w-10 h-10 bg-[#e8f5e9] text-primary rounded-full flex items-center justify-center mb-3">
+                            <span class="material-symbols-outlined">fact_check</span>
+                        </div>
+                        <h4 class="font-title-lg text-title-lg font-bold">ESG Audit Waiver</h4>
+                        <p class="font-label-sm text-label-sm text-text-muted mt-2">Compensate 100% of standard ISO-certified ESG auditing expenses.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-surface-border">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="font-label-sm font-semibold text-text-muted">Cost</span>
+                            <span class="font-title-lg font-bold text-score-b">800 ECT</span>
+                        </div>
+                        <button onclick="redeemPerk('ESG Audit Fee Waiver', 800)" class="w-full bg-primary text-white py-2 rounded-lg font-bold text-sm hover:bg-primary-container transition-all">Redeem</button>
+                    </div>
+                </div>
+
+                <!-- Perk 4 -->
+                <div class="border border-surface-border rounded-lg p-5 flex flex-col justify-between hover:border-primary transition-colors bg-surface">
+                    <div>
+                        <div class="w-10 h-10 bg-[#e8f5e9] text-primary rounded-full flex items-center justify-center mb-3">
+                            <span class="material-symbols-outlined">energy_savings_leaf</span>
+                        </div>
+                        <h4 class="font-title-lg text-title-lg font-bold">Carbon Offset Badge</h4>
+                        <p class="font-label-sm text-label-sm text-text-muted mt-2">Get direct gold-standard carbon offset badges to display on product tags.</p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-surface-border">
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="font-label-sm font-semibold text-text-muted">Cost</span>
+                            <span class="font-title-lg font-bold text-score-b">1000 ECT</span>
+                        </div>
+                        <button onclick="redeemPerk('Carbon Offset Badge', 1000)" class="w-full bg-primary text-white py-2 rounded-lg font-bold text-sm hover:bg-primary-container transition-all">Redeem</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="bg-white border border-surface-border rounded-xl flex flex-col overflow-hidden shadow-sm">
+            <div class="p-6 border-b border-surface-border flex items-center justify-between bg-surface-container-low">
+                <h3 class="font-title-lg text-title-lg font-bold">Eco-Coins Ledger History</h3>
+                <span class="font-label-sm text-label-sm text-text-muted">Cryptographically logged ledger</span>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-surface font-label-sm text-label-sm text-text-muted uppercase border-b border-surface-border font-semibold">
+                            <th class="py-3 px-6">Date</th>
+                            <th class="py-3 px-6">Description / Trigger Event</th>
+                            <th class="py-3 px-6 text-right">ECT Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody class="font-data-tabular text-data-tabular text-text-main divide-y divide-surface-border" id="coinsTableBody">
+                        <tr>
+                            <td colspan="3" class="p-8 text-center text-text-muted">Loading transactions...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-stack-lg px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter border-t border-surface-border bg-surface-container-lowest mt-auto">
+        <div class="font-headline-sm text-headline-sm font-bold text-primary">EcoMark</div>
+        <p class="font-label-sm text-label-sm text-text-muted">© 2024 EcoMark Industrial Carbon Accounting. All rights reserved.</p>
+    </footer>
+</div>
+
+<script src="../js/db.js"></script>
+<script src="../js/auth.js"></script>
+<script>
+    // Verify Company authentication
+    const user = checkAuth('company');
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (!user) return;
+
+        // Set Labels
+        document.getElementById('sideCompanyLabel').textContent = user.companyName;
+        document.getElementById('topCompanyLabel').textContent = user.companyName;
+
+        // 1. Mobile Menu Drawer Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const closeDrawerBtn = document.getElementById('closeDrawerBtn');
+        
+        if (mobileMenuBtn && mobileDrawer && closeDrawerBtn) {
+            mobileMenuBtn.addEventListener('click', () => mobileDrawer.classList.remove('hidden'));
+            closeDrawerBtn.addEventListener('click', () => mobileDrawer.classList.add('hidden'));
+        }
+
+        // 2. Render Page Data
+        const renderWallet = () => {
+            const users = DB.getUsers();
+            const currUser = users[user.uid];
+            const balance = currUser ? currUser.ecoCoins : 0;
+            
+            document.getElementById('ecoCoinsDisplay').textContent = balance.toLocaleString();
+
+            // Milestone logic (silver badge at 3,000, gold at 10,000)
+            let milestone = 3000;
+            let label = "Silver Badge";
+            if (balance >= 3000) {
+                milestone = 10000;
+                label = "Gold Badge";
+            }
+            const pct = Math.min((balance / milestone) * 100, 100);
+            
+            document.getElementById('progressBar').style.width = `${pct}%`;
+            document.getElementById('progressText').textContent = `${(milestone - balance > 0) ? (milestone - balance).toLocaleString() + ' ECT to ' + label : 'Milestone achieved!'}`;
+            
+            // Render History
+            const history = Object.values(DB.getEcoCoinsHistory()).filter(h => h.companyId === user.uid);
+            history.sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp));
+
+            const tableBody = document.getElementById('coinsTableBody');
+            if (history.length === 0) {
+                tableBody.innerHTML = `
+                    <tr>
+                        <td colspan="3" class="p-8 text-center text-text-muted">No transactions found.</td>
+                    </tr>
+                `;
+            } else {
+                tableBody.innerHTML = history.map(h => {
+                    const isDebit = h.amount < 0 || h.trigger.toLowerCase().startsWith('redeemed');
+                    const amtClass = isDebit ? "text-score-d" : "text-score-a";
+                    const formattedAmt = isDebit ? `-${Math.abs(h.amount)}` : `+${h.amount}`;
+                    return `
+                        <tr class="hover:bg-surface-container-low transition-colors">
+                            <td class="py-4 px-6 whitespace-nowrap text-text-muted text-sm">${new Date(h.timestamp).toLocaleDateString()}</td>
+                            <td class="py-4 px-6 font-medium text-sm">${h.trigger}</td>
+                            <td class="py-4 px-6 text-right font-bold text-sm ${amtClass} flex justify-end items-center gap-1">
+                                ${formattedAmt} <span class="material-symbols-outlined text-[16px]">monetization_on</span>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            }
+        };
+
+        renderWallet();
+
+        // 3. Redeem Perk Handler
+        window.redeemPerk = (perkName, cost) => {
+            const users = DB.getUsers();
+            const currUser = users[user.uid];
+            if (!currUser) return;
+
+            if (currUser.ecoCoins < cost) {
+                alert(`Insufficient ECT balance. You need ${cost} ECT, but only have ${currUser.ecoCoins} ECT.`);
+                return;
+            }
+
+            if (confirm(`Are you sure you want to spend ${cost} ECT to redeem "${perkName}"?`)) {
+                // Deduct coins
+                currUser.ecoCoins -= cost;
+                users[user.uid] = currUser;
+                DB.saveUsers(users);
+
+                // Add record
+                DB.addCoinsHistory(user.uid, `Redeemed: ${perkName}`, -cost);
+
+                // Audit log
+                DB.addAuditLog("perk_redeemed", user.uid, null, `Redeemed perk: ${perkName} for ${cost} ECT.`);
+
+                // Show modal
+                document.getElementById('redeemModalText').textContent = `Your redemption request for "${perkName}" has been validated and ${cost} ECT has been debited.`;
+                document.getElementById('successRedeemModal').classList.remove('hidden');
+
+                // Re-render
+                renderWallet();
+            }
+        };
+
+        document.getElementById('modalCloseBtn').addEventListener('click', () => {
+            document.getElementById('successRedeemModal').classList.add('hidden');
+        });
+
+        // Logout securely
+        document.getElementById('logoutBtn').addEventListener('click', () => DB.logout());
+    });
+</script>
+</body>
+</html>

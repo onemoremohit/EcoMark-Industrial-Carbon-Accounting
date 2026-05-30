@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EcoMark - Consumer Product Info</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "outline-variant": "#bec9be",
+                      "surface-dim": "#d8dad9",
+                      "score-a": "#388E3C",
+                      "text-main": "#1A1C1A",
+                      "text-muted": "#5C635C",
+                      "error-container": "#ffdad6",
+                      "score-d": "#B71C1C",
+                      "on-primary": "#ffffff",
+                      "surface-border": "#E1E8E1",
+                      "tertiary-fixed": "#acf4a4",
+                      "primary-fixed-dim": "#80d9a0",
+                      "on-primary-fixed-variant": "#00522e",
+                      "secondary-container": "#a0f399",
+                      "on-tertiary-fixed": "#002203",
+                      "surface": "#f8faf8",
+                      "surface-variant": "#e1e3e1",
+                      "surface-container": "#eceeec",
+                      "on-primary-container": "#abffc6",
+                      "secondary": "#1b6d24",
+                      "surface-tint": "#006d3f",
+                      "outline": "#6f7a70",
+                      "inverse-primary": "#80d9a0",
+                      "on-tertiary-fixed-variant": "#0c5216",
+                      "on-surface": "#191c1b",
+                      "on-error-container": "#93000a",
+                      "inverse-surface": "#2e3130",
+                      "inverse-on-surface": "#eff1ef",
+                      "on-tertiary-container": "#b6fead",
+                      "tertiary-fixed-dim": "#91d78a",
+                      "on-surface-variant": "#3f4941",
+                      "on-background": "#191c1b",
+                      "surface-container-low": "#f2f4f2",
+                      "score-a-plus": "#1B5E20",
+                      "score-b": "#F9A825",
+                      "surface-container-lowest": "#ffffff",
+                      "background": "#f8faf8",
+                      "on-secondary-container": "#217128",
+                      "on-error": "#ffffff",
+                      "on-secondary-fixed-variant": "#005312",
+                      "on-secondary-fixed": "#002204",
+                      "primary-fixed": "#9bf6ba",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#88d982",
+                      "on-primary-fixed": "#00210f",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#e6e9e7",
+                      "tertiary-container": "#377837",
+                      "secondary-fixed": "#a3f69c",
+                      "primary": "#006036",
+                      "primary-container": "#1a7a4a",
+                      "tertiary": "#1c5f21",
+                      "surface-bright": "#f8faf8",
+                      "error": "#ba1a1a",
+                      "surface-container-highest": "#e1e3e1",
+                      "score-c": "#E65100"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-sm": "8px",
+                      "margin-desktop": "48px",
+                      "margin-mobile": "16px",
+                      "stack-md": "16px",
+                      "gutter": "24px",
+                      "container-max": "1200px",
+                      "stack-lg": "32px",
+                      "base": "4px"
+              },
+              "fontFamily": {
+                      "label-md": [
+                              "Inter"
+                      ],
+                      "data-tabular": [
+                              "Inter"
+                      ],
+                      "headline-md": [
+                              "Inter"
+                      ],
+                      "headline-lg": [
+                              "Inter"
+                      ],
+                      "body-md": [
+                              "Inter"
+                      ],
+                      "display-lg": [
+                              "Inter"
+                      ],
+                      "title-lg": [
+                              "Inter"
+                      ],
+                      "label-sm": [
+                              "Inter"
+                      ],
+                      "body-lg": [
+                              "Inter"
+                      ],
+                      "headline-lg-mobile": [
+                              "Inter"
+                      ]
+              },
+              "fontSize": {
+                      "label-md": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "data-tabular": [
+                              "14px",
+                              {
+                                      "lineHeight": "20px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-md": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "headline-lg": [
+                              "32px",
+                              {
+                                      "lineHeight": "40px",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-md": [
+                              "16px",
+                              {
+                                      "lineHeight": "24px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "display-lg": [
+                              "48px",
+                              {
+                                      "lineHeight": "56px",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "title-lg": [
+                              "20px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "label-sm": [
+                              "12px",
+                              {
+                                      "lineHeight": "16px",
+                                      "letterSpacing": "0.05em",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body-lg": [
+                              "18px",
+                              {
+                                      "lineHeight": "28px",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "headline-lg-mobile": [
+                              "24px",
+                              {
+                                      "lineHeight": "32px",
+                                      "fontWeight": "600"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #f8faf8;
+            color: #191c1b;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+        }
+        .bento-item {
+            background: #ffffff;
+            border: 1px solid #E1E8E1;
+            border-radius: 0.5rem;
+            padding: 24px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col font-body-md text-body-md bg-background text-on-background">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40 bg-surface dark:bg-background border-b border-surface-border dark:border-outline-variant">
+<div class="flex items-center gap-2 cursor-pointer transition-colors hover:bg-surface-container-low dark:hover:bg-surface-container-highest p-2 rounded">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed">eco</span>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">EcoMark</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center w-10 h-10 rounded-full border border-surface-border hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-primary">menu</span>
+</button>
+</div>
+</header>
+<main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-stack-lg">
+<!-- Hero Section -->
+<section class="flex flex-col items-center justify-center text-center mb-stack-lg py-12">
+<h2 class="font-label-sm text-label-sm text-text-muted uppercase tracking-wider mb-2">Sustainable Solutions Inc.</h2>
+<h1 class="font-display-lg text-display-lg text-on-surface mb-6">EcoBrew Organic Coffee Beans</h1>
+<div class="w-40 h-40 rounded-full bg-score-a-plus flex items-center justify-center text-on-primary shadow-lg mb-6 transform hover:scale-105 transition-transform duration-300">
+<span class="font-display-lg text-display-lg font-bold">A+</span>
+</div>
+<p class="font-title-lg text-title-lg text-primary mb-2">Ultra Green Rating</p>
+<p class="font-body-lg text-body-lg text-text-muted max-w-2xl mx-auto">This product exemplifies industry-leading carbon efficiency and sustainable sourcing practices.</p>
+</section>
+<!-- Bento Grid -->
+<div class="bento-grid mb-stack-lg">
+<!-- CO2e Metric -->
+<div class="bento-item col-span-12 md:col-span-6 lg:col-span-4 flex flex-col justify-center items-center text-center relative overflow-hidden">
+<div class="absolute top-0 left-0 w-full h-1 bg-primary"></div>
+<span class="material-symbols-outlined text-4xl text-primary mb-4">co2</span>
+<span class="font-headline-lg text-headline-lg font-bold text-on-surface">1.34 kg</span>
+<span class="font-label-md text-label-md text-text-muted mt-2">CO2e per unit</span>
+</div>
+<!-- Equivalency -->
+<div class="bento-item col-span-12 md:col-span-6 lg:col-span-8 flex flex-col justify-center bg-secondary-container bg-opacity-20 border-primary-fixed-dim">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-white rounded-full shadow-sm">
+<span class="material-symbols-outlined text-primary text-3xl">directions_car</span>
+</div>
+<div>
+<h3 class="font-title-lg text-title-lg text-on-surface mb-2">Real-world Impact</h3>
+<p class="font-body-lg text-body-lg text-on-surface-variant">The carbon footprint of this product is roughly equal to driving <strong class="text-primary font-bold">8 km</strong> in an average passenger vehicle.</p>
+</div>
+</div>
+</div>
+<!-- Trend -->
+<div class="bento-item col-span-12 lg:col-span-12 flex flex-col md:flex-row items-center justify-between gap-6">
+<div class="flex-1">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-2">Emissions Trend</h3>
+<p class="font-body-md text-body-md text-text-muted">Compared to the previous year, emissions per unit have decreased.</p>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-low px-6 py-4 rounded-full">
+<span class="material-symbols-outlined text-score-a text-3xl" style="font-variation-settings: 'FILL' 1;">trending_down</span>
+<span class="font-headline-md text-headline-md text-score-a font-bold">-12%</span>
+</div>
+</div>
+<!-- Transparency Details -->
+<div class="bento-item col-span-12">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-4 border-b border-surface-border pb-2">Lifecycle Breakdown</h3>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-text-muted uppercase">Sourcing</span>
+<span class="font-data-tabular text-data-tabular">0.45 kg</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full" style="width: 35%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-text-muted uppercase">Manufacturing</span>
+<span class="font-data-tabular text-data-tabular">0.60 kg</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-score-b h-full" style="width: 45%"></div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="flex justify-between items-center">
+<span class="font-label-sm text-label-sm text-text-muted uppercase">Transport</span>
+<span class="font-data-tabular text-data-tabular">0.29 kg</span>
+</div>
+<div class="w-full bg-surface-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary-fixed-dim h-full" style="width: 20%"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="flex justify-center mt-8">
+<button class="bg-primary text-on-primary px-8 py-3 rounded hover:bg-surface-tint transition-colors shadow-sm hover:shadow-md font-label-md text-label-md flex items-center gap-2">
+                View Full Verification Report
+                <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-stack-lg px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter bg-surface-container-lowest dark:bg-surface-container-low border-t border-surface-border dark:border-outline-variant mt-auto">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-bold text-primary">EcoMark</span>
+</div>
+<p class="font-label-sm text-label-sm text-text-muted dark:text-outline text-center">© 2024 EcoMark Industrial Carbon Accounting. All rights reserved.</p>
+<div class="flex gap-4 flex-wrap justify-center">
+<a class="font-label-sm text-label-sm text-text-muted dark:text-outline hover:text-primary dark:hover:text-primary-fixed transition-opacity duration-200" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-text-muted dark:text-outline hover:text-primary dark:hover:text-primary-fixed transition-opacity duration-200" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-text-muted dark:text-outline hover:text-primary dark:hover:text-primary-fixed transition-opacity duration-200" href="#">Public Verification</a>
+<a class="font-label-sm text-label-sm text-text-muted dark:text-outline hover:text-primary dark:hover:text-primary-fixed transition-opacity duration-200" href="#">API Documentation</a>
+</div>
+</footer>
+</body></html>
