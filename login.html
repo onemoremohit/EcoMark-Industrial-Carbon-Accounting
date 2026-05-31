@@ -156,9 +156,18 @@
         <!-- Right Side: Login Form -->
         <div class="w-full flex justify-center">
             <div class="industrial-card w-full max-w-md p-stack-lg rounded-xl shadow-md bg-white border border-surface-border">
-                <div class="text-center mb-stack-lg">
+                <div class="text-center mb-6">
                     <h2 class="font-headline-lg text-headline-lg text-primary font-bold mb-2">Company Login</h2>
                     <p class="font-body-md text-body-md text-text-muted">Enter your institutional credentials to continue</p>
+                </div>
+
+                <!-- Public Registry Redirect Banner -->
+                <div class="mb-5 p-3 bg-[#e8f5e9] text-[#1B5E20] rounded-xl border border-[#c8e6c9] flex items-center justify-between gap-3 text-xs font-semibold">
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-secondary text-lg icon-fill">public</span>
+                        <span>Just browsing? Search product carbon scores.</span>
+                    </div>
+                    <a href="consumer/search.html" class="bg-secondary text-white px-3 py-1.5 rounded-lg hover:bg-primary transition-all text-[11px] shrink-0 font-bold">Public Registry ↗</a>
                 </div>
 
                 <!-- Error Notification Banner -->
@@ -226,7 +235,7 @@
     </div>
 </footer>
 
-<script src="js/db.js"></script>
+<script src="js/db.js?v=5"></script>
 <script src="js/auth.js"></script>
 </body>
 </html>

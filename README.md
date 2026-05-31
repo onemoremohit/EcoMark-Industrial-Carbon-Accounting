@@ -29,25 +29,26 @@ stitch_project_idea_design_blueprint/
 │   ├── db.js                      ← Simulated DB engine: seeding, IPCC factors, Eco-Coin logic
 │   └── auth.js                    ← Client-side credentials & page-level route guards
 │
-├── company/                       ← Authenticated company (enterprise) portal
-│   ├── dashboard.html             ← KPI metrics, YTD chart, Policy Compliance Panel (BEE PAT + SEBI BRSR live status)
-│   ├── submit-report.html         ← Fuel report form + Green Energy Recommendation engine in success modal
-│   ├── my-products.html           ← Product registry with live QR scan-redirect & blob downloads
-│   ├── eco-coins.html             ← ECT rewards wallet & benefits redemption matrix
-│   ├── compliance.html            ← Per-regulation compliance tracker (EPA, SEBI BRSR, BEE PAT, EU CBAM + SBTi trajectory)
-│   └── policy-guide.html          ← Green Action Plan: fuel-switch recommendations + 3-step score roadmap
+├── company/                       ← Authenticated company (enterprise) portal (Grouped sidebars)
+│   ├── dashboard.html             ← Dashboard [MY WORK]
+│   ├── submit-report.html         ← Submit Report [MY WORK] + Green Recommendations
+│   ├── my-products.html           ← My Products [MY WORK] + QR Code download
+│   ├── eco-coins.html             ← Eco-Coins & Rewards [COMPLIANCE & REWARDS]
+│   ├── compliance.html            ← My Compliance Status [COMPLIANCE & REWARDS] + SBTi trajectory
+│   └── policy-guide.html          ← Policy Guide [REFERENCE] + Personalised roadmap
 │
-├── consumer/                      ← Public unauthenticated pages (no login)
-│   ├── search.html                ← Carbon registry search: filter by score/industry, sort, animated cards
-│   ├── product.html               ← Product detail: score badge, lifecycle chart, sustainability tip, better alternatives
-│   └── label-generator.html       ← Printable 90×50mm carbon label with live QR code (window.print())
+├── consumer/                      ← Public unauthenticated registry portal (Unified headers)
+│   ├── search.html                ← Carbon score registry lookup
+│   ├── compare.html               ← Exact-match comparative tool + AI visual compare
+│   ├── product.html               ← Detailed carbon footprint review + better alternatives
+│   └── label-generator.html       ← Printable carbon label + graceful product selector fallback
 │
 ├── admin/
-│   └── dashboard.html             ← Regulator enforcement portal: compliance alerts, Issue Notice/Send Reminder, audit log, CSV export
+│   └── dashboard.html             ← Regulator enforcement dashboard (CSV export ledger, audit trail)
 │
-├── index.html                     ← Investor-ready landing page: Why Register, Policy Framework, Obstacle Solutions, Architecture
-├── compliance.html                ← Public Compliance & Policy Portal: ISO 14064, GHG Protocol, SEBI BRSR, EU CBAM, BEE PAT (no login)
-├── login.html                     ← Unified login (routes company → /company/dashboard, admin → /admin/dashboard)
+├── index.html                     ← Investor-ready dual-audience portal page (Split hero two-door layout)
+├── compliance.html                ← Public Compliance & Policy Portal: ISO 14064, GHG Protocol, SEBI BRSR, EU CBAM (Unified header)
+├── login.html                     ← Unified login (with a Public Registry lookup redirection banner)
 ├── register.html                  ← Corporate registration (+100 ECT on signup)
 ├── project_spec.md                ← Platform specification document
 └── README.md                      ← This file
@@ -66,6 +67,21 @@ Open **`index.html`** in any modern browser. The entire platform runs client-sid
 | **Company** | `company1@ecomark.com` | `company123` | Ravi Steel Industries (Pune) | 2 reports · Grade C · 850 ECT |
 | **Company** | `company2@ecomark.com` | `company123` | GreenWave Textiles (Surat) | 2 reports · Grade A · 1,450 ECT |
 | **Company** | `company3@ecomark.com` | `company123` | SunBake Foods (Nashik) | 2 reports · Grade A+ · 1,950 ECT |
+| **Company** | `company4@ecomark.com` | `company123` | Bharat Steel Works (Nagpur) | 2 reports · Grade C · 900 ECT |
+| **Company** | `company5@ecomark.com` | `company123` | Surat Fab Co. (Surat) | 2 reports · Grade A · 1,200 ECT |
+| **Company** | `company6@ecomark.com` | `company123` | Golden Grains Ltd. (Indore) | 2 reports · Grade B · 700 ECT |
+| **Company** | `company9@ecomark.com` | `company123` | Apex Steel Ind. (Jamshedpur) | 2 reports · Grade B · 800 ECT |
+| **Company** | `company10@ecomark.com` | `company123` | Deccan Alloys (Hyderabad) | 2 reports · Grade B · 950 ECT |
+| **Company** | `company11@ecomark.com` | `company123` | Lion Iron & Steel (Bellary) | 2 reports · Grade A · 1,100 ECT |
+| **Company** | `company12@ecomark.com` | `company123` | Vardhman Steels (Ludhiana) | 2 reports · Grade C · 650 ECT |
+| **Company** | `company13@ecomark.com` | `company123` | Indus Weaves Co. (Coimbatore) | 2 reports · Grade A · 1,300 ECT |
+| **Company** | `company14@ecomark.com` | `company123` | Silk Route Fabrics (Bhagalpur) | 2 reports · Grade B · 750 ECT |
+| **Company** | `company15@ecomark.com` | `company123` | Yarn & Loom Corp. (Ahmedabad) | 2 reports · Grade A+ · 1,400 ECT |
+| **Company** | `company16@ecomark.com` | `company123` | Kora Cotton Mills (Madurai) | 2 reports · Grade A · 900 ECT |
+| **Company** | `company17@ecomark.com` | `company123` | Silver Flour Mills (Bhopal) | 2 reports · Grade A · 850 ECT |
+| **Company** | `company18@ecomark.com` | `company123` | Annapurna Grains (Varanasi) | 2 reports · Grade A+ · 1,250 ECT |
+| **Company** | `company19@ecomark.com` | `company123` | Narmada Agro Foods (Jabalpur) | 2 reports · Grade B · 700 ECT |
+| **Company** | `company20@ecomark.com` | `company123` | Royal Chakki Mills (Kota) | 2 reports · Grade A · 900 ECT |
 | **Admin** | `admin@ecomark.com` | `admin` | EcoMark Regulator Bureau | All aggregate views + enforcement tools |
 
 ---

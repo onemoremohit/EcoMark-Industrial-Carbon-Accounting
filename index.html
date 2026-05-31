@@ -162,115 +162,177 @@
 <body class="bg-background text-on-background antialiased min-h-screen flex flex-col font-body-md font-sans">
 
 <!-- TopAppBar -->
-<header class="bg-white/90 backdrop-blur-sm w-full border-b border-surface-border flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40">
-    <a href="index.html" class="flex items-center gap-3 hover:opacity-85 transition-opacity">
+<header class="bg-white/95 backdrop-blur-md w-full border-b border-surface-border flex justify-between items-center px-6 md:px-12 py-4 sticky top-0 z-40 shadow-sm">
+    <a href="index.html" class="flex items-center gap-2.5 hover:opacity-85 transition-opacity">
         <span class="material-symbols-outlined text-primary text-3xl font-bold icon-fill">eco</span>
-        <div>
-            <span class="font-headline-md text-headline-md font-bold text-primary">EcoMark</span>
-            <span class="hidden md:inline font-label-sm text-label-sm text-text-muted ml-2">Industrial Carbon Platform</span>
-        </div>
+        <span class="font-bold text-primary text-xl tracking-tight font-sans">EcoMark</span>
     </a>
-    <div class="flex items-center gap-6">
-        <nav class="hidden md:flex gap-6">
-            <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md font-semibold" href="#why-register">Why Register?</a>
-            <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md font-semibold" href="#policy-framework">Policies</a>
-            <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md font-semibold" href="#how-it-works">How It Works</a>
-            <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md font-semibold" href="consumer/search.html">Public Registry</a>
-            <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md font-semibold" href="consumer/compare.html">Compare Products</a>
-            <a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md font-semibold" href="compliance.html">Compliance Portal</a>
-        </nav>
-        <div class="flex items-center gap-3">
-            <a class="text-primary font-label-md text-label-md hidden md:block hover:underline font-bold" href="login.html">Login</a>
-            <a href="register.html" class="bg-primary text-on-primary px-5 py-2.5 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all hover:shadow-md font-bold pulse-glow-btn">Register Company</a>
-        </div>
+    <div class="flex items-center gap-4 md:gap-6">
+        <a href="consumer/search.html" class="text-on-surface-variant hover:text-primary font-bold text-sm transition-colors py-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-lg">public</span>
+            <span>Public Registry</span>
+        </a>
+        <span class="h-4 w-px bg-surface-border hidden md:inline"></span>
+        <a href="login.html" class="text-on-surface-variant hover:text-primary font-bold text-sm transition-colors py-1 flex items-center gap-1">
+            <span class="material-symbols-outlined text-lg">corporate_fare</span>
+            <span>Company Login</span>
+        </a>
+        <a href="register.html" class="bg-primary text-white px-4 md:px-5 py-2.5 rounded-xl font-bold text-xs md:text-sm hover:bg-primary-container transition-all hover:shadow-md">
+            Register Facility
+        </a>
     </div>
 </header>
 
 <main class="flex-grow flex flex-col items-center">
 
-    <!-- ═══ HERO SECTION ═══ -->
-    <section class="w-full gradient-hero">
-        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-[80px] md:py-[120px]">
-            <div class="grid md:grid-cols-2 gap-gutter items-center">
-                <div class="flex flex-col gap-stack-md">
-                    <div class="badge-pill animate-fade-in-up">
-                        <span class="material-symbols-outlined icon-fill text-sm">verified</span>
-                        IPCC-Aligned Carbon Accounting · ISO 14064 · GHG Protocol
+    <!-- ═══ DUAL-AUDIENCE TWO-DOOR HERO SECTION ═══ -->
+    <section class="w-full gradient-hero py-12 md:py-20 px-6 md:px-12 border-b border-surface-border">
+        <div class="max-w-container-max mx-auto">
+            <!-- Heading -->
+            <div class="text-center mb-12 animate-fade-in-up">
+                <div class="badge-pill mb-4 inline-flex">
+                    <span class="material-symbols-outlined icon-fill text-sm">verified</span>
+                    IPCC-Grade Industrial Carbon Ledger & Public Registry
+                </div>
+                <h1 class="text-3xl md:text-5xl font-extrabold text-[#006036] tracking-tight leading-tight mb-4">
+                    Two Doors, One Carbon Ledger.
+                </h1>
+                <p class="text-text-muted text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+                    EcoMark separates enterprise-grade compliance tools from open public registries, enabling seamless data reporting and verified sustainability lookup.
+                </p>
+            </div>
+
+            <!-- Two Doors Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                <!-- Door 1: Company / Industrial Portal -->
+                <div class="bg-white rounded-2xl border border-surface-border hover:border-primary/40 hover:shadow-xl transition-all duration-300 p-8 flex flex-col justify-between relative overflow-hidden group animate-fade-in-up animate-delay-1">
+                    <div class="absolute -right-16 -top-16 w-32 h-32 bg-primary/5 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                    <div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 bg-primary/10 text-primary rounded-xl flex items-center justify-center">
+                                <span class="material-symbols-outlined text-2xl icon-fill">factory</span>
+                            </div>
+                            <div>
+                                <p class="text-xs text-primary font-bold uppercase tracking-widest leading-none mb-1">Portal For</p>
+                                <h3 class="font-bold text-on-surface text-xl md:text-2xl leading-none">Industries & Factories</h3>
+                            </div>
+                        </div>
+                        <p class="text-text-muted text-sm md:text-base leading-relaxed mb-6">
+                            Report direct and indirect carbon emissions (Scope 1 & 2) using IPCC-certified fuel switching calculations. Fulfill EPA 1986, BEE PAT Scheme, and SEBI BRSR compliance mandates seamlessly.
+                        </p>
+                        
+                        <div class="space-y-3 mb-8">
+                            <div class="flex items-start gap-2.5 text-sm text-on-surface-variant font-medium">
+                                <span class="material-symbols-outlined text-primary text-lg mt-0.5 icon-fill text-[#388E3C]">check_circle</span>
+                                <span>Fast Form-based Quarterly Fuel Reporting (Average 8 minutes)</span>
+                            </div>
+                            <div class="flex items-start gap-2.5 text-sm text-on-surface-variant font-medium">
+                                <span class="material-symbols-outlined text-primary text-lg mt-0.5 icon-fill text-[#388E3C]">check_circle</span>
+                                <span>Tamper-evident log matching international audit frameworks</span>
+                            </div>
+                            <div class="flex items-start gap-2.5 text-sm text-on-surface-variant font-medium">
+                                <span class="material-symbols-outlined text-primary text-lg mt-0.5 icon-fill text-[#388E3C]">check_circle</span>
+                                <span>Earn Eco-Coins (Carbon Tokens) to redeem for ESG benefits</span>
+                            </div>
+                        </div>
                     </div>
-                    <h1 class="animate-fade-in-up animate-delay-1 font-display-lg text-display-lg text-primary font-extrabold leading-[1.1] tracking-tight">
-                        India's Most Trusted<br/>Industrial Carbon<br/>Transparency Platform
-                    </h1>
-                    <p class="animate-fade-in-up animate-delay-2 font-body-lg text-body-lg text-on-surface-variant max-w-[520px] leading-relaxed">
-                        EcoMark helps manufacturers measure, report, and reduce Scope 1 & 2 emissions with verifiable, compliance-grade carbon accounting — linked to real regulatory mandates and market incentives.
-                    </p>
-                    <div class="animate-fade-in-up animate-delay-3 flex flex-wrap gap-4 mt-stack-sm">
-                        <a href="register.html" id="hero-register-btn" class="bg-primary text-on-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-primary-container transition-all shadow-md hover:shadow-lg font-bold flex items-center gap-2">
-                            <span class="material-symbols-outlined icon-fill">factory</span>
-                            Register Your Company
+
+                    <div class="flex flex-col sm:flex-row gap-3 pt-6 border-t border-surface-border mt-auto">
+                        <a href="register.html" class="flex-1 bg-primary text-white text-center py-3.5 rounded-xl font-bold text-sm hover:bg-primary-container transition-colors shadow-sm flex items-center justify-center gap-2">
+                            <span>Register Your Company</span>
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
                         </a>
-                        <a href="login.html?demo=true" class="border border-outline text-primary px-8 py-4 rounded-lg font-label-md text-label-md hover:bg-surface-container-low transition-colors font-bold flex items-center gap-2">
-                            <span class="material-symbols-outlined">play_circle</span>
-                            Explore Live Demo
+                        <a href="login.html" class="flex-1 border border-outline text-primary text-center py-3.5 rounded-xl font-bold text-sm hover:bg-surface-container-low transition-colors flex items-center justify-center gap-2">
+                            <span>Portal Login</span>
+                            <span class="material-symbols-outlined text-sm">login</span>
                         </a>
-                    </div>
-                    <!-- Trust Badges -->
-                    <div class="animate-fade-in-up animate-delay-4 flex flex-wrap gap-3 mt-2">
-                        <span class="policy-tag">ISO 14064-1</span>
-                        <span class="policy-tag">GHG Protocol</span>
-                        <span class="policy-tag">CSRD Ready</span>
-                        <span class="policy-tag">SBTi Aligned</span>
-                        <span class="policy-tag">BEE India</span>
                     </div>
                 </div>
 
-                <!-- Live Stats Widget -->
-                <div class="flex flex-col gap-gutter">
-                    <!-- Platform Stats Card -->
-                    <div class="bg-white rounded-xl border border-surface-border shadow-md p-6">
-                        <p class="font-label-sm text-label-sm text-text-muted font-semibold mb-4 uppercase tracking-wider">Platform at a Glance</p>
-                        <div class="grid grid-cols-3 gap-4 text-center">
-                            <div>
-                                <div class="stat-number" id="heroCompanies">3</div>
-                                <p class="font-label-sm text-label-sm text-text-muted mt-1">Registered<br/>Companies</p>
-                            </div>
-                            <div class="border-x border-surface-border">
-                                <div class="stat-number" id="heroReports">6</div>
-                                <p class="font-label-sm text-label-sm text-text-muted mt-1">Verified<br/>Reports</p>
+                <!-- Door 2: Public Carbon Registry -->
+                <div class="bg-white rounded-2xl border border-surface-border hover:border-secondary/40 hover:shadow-xl transition-all duration-300 p-8 flex flex-col justify-between relative overflow-hidden group animate-fade-in-up animate-delay-2">
+                    <div class="absolute -right-16 -top-16 w-32 h-32 bg-secondary/5 rounded-full group-hover:scale-150 transition-transform duration-500"></div>
+                    <div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 bg-secondary/10 text-secondary rounded-xl flex items-center justify-center">
+                                <span class="material-symbols-outlined text-2xl icon-fill">public</span>
                             </div>
                             <div>
-                                <div class="stat-number" id="heroProducts">3</div>
-                                <p class="font-label-sm text-label-sm text-text-muted mt-1">Carbon-Scored<br/>Products</p>
+                                <p class="text-xs text-secondary font-bold uppercase tracking-widest leading-none mb-1">Registry For</p>
+                                <h3 class="font-bold text-on-surface text-xl md:text-2xl leading-none">Consumers & Buyers</h3>
                             </div>
                         </div>
-                        <div class="mt-4 pt-4 border-t border-surface-border flex items-center justify-between">
-                            <span class="font-label-sm text-label-sm text-text-muted">Total CO2e Logged</span>
-                            <span class="font-bold text-on-surface" id="heroTotalCo2">Loading...</span>
+                        <p class="text-text-muted text-sm md:text-base leading-relaxed mb-6">
+                            Browse India's public carbon index. Verify any product's certified carbon footprint, scan packaging QR labels, and perform side-by-side comparisons of similar market goods — no login required.
+                        </p>
+                        
+                        <div class="space-y-3 mb-8">
+                            <div class="flex items-start gap-2.5 text-sm text-on-surface-variant font-medium">
+                                <span class="material-symbols-outlined text-secondary text-lg mt-0.5 icon-fill text-[#388E3C]">check_circle</span>
+                                <span>Search carbon scores and verified manufacturer lists</span>
+                            </div>
+                            <div class="flex items-start gap-2.5 text-sm text-on-surface-variant font-medium">
+                                <span class="material-symbols-outlined text-secondary text-lg mt-0.5 icon-fill text-[#388E3C]">check_circle</span>
+                                <span>Compare two products side-by-side or upload a camera photo</span>
+                            </div>
+                            <div class="flex items-start gap-2.5 text-sm text-on-surface-variant font-medium">
+                                <span class="material-symbols-outlined text-secondary text-lg mt-0.5 icon-fill text-[#388E3C]">check_circle</span>
+                                <span>Print high-resolution carbon labels for commercial shipping</span>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Live Product Score Cards -->
-                    <div class="grid grid-cols-3 gap-3">
-                        <div class="bg-white rounded-xl border border-surface-border p-4 text-center hover:shadow-md transition-shadow">
-                            <div class="w-12 h-12 rounded-full bg-[#1B5E20] text-white flex items-center justify-center font-bold text-lg mx-auto mb-2">A+</div>
-                            <p class="font-label-sm text-[11px] text-text-muted font-semibold">SunBake Foods</p>
-                            <p class="font-label-sm text-[10px] text-on-surface-variant">Wheat Flour</p>
+                    <div class="flex flex-col sm:flex-row gap-3 pt-6 border-t border-surface-border mt-auto">
+                        <a href="consumer/search.html" class="flex-1 bg-secondary text-white text-center py-3.5 rounded-xl font-bold text-sm hover:bg-opacity-95 transition-colors shadow-sm flex items-center justify-center gap-2">
+                            <span>Search Carbon Scores</span>
+                            <span class="material-symbols-outlined text-sm">search</span>
+                        </a>
+                        <a href="consumer/compare.html" class="flex-1 border border-outline text-secondary text-center py-3.5 rounded-xl font-bold text-sm hover:bg-surface-container-low transition-colors flex items-center justify-center gap-2">
+                            <span>Compare Footprints</span>
+                            <span class="material-symbols-outlined text-sm">balance</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats & Quick Preview Ribbon -->
+            <div class="mt-12 bg-white rounded-2xl border border-surface-border p-6 shadow-md grid grid-cols-1 md:grid-cols-4 gap-6 items-center animate-fade-in-up animate-delay-3">
+                <!-- Stats Column -->
+                <div class="md:col-span-2 border-b md:border-b-0 md:border-r border-surface-border pb-6 md:pb-0 pr-0 md:pr-6">
+                    <p class="font-label-sm text-xs text-text-muted font-bold uppercase tracking-wider mb-3">Live Platform Activity</p>
+                    <div class="grid grid-cols-3 gap-2 text-center">
+                        <div>
+                            <div class="text-xl md:text-2xl font-extrabold text-primary" id="heroCompanies">3</div>
+                            <p class="text-[10px] text-text-muted">Industries</p>
                         </div>
-                        <div class="bg-white rounded-xl border border-surface-border p-4 text-center hover:shadow-md transition-shadow">
-                            <div class="w-12 h-12 rounded-full bg-[#388E3C] text-white flex items-center justify-center font-bold text-lg mx-auto mb-2">A</div>
-                            <p class="font-label-sm text-[11px] text-text-muted font-semibold">GreenWave</p>
-                            <p class="font-label-sm text-[10px] text-on-surface-variant">Cotton Fabric</p>
+                        <div class="border-x border-surface-border">
+                            <div class="text-xl md:text-2xl font-extrabold text-primary" id="heroReports">6</div>
+                            <p class="text-[10px] text-text-muted">Reports</p>
                         </div>
-                        <div class="bg-white rounded-xl border border-surface-border p-4 text-center hover:shadow-md transition-shadow">
-                            <div class="w-12 h-12 rounded-full bg-[#E65100] text-white flex items-center justify-center font-bold text-lg mx-auto mb-2">C</div>
-                            <p class="font-label-sm text-[11px] text-text-muted font-semibold">Ravi Steel</p>
-                            <p class="font-label-sm text-[10px] text-on-surface-variant">Steel Rod G60</p>
+                        <div>
+                            <div class="text-xl md:text-2xl font-extrabold text-primary" id="heroProducts">3</div>
+                            <p class="text-[10px] text-text-muted">Products</p>
                         </div>
                     </div>
+                    <div class="mt-3 pt-3 border-t border-surface-border flex justify-between text-xs">
+                        <span class="text-text-muted font-semibold">Total CO2e Logged:</span>
+                        <strong class="text-on-surface" id="heroTotalCo2">Loading...</strong>
+                    </div>
+                </div>
 
-                    <a href="consumer/search.html" class="text-center text-primary font-label-sm text-label-sm hover:underline font-semibold flex items-center justify-center gap-1">
-                        <span class="material-symbols-outlined text-sm">qr_code</span>
-                        View Public Carbon Registry (no login required)
-                    </a>
+                <!-- Carbon rating guide -->
+                <div class="md:col-span-2 flex flex-col justify-center">
+                    <p class="font-label-sm text-xs text-text-muted font-bold uppercase tracking-wider mb-2">Registry Ratings Guide</p>
+                    <div class="flex items-center gap-2 flex-wrap mb-2">
+                        <span class="px-2 py-0.5 rounded bg-[#1B5E20] text-white text-[10px] font-extrabold">A+</span>
+                        <span class="px-2 py-0.5 rounded bg-[#388E3C] text-white text-[10px] font-extrabold">A</span>
+                        <span class="px-2 py-0.5 rounded bg-[#F9A825] text-white text-[10px] font-extrabold">B</span>
+                        <span class="px-2 py-0.5 rounded bg-[#E65100] text-white text-[10px] font-extrabold">C</span>
+                        <span class="px-2 py-0.5 rounded bg-[#B71C1C] text-white text-[10px] font-extrabold">D</span>
+                    </div>
+                    <p class="text-[11px] text-text-muted leading-relaxed">
+                        ratings represent certified emission levels. Lower letters indicate higher carbon intensity. All scores calculated via IPCC factors.
+                    </p>
                 </div>
             </div>
         </div>
@@ -546,13 +608,15 @@
         </div>
     </section>
 
+
+
     <!-- ═══ HOW IT WORKS ═══ -->
     <section class="w-full bg-white border-y border-surface-border py-[80px]" id="how-it-works">
         <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
             <div class="text-center mb-[56px]">
                 <div class="badge-pill mb-4 inline-flex">
                     <span class="material-symbols-outlined icon-fill text-sm">settings</span>
-                    Platform Architecture
+                    3-Step Process
                 </div>
                 <h2 class="font-display-lg text-display-lg text-on-surface font-bold mb-stack-sm tracking-tight">How EcoMark Works</h2>
                 <p class="font-body-lg text-body-lg text-on-surface-variant max-w-[620px] mx-auto leading-relaxed">A unified 3-layer ecosystem of trust between manufacturers, regulators, and consumers.</p>
@@ -730,76 +794,7 @@
         </div>
     </section>
 
-    <!-- ═══ TECH ARCHITECTURE SECTION ═══ -->
-    <section class="w-full gradient-dark text-white py-[80px]">
-        <div class="max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop">
-            <div class="text-center mb-[56px]">
-                <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white rounded-full px-4 py-1.5 text-xs font-bold mb-4">
-                    <span class="material-symbols-outlined text-sm icon-fill">architecture</span>
-                    TECHNICAL ARCHITECTURE
-                </div>
-                <h2 class="font-display-lg text-display-lg font-bold mb-stack-sm">Production-Grade Stack</h2>
-                <p class="font-body-lg text-body-lg text-white/70 max-w-[560px] mx-auto">EcoMark's frontend prototype is built to drop directly onto a production backend.</p>
-            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
-                <div class="bg-white/5 border border-white/10 rounded-xl p-6">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-[#006036] flex items-center justify-center">
-                            <span class="material-symbols-outlined text-white text-sm">devices</span>
-                        </div>
-                        <h3 class="font-title-lg text-title-lg font-bold">Frontend Layer</h3>
-                    </div>
-                    <ul class="space-y-2 text-white/70 font-body-md text-sm">
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>HTML5 + Tailwind CSS UI</li>
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>Chart.js analytics rendering</li>
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>QR Code generation (canvas API)</li>
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>LocalStorage prototype DB</li>
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>Role-based auth guards</li>
-                    </ul>
-                </div>
-
-                <div class="bg-white/5 border border-white/10 rounded-xl p-6">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-[#1B5E20] flex items-center justify-center">
-                            <span class="material-symbols-outlined text-white text-sm">dns</span>
-                        </div>
-                        <h3 class="font-title-lg text-title-lg font-bold">Backend (Planned)</h3>
-                    </div>
-                    <ul class="space-y-2 text-white/70 font-body-md text-sm">
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>Node.js + Express REST API</li>
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>PostgreSQL — sharded, WORM audit</li>
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>Redis — real-time metric cache</li>
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>JWT + OAuth2 enterprise SSO</li>
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>IoT MQTT data connector</li>
-                    </ul>
-                </div>
-
-                <div class="bg-white/5 border border-white/10 rounded-xl p-6">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-lg bg-[#388E3C] flex items-center justify-center">
-                            <span class="material-symbols-outlined text-white text-sm">cloud</span>
-                        </div>
-                        <h3 class="font-title-lg text-title-lg font-bold">Infrastructure</h3>
-                    </div>
-                    <ul class="space-y-2 text-white/70 font-body-md text-sm">
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>AWS / Azure multi-region</li>
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>Kubernetes auto-scaling</li>
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>Cloudflare CDN + DDoS protection</li>
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>SOC 2 Type II compliance</li>
-                        <li class="flex items-center gap-2"><span class="text-[#80d9a0]">▹</span>99.99% SLA uptime guarantee</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="mt-stack-lg text-center">
-                <a href="compliance.html" class="inline-flex items-center gap-2 bg-white text-[#006036] px-8 py-4 rounded-lg font-bold hover:bg-[#f8faf8] transition-colors shadow-md">
-                    <span class="material-symbols-outlined icon-fill">policy</span>
-                    Explore Full Compliance & Policy Portal
-                </a>
-            </div>
-        </div>
-    </section>
 
     <!-- ═══ FINAL CTA ═══ -->
     <section class="w-full bg-[#e8f5e9] border-y border-[#c8e6c9] py-[80px]">
@@ -867,7 +862,7 @@
     </div>
 </footer>
 
-<script src="js/db.js"></script>
+<script src="js/db.js?v=5"></script>
 <script>
     // Populate live stats from DB
     document.addEventListener('DOMContentLoaded', () => {

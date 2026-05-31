@@ -23,7 +23,16 @@ const COIN_TRIGGERS = {
 
 // Initialize DB if not present
 function initDB() {
-    if (!localStorage.getItem('ecomark_db_initialized_v2')) {
+    if (!localStorage.getItem('ecomark_db_initialized_v5')) {
+        localStorage.removeItem('ecomark_users');
+        localStorage.removeItem('ecomark_products');
+        localStorage.removeItem('ecomark_reports');
+        localStorage.removeItem('ecomark_ecoCoinsHistory');
+        localStorage.removeItem('ecomark_auditLogs');
+        localStorage.removeItem('ecomark_db_initialized_v2');
+        localStorage.removeItem('ecomark_db_initialized_v3');
+        localStorage.removeItem('ecomark_db_initialized_v4');
+
         const users = {
             "admin_uid": {
                 uid: "admin_uid",
@@ -40,7 +49,7 @@ function initDB() {
                 password: "company123",
                 role: "company",
                 companyName: "Ravi Steel Industries",
-                industry: "Manufacturing",
+                industry: "Steel Manufacturing",
                 location: "Pune",
                 ecoCoins: 850
             },
@@ -64,9 +73,39 @@ function initDB() {
                 location: "Nashik",
                 ecoCoins: 1950
             },
+            "bharat_steel_uid": {
+                uid: "bharat_steel_uid",
+                email: "company4@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Bharat Steel Works",
+                industry: "Steel Manufacturing",
+                location: "Nagpur",
+                ecoCoins: 900
+            },
+            "surat_fab_uid": {
+                uid: "surat_fab_uid",
+                email: "company5@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Surat Fab Co.",
+                industry: "Textile",
+                location: "Surat",
+                ecoCoins: 1200
+            },
+            "golden_grains_ltd_uid": {
+                uid: "golden_grains_ltd_uid",
+                email: "company6@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Golden Grains Ltd.",
+                industry: "Food Processing",
+                location: "Indore",
+                ecoCoins: 700
+            },
             "shakti_steel_uid": {
                 uid: "shakti_steel_uid",
-                email: "company4@ecomark.com",
+                email: "company7@ecomark.com",
                 password: "company123",
                 role: "company",
                 companyName: "Shakti Steel Ltd",
@@ -76,13 +115,133 @@ function initDB() {
             },
             "golden_grains_uid": {
                 uid: "golden_grains_uid",
-                email: "company5@ecomark.com",
+                email: "company8@ecomark.com",
                 password: "company123",
                 role: "company",
                 companyName: "Golden Grains Co",
                 industry: "Food Processing",
                 location: "Amritsar",
                 ecoCoins: 600
+            },
+            "apex_steel_uid": {
+                uid: "apex_steel_uid",
+                email: "company9@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Apex Steel Ind.",
+                industry: "Steel Manufacturing",
+                location: "Jamshedpur",
+                ecoCoins: 800
+            },
+            "deccan_alloys_uid": {
+                uid: "deccan_alloys_uid",
+                email: "company10@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Deccan Alloys",
+                industry: "Steel Manufacturing",
+                location: "Hyderabad",
+                ecoCoins: 950
+            },
+            "lion_iron_uid": {
+                uid: "lion_iron_uid",
+                email: "company11@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Lion Iron & Steel",
+                industry: "Steel Manufacturing",
+                location: "Bellary",
+                ecoCoins: 1100
+            },
+            "vardhman_steels_uid": {
+                uid: "vardhman_steels_uid",
+                email: "company12@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Vardhman Steels",
+                industry: "Steel Manufacturing",
+                location: "Ludhiana",
+                ecoCoins: 650
+            },
+            "indus_weaves_uid": {
+                uid: "indus_weaves_uid",
+                email: "company13@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Indus Weaves Co.",
+                industry: "Textile",
+                location: "Coimbatore",
+                ecoCoins: 1300
+            },
+            "silk_route_uid": {
+                uid: "silk_route_uid",
+                email: "company14@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Silk Route Fabrics",
+                industry: "Textile",
+                location: "Bhagalpur",
+                ecoCoins: 750
+            },
+            "yarn_loom_uid": {
+                uid: "yarn_loom_uid",
+                email: "company15@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Yarn & Loom Corp.",
+                industry: "Textile",
+                location: "Ahmedabad",
+                ecoCoins: 1400
+            },
+            "kora_cotton_uid": {
+                uid: "kora_cotton_uid",
+                email: "company16@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Kora Cotton Mills",
+                industry: "Textile",
+                location: "Madurai",
+                ecoCoins: 900
+            },
+            "silver_flour_uid": {
+                uid: "silver_flour_uid",
+                email: "company17@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Silver Flour Mills",
+                industry: "Food Processing",
+                location: "Bhopal",
+                ecoCoins: 850
+            },
+            "annapurna_grains_uid": {
+                uid: "annapurna_grains_uid",
+                email: "company18@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Annapurna Grains",
+                industry: "Food Processing",
+                location: "Varanasi",
+                ecoCoins: 1250
+            },
+            "narmada_agro_uid": {
+                uid: "narmada_agro_uid",
+                email: "company19@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Narmada Agro Foods",
+                industry: "Food Processing",
+                location: "Jabalpur",
+                ecoCoins: 700
+            },
+            "royal_chakki_uid": {
+                uid: "royal_chakki_uid",
+                email: "company20@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Royal Chakki Mills",
+                industry: "Food Processing",
+                location: "Kota",
+                ecoCoins: 900
             }
         };
 
@@ -91,7 +250,7 @@ function initDB() {
                 productId: "prod_ravi_steel",
                 companyId: "ravi_steel_uid",
                 productName: "Steel Rod Grade-60",
-                category: "Manufacturing",
+                category: "Steel Rod",
                 latestScore: "C",
                 latestCO2ePerUnit: 5.256,
                 reportHistory: ["rep_ravi_q2", "rep_ravi_q3"]
@@ -100,7 +259,7 @@ function initDB() {
                 productId: "prod_greenwave_textiles",
                 companyId: "greenwave_uid",
                 productName: "Cotton Fabric Roll",
-                category: "Textile",
+                category: "Cotton Fabric",
                 latestScore: "A",
                 latestCO2ePerUnit: 1.022,
                 reportHistory: ["rep_green_q2", "rep_green_q3"]
@@ -109,10 +268,37 @@ function initDB() {
                 productId: "prod_sunbake_foods",
                 companyId: "sunbake_uid",
                 productName: "Packaged Wheat Flour",
-                category: "Food Processing",
+                category: "Packaged Flour",
                 latestScore: "A+",
                 latestCO2ePerUnit: 0.1575,
                 reportHistory: ["rep_sun_q2", "rep_sun_q3"]
+            },
+            "prod_bharat_steel": {
+                productId: "prod_bharat_steel",
+                companyId: "bharat_steel_uid",
+                productName: "Structural Steel Rod",
+                category: "Steel Rod",
+                latestScore: "C",
+                latestCO2ePerUnit: 6.08,
+                reportHistory: ["rep_bharat_q2", "rep_bharat_q3"]
+            },
+            "prod_surat_fab": {
+                productId: "prod_surat_fab",
+                companyId: "surat_fab_uid",
+                productName: "Organic Cotton Fabric",
+                category: "Cotton Fabric",
+                latestScore: "A",
+                latestCO2ePerUnit: 1.104,
+                reportHistory: ["rep_surat_q2", "rep_surat_q3"]
+            },
+            "prod_golden_grains_ltd": {
+                productId: "prod_golden_grains_ltd",
+                companyId: "golden_grains_ltd_uid",
+                productName: "Premium Packaged Flour",
+                category: "Packaged Flour",
+                latestScore: "B",
+                latestCO2ePerUnit: 3.5667,
+                reportHistory: ["rep_golden_ltd_q2", "rep_golden_ltd_q3"]
             },
             "prod_shakti_steel": {
                 productId: "prod_shakti_steel",
@@ -131,6 +317,114 @@ function initDB() {
                 latestScore: "A",
                 latestCO2ePerUnit: 0.920,
                 reportHistory: ["rep_golden_q3"]
+            },
+            "prod_apex_steel": {
+                productId: "prod_apex_steel",
+                companyId: "apex_steel_uid",
+                productName: "Reinforced Steel Rod",
+                category: "Steel Rod",
+                latestScore: "B",
+                latestCO2ePerUnit: 4.7833,
+                reportHistory: ["rep_apex_q2", "rep_apex_q3"]
+            },
+            "prod_deccan_alloys": {
+                productId: "prod_deccan_alloys",
+                companyId: "deccan_alloys_uid",
+                productName: "Deccan TMT Steel Rod",
+                category: "Steel Rod",
+                latestScore: "B",
+                latestCO2ePerUnit: 3.892,
+                reportHistory: ["rep_deccan_q2", "rep_deccan_q3"]
+            },
+            "prod_lion_steel": {
+                productId: "prod_lion_steel",
+                companyId: "lion_iron_uid",
+                productName: "Lion High-Tensile Rod",
+                category: "Steel Rod",
+                latestScore: "A",
+                latestCO2ePerUnit: 1.8427,
+                reportHistory: ["rep_lion_q2", "rep_lion_q3"]
+            },
+            "prod_vardhman_steel": {
+                productId: "prod_vardhman_steel",
+                companyId: "vardhman_steels_uid",
+                productName: "Vardhman Mild Steel Rod",
+                category: "Steel Rod",
+                latestScore: "C",
+                latestCO2ePerUnit: 6.74,
+                reportHistory: ["rep_vardhman_q2", "rep_vardhman_q3"]
+            },
+            "prod_indus_weaves": {
+                productId: "prod_indus_weaves",
+                companyId: "indus_weaves_uid",
+                productName: "Indus Premium Cotton Fabric",
+                category: "Cotton Fabric",
+                latestScore: "A",
+                latestCO2ePerUnit: 0.8856,
+                reportHistory: ["rep_indus_q2", "rep_indus_q3"]
+            },
+            "prod_silk_route": {
+                productId: "prod_silk_route",
+                companyId: "silk_route_uid",
+                productName: "Silk-Cotton Blend Fabric",
+                category: "Cotton Fabric",
+                latestScore: "B",
+                latestCO2ePerUnit: 2.4552,
+                reportHistory: ["rep_silk_q2", "rep_silk_q3"]
+            },
+            "prod_yarn_loom": {
+                productId: "prod_yarn_loom",
+                companyId: "yarn_loom_uid",
+                productName: "Pure combed Cotton Fabric",
+                category: "Cotton Fabric",
+                latestScore: "A+",
+                latestCO2ePerUnit: 0.451,
+                reportHistory: ["rep_yarn_q2", "rep_yarn_q3"]
+            },
+            "prod_kora_cotton": {
+                productId: "prod_kora_cotton",
+                companyId: "kora_cotton_uid",
+                productName: "Kora Handloom Cotton Fabric",
+                category: "Cotton Fabric",
+                latestScore: "A",
+                latestCO2ePerUnit: 1.2484,
+                reportHistory: ["rep_kora_q2", "rep_kora_q3"]
+            },
+            "prod_silver_flour": {
+                productId: "prod_silver_flour",
+                companyId: "silver_flour_uid",
+                productName: "Silver Sharbati Flour",
+                category: "Packaged Flour",
+                latestScore: "A",
+                latestCO2ePerUnit: 1.6442,
+                reportHistory: ["rep_silver_q2", "rep_silver_q3"]
+            },
+            "prod_annapurna_grains": {
+                productId: "prod_annapurna_grains",
+                companyId: "annapurna_grains_uid",
+                productName: "Annapurna Organic Atta",
+                category: "Packaged Flour",
+                latestScore: "A+",
+                latestCO2ePerUnit: 0.3854,
+                reportHistory: ["rep_annapurna_q2", "rep_annapurna_q3"]
+            },
+            "prod_narmada_agro": {
+                productId: "prod_narmada_agro",
+                companyId: "narmada_agro_uid",
+                productName: "Narmada Agro Flour",
+                category: "Packaged Flour",
+                latestScore: "B",
+                latestCO2ePerUnit: 2.934,
+                reportHistory: ["rep_narmada_q2", "rep_narmada_q3"]
+            },
+            "prod_royal_chakki": {
+                productId: "prod_royal_chakki",
+                companyId: "royal_chakki_uid",
+                productName: "Royal Whole Wheat Flour",
+                category: "Packaged Flour",
+                latestScore: "A",
+                latestCO2ePerUnit: 1.1468,
+                reportHistory: ["rep_royal_q2", "rep_royal_q3"]
             }
         };
 
@@ -225,6 +519,96 @@ function initDB() {
                 score: "A+",
                 submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
             },
+            "rep_bharat_q2": {
+                reportId: "rep_bharat_q2",
+                companyId: "bharat_steel_uid",
+                productId: "prod_bharat_steel",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "diesel", quantity: 1200, unit: "liters" },
+                    { fuel_type: "coal", quantity: 500, unit: "kg" }
+                ],
+                batchSize: 600,
+                totalCO2e: 4426.0,
+                co2ePerUnit: 7.3767,
+                score: "C",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_bharat_q3": {
+                reportId: "rep_bharat_q3",
+                companyId: "bharat_steel_uid",
+                productId: "prod_bharat_steel",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "diesel", quantity: 1000, unit: "liters" },
+                    { fuel_type: "coal", quantity: 400, unit: "kg" }
+                ],
+                batchSize: 600,
+                totalCO2e: 3648.0,
+                co2ePerUnit: 6.08,
+                score: "C",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_surat_q2": {
+                reportId: "rep_surat_q2",
+                companyId: "surat_fab_uid",
+                productId: "prod_surat_fab",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "electricity", quantity: 800, unit: "kWh" },
+                    { fuel_type: "natural_gas", quantity: 400, unit: "m3" }
+                ],
+                batchSize: 1000,
+                totalCO2e: 1472.0,
+                co2ePerUnit: 1.472,
+                score: "A",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_surat_q3": {
+                reportId: "rep_surat_q3",
+                companyId: "surat_fab_uid",
+                productId: "prod_surat_fab",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "electricity", quantity: 600, unit: "kWh" },
+                    { fuel_type: "natural_gas", quantity: 300, unit: "m3" }
+                ],
+                batchSize: 1000,
+                totalCO2e: 1104.0,
+                co2ePerUnit: 1.104,
+                score: "A",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_golden_ltd_q2": {
+                reportId: "rep_golden_ltd_q2",
+                companyId: "golden_grains_ltd_uid",
+                productId: "prod_golden_grains_ltd",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "lpg", quantity: 1500, unit: "liters" },
+                    { fuel_type: "biomass", quantity: 1000, unit: "kg" }
+                ],
+                batchSize: 600,
+                totalCO2e: 2675.0,
+                co2ePerUnit: 4.4583,
+                score: "B",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_golden_ltd_q3": {
+                reportId: "rep_golden_ltd_q3",
+                companyId: "golden_grains_ltd_uid",
+                productId: "prod_golden_grains_ltd",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "lpg", quantity: 1200, unit: "liters" },
+                    { fuel_type: "biomass", quantity: 800, unit: "kg" }
+                ],
+                batchSize: 600,
+                totalCO2e: 2140.0,
+                co2ePerUnit: 3.5667,
+                score: "B",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
             "rep_shakti_q3": {
                 reportId: "rep_shakti_q3",
                 companyId: "shakti_steel_uid",
@@ -254,6 +638,366 @@ function initDB() {
                 co2ePerUnit: 0.920,
                 score: "A",
                 submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_apex_q2": {
+                reportId: "rep_apex_q2",
+                companyId: "apex_steel_uid",
+                productId: "prod_apex_steel",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "diesel", quantity: 1000, unit: "liters" },
+                    { fuel_type: "coal", quantity: 300, unit: "kg" }
+                ],
+                batchSize: 600,
+                totalCO2e: 3406.0,
+                co2ePerUnit: 5.6767,
+                score: "C",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_apex_q3": {
+                reportId: "rep_apex_q3",
+                companyId: "apex_steel_uid",
+                productId: "prod_apex_steel",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "diesel", quantity: 800, unit: "liters" },
+                    { fuel_type: "coal", quantity: 300, unit: "kg" }
+                ],
+                batchSize: 600,
+                totalCO2e: 2870.0,
+                co2ePerUnit: 4.7833,
+                score: "B",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_deccan_q2": {
+                reportId: "rep_deccan_q2",
+                companyId: "deccan_alloys_uid",
+                productId: "prod_deccan_alloys",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "diesel", quantity: 800, unit: "liters" },
+                    { fuel_type: "electricity", quantity: 600, unit: "kWh" }
+                ],
+                batchSize: 600,
+                totalCO2e: 2636.0,
+                co2ePerUnit: 4.3933,
+                score: "B",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_deccan_q3": {
+                reportId: "rep_deccan_q3",
+                companyId: "deccan_alloys_uid",
+                productId: "prod_deccan_alloys",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "diesel", quantity: 700, unit: "liters" },
+                    { fuel_type: "electricity", quantity: 560, unit: "kWh" }
+                ],
+                batchSize: 600,
+                totalCO2e: 2335.2,
+                co2ePerUnit: 3.892,
+                score: "B",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_lion_q2": {
+                reportId: "rep_lion_q2",
+                companyId: "lion_iron_uid",
+                productId: "prod_lion_steel",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "electricity", quantity: 1200, unit: "kWh" },
+                    { fuel_type: "furnace_oil", quantity: 100, unit: "liters" }
+                ],
+                batchSize: 600,
+                totalCO2e: 1299.0,
+                co2ePerUnit: 2.165,
+                score: "B",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_lion_q3": {
+                reportId: "rep_lion_q3",
+                companyId: "lion_iron_uid",
+                productId: "prod_lion_steel",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "electricity", quantity: 1000, unit: "kWh" },
+                    { fuel_type: "natural_gas", quantity: 140, unit: "m3" }
+                ],
+                batchSize: 600,
+                totalCO2e: 1105.6,
+                co2ePerUnit: 1.8427,
+                score: "A",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_vardhman_q2": {
+                reportId: "rep_vardhman_q2",
+                companyId: "vardhman_steels_uid",
+                productId: "prod_vardhman_steel",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "coal", quantity: 1500, unit: "kg" },
+                    { fuel_type: "electricity", quantity: 800, unit: "kWh" }
+                ],
+                batchSize: 600,
+                totalCO2e: 4286.0,
+                co2ePerUnit: 7.1433,
+                score: "C",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_vardhman_q3": {
+                reportId: "rep_vardhman_q3",
+                companyId: "vardhman_steels_uid",
+                productId: "prod_vardhman_steel",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "coal", quantity: 1400, unit: "kg" },
+                    { fuel_type: "electricity", quantity: 800, unit: "kWh" }
+                ],
+                batchSize: 600,
+                totalCO2e: 4044.0,
+                co2ePerUnit: 6.74,
+                score: "C",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_indus_q2": {
+                reportId: "rep_indus_q2",
+                companyId: "indus_weaves_uid",
+                productId: "prod_indus_weaves",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "electricity", quantity: 1000, unit: "kWh" },
+                    { fuel_type: "biomass", quantity: 800, unit: "kg" }
+                ],
+                batchSize: 1000,
+                totalCO2e: 1148.0,
+                co2ePerUnit: 1.148,
+                score: "A",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_indus_q3": {
+                reportId: "rep_indus_q3",
+                companyId: "indus_weaves_uid",
+                productId: "prod_indus_weaves",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "electricity", quantity: 800, unit: "kWh" },
+                    { fuel_type: "biomass", quantity: 560, unit: "kg" }
+                ],
+                batchSize: 1000,
+                totalCO2e: 885.6,
+                co2ePerUnit: 0.8856,
+                score: "A",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_silk_q2": {
+                reportId: "rep_silk_q2",
+                companyId: "silk_route_uid",
+                productId: "prod_silk_route",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "electricity", quantity: 2000, unit: "kWh" },
+                    { fuel_type: "natural_gas", quantity: 560, unit: "m3" }
+                ],
+                batchSize: 1000,
+                totalCO2e: 2782.4,
+                co2ePerUnit: 2.7824,
+                score: "B",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_silk_q3": {
+                reportId: "rep_silk_q3",
+                companyId: "silk_route_uid",
+                productId: "prod_silk_route",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "electricity", quantity: 1800, unit: "kWh" },
+                    { fuel_type: "natural_gas", quantity: 480, unit: "m3" }
+                ],
+                batchSize: 1000,
+                totalCO2e: 2455.2,
+                co2ePerUnit: 2.4552,
+                score: "B",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_yarn_q2": {
+                reportId: "rep_yarn_q2",
+                companyId: "yarn_loom_uid",
+                productId: "prod_yarn_loom",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "electricity", quantity: 500, unit: "kWh" },
+                    { fuel_type: "biomass", quantity: 400, unit: "kg" }
+                ],
+                batchSize: 1000,
+                totalCO2e: 574.0,
+                co2ePerUnit: 0.574,
+                score: "A",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_yarn_q3": {
+                reportId: "rep_yarn_q3",
+                companyId: "yarn_loom_uid",
+                productId: "prod_yarn_loom",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "electricity", quantity: 400, unit: "kWh" },
+                    { fuel_type: "biomass", quantity: 300, unit: "kg" }
+                ],
+                batchSize: 1000,
+                totalCO2e: 451.0,
+                co2ePerUnit: 0.451,
+                score: "A+",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_kora_q2": {
+                reportId: "rep_kora_q2",
+                companyId: "kora_cotton_uid",
+                productId: "prod_kora_cotton",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "electricity", quantity: 1200, unit: "kWh" },
+                    { fuel_type: "natural_gas", quantity: 250, unit: "m3" }
+                ],
+                batchSize: 1000,
+                totalCO2e: 1494.0,
+                co2ePerUnit: 1.494,
+                score: "A",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_kora_q3": {
+                reportId: "rep_kora_q3",
+                companyId: "kora_cotton_uid",
+                productId: "prod_kora_cotton",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "electricity", quantity: 1000, unit: "kWh" },
+                    { fuel_type: "natural_gas", quantity: 210, unit: "m3" }
+                ],
+                batchSize: 1000,
+                totalCO2e: 1248.4,
+                co2ePerUnit: 1.2484,
+                score: "A",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_silver_q2": {
+                reportId: "rep_silver_q2",
+                companyId: "silver_flour_uid",
+                productId: "prod_silver_flour",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "electricity", quantity: 1000, unit: "kWh" },
+                    { fuel_type: "lpg", quantity: 160, unit: "liters" }
+                ],
+                batchSize: 500,
+                totalCO2e: 1061.6,
+                co2ePerUnit: 2.1232,
+                score: "B",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_silver_q3": {
+                reportId: "rep_silver_q3",
+                companyId: "silver_flour_uid",
+                productId: "prod_silver_flour",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "electricity", quantity: 800, unit: "kWh" },
+                    { fuel_type: "lpg", quantity: 110, unit: "liters" }
+                ],
+                batchSize: 500,
+                totalCO2e: 822.1,
+                co2ePerUnit: 1.6442,
+                score: "A",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_annapurna_q2": {
+                reportId: "rep_annapurna_q2",
+                companyId: "annapurna_grains_uid",
+                productId: "prod_annapurna_grains",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "biomass", quantity: 200, unit: "kg" },
+                    { fuel_type: "electricity", quantity: 200, unit: "kWh" }
+                ],
+                batchSize: 500,
+                totalCO2e: 246.0,
+                co2ePerUnit: 0.492,
+                score: "A+",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_annapurna_q3": {
+                reportId: "rep_annapurna_q3",
+                companyId: "annapurna_grains_uid",
+                productId: "prod_annapurna_grains",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "biomass", quantity: 150, unit: "kg" },
+                    { fuel_type: "electricity", quantity: 160, unit: "kWh" }
+                ],
+                batchSize: 500,
+                totalCO2e: 192.7,
+                co2ePerUnit: 0.3854,
+                score: "A+",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_narmada_q2": {
+                reportId: "rep_narmada_q2",
+                companyId: "narmada_agro_uid",
+                productId: "prod_narmada_agro",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "lpg", quantity: 800, unit: "liters" },
+                    { fuel_type: "electricity", quantity: 600, unit: "kWh" }
+                ],
+                batchSize: 500,
+                totalCO2e: 1700.0,
+                co2ePerUnit: 3.40,
+                score: "B",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_narmada_q3": {
+                reportId: "rep_narmada_q3",
+                companyId: "narmada_agro_uid",
+                productId: "prod_narmada_agro",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "lpg", quantity: 700, unit: "liters" },
+                    { fuel_type: "electricity", quantity: 500, unit: "kWh" }
+                ],
+                batchSize: 500,
+                totalCO2e: 1467.0,
+                co2ePerUnit: 2.934,
+                score: "B",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_royal_q2": {
+                reportId: "rep_royal_q2",
+                companyId: "royal_chakki_uid",
+                productId: "prod_royal_chakki",
+                period: "2024-Q2",
+                fuelEntries: [
+                    { fuel_type: "lpg", quantity: 400, unit: "liters" },
+                    { fuel_type: "biomass", quantity: 250, unit: "kg" }
+                ],
+                batchSize: 500,
+                totalCO2e: 706.5,
+                co2ePerUnit: 1.413,
+                score: "A",
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
+            },
+            "rep_royal_q3": {
+                reportId: "rep_royal_q3",
+                companyId: "royal_chakki_uid",
+                productId: "prod_royal_chakki",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "lpg", quantity: 320, unit: "liters" },
+                    { fuel_type: "biomass", quantity: 220, unit: "kg" }
+                ],
+                batchSize: 500,
+                totalCO2e: 573.4,
+                co2ePerUnit: 1.1468,
+                score: "A",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
             }
         };
 
@@ -276,6 +1020,78 @@ function initDB() {
             "coins_sun_4": { id: "coins_sun_4", companyId: "sunbake_uid", trigger: "Rating A+ Achieved (2024-Q3)", amount: 300, timestamp: new Date(Date.now() - 15*24*60*60*1000).toISOString() },
             "coins_sun_5": { id: "coins_sun_5", companyId: "sunbake_uid", trigger: "Fuel Report (2024-Q3)", amount: 50, timestamp: new Date(Date.now() - 15*24*60*60*1000).toISOString() },
             "coins_sun_6": { id: "coins_sun_6", companyId: "sunbake_uid", trigger: "25%+ Carbon Footprint Reduction (Q3 vs Q2)", amount: 1000, timestamp: new Date(Date.now() - 15*24*60*60*1000).toISOString() },
+
+            "coins_bharat_1": { id: "coins_bharat_1", companyId: "bharat_steel_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date(Date.now() - 60*24*60*60*1000).toISOString() },
+            "coins_bharat_2": { id: "coins_bharat_2", companyId: "bharat_steel_uid", trigger: "First Fuel Report (2024-Q2)", amount: 200, timestamp: new Date(Date.now() - 45*24*60*60*1000).toISOString() },
+            "coins_bharat_3": { id: "coins_bharat_3", companyId: "bharat_steel_uid", trigger: "Fuel Report (2024-Q3)", amount: 50, timestamp: new Date(Date.now() - 15*24*60*60*1000).toISOString() },
+            "coins_bharat_4": { id: "coins_bharat_4", companyId: "bharat_steel_uid", trigger: "15%+ Carbon Footprint Reduction (Q3 vs Q2)", amount: 550, timestamp: new Date(Date.now() - 15*24*60*60*1000).toISOString() },
+
+            "coins_surat_1": { id: "coins_surat_1", companyId: "surat_fab_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date(Date.now() - 60*24*60*60*1000).toISOString() },
+            "coins_surat_2": { id: "coins_surat_2", companyId: "surat_fab_uid", trigger: "First Fuel Report (2024-Q2)", amount: 200, timestamp: new Date(Date.now() - 45*24*60*60*1000).toISOString() },
+            "coins_surat_3": { id: "coins_surat_3", companyId: "surat_fab_uid", trigger: "Rating A Achieved (2024-Q2)", amount: 300, timestamp: new Date(Date.now() - 45*24*60*60*1000).toISOString() },
+            "coins_surat_4": { id: "coins_surat_4", companyId: "surat_fab_uid", trigger: "Rating A Achieved (2024-Q3)", amount: 300, timestamp: new Date(Date.now() - 15*24*60*60*1000).toISOString() },
+            "coins_surat_5": { id: "coins_surat_5", companyId: "surat_fab_uid", trigger: "Fuel Report (2024-Q3)", amount: 50, timestamp: new Date(Date.now() - 15*24*60*60*1000).toISOString() },
+            "coins_surat_6": { id: "coins_surat_6", companyId: "surat_fab_uid", trigger: "25%+ Carbon Reduction Achieved", amount: 250, timestamp: new Date(Date.now() - 15*24*60*60*1000).toISOString() },
+
+            "coins_golden_ltd_1": { id: "coins_golden_ltd_1", companyId: "golden_grains_ltd_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date(Date.now() - 60*24*60*60*1000).toISOString() },
+            "coins_golden_ltd_2": { id: "coins_golden_ltd_2", companyId: "golden_grains_ltd_uid", trigger: "First Fuel Report (2024-Q2)", amount: 200, timestamp: new Date(Date.now() - 45*24*60*60*1000).toISOString() },
+            "coins_golden_ltd_3": { id: "coins_golden_ltd_3", companyId: "golden_grains_ltd_uid", trigger: "Fuel Report (2024-Q3)", amount: 50, timestamp: new Date(Date.now() - 15*24*60*60*1000).toISOString() },
+            "coins_golden_ltd_4": { id: "coins_golden_ltd_4", companyId: "golden_grains_ltd_uid", trigger: "20%+ Carbon Reduction Achieved", amount: 350, timestamp: new Date(Date.now() - 15*24*60*60*1000).toISOString() },
+
+            "coins_apex_1": { id: "coins_apex_1", companyId: "apex_steel_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date().toISOString() },
+            "coins_apex_2": { id: "coins_apex_2", companyId: "apex_steel_uid", trigger: "First Fuel Report", amount: 200, timestamp: new Date().toISOString() },
+            "coins_apex_3": { id: "coins_apex_3", companyId: "apex_steel_uid", trigger: "Carbon reduction bonus", amount: 500, timestamp: new Date().toISOString() },
+
+            "coins_deccan_1": { id: "coins_deccan_1", companyId: "deccan_alloys_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date().toISOString() },
+            "coins_deccan_2": { id: "coins_deccan_2", companyId: "deccan_alloys_uid", trigger: "First Fuel Report", amount: 200, timestamp: new Date().toISOString() },
+            "coins_deccan_3": { id: "coins_deccan_3", companyId: "deccan_alloys_uid", trigger: "Carbon reduction bonus", amount: 650, timestamp: new Date().toISOString() },
+
+            "coins_lion_1": { id: "coins_lion_1", companyId: "lion_iron_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date().toISOString() },
+            "coins_lion_2": { id: "coins_lion_2", companyId: "lion_iron_uid", trigger: "First Fuel Report", amount: 200, timestamp: new Date().toISOString() },
+            "coins_lion_3": { id: "coins_lion_3", companyId: "lion_iron_uid", trigger: "Grade A Achieved", amount: 300, timestamp: new Date().toISOString() },
+            "coins_lion_4": { id: "coins_lion_4", companyId: "lion_iron_uid", trigger: "Carbon reduction bonus", amount: 500, timestamp: new Date().toISOString() },
+
+            "coins_vardhman_1": { id: "coins_vardhman_1", companyId: "vardhman_steels_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date().toISOString() },
+            "coins_vardhman_2": { id: "coins_vardhman_2", companyId: "vardhman_steels_uid", trigger: "First Fuel Report", amount: 200, timestamp: new Date().toISOString() },
+            "coins_vardhman_3": { id: "coins_vardhman_3", companyId: "vardhman_steels_uid", trigger: "On-time reporting", amount: 350, timestamp: new Date().toISOString() },
+
+            "coins_indus_1": { id: "coins_indus_1", companyId: "indus_weaves_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date().toISOString() },
+            "coins_indus_2": { id: "coins_indus_2", companyId: "indus_weaves_uid", trigger: "First Fuel Report", amount: 200, timestamp: new Date().toISOString() },
+            "coins_indus_3": { id: "coins_indus_3", companyId: "indus_weaves_uid", trigger: "Grade A Achieved", amount: 300, timestamp: new Date().toISOString() },
+            "coins_indus_4": { id: "coins_indus_4", companyId: "indus_weaves_uid", trigger: "Carbon reduction bonus", amount: 700, timestamp: new Date().toISOString() },
+
+            "coins_silk_1": { id: "coins_silk_1", companyId: "silk_route_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date().toISOString() },
+            "coins_silk_2": { id: "coins_silk_2", companyId: "silk_route_uid", trigger: "First Fuel Report", amount: 200, timestamp: new Date().toISOString() },
+            "coins_silk_3": { id: "coins_silk_3", companyId: "silk_route_uid", trigger: "Carbon reduction bonus", amount: 450, timestamp: new Date().toISOString() },
+
+            "coins_yarn_1": { id: "coins_yarn_1", companyId: "yarn_loom_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date().toISOString() },
+            "coins_yarn_2": { id: "coins_yarn_2", companyId: "yarn_loom_uid", trigger: "First Fuel Report", amount: 200, timestamp: new Date().toISOString() },
+            "coins_yarn_3": { id: "coins_yarn_3", companyId: "yarn_loom_uid", trigger: "Grade A+ Achieved", amount: 300, timestamp: new Date().toISOString() },
+            "coins_yarn_4": { id: "coins_yarn_4", companyId: "yarn_loom_uid", trigger: "Carbon reduction bonus", amount: 800, timestamp: new Date().toISOString() },
+
+            "coins_kora_1": { id: "coins_kora_1", companyId: "kora_cotton_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date().toISOString() },
+            "coins_kora_2": { id: "coins_kora_2", companyId: "kora_cotton_uid", trigger: "First Fuel Report", amount: 200, timestamp: new Date().toISOString() },
+            "coins_kora_3": { id: "coins_kora_3", companyId: "kora_cotton_uid", trigger: "Grade A Achieved", amount: 300, timestamp: new Date().toISOString() },
+            "coins_kora_4": { id: "coins_kora_4", companyId: "kora_cotton_uid", trigger: "Carbon reduction bonus", amount: 300, timestamp: new Date().toISOString() },
+
+            "coins_silver_f_1": { id: "coins_silver_f_1", companyId: "silver_flour_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date().toISOString() },
+            "coins_silver_f_2": { id: "coins_silver_f_2", companyId: "silver_flour_uid", trigger: "First Fuel Report", amount: 200, timestamp: new Date().toISOString() },
+            "coins_silver_f_3": { id: "coins_silver_f_3", companyId: "silver_flour_uid", trigger: "Grade A Achieved", amount: 300, timestamp: new Date().toISOString() },
+            "coins_silver_f_4": { id: "coins_silver_f_4", companyId: "silver_flour_uid", trigger: "Carbon reduction bonus", amount: 250, timestamp: new Date().toISOString() },
+
+            "coins_anna_1": { id: "coins_anna_1", companyId: "annapurna_grains_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date().toISOString() },
+            "coins_anna_2": { id: "coins_anna_2", companyId: "annapurna_grains_uid", trigger: "First Fuel Report", amount: 200, timestamp: new Date().toISOString() },
+            "coins_anna_3": { id: "coins_anna_3", companyId: "annapurna_grains_uid", trigger: "Grade A+ Achieved", amount: 300, timestamp: new Date().toISOString() },
+            "coins_anna_4": { id: "coins_anna_4", companyId: "annapurna_grains_uid", trigger: "Carbon reduction bonus", amount: 650, timestamp: new Date().toISOString() },
+
+            "coins_narmada_1": { id: "coins_narmada_1", companyId: "narmada_agro_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date().toISOString() },
+            "coins_narmada_2": { id: "coins_narmada_2", companyId: "narmada_agro_uid", trigger: "First Fuel Report", amount: 200, timestamp: new Date().toISOString() },
+            "coins_narmada_3": { id: "coins_narmada_3", companyId: "narmada_agro_uid", trigger: "Carbon reduction bonus", amount: 400, timestamp: new Date().toISOString() },
+
+            "coins_royal_1": { id: "coins_royal_1", companyId: "royal_chakki_uid", trigger: "Registration Reward", amount: 100, timestamp: new Date().toISOString() },
+            "coins_royal_2": { id: "coins_royal_2", companyId: "royal_chakki_uid", trigger: "First Fuel Report", amount: 200, timestamp: new Date().toISOString() },
+            "coins_royal_3": { id: "coins_royal_3", companyId: "royal_chakki_uid", trigger: "Grade A Achieved", amount: 300, timestamp: new Date().toISOString() },
+            "coins_royal_4": { id: "coins_royal_4", companyId: "royal_chakki_uid", trigger: "Carbon reduction bonus", amount: 300, timestamp: new Date().toISOString() }
         };
 
         const auditLogs = [
@@ -288,6 +1104,18 @@ function initDB() {
             { logId: "log_7", action: "company_registered", companyId: "sunbake_uid", timestamp: new Date(Date.now() - 60*24*60*60*1000).toISOString(), detail: "SunBake Foods registered on EcoMark." },
             { logId: "log_8", action: "report_submitted", companyId: "sunbake_uid", reportId: "rep_sun_q2", timestamp: new Date(Date.now() - 45*24*60*60*1000).toISOString(), detail: "Report submitted for Packaged Wheat Flour (2024-Q2)." },
             { logId: "log_9", action: "report_submitted", companyId: "sunbake_uid", reportId: "rep_sun_q3", timestamp: new Date(Date.now() - 15*24*60*60*1000).toISOString(), detail: "Report submitted for Packaged Wheat Flour (2024-Q3)." },
+
+            { logId: "log_10", action: "company_registered", companyId: "bharat_steel_uid", timestamp: new Date(Date.now() - 60*24*60*60*1000).toISOString(), detail: "Bharat Steel Works registered on EcoMark." },
+            { logId: "log_11", action: "report_submitted", companyId: "bharat_steel_uid", reportId: "rep_bharat_q2", timestamp: new Date(Date.now() - 45*24*60*60*1000).toISOString(), detail: "Report submitted for Structural Steel Rod (2024-Q2)." },
+            { logId: "log_12", action: "report_submitted", companyId: "bharat_steel_uid", reportId: "rep_bharat_q3", timestamp: new Date(Date.now() - 15*24*60*60*1000).toISOString(), detail: "Report submitted for Structural Steel Rod (2024-Q3)." },
+
+            { logId: "log_13", action: "company_registered", companyId: "surat_fab_uid", timestamp: new Date(Date.now() - 60*24*60*60*1000).toISOString(), detail: "Surat Fab Co. registered on EcoMark." },
+            { logId: "log_14", action: "report_submitted", companyId: "surat_fab_uid", reportId: "rep_surat_q2", timestamp: new Date(Date.now() - 45*24*60*60*1000).toISOString(), detail: "Report submitted for Organic Cotton Fabric (2024-Q2)." },
+            { logId: "log_15", action: "report_submitted", companyId: "surat_fab_uid", reportId: "rep_surat_q3", timestamp: new Date(Date.now() - 15*24*60*60*1000).toISOString(), detail: "Report submitted for Organic Cotton Fabric (2024-Q3)." },
+
+            { logId: "log_16", action: "company_registered", companyId: "golden_grains_ltd_uid", timestamp: new Date(Date.now() - 60*24*60*60*1000).toISOString(), detail: "Golden Grains Ltd. registered on EcoMark." },
+            { logId: "log_17", action: "report_submitted", companyId: "golden_grains_ltd_uid", reportId: "rep_golden_ltd_q2", timestamp: new Date(Date.now() - 45*24*60*60*1000).toISOString(), detail: "Report submitted for Premium Packaged Flour (2024-Q2)." },
+            { logId: "log_18", action: "report_submitted", companyId: "golden_grains_ltd_uid", reportId: "rep_golden_ltd_q3", timestamp: new Date(Date.now() - 15*24*60*60*1000).toISOString(), detail: "Report submitted for Premium Packaged Flour (2024-Q3)." }
         ];
 
         localStorage.setItem('ecomark_users', JSON.stringify(users));
@@ -295,7 +1123,8 @@ function initDB() {
         localStorage.setItem('ecomark_reports', JSON.stringify(reports));
         localStorage.setItem('ecomark_ecoCoinsHistory', JSON.stringify(ecoCoinsHistory));
         localStorage.setItem('ecomark_auditLogs', JSON.stringify(auditLogs));
-        localStorage.setItem('ecomark_db_initialized_v2', 'true');
+        localStorage.setItem('ecomark_db_initialized_v5', 'true');
+        console.log("EcoMark DB v5 initialized with 20 comparable products!");
     }
 }
 

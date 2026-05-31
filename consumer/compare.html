@@ -4,7 +4,7 @@
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>Compare Product Footprints | EcoMark Public Registry</title>
-    <meta name="description" content="Compare verified industrial products side-by-side. View carbon scores, precise CO₂e differences, fuel breakdowns, and environmental lifecycle trends."/>
+    <meta name="description" content="Compare verified industrial products side-by-side or scan a product photo for an instant AI-powered carbon market analysis. View CO₂e scores, gas breakdowns, and market averages."/>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
@@ -39,259 +39,513 @@
         body { font-family: 'Inter', sans-serif; background-color: #f8faf8; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         .icon-fill { font-variation-settings: 'FILL' 1; }
-        
+
+        /* ── Score Badge ── */
         .score-badge-large {
             width: 72px; height: 72px; border-radius: 50%;
             display: inline-flex; align-items: center; justify-content: center;
             font-size: 28px; font-weight: 800; color: white;
             box-shadow: 0 4px 14px rgba(0,0,0,0.1);
         }
-        
+
+        /* ── Winner Pulse ── */
         @keyframes pulseGlow {
             0%, 100% { transform: scale(1); box-shadow: 0 4px 14px rgba(27, 94, 32, 0.2); }
             50% { transform: scale(1.03); box-shadow: 0 4px 22px rgba(27, 94, 32, 0.4); }
         }
-        
-        .winner-pill {
-            animation: pulseGlow 2s infinite ease-in-out;
+        .winner-pill { animation: pulseGlow 2s infinite ease-in-out; }
+        .dropdown-shadow { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08); }
+        .compare-pane { transition: all 0.25s ease; }
+
+        /* ── Tab System ── */
+        .tab-btn {
+            display: flex; align-items: center; gap: 8px;
+            padding: 10px 20px; border-radius: 12px;
+            font-size: 14px; font-weight: 700;
+            transition: all 0.2s ease; cursor: pointer; border: none;
+            background: transparent; color: #5C635C;
+        }
+        .tab-btn.active {
+            background: #006036; color: white;
+            box-shadow: 0 4px 12px rgba(0,96,54,0.25);
+        }
+        .tab-btn:not(.active):hover { background: #eceeec; color: #191c1b; }
+
+        /* ── Upload Zone ── */
+        .upload-zone {
+            border: 2px dashed #bec9be; border-radius: 20px;
+            background: #f8faf8; transition: all 0.2s ease;
+            cursor: pointer; position: relative; overflow: hidden;
+        }
+        .upload-zone:hover, .upload-zone.drag-over {
+            border-color: #006036; background: #f0fdf4;
+        }
+        .upload-zone.has-image { border-style: solid; border-color: #006036; }
+
+        /* ── AI Scan Loader ── */
+        @keyframes scanPulse {
+            0%, 100% { opacity: 0.4; transform: scale(0.96); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes spinRing {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .scan-ring {
+            width: 72px; height: 72px; border-radius: 50%;
+            border: 4px solid #e1e8e1; border-top-color: #006036;
+            animation: spinRing 0.9s linear infinite;
+        }
+        .scan-text { animation: scanPulse 1.4s ease-in-out infinite; }
+
+        /* ── Gas Bar Chart ── */
+        @keyframes barFill {
+            from { width: 0%; }
+        }
+        .gas-bar-fill {
+            height: 10px; border-radius: 999px;
+            animation: barFill 0.9s ease-out both;
+        }
+        .gas-bar-track {
+            background: #E1E8E1; border-radius: 999px;
+            height: 10px; overflow: hidden;
         }
 
-        .dropdown-shadow { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08); }
-        
-        .compare-pane {
-            transition: all 0.25s ease;
+        /* ── League Table Rows ── */
+        .league-row { transition: background 0.15s ease; }
+        .league-row:hover { background: #f2f4f2; }
+
+        /* ── API Key Panel ── */
+        .api-panel {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+            opacity: 0;
         }
+        .api-panel.open { max-height: 200px; opacity: 1; }
+
+        /* ── Result Fade In ── */
+        @keyframes resultFade {
+            from { opacity: 0; transform: translateY(16px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .result-fade { animation: resultFade 0.5s ease both; }
+        .result-fade-1 { animation-delay: 0.1s; }
+        .result-fade-2 { animation-delay: 0.2s; }
+        .result-fade-3 { animation-delay: 0.3s; }
+        .result-fade-4 { animation-delay: 0.4s; }
     </style>
 </head>
 <body class="bg-background text-on-background min-h-screen flex flex-col">
 
-<!-- Header -->
+<!-- ── Header ── -->
 <header class="flex justify-between items-center w-full px-4 md:px-12 py-4 sticky top-0 z-40 bg-white border-b border-surface-border">
     <a href="../index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
         <span class="material-symbols-outlined text-primary text-2xl icon-fill">eco</span>
-        <span class="font-bold text-primary text-lg">EcoMark</span>
+        <div class="flex flex-col sm:flex-row sm:items-center gap-1.5">
+            <span class="font-bold text-primary text-lg leading-none">EcoMark</span>
+            <span class="text-[9px] sm:text-xs bg-primary/10 text-primary border border-primary/20 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">Public Registry</span>
+        </div>
     </a>
+    <nav class="hidden md:flex items-center gap-6">
+        <a href="search.html" class="text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors py-1">Search</a>
+        <a href="compare.html" class="text-sm font-bold text-primary border-b-2 border-primary py-1">Compare</a>
+        <a href="label-generator.html" class="text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors py-1">Labels</a>
+        <a href="../compliance.html" class="text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors py-1">Policy Guide</a>
+    </nav>
     <div class="flex items-center gap-3">
-        <span class="text-xs bg-primary/10 text-primary border border-primary/20 font-bold px-3 py-1 rounded-full uppercase tracking-wider hidden sm:block">Public Registry</span>
-        <a href="search.html" class="text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors">Search Products</a>
-        <a href="../register.html" class="bg-primary text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-primary-container transition-colors">Register Company</a>
+        <a href="../login.html" class="border border-surface-border text-on-surface-variant text-sm px-4 py-2 rounded-lg font-bold hover:bg-surface-container-low transition-colors">Company Portal →</a>
     </div>
 </header>
 
 <main class="flex-grow max-w-container-max mx-auto w-full px-4 md:px-12 py-8">
-    
-    <!-- Hero Pitch / Heading -->
-    <div class="text-center mb-8">
+
+    <!-- ── Hero Heading ── -->
+    <div class="text-center mb-6">
         <div class="inline-flex items-center gap-2 bg-[#e8f5e9] border border-[#c8e6c9] text-secondary rounded-full px-3 py-1 text-xs font-bold mb-3">
             <span class="material-symbols-outlined text-sm icon-fill">balance</span>
-            Strict Exact-Match Comparisons
+            Carbon Comparison Tools
         </div>
         <h1 class="text-3xl md:text-4xl font-extrabold text-on-surface mb-2 tracking-tight">Compare Carbon Footprints</h1>
         <p class="text-text-muted text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-            Compare lifecycle greenhouse emissions of similar products directly. Under EcoMark rules, products are only comparable if they share the exact same category and industry sector.
+            Select two products to compare side-by-side, or photograph a product for an instant AI-powered market analysis.
         </p>
     </div>
 
-    <!-- ── STEP 1: SELECT PRODUCT A & B ── -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-8">
-        
-        <!-- PRODUCT A SLOT -->
-        <div class="bg-white border border-surface-border rounded-2xl p-6 shadow-sm flex flex-col relative compare-pane" id="paneA">
-            <div class="flex justify-between items-start mb-4">
-                <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Product A (Baseline)</span>
-                <button id="resetABtn" class="text-text-muted hover:text-error text-xs font-bold flex items-center gap-1 hidden">
-                    <span class="material-symbols-outlined text-sm">restart_alt</span> Reset
-                </button>
-            </div>
-            
-            <div id="searchSlotA">
-                <label class="block text-sm font-bold text-on-surface mb-2">Search for a product to compare</label>
-                <div class="relative">
-                    <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-muted">search</span>
-                    <input
-                        type="text"
-                        id="inputSearchA"
-                        placeholder="Type steel rod, wheat flour..."
-                        class="w-full pl-12 pr-4 py-3 rounded-xl border border-surface-border bg-white text-on-surface focus:outline-none focus:border-primary transition-all text-sm font-medium shadow-sm"
-                        autocomplete="off"
-                    />
-                    <!-- Autocomplete dropdown -->
-                    <div id="dropdownA" class="absolute left-0 right-0 mt-2 bg-white border border-surface-border rounded-xl dropdown-shadow hidden z-30 max-h-60 overflow-y-auto">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Product A Selected Panel Content -->
-            <div id="selectedSlotA" class="hidden flex items-center gap-4 py-2">
-                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                    <span class="material-symbols-outlined text-primary text-2xl">check_circle</span>
-                </div>
-                <div class="flex-1 min-w-0">
-                    <h3 class="font-bold text-on-surface truncate" id="selectedAName">Product A Name</h3>
-                    <p class="text-xs text-text-muted truncate" id="selectedACompany">Manufacturer Company</p>
-                    <div class="flex items-center gap-2 mt-1">
-                        <span id="selectedACat" class="text-[10px] font-extrabold uppercase tracking-wider bg-surface-container-low text-on-surface-variant px-2.5 py-0.5 rounded-full">Manufacturing</span>
-                        <span id="selectedAInd" class="text-[10px] font-extrabold uppercase tracking-wider bg-secondary-container text-on-secondary-container px-2.5 py-0.5 rounded-full">Steel</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- PRODUCT B SLOT -->
-        <div class="bg-white border border-surface-border rounded-2xl p-6 shadow-sm flex flex-col relative compare-pane opacity-60 pointer-events-none" id="paneB">
-            <div class="flex justify-between items-start mb-4">
-                <span class="bg-[#1A73E8]/10 text-[#1A73E8] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Product B (Similar comparison)</span>
-                <button id="resetBBtn" class="text-text-muted hover:text-error text-xs font-bold flex items-center gap-1 hidden">
-                    <span class="material-symbols-outlined text-sm">restart_alt</span> Reset
-                </button>
-            </div>
-            
-            <div id="searchSlotB">
-                <label class="block text-sm font-bold text-on-surface mb-2">Find a similar product to compare</label>
-                <div class="relative">
-                    <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-muted">search</span>
-                    <input
-                        type="text"
-                        id="inputSearchB"
-                        placeholder="Type Golden Grains, Shakti Steel..."
-                        class="w-full pl-12 pr-4 py-3 rounded-xl border border-surface-border bg-white text-on-surface focus:outline-none focus:border-primary transition-all text-sm font-medium shadow-sm"
-                        autocomplete="off"
-                    />
-                    <!-- Autocomplete dropdown -->
-                    <div id="dropdownB" class="absolute left-0 right-0 mt-2 bg-white border border-surface-border rounded-xl dropdown-shadow hidden z-30 max-h-60 overflow-y-auto">
-                        <!-- Populated by JS -->
-                    </div>
-                </div>
-                <!-- Warning display when typing invalid categories -->
-                <p id="matchWarning" class="text-xs text-score-c font-semibold mt-2 hidden flex items-center gap-1">
-                    <span class="material-symbols-outlined text-xs">info</span>
-                    Only Manufacturing products in Manufacturing can be compared here.
-                </p>
-            </div>
-
-            <!-- Product B Selected Panel Content -->
-            <div id="selectedSlotB" class="hidden flex items-center gap-4 py-2">
-                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                    <span class="material-symbols-outlined text-primary text-2xl">check_circle</span>
-                </div>
-                <div class="flex-1 min-w-0">
-                    <h3 class="font-bold text-on-surface truncate" id="selectedBName">Product B Name</h3>
-                    <p class="text-xs text-text-muted truncate" id="selectedBCompany">Manufacturer Company</p>
-                    <div class="flex items-center gap-2 mt-1">
-                        <span id="selectedBCat" class="text-[10px] font-extrabold uppercase tracking-wider bg-surface-container-low text-on-surface-variant px-2.5 py-0.5 rounded-full">Manufacturing</span>
-                        <span id="selectedBInd" class="text-[10px] font-extrabold uppercase tracking-wider bg-secondary-container text-on-secondary-container px-2.5 py-0.5 rounded-full">Steel</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <!-- ── Tab Bar ── -->
+    <div class="flex items-center justify-center gap-2 mb-8 bg-white border border-surface-border rounded-2xl p-2 max-w-sm mx-auto shadow-sm">
+        <button id="tabManual" class="tab-btn active flex-1 justify-center" onclick="switchTab('manual')">
+            <span class="material-symbols-outlined text-lg">balance</span>
+            <span>Manual Compare</span>
+        </button>
+        <button id="tabVisual" class="tab-btn flex-1 justify-center" onclick="switchTab('visual')">
+            <span class="material-symbols-outlined text-lg">photo_camera</span>
+            <span>Visual Compare</span>
+        </button>
     </div>
 
-    <!-- ── STEP 2: COMPARISON DISPLAY ── -->
-    <div id="comparisonResults" class="hidden space-y-6">
-        
-        <!-- SIDE BY SIDE DECK -->
-        <div class="bg-white border border-surface-border rounded-2xl shadow-sm overflow-hidden">
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-surface-border">
-                
-                <!-- PRODUCT A COMPARISON VIEW -->
-                <div class="p-8 flex flex-col items-center text-center relative" id="deckA">
-                    <!-- pulsing winner highlight placeholder -->
-                    <div id="winnerABanner" class="absolute top-4 left-4 right-4 bg-score-a-plus text-white text-xs font-bold py-2 px-4 rounded-full hidden flex items-center justify-center gap-1.5 winner-pill uppercase tracking-wider">
-                        <span class="material-symbols-outlined text-sm icon-fill">stars</span> Lower Carbon Choice
-                    </div>
-                    
-                    <div class="mt-8 mb-6 flex flex-col items-center">
-                        <div id="badgeA" class="score-badge-large mb-3">A</div>
-                        <h2 class="text-2xl font-extrabold text-on-surface mb-1" id="nameA">Product A</h2>
-                        <p class="text-sm text-text-muted" id="companyA">Company A</p>
-                        <span class="inline-block mt-2 text-[10px] font-extrabold uppercase tracking-wider bg-surface-container-low text-on-surface-variant px-3 py-1 rounded-full" id="indA">Manufacturing</span>
-                    </div>
+    <!-- ══════════════════════════════════════════════════ -->
+    <!-- TAB 1 — MANUAL COMPARE (original, fully preserved) -->
+    <!-- ══════════════════════════════════════════════════ -->
+    <div id="manualComparePanel">
 
-                    <div class="w-full border-t border-surface-border py-4">
-                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-1">Carbon Footprint</p>
-                        <p class="text-3xl font-black text-on-surface" id="footprintA">0.0000 kg <span class="text-sm font-semibold text-text-muted">CO₂e/unit</span></p>
-                    </div>
+        <!-- STEP 1: SELECT PRODUCT A & B -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-8">
 
-                    <div class="w-full border-t border-surface-border py-4 flex justify-between items-center px-4">
-                        <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Fuel Type Breakdown</span>
-                        <div class="flex flex-wrap gap-1.5 justify-end" id="fuelsA">
-                            <!-- Populated by JS -->
-                        </div>
-                    </div>
+            <!-- PRODUCT A SLOT -->
+            <div class="bg-white border border-surface-border rounded-2xl p-6 shadow-sm flex flex-col relative compare-pane" id="paneA">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Product A (Baseline)</span>
+                    <button id="resetABtn" class="text-text-muted hover:text-error text-xs font-bold flex items-center gap-1 hidden">
+                        <span class="material-symbols-outlined text-sm">restart_alt</span> Reset
+                    </button>
+                </div>
 
-                    <div class="w-full border-t border-surface-border pt-4 pb-2 flex justify-between items-center px-4">
-                        <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Emission Trend</span>
-                        <div class="flex items-center gap-1.5" id="trendAContainer">
-                            <span class="text-base font-bold" id="trendAArrow">→</span>
-                            <span class="text-xs text-text-muted font-medium" id="trendAText">Stable</span>
-                        </div>
+                <div id="searchSlotA">
+                    <label class="block text-sm font-bold text-on-surface mb-2">Search for a product to compare</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-muted">search</span>
+                        <input type="text" id="inputSearchA" placeholder="Type steel rod, wheat flour..."
+                            class="w-full pl-12 pr-4 py-3 rounded-xl border border-surface-border bg-white text-on-surface focus:outline-none focus:border-primary transition-all text-sm font-medium shadow-sm"
+                            autocomplete="off"/>
+                        <div id="dropdownA" class="absolute left-0 right-0 mt-2 bg-white border border-surface-border rounded-xl dropdown-shadow hidden z-30 max-h-60 overflow-y-auto"></div>
                     </div>
                 </div>
 
-                <!-- PRODUCT B COMPARISON VIEW -->
-                <div class="p-8 flex flex-col items-center text-center relative" id="deckB">
-                    <!-- pulsing winner highlight placeholder -->
-                    <div id="winnerBBanner" class="absolute top-4 left-4 right-4 bg-score-a-plus text-white text-xs font-bold py-2 px-4 rounded-full hidden flex items-center justify-center gap-1.5 winner-pill uppercase tracking-wider">
-                        <span class="material-symbols-outlined text-sm icon-fill">stars</span> Lower Carbon Choice
+                <div id="selectedSlotA" class="hidden flex items-center gap-4 py-2">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-primary text-2xl">check_circle</span>
                     </div>
-
-                    <div class="mt-8 mb-6 flex flex-col items-center">
-                        <div id="badgeB" class="score-badge-large mb-3">B</div>
-                        <h2 class="text-2xl font-extrabold text-on-surface mb-1" id="nameB">Product B</h2>
-                        <p class="text-sm text-text-muted" id="companyB">Company B</p>
-                        <span class="inline-block mt-2 text-[10px] font-extrabold uppercase tracking-wider bg-surface-container-low text-on-surface-variant px-3 py-1 rounded-full" id="indB">Manufacturing</span>
-                    </div>
-
-                    <div class="w-full border-t border-surface-border py-4">
-                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-1">Carbon Footprint</p>
-                        <p class="text-3xl font-black text-on-surface" id="footprintB">0.0000 kg <span class="text-sm font-semibold text-text-muted">CO₂e/unit</span></p>
-                    </div>
-
-                    <div class="w-full border-t border-surface-border py-4 flex justify-between items-center px-4">
-                        <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Fuel Type Breakdown</span>
-                        <div class="flex flex-wrap gap-1.5 justify-end" id="fuelsB">
-                            <!-- Populated by JS -->
-                        </div>
-                    </div>
-
-                    <div class="w-full border-t border-surface-border pt-4 pb-2 flex justify-between items-center px-4">
-                        <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Emission Trend</span>
-                        <div class="flex items-center gap-1.5" id="trendBContainer">
-                            <span class="text-base font-bold" id="trendBArrow">→</span>
-                            <span class="text-xs text-text-muted font-medium" id="trendBText">Stable</span>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-on-surface truncate" id="selectedAName">Product A Name</h3>
+                        <p class="text-xs text-text-muted truncate" id="selectedACompany">Manufacturer Company</p>
+                        <div class="flex items-center gap-2 mt-1">
+                            <span id="selectedACat" class="text-[10px] font-extrabold uppercase tracking-wider bg-surface-container-low text-on-surface-variant px-2.5 py-0.5 rounded-full">Manufacturing</span>
+                            <span id="selectedAInd" class="text-[10px] font-extrabold uppercase tracking-wider bg-secondary-container text-on-secondary-container px-2.5 py-0.5 rounded-full">Steel</span>
                         </div>
                     </div>
                 </div>
-
             </div>
 
-            <!-- MATH STATS DIFFERENCE BANNER -->
-            <div class="border-t border-surface-border bg-surface-container-low px-8 py-5 text-center flex flex-col sm:flex-row items-center justify-center gap-2">
-                <span class="material-symbols-outlined text-primary text-xl icon-fill shrink-0">calculate</span>
-                <p class="font-bold text-on-surface text-sm sm:text-base" id="deltaMathText">
-                    Product A emits 0% more CO₂ per unit than Product B.
-                </p>
+            <!-- PRODUCT B SLOT -->
+            <div class="bg-white border border-surface-border rounded-2xl p-6 shadow-sm flex flex-col relative compare-pane opacity-60 pointer-events-none" id="paneB">
+                <div class="flex justify-between items-start mb-4">
+                    <span class="bg-[#1A73E8]/10 text-[#1A73E8] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Product B (Similar comparison)</span>
+                    <button id="resetBBtn" class="text-text-muted hover:text-error text-xs font-bold flex items-center gap-1 hidden">
+                        <span class="material-symbols-outlined text-sm">restart_alt</span> Reset
+                    </button>
+                </div>
+
+                <div id="searchSlotB">
+                    <label class="block text-sm font-bold text-on-surface mb-2">Find a similar product to compare</label>
+                    <div class="relative">
+                        <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-muted">search</span>
+                        <input type="text" id="inputSearchB" placeholder="Type Golden Grains, Shakti Steel..."
+                            class="w-full pl-12 pr-4 py-3 rounded-xl border border-surface-border bg-white text-on-surface focus:outline-none focus:border-primary transition-all text-sm font-medium shadow-sm"
+                            autocomplete="off"/>
+                        <div id="dropdownB" class="absolute left-0 right-0 mt-2 bg-white border border-surface-border rounded-xl dropdown-shadow hidden z-30 max-h-60 overflow-y-auto"></div>
+                    </div>
+                    <p id="matchWarning" class="text-xs text-score-c font-semibold mt-2 hidden flex items-center gap-1">
+                        <span class="material-symbols-outlined text-xs">info</span>
+                        Only Manufacturing products in Manufacturing can be compared here.
+                    </p>
+                </div>
+
+                <div id="selectedSlotB" class="hidden flex items-center gap-4 py-2">
+                    <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                        <span class="material-symbols-outlined text-primary text-2xl">check_circle</span>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-on-surface truncate" id="selectedBName">Product B Name</h3>
+                        <p class="text-xs text-text-muted truncate" id="selectedBCompany">Manufacturer Company</p>
+                        <div class="flex items-center gap-2 mt-1">
+                            <span id="selectedBCat" class="text-[10px] font-extrabold uppercase tracking-wider bg-surface-container-low text-on-surface-variant px-2.5 py-0.5 rounded-full">Manufacturing</span>
+                            <span id="selectedBInd" class="text-[10px] font-extrabold uppercase tracking-wider bg-secondary-container text-on-secondary-container px-2.5 py-0.5 rounded-full">Steel</span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>
 
-        <!-- ── BOTTOM: WHAT THIS MEANS FOR CONSUMERS ── -->
-        <div class="bg-gradient-to-r from-[#e8f5e9] to-[#f1fdf3] border border-[#c8e6c9] rounded-2xl p-6 shadow-sm flex items-start gap-4">
-            <div class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
-                <span class="material-symbols-outlined icon-fill">campaign</span>
+        <!-- STEP 2: COMPARISON DISPLAY -->
+        <div id="comparisonResults" class="hidden space-y-6">
+
+            <!-- SIDE BY SIDE DECK -->
+            <div class="bg-white border border-surface-border rounded-2xl shadow-sm overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-surface-border">
+
+                    <!-- PRODUCT A VIEW -->
+                    <div class="p-8 flex flex-col items-center text-center relative" id="deckA">
+                        <div id="winnerABanner" class="absolute top-4 left-4 right-4 bg-score-a-plus text-white text-xs font-bold py-2 px-4 rounded-full hidden flex items-center justify-center gap-1.5 winner-pill uppercase tracking-wider">
+                            <span class="material-symbols-outlined text-sm icon-fill">stars</span> Lower Carbon Choice
+                        </div>
+                        <div class="mt-8 mb-6 flex flex-col items-center">
+                            <div id="badgeA" class="score-badge-large mb-3">A</div>
+                            <h2 class="text-2xl font-extrabold text-on-surface mb-1" id="nameA">Product A</h2>
+                            <p class="text-sm text-text-muted" id="companyA">Company A</p>
+                            <span class="inline-block mt-2 text-[10px] font-extrabold uppercase tracking-wider bg-surface-container-low text-on-surface-variant px-3 py-1 rounded-full" id="indA">Manufacturing</span>
+                        </div>
+                        <div class="w-full border-t border-surface-border py-4">
+                            <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-1">Carbon Footprint</p>
+                            <p class="text-3xl font-black text-on-surface" id="footprintA">0.0000 kg <span class="text-sm font-semibold text-text-muted">CO₂e/unit</span></p>
+                        </div>
+                        <div class="w-full border-t border-surface-border py-4 flex justify-between items-center px-4">
+                            <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Fuel Type Breakdown</span>
+                            <div class="flex flex-wrap gap-1.5 justify-end" id="fuelsA"></div>
+                        </div>
+                        <div class="w-full border-t border-surface-border pt-4 pb-2 flex justify-between items-center px-4">
+                            <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Emission Trend</span>
+                            <div class="flex items-center gap-1.5" id="trendAContainer">
+                                <span class="text-base font-bold" id="trendAArrow">→</span>
+                                <span class="text-xs text-text-muted font-medium" id="trendAText">Stable</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- PRODUCT B VIEW -->
+                    <div class="p-8 flex flex-col items-center text-center relative" id="deckB">
+                        <div id="winnerBBanner" class="absolute top-4 left-4 right-4 bg-score-a-plus text-white text-xs font-bold py-2 px-4 rounded-full hidden flex items-center justify-center gap-1.5 winner-pill uppercase tracking-wider">
+                            <span class="material-symbols-outlined text-sm icon-fill">stars</span> Lower Carbon Choice
+                        </div>
+                        <div class="mt-8 mb-6 flex flex-col items-center">
+                            <div id="badgeB" class="score-badge-large mb-3">B</div>
+                            <h2 class="text-2xl font-extrabold text-on-surface mb-1" id="nameB">Product B</h2>
+                            <p class="text-sm text-text-muted" id="companyB">Company B</p>
+                            <span class="inline-block mt-2 text-[10px] font-extrabold uppercase tracking-wider bg-surface-container-low text-on-surface-variant px-3 py-1 rounded-full" id="indB">Manufacturing</span>
+                        </div>
+                        <div class="w-full border-t border-surface-border py-4">
+                            <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-1">Carbon Footprint</p>
+                            <p class="text-3xl font-black text-on-surface" id="footprintB">0.0000 kg <span class="text-sm font-semibold text-text-muted">CO₂e/unit</span></p>
+                        </div>
+                        <div class="w-full border-t border-surface-border py-4 flex justify-between items-center px-4">
+                            <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Fuel Type Breakdown</span>
+                            <div class="flex flex-wrap gap-1.5 justify-end" id="fuelsB"></div>
+                        </div>
+                        <div class="w-full border-t border-surface-border pt-4 pb-2 flex justify-between items-center px-4">
+                            <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Emission Trend</span>
+                            <div class="flex items-center gap-1.5" id="trendBContainer">
+                                <span class="text-base font-bold" id="trendBArrow">→</span>
+                                <span class="text-xs text-text-muted font-medium" id="trendBText">Stable</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- MATH STATS BANNER -->
+                <div class="border-t border-surface-border bg-surface-container-low px-8 py-5 text-center flex flex-col sm:flex-row items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-xl icon-fill shrink-0">calculate</span>
+                    <p class="font-bold text-on-surface text-sm sm:text-base" id="deltaMathText">
+                        Product A emits 0% more CO₂ per unit than Product B.
+                    </p>
+                </div>
             </div>
-            <div class="flex-grow">
-                <h3 class="font-bold text-primary text-base mb-1">What This Means for Consumers</h3>
-                <p class="text-on-surface-variant text-sm leading-relaxed" id="plainLanguageVerdict">
-                    Selecting the carbon-efficient product helps drive regulatory compliance and climate action forward.
-                </p>
+
+            <!-- CONSUMER VERDICT -->
+            <div class="bg-gradient-to-r from-[#e8f5e9] to-[#f1fdf3] border border-[#c8e6c9] rounded-2xl p-6 shadow-sm flex items-start gap-4">
+                <div class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                    <span class="material-symbols-outlined icon-fill">campaign</span>
+                </div>
+                <div class="flex-grow">
+                    <h3 class="font-bold text-primary text-base mb-1">What This Means for Consumers</h3>
+                    <p class="text-on-surface-variant text-sm leading-relaxed" id="plainLanguageVerdict">
+                        Selecting the carbon-efficient product helps drive regulatory compliance and climate action forward.
+                    </p>
+                </div>
+            </div>
+
+        </div><!-- /comparisonResults -->
+
+    </div><!-- /manualComparePanel -->
+
+    <!-- ══════════════════════════════════════════════════ -->
+    <!-- TAB 2 — VISUAL COMPARE (new AI-powered feature)   -->
+    <!-- ══════════════════════════════════════════════════ -->
+    <div id="visualComparePanel" class="hidden space-y-6">
+
+        <!-- UPLOAD SECTION -->
+        <div class="bg-white border border-surface-border rounded-2xl p-6 shadow-sm">
+            <div class="flex items-center gap-3 mb-5">
+                <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                    <span class="material-symbols-outlined text-primary icon-fill">camera_enhance</span>
+                </div>
+                <div>
+                    <h2 class="font-bold text-on-surface text-base">Scan a Product</h2>
+                    <p class="text-xs text-text-muted">Upload or photograph any industrial product — AI will identify its type and pull market emissions data.</p>
+                </div>
+            </div>
+
+            <!-- Drop Zone -->
+            <div id="uploadZone" class="upload-zone min-h-[200px] flex flex-col items-center justify-center p-8 mb-4"
+                 onclick="document.getElementById('fileInput').click()"
+                 ondragover="handleDragOver(event)"
+                 ondragleave="handleDragLeave(event)"
+                 ondrop="handleDrop(event)">
+
+                <!-- Default state -->
+                <div id="uploadPrompt" class="text-center">
+                    <span class="material-symbols-outlined text-5xl text-text-muted mb-3 block icon-fill">add_photo_alternate</span>
+                    <p class="font-bold text-on-surface mb-1">Drop product photo here</p>
+                    <p class="text-xs text-text-muted mb-4">or use the buttons below</p>
+                    <div class="flex flex-wrap gap-2 justify-center">
+                        <button type="button"
+                            onclick="event.stopPropagation(); document.getElementById('cameraInput').click()"
+                            class="flex items-center gap-2 bg-primary text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-primary-container transition-colors">
+                            <span class="material-symbols-outlined text-sm icon-fill">photo_camera</span>Camera
+                        </button>
+                        <button type="button"
+                            onclick="event.stopPropagation(); document.getElementById('fileInput').click()"
+                            class="flex items-center gap-2 border border-surface-border text-on-surface text-sm px-4 py-2 rounded-lg font-bold hover:bg-surface-container-low transition-colors">
+                            <span class="material-symbols-outlined text-sm">photo_library</span>Gallery
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Image preview (hidden until image loaded) -->
+                <div id="imagePreviewWrap" class="hidden w-full flex flex-col items-center gap-3">
+                    <img id="imagePreview" src="" alt="Uploaded product" class="max-h-56 max-w-full rounded-xl object-contain shadow-sm"/>
+                    <p class="text-xs text-text-muted font-medium" id="imageFilename"></p>
+                    <button type="button"
+                        onclick="event.stopPropagation(); resetVisual()"
+                        class="text-xs text-error font-bold flex items-center gap-1 hover:underline">
+                        <span class="material-symbols-outlined text-sm">restart_alt</span>Remove &amp; re-upload
+                    </button>
+                </div>
+            </div>
+
+            <!-- Hidden file inputs -->
+            <input type="file" id="fileInput" accept="image/*" class="hidden" onchange="handleFileInputChange(this)"/>
+            <input type="file" id="cameraInput" accept="image/*" capture="environment" class="hidden" onchange="handleFileInputChange(this)"/>
+
+            <!-- Optional Gemini API key -->
+            <div class="border border-surface-border rounded-xl overflow-hidden">
+                <button type="button" id="apiKeyToggle"
+                    onclick="toggleApiPanel()"
+                    class="w-full flex items-center justify-between px-4 py-3 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low transition-colors">
+                    <span class="flex items-center gap-2">
+                        <span class="material-symbols-outlined text-sm icon-fill">key</span>
+                        Gemini Vision API Key <span class="text-xs font-normal text-text-muted ml-1">(optional — enables real AI identification)</span>
+                    </span>
+                    <span class="material-symbols-outlined text-sm" id="apiToggleIcon">expand_more</span>
+                </button>
+                <div id="apiKeyPanel" class="api-panel px-4 pb-4">
+                    <div class="pt-3 space-y-2">
+                        <input type="password" id="geminiApiKey" placeholder="AIza..."
+                            class="w-full px-4 py-2.5 rounded-lg border border-surface-border text-sm font-medium focus:outline-none focus:border-primary transition-all"
+                            oninput="saveApiKey(this.value)"/>
+                        <p class="text-[11px] text-text-muted leading-snug">
+                            Key is stored in sessionStorage only (cleared when you close this tab). 
+                            Get a free key at <a href="https://aistudio.google.com/apikey" target="_blank" class="text-primary font-bold hover:underline">aistudio.google.com</a>.
+                            Without a key, a smart demo simulation runs instead.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analyse Button -->
+            <button id="analyseBtn" disabled
+                onclick="runVisionAnalysis()"
+                class="mt-4 w-full flex items-center justify-center gap-2 bg-primary text-white py-3.5 rounded-xl font-bold text-sm hover:bg-primary-container transition-colors disabled:opacity-40 disabled:cursor-not-allowed">
+                <span class="material-symbols-outlined icon-fill">search</span>
+                Analyse This Product
+            </button>
+        </div>
+
+        <!-- AI SCANNING LOADER (hidden by default) -->
+        <div id="scanLoader" class="hidden bg-white border border-surface-border rounded-2xl p-10 flex flex-col items-center gap-5">
+            <div class="scan-ring"></div>
+            <div class="text-center">
+                <p class="font-bold text-on-surface mb-1">AI is analysing your image…</p>
+                <p class="text-sm text-text-muted scan-text" id="scanStatusText">Scanning product label &amp; materials…</p>
             </div>
         </div>
 
-    </div>
+        <!-- VISUAL RESULTS (hidden until analysis complete) -->
+        <div id="visualResults" class="hidden space-y-5">
+
+            <!-- Identification Card -->
+            <div class="result-fade result-fade-1 bg-white border border-surface-border rounded-2xl p-6 shadow-sm">
+                <div class="flex items-start justify-between gap-4 flex-wrap">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-wider text-text-muted mb-1">AI Identification</p>
+                        <h2 class="text-2xl font-extrabold text-on-surface mb-1" id="vr_productType">—</h2>
+                        <div class="flex items-center gap-2 flex-wrap mt-2">
+                            <span class="text-[11px] font-bold uppercase tracking-wider bg-surface-container-low text-on-surface-variant px-3 py-1 rounded-full" id="vr_category">—</span>
+                            <span class="text-[11px] font-bold uppercase tracking-wider bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full" id="vr_industry">—</span>
+                            <span class="text-[11px] font-bold uppercase tracking-wider bg-[#e8f5e9] text-[#1B5E20] px-3 py-1 rounded-full" id="vr_confidence">—</span>
+                        </div>
+                    </div>
+                    <div id="vr_methodBadge" class="shrink-0 text-xs bg-[#fffde7] border border-[#fff176] text-[#F57F17] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5">
+                        <span class="material-symbols-outlined text-sm icon-fill">auto_awesome</span>
+                        <span id="vr_methodLabel">Demo Mode</span>
+                    </div>
+                </div>
+                <div id="vr_aiNote" class="mt-4 p-3 bg-surface-container-low rounded-xl text-xs text-text-muted font-medium hidden"></div>
+            </div>
+
+            <!-- Market Average Stats -->
+            <div class="result-fade result-fade-2 bg-white border border-surface-border rounded-2xl overflow-hidden shadow-sm">
+                <div class="bg-gradient-to-r from-[#001c0f] to-[#003321] px-6 py-5 text-white">
+                    <p class="text-xs font-bold uppercase tracking-wider opacity-60 mb-1">Market Intelligence</p>
+                    <h3 class="text-xl font-extrabold">Emissions vs. Market Average</h3>
+                    <p class="text-sm opacity-70 mt-0.5" id="vr_marketSubtitle">Based on all verified products in this category</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-surface-border">
+                    <div class="p-5 text-center">
+                        <p class="text-xs font-bold uppercase tracking-wider text-text-muted mb-1">Market Average</p>
+                        <p class="text-2xl font-black text-on-surface" id="vr_avg">—</p>
+                        <p class="text-xs text-text-muted">kg CO₂e/unit</p>
+                    </div>
+                    <div class="p-5 text-center">
+                        <p class="text-xs font-bold uppercase tracking-wider text-text-muted mb-1">Best in Market</p>
+                        <p class="text-2xl font-black text-score-a" id="vr_min">—</p>
+                        <p class="text-xs text-text-muted">kg CO₂e/unit</p>
+                    </div>
+                    <div class="p-5 text-center">
+                        <p class="text-xs font-bold uppercase tracking-wider text-text-muted mb-1">Highest Emitter</p>
+                        <p class="text-2xl font-black text-score-c" id="vr_max">—</p>
+                        <p class="text-xs text-text-muted">kg CO₂e/unit</p>
+                    </div>
+                    <div class="p-5 text-center">
+                        <p class="text-xs font-bold uppercase tracking-wider text-text-muted mb-1">Products Analysed</p>
+                        <p class="text-2xl font-black text-primary" id="vr_count">—</p>
+                        <p class="text-xs text-text-muted">verified products</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gas Emission Breakdown -->
+            <div class="result-fade result-fade-3 bg-white border border-surface-border rounded-2xl p-6 shadow-sm">
+                <h3 class="font-bold text-on-surface text-base mb-1 flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary icon-fill">science</span>
+                    Gas Emission Breakdown by Fuel Source
+                </h3>
+                <p class="text-xs text-text-muted mb-5">Market-average CO₂e contribution from each fuel type across all comparable products.</p>
+                <div id="vr_gasBars" class="space-y-4"></div>
+            </div>
+
+            <!-- All Comparable Products League Table -->
+            <div class="result-fade result-fade-4 bg-white border border-surface-border rounded-2xl overflow-hidden shadow-sm">
+                <div class="px-6 py-4 border-b border-surface-border flex items-center gap-3">
+                    <span class="material-symbols-outlined text-primary icon-fill">leaderboard</span>
+                    <div>
+                        <h3 class="font-bold text-on-surface text-base">All Comparable Products</h3>
+                        <p class="text-xs text-text-muted">Ranked by carbon efficiency (best to worst)</p>
+                    </div>
+                </div>
+                <div id="vr_leagueTable" class="divide-y divide-surface-border"></div>
+            </div>
+
+            <!-- Reset Visual -->
+            <div class="text-center pt-2 pb-4">
+                <button onclick="resetVisual()" class="inline-flex items-center gap-2 text-sm font-bold text-text-muted hover:text-primary transition-colors">
+                    <span class="material-symbols-outlined text-sm">restart_alt</span>Analyse another product
+                </button>
+            </div>
+
+        </div><!-- /visualResults -->
+
+    </div><!-- /visualComparePanel -->
 
 </main>
 
@@ -309,404 +563,768 @@
     </div>
 </footer>
 
-<script src="../js/db.js"></script>
+<script src="../js/db.js?v=5"></script>
 <script>
-    const SCORE_BG = {
-        'A+': '#1B5E20', 'A': '#388E3C', 'B': '#F9A825', 'C': '#E65100', 'D': '#B71C1C'
-    };
+// ═══════════════════════════════════════════════════════════════
+// SHARED CONSTANTS
+// ═══════════════════════════════════════════════════════════════
+const SCORE_BG = {
+    'A+': '#1B5E20', 'A': '#388E3C', 'B': '#F9A825', 'C': '#E65100', 'D': '#B71C1C'
+};
 
-    let allProductsList = [];
-    let productA = null;
-    let productB = null;
+// Fuel type display config
+const FUEL_META = {
+    diesel:      { label: 'Diesel',       color: '#B71C1C', icon: '⛽' },
+    petrol:      { label: 'Petrol',       color: '#D84315', icon: '⛽' },
+    lpg:         { label: 'LPG',          color: '#E65100', icon: '🔥' },
+    natural_gas: { label: 'Natural Gas',  color: '#1565C0', icon: '💨' },
+    coal:        { label: 'Coal',         color: '#37474F', icon: '⚫' },
+    furnace_oil: { label: 'Furnace Oil',  color: '#880E4F', icon: '🛢️' },
+    biomass:     { label: 'Biomass',      color: '#2E7D32', icon: '🌿' },
+    electricity: { label: 'Electricity',  color: '#6A1B9A', icon: '⚡' }
+};
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const rawProducts = DB.getProducts();
-        const rawUsers = DB.getUsers();
+// ═══════════════════════════════════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════════════════════════════════
+function switchTab(tab) {
+    const isManual = tab === 'manual';
+    document.getElementById('manualComparePanel').classList.toggle('hidden', !isManual);
+    document.getElementById('visualComparePanel').classList.toggle('hidden', isManual);
+    document.getElementById('tabManual').classList.toggle('active', isManual);
+    document.getElementById('tabVisual').classList.toggle('active', !isManual);
+}
 
-        // Flatten products with company details for search queries
-        allProductsList = Object.values(rawProducts)
-            .filter(p => p.latestScore)
-            .map(p => ({
-                ...p,
-                companyName: rawUsers[p.companyId]?.companyName || 'Unknown Company',
-                industryType: rawUsers[p.companyId]?.industry || p.category || 'Manufacturing'
-            }));
+// ═══════════════════════════════════════════════════════════════
+// MANUAL COMPARE — original logic (fully preserved)
+// ═══════════════════════════════════════════════════════════════
+let allProductsList = [];
+let productA = null;
+let productB = null;
 
-        // Binds autocomplete input searches
-        bindSearch('inputSearchA', 'dropdownA', item => {
-            selectProductA(item);
-        }, () => allProductsList);
+document.addEventListener('DOMContentLoaded', () => {
+    const rawProducts = DB.getProducts();
+    const rawUsers = DB.getUsers();
 
-        bindSearch('inputSearchB', 'dropdownB', item => {
-            selectProductB(item);
-        }, () => {
-            if (!productA) return [];
-            return allProductsList.filter(p => 
-                p.category === productA.category && 
-                p.industryType === productA.industryType &&
-                p.productId !== productA.productId
+    allProductsList = Object.values(rawProducts)
+        .filter(p => p.latestScore)
+        .map(p => ({
+            ...p,
+            companyName: rawUsers[p.companyId]?.companyName || 'Unknown Company',
+            industryType: rawUsers[p.companyId]?.industry || p.category || 'Manufacturing'
+        }));
+
+    bindSearch('inputSearchA', 'dropdownA', item => {
+        selectProductA(item);
+    }, () => allProductsList);
+
+    bindSearch('inputSearchB', 'dropdownB', item => {
+        selectProductB(item);
+    }, () => {
+        if (!productA) return [];
+        return allProductsList.filter(p =>
+            p.category === productA.category &&
+            p.industryType === productA.industryType &&
+            p.productId !== productA.productId
+        );
+    });
+
+    document.getElementById('inputSearchB').addEventListener('input', () => {
+        if (!productA) return;
+        const query = document.getElementById('inputSearchB').value.trim().toLowerCase();
+        const warningEl = document.getElementById('matchWarning');
+        if (query) {
+            const mismatch = allProductsList.filter(p =>
+                p.productName.toLowerCase().includes(query) &&
+                (p.category !== productA.category || p.industryType !== productA.industryType)
             );
-        });
-
-        // Binds input validation alert helper
-        document.getElementById('inputSearchB').addEventListener('input', () => {
-            if (!productA) return;
-            const query = document.getElementById('inputSearchB').value.trim().toLowerCase();
-            const warningEl = document.getElementById('matchWarning');
-            
-            if (query) {
-                // Find if there are any products matching query name that are from DIFFERENT category/industry
-                const mismatchedProducts = allProductsList.filter(p => 
-                    p.productName.toLowerCase().includes(query) &&
-                    (p.category !== productA.category || p.industryType !== productA.industryType)
-                );
-                
-                if (mismatchedProducts.length > 0) {
-                    warningEl.textContent = `Only ${productA.category} products in ${productA.industryType} can be compared here.`;
-                    warningEl.classList.remove('hidden');
-                } else {
-                    warningEl.classList.add('hidden');
-                }
+            if (mismatch.length > 0) {
+                warningEl.textContent = `Only ${productA.category} products in ${productA.industryType} can be compared here.`;
+                warningEl.classList.remove('hidden');
             } else {
                 warningEl.classList.add('hidden');
             }
-        });
-
-        // Setup resets
-        document.getElementById('resetABtn').addEventListener('click', resetA);
-        document.getElementById('resetBBtn').addEventListener('click', resetB);
-
-        // Check for ?productId= param to preload Product A
-        const params = new URLSearchParams(window.location.search);
-        const preloadId = params.get('productId');
-        if (preloadId) {
-            const preProduct = allProductsList.find(p => p.productId === preloadId);
-            if (preProduct) {
-                selectProductA(preProduct);
-            }
+        } else {
+            warningEl.classList.add('hidden');
         }
     });
 
-    // Custom Autocomplete binder
-    function bindSearch(inputId, dropdownId, onSelect, getFilteredList) {
-        const input = document.getElementById(inputId);
-        const dropdown = document.getElementById(dropdownId);
+    document.getElementById('resetABtn').addEventListener('click', resetA);
+    document.getElementById('resetBBtn').addEventListener('click', resetB);
 
-        input.addEventListener('focus', () => {
-            renderDropdown();
+    const params = new URLSearchParams(window.location.search);
+    const preloadId = params.get('productId');
+    if (preloadId) {
+        const preProduct = allProductsList.find(p => p.productId === preloadId);
+        if (preProduct) selectProductA(preProduct);
+    }
+
+    // Restore saved API key from sessionStorage
+    const savedKey = sessionStorage.getItem('ecomark_gemini_key');
+    if (savedKey) document.getElementById('geminiApiKey').value = savedKey;
+});
+
+function bindSearch(inputId, dropdownId, onSelect, getFilteredList) {
+    const input = document.getElementById(inputId);
+    const dropdown = document.getElementById(dropdownId);
+
+    input.addEventListener('focus', renderDropdown);
+    input.addEventListener('input', renderDropdown);
+
+    document.addEventListener('click', e => {
+        if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+            dropdown.classList.add('hidden');
+        }
+    });
+
+    function renderDropdown() {
+        const list = getFilteredList();
+        const query = input.value.trim().toLowerCase();
+        const filtered = list.filter(p =>
+            !query ||
+            p.productName.toLowerCase().includes(query) ||
+            p.companyName.toLowerCase().includes(query)
+        );
+
+        if (filtered.length === 0) {
+            dropdown.innerHTML = `<p class="p-3 text-xs text-text-muted text-center font-medium">No verified matches found</p>`;
+        } else {
+            dropdown.innerHTML = filtered.map(p => {
+                const scoreBg = SCORE_BG[p.latestScore] || '#388E3C';
+                return `
+                    <div class="flex items-center justify-between p-3 hover:bg-surface-container-low cursor-pointer border-b border-surface-border last:border-b-0" data-id="${p.productId}">
+                        <div class="min-w-0 flex-1">
+                            <p class="text-sm font-bold text-on-surface truncate mb-0.5">${p.productName}</p>
+                            <p class="text-xs text-text-muted truncate">${p.companyName}</p>
+                        </div>
+                        <div class="flex items-center gap-2 shrink-0">
+                            <span class="text-[9px] font-bold uppercase tracking-wider bg-surface-container text-on-surface-variant px-2 py-0.5 rounded-full">${p.industryType}</span>
+                            <span class="w-7 h-7 rounded-full text-white text-[10px] font-black flex items-center justify-center" style="background:${scoreBg}">${p.latestScore}</span>
+                        </div>
+                    </div>`;
+            }).join('');
+        }
+        dropdown.classList.remove('hidden');
+    }
+
+    dropdown.addEventListener('click', e => {
+        const item = e.target.closest('[data-id]');
+        if (!item) return;
+        const pid = item.dataset.id;
+        const match = getFilteredList().find(p => p.productId === pid) || allProductsList.find(p => p.productId === pid);
+        if (match) {
+            input.value = '';
+            dropdown.classList.add('hidden');
+            onSelect(match);
+        }
+    });
+}
+
+function selectProductA(item) {
+    productA = item;
+    document.getElementById('searchSlotA').classList.add('hidden');
+    document.getElementById('selectedSlotA').classList.remove('hidden');
+    document.getElementById('resetABtn').classList.remove('hidden');
+    document.getElementById('selectedAName').textContent = item.productName;
+    document.getElementById('selectedACompany').textContent = item.companyName;
+    document.getElementById('selectedACat').textContent = item.category;
+    document.getElementById('selectedAInd').textContent = item.industryType;
+    const paneB = document.getElementById('paneB');
+    paneB.classList.remove('opacity-60', 'pointer-events-none');
+    document.getElementById('inputSearchB').focus();
+    document.getElementById('matchWarning').textContent = `Only ${item.category} products in ${item.industryType} can be compared here.`;
+    checkCompare();
+}
+
+function selectProductB(item) {
+    productB = item;
+    document.getElementById('searchSlotB').classList.add('hidden');
+    document.getElementById('selectedSlotB').classList.remove('hidden');
+    document.getElementById('resetBBtn').classList.remove('hidden');
+    document.getElementById('matchWarning').classList.add('hidden');
+    document.getElementById('selectedBName').textContent = item.productName;
+    document.getElementById('selectedBCompany').textContent = item.companyName;
+    document.getElementById('selectedBCat').textContent = item.category;
+    document.getElementById('selectedBInd').textContent = item.industryType;
+    checkCompare();
+}
+
+function checkCompare() {
+    if (!productA || !productB) {
+        document.getElementById('comparisonResults').classList.add('hidden');
+        return;
+    }
+    const reports = DB.getReports();
+
+    // Product A
+    document.getElementById('nameA').textContent = productA.productName;
+    document.getElementById('companyA').textContent = productA.companyName;
+    document.getElementById('indA').textContent = productA.industryType;
+    document.getElementById('footprintA').innerHTML = `${productA.latestCO2ePerUnit.toFixed(4)} kg <span class="text-sm font-semibold text-text-muted">CO₂e/unit</span>`;
+    const badgeA = document.getElementById('badgeA');
+    badgeA.textContent = productA.latestScore;
+    badgeA.style.backgroundColor = SCORE_BG[productA.latestScore] || '#388E3C';
+
+    const latestRepAId = productA.reportHistory[productA.reportHistory.length - 1];
+    const latestRepA = reports[latestRepAId];
+    const fuelsAContainer = document.getElementById('fuelsA');
+    fuelsAContainer.innerHTML = '';
+    if (latestRepA && latestRepA.fuelEntries) {
+        latestRepA.fuelEntries.forEach(fe => {
+            const span = document.createElement('span');
+            span.className = 'text-[10px] font-bold bg-[#eceeec] border border-surface-border text-on-surface-variant px-2 py-0.5 rounded-full capitalize';
+            span.textContent = fe.fuel_type.replace('_', ' ');
+            fuelsAContainer.appendChild(span);
         });
+    } else {
+        fuelsAContainer.innerHTML = `<span class="text-xs text-text-muted">N/A</span>`;
+    }
 
-        input.addEventListener('input', () => {
-            renderDropdown();
+    const trendAArrow = document.getElementById('trendAArrow');
+    const trendAText = document.getElementById('trendAText');
+    if (productA.reportHistory.length > 1) {
+        const rList = productA.reportHistory.map(id => reports[id]).filter(Boolean).sort((a,b) => new Date(a.submittedAt) - new Date(b.submittedAt));
+        const cur = rList[rList.length-1].co2ePerUnit, prev = rList[rList.length-2].co2ePerUnit;
+        if (cur < prev) { trendAArrow.className='text-base font-bold text-score-a'; trendAArrow.textContent='↓'; trendAText.textContent='Improving'; }
+        else if (cur > prev) { trendAArrow.className='text-base font-bold text-error'; trendAArrow.textContent='↑'; trendAText.textContent='Worsening'; }
+        else { trendAArrow.className='text-base font-bold text-text-muted'; trendAArrow.textContent='→'; trendAText.textContent='Stable'; }
+    } else { trendAArrow.className='text-base font-bold text-text-muted'; trendAArrow.textContent='→'; trendAText.textContent='Stable (First report)'; }
+
+    // Product B
+    document.getElementById('nameB').textContent = productB.productName;
+    document.getElementById('companyB').textContent = productB.companyName;
+    document.getElementById('indB').textContent = productB.industryType;
+    document.getElementById('footprintB').innerHTML = `${productB.latestCO2ePerUnit.toFixed(4)} kg <span class="text-sm font-semibold text-text-muted">CO₂e/unit</span>`;
+    const badgeB = document.getElementById('badgeB');
+    badgeB.textContent = productB.latestScore;
+    badgeB.style.backgroundColor = SCORE_BG[productB.latestScore] || '#388E3C';
+
+    const latestRepBId = productB.reportHistory[productB.reportHistory.length - 1];
+    const latestRepB = reports[latestRepBId];
+    const fuelsBContainer = document.getElementById('fuelsB');
+    fuelsBContainer.innerHTML = '';
+    if (latestRepB && latestRepB.fuelEntries) {
+        latestRepB.fuelEntries.forEach(fe => {
+            const span = document.createElement('span');
+            span.className = 'text-[10px] font-bold bg-[#eceeec] border border-surface-border text-on-surface-variant px-2 py-0.5 rounded-full capitalize';
+            span.textContent = fe.fuel_type.replace('_', ' ');
+            fuelsBContainer.appendChild(span);
         });
+    } else {
+        fuelsBContainer.innerHTML = `<span class="text-xs text-text-muted">N/A</span>`;
+    }
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', e => {
-            if (!input.contains(e.target) && !dropdown.contains(e.target)) {
-                dropdown.classList.add('hidden');
-            }
-        });
+    const trendBArrow = document.getElementById('trendBArrow');
+    const trendBText = document.getElementById('trendBText');
+    if (productB.reportHistory.length > 1) {
+        const rList = productB.reportHistory.map(id => reports[id]).filter(Boolean).sort((a,b) => new Date(a.submittedAt) - new Date(b.submittedAt));
+        const cur = rList[rList.length-1].co2ePerUnit, prev = rList[rList.length-2].co2ePerUnit;
+        if (cur < prev) { trendBArrow.className='text-base font-bold text-score-a'; trendBArrow.textContent='↓'; trendBText.textContent='Improving'; }
+        else if (cur > prev) { trendBArrow.className='text-base font-bold text-error'; trendBArrow.textContent='↑'; trendBText.textContent='Worsening'; }
+        else { trendBArrow.className='text-base font-bold text-text-muted'; trendBArrow.textContent='→'; trendBText.textContent='Stable'; }
+    } else { trendBArrow.className='text-base font-bold text-text-muted'; trendBArrow.textContent='→'; trendBText.textContent='Stable (First report)'; }
 
-        function renderDropdown() {
-            const list = getFilteredList();
-            const query = input.value.trim().toLowerCase();
-            
-            const filtered = list.filter(p => 
-                !query || 
-                p.productName.toLowerCase().includes(query) ||
-                p.companyName.toLowerCase().includes(query)
-            );
+    // Winner Math
+    const fA = productA.latestCO2ePerUnit, fB = productB.latestCO2ePerUnit;
+    const bannerA = document.getElementById('winnerABanner'), bannerB = document.getElementById('winnerBBanner');
+    const deltaText = document.getElementById('deltaMathText'), verdictText = document.getElementById('plainLanguageVerdict');
+    const deckA = document.getElementById('deckA'), deckB = document.getElementById('deckB');
 
-            if (filtered.length === 0) {
-                dropdown.innerHTML = `<p class="p-3 text-xs text-text-muted text-center font-medium">No verified matches found</p>`;
-            } else {
-                dropdown.innerHTML = filtered.map(p => {
-                    const scoreBg = SCORE_BG[p.latestScore] || '#388E3C';
-                    return `
-                        <div class="flex items-center justify-between p-3 hover:bg-surface-container-low cursor-pointer border-b border-surface-border last:border-b-0"
-                             data-id="${p.productId}">
-                            <div class="min-w-0 flex-1">
-                                <p class="text-sm font-bold text-on-surface truncate mb-0.5">${p.productName}</p>
-                                <p class="text-xs text-text-muted truncate">${p.companyName}</p>
-                            </div>
-                            <div class="flex items-center gap-2 shrink-0">
-                                <span class="text-[9px] font-bold uppercase tracking-wider bg-surface-container text-on-surface-variant px-2 py-0.5 rounded-full">${p.industryType}</span>
-                                <span class="w-7 h-7 rounded-full text-white text-[10px] font-black flex items-center justify-center" style="background:${scoreBg}">${p.latestScore}</span>
-                            </div>
-                        </div>`;
-                }).join('');
-            }
-            dropdown.classList.remove('hidden');
+    bannerA.classList.add('hidden'); bannerB.classList.add('hidden');
+    deckA.classList.remove('border-2','border-score-a-plus'); deckB.classList.remove('border-2','border-score-a-plus');
+
+    let diffKg = Math.abs(fA - fB), pct = 0;
+    if (fA === fB) {
+        deltaText.innerHTML = `<span class="material-symbols-outlined text-primary text-sm icon-fill shrink-0">check_circle</span> Both products have an identical footprint of <strong>${fA.toFixed(4)} kg CO₂e/unit</strong>.`;
+        bannerA.textContent = 'Equal Footprint'; bannerB.textContent = 'Equal Footprint';
+        bannerA.classList.remove('hidden','bg-score-a-plus'); bannerB.classList.remove('hidden','bg-score-a-plus');
+        bannerA.classList.add('bg-score-b'); bannerB.classList.add('bg-score-b');
+        verdictText.innerHTML = `Both products are in the <strong class="font-bold">${productA.category}</strong> category. Choosing either product emits the same environmental load. Consider regional proximity to minimize transport emissions.`;
+    } else {
+        let higher, lower;
+        if (fA > fB) {
+            higher = productA; lower = productB; pct = Math.round(((fA-fB)/fB)*100);
+            bannerB.classList.remove('hidden','bg-score-b'); bannerB.classList.add('bg-score-a-plus');
+            bannerB.innerHTML = `<span class="material-symbols-outlined text-sm icon-fill">stars</span> Lower Carbon Choice`;
+            deckB.classList.add('border-2','border-score-a-plus');
+        } else {
+            higher = productB; lower = productA; pct = Math.round(((fB-fA)/fA)*100);
+            bannerA.classList.remove('hidden','bg-score-b'); bannerA.classList.add('bg-score-a-plus');
+            bannerA.innerHTML = `<span class="material-symbols-outlined text-sm icon-fill">stars</span> Lower Carbon Choice`;
+            deckA.classList.add('border-2','border-score-a-plus');
+        }
+        deltaText.innerHTML = `<span class="material-symbols-outlined text-[#006036] text-sm icon-fill shrink-0">arrow_circle_down</span> <strong>${higher.productName}</strong> emits <strong>${pct}% more</strong> CO₂ per unit than <strong>${lower.productName}</strong> (+${diffKg.toFixed(4)} kg).`;
+        const savedKm = (diffKg * 6).toFixed(1);
+        verdictText.innerHTML = `Both products are in the <strong class="font-bold text-primary">${productA.category}</strong> category. Choosing <strong class="text-primary font-extrabold">${lower.productName}</strong> saves approximately <strong class="text-primary font-black">${diffKg.toFixed(3)} kg</strong> of CO₂ per unit purchased — equivalent to avoiding a <strong class="text-primary font-black">${savedKm} km</strong> driving journey in a standard vehicle.`;
+    }
+
+    document.getElementById('comparisonResults').classList.remove('hidden');
+}
+
+function resetA() {
+    productA = null; productB = null;
+    document.getElementById('inputSearchA').value = '';
+    document.getElementById('searchSlotA').classList.remove('hidden');
+    document.getElementById('selectedSlotA').classList.add('hidden');
+    document.getElementById('resetABtn').classList.add('hidden');
+    document.getElementById('paneB').classList.add('opacity-60', 'pointer-events-none');
+    resetB(); checkCompare();
+}
+
+function resetB() {
+    productB = null;
+    document.getElementById('inputSearchB').value = '';
+    document.getElementById('searchSlotB').classList.remove('hidden');
+    document.getElementById('selectedSlotB').classList.add('hidden');
+    document.getElementById('resetBBtn').classList.add('hidden');
+    document.getElementById('matchWarning').classList.add('hidden');
+    checkCompare();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// VISUAL COMPARE — Image Upload Handlers
+// ═══════════════════════════════════════════════════════════════
+let uploadedImageBase64 = null;
+let uploadedFileName = '';
+
+function handleFileInputChange(input) {
+    if (input.files && input.files[0]) {
+        loadImageFile(input.files[0]);
+    }
+}
+
+function handleDragOver(e) {
+    e.preventDefault();
+    document.getElementById('uploadZone').classList.add('drag-over');
+}
+
+function handleDragLeave(e) {
+    document.getElementById('uploadZone').classList.remove('drag-over');
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    document.getElementById('uploadZone').classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file && file.type.startsWith('image/')) loadImageFile(file);
+}
+
+function loadImageFile(file) {
+    uploadedFileName = file.name;
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        uploadedImageBase64 = e.target.result; // full data URL
+        const preview = document.getElementById('imagePreview');
+        preview.src = uploadedImageBase64;
+        document.getElementById('imageFilename').textContent = file.name;
+        document.getElementById('uploadPrompt').classList.add('hidden');
+        document.getElementById('imagePreviewWrap').classList.remove('hidden');
+        document.getElementById('uploadZone').classList.add('has-image');
+        document.getElementById('analyseBtn').disabled = false;
+        // Hide any previous results
+        document.getElementById('visualResults').classList.add('hidden');
+        document.getElementById('scanLoader').classList.add('hidden');
+    };
+    reader.readAsDataURL(file);
+}
+
+function resetVisual() {
+    uploadedImageBase64 = null;
+    uploadedFileName = '';
+    document.getElementById('fileInput').value = '';
+    document.getElementById('cameraInput').value = '';
+    document.getElementById('imagePreview').src = '';
+    document.getElementById('imageFilename').textContent = '';
+    document.getElementById('uploadPrompt').classList.remove('hidden');
+    document.getElementById('imagePreviewWrap').classList.add('hidden');
+    document.getElementById('uploadZone').classList.remove('has-image', 'drag-over');
+    document.getElementById('analyseBtn').disabled = true;
+    document.getElementById('visualResults').classList.add('hidden');
+    document.getElementById('scanLoader').classList.add('hidden');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// API KEY PANEL
+// ═══════════════════════════════════════════════════════════════
+function toggleApiPanel() {
+    const panel = document.getElementById('apiKeyPanel');
+    const icon = document.getElementById('apiToggleIcon');
+    const isOpen = panel.classList.contains('open');
+    panel.classList.toggle('open', !isOpen);
+    icon.textContent = isOpen ? 'expand_more' : 'expand_less';
+}
+
+function saveApiKey(val) {
+    sessionStorage.setItem('ecomark_gemini_key', val.trim());
+}
+
+// ═══════════════════════════════════════════════════════════════
+// VISION ANALYSIS — Main Entry Point
+// ═══════════════════════════════════════════════════════════════
+async function runVisionAnalysis() {
+    if (!uploadedImageBase64) return;
+
+    // Show loader, hide results
+    document.getElementById('analyseBtn').disabled = true;
+    document.getElementById('visualResults').classList.add('hidden');
+    document.getElementById('scanLoader').classList.remove('hidden');
+
+    // Cycle scan status text
+    const statusMessages = [
+        'Scanning product label &amp; materials…',
+        'Matching industrial category…',
+        'Querying EcoMark carbon registry…',
+        'Computing market averages…',
+        'Preparing emission breakdown…'
+    ];
+    let msgIdx = 0;
+    const statusEl = document.getElementById('scanStatusText');
+    const statusInterval = setInterval(() => {
+        msgIdx = (msgIdx + 1) % statusMessages.length;
+        statusEl.innerHTML = statusMessages[msgIdx];
+    }, 900);
+
+    try {
+        const apiKey = sessionStorage.getItem('ecomark_gemini_key') || '';
+        let identifiedCategory, identifiedType, confidence, aiNote, usedRealAI;
+
+        if (apiKey) {
+            // Real Gemini Vision API call
+            const result = await analyseWithGemini(uploadedImageBase64, apiKey);
+            identifiedCategory = result.category;
+            identifiedType = result.productType;
+            confidence = result.confidence;
+            aiNote = result.note;
+            usedRealAI = true;
+        } else {
+            // Demo simulation — add a human-feeling delay
+            await new Promise(r => setTimeout(r, 2800));
+            const result = runDemoAnalysis(uploadedFileName, uploadedImageBase64);
+            identifiedCategory = result.category;
+            identifiedType = result.productType;
+            confidence = result.confidence;
+            aiNote = result.note;
+            usedRealAI = false;
         }
 
-        dropdown.addEventListener('click', e => {
-            const item = e.target.closest('[data-id]');
-            if (!item) return;
-            const pid = item.dataset.id;
-            const match = getFilteredList().find(p => p.productId === pid) || allProductsList.find(p => p.productId === pid);
-            if (match) {
-                input.value = '';
-                dropdown.classList.add('hidden');
-                onSelect(match);
-            }
-        });
+        clearInterval(statusInterval);
+
+        // Compute market stats for identified category
+        const stats = computeMarketAverages(identifiedCategory);
+
+        // Render results
+        renderVisualResults(identifiedType, identifiedCategory, confidence, aiNote, usedRealAI, stats);
+
+    } catch (err) {
+        clearInterval(statusInterval);
+        // Fallback to demo on API error
+        await new Promise(r => setTimeout(r, 500));
+        const result = runDemoAnalysis(uploadedFileName, uploadedImageBase64);
+        const stats = computeMarketAverages(result.category);
+        renderVisualResults(result.productType, result.category, result.confidence,
+            `API error: ${err.message}. Showing demo mode results.`, false, stats);
     }
 
-    // Select Product A
-    function selectProductA(item) {
-        productA = item;
-        
-        // Hide Search Slot, Show Selected Panel
-        document.getElementById('searchSlotA').classList.add('hidden');
-        document.getElementById('selectedSlotA').classList.remove('hidden');
-        document.getElementById('resetABtn').classList.remove('hidden');
-        
-        // Populate labels
-        document.getElementById('selectedAName').textContent = item.productName;
-        document.getElementById('selectedACompany').textContent = item.companyName;
-        document.getElementById('selectedACat').textContent = item.category;
-        document.getElementById('selectedAInd').textContent = item.industryType;
+    document.getElementById('scanLoader').classList.add('hidden');
+    document.getElementById('analyseBtn').disabled = false;
+}
 
-        // Unlock Product B Pane
-        const paneB = document.getElementById('paneB');
-        paneB.classList.remove('opacity-60', 'pointer-events-none');
-        document.getElementById('inputSearchB').focus();
+// ═══════════════════════════════════════════════════════════════
+// GEMINI VISION API CALL
+// ═══════════════════════════════════════════════════════════════
+async function analyseWithGemini(dataUrl, apiKey) {
+    // Strip the data URL prefix to get pure base64
+    const base64Data = dataUrl.split(',')[1];
+    const mimeMatch = dataUrl.match(/data:(image\/\w+);base64/);
+    const mimeType = mimeMatch ? mimeMatch[1] : 'image/jpeg';
 
-        // Trigger warning text update
-        document.getElementById('matchWarning').textContent = `Only ${item.category} products in ${item.industryType} can be compared here.`;
+    const prompt = `You are an industrial carbon accounting assistant. Analyse this product image and respond with ONLY a JSON object — no markdown, no explanation.
 
-        checkCompare();
-    }
+The EcoMark database has exactly three product categories:
+1. "Steel Rod" — any steel bar, rod, rebar, TMT bar, structural steel
+2. "Cotton Fabric" — any woven fabric, textile roll, cotton cloth
+3. "Packaged Flour" — any flour bag, grain flour, atta, packaged wheat/rice flour
 
-    // Select Product B
-    function selectProductB(item) {
-        productB = item;
+Respond with this exact JSON structure:
+{
+  "productType": "<descriptive product name, e.g. 'TMT Steel Rebar'>",
+  "category": "<one of: Steel Rod | Cotton Fabric | Packaged Flour>",
+  "confidence": "<High | Medium | Low>",
+  "note": "<one sentence about what you observed in the image>"
+}
 
-        // Hide Search Slot, Show Selected Panel
-        document.getElementById('searchSlotB').classList.add('hidden');
-        document.getElementById('selectedSlotB').classList.remove('hidden');
-        document.getElementById('resetBBtn').classList.remove('hidden');
-        document.getElementById('matchWarning').classList.add('hidden');
+If the product doesn't match any category, pick the closest one and set confidence to Low.`;
 
-        // Populate labels
-        document.getElementById('selectedBName').textContent = item.productName;
-        document.getElementById('selectedBCompany').textContent = item.companyName;
-        document.getElementById('selectedBCat').textContent = item.category;
-        document.getElementById('selectedBInd').textContent = item.industryType;
-
-        checkCompare();
-    }
-
-    // Check if both products are selected, and run the comparison
-    function checkCompare() {
-        if (!productA || !productB) {
-            document.getElementById('comparisonResults').classList.add('hidden');
-            return;
+    const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+        {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [
+                        { text: prompt },
+                        { inline_data: { mime_type: mimeType, data: base64Data } }
+                    ]
+                }],
+                generationConfig: { temperature: 0.1, maxOutputTokens: 256 }
+            })
         }
+    );
 
-        const reports = DB.getReports();
+    if (!response.ok) {
+        const errBody = await response.json().catch(() => ({}));
+        throw new Error(errBody?.error?.message || `HTTP ${response.status}`);
+    }
 
-        // 1. Populate Product A Details
-        document.getElementById('nameA').textContent = productA.productName;
-        document.getElementById('companyA').textContent = productA.companyName;
-        document.getElementById('indA').textContent = productA.industryType;
-        document.getElementById('footprintA').innerHTML = `${productA.latestCO2ePerUnit.toFixed(4)} kg <span class="text-sm font-semibold text-text-muted">CO₂e/unit</span>`;
-        
-        const badgeA = document.getElementById('badgeA');
-        badgeA.textContent = productA.latestScore;
-        badgeA.style.backgroundColor = SCORE_BG[productA.latestScore] || '#388E3C';
+    const data = await response.json();
+    const raw = data.candidates?.[0]?.content?.parts?.[0]?.text || '{}';
 
-        // Fuel pills Product A
-        const latestRepAId = productA.reportHistory[productA.reportHistory.length - 1];
-        const latestRepA = reports[latestRepAId];
-        const fuelsAContainer = document.getElementById('fuelsA');
-        fuelsAContainer.innerHTML = '';
-        if (latestRepA && latestRepA.fuelEntries) {
-            latestRepA.fuelEntries.forEach(fe => {
-                const span = document.createElement('span');
-                span.className = 'text-[10px] font-bold bg-[#eceeec] border border-surface-border text-on-surface-variant px-2 py-0.5 rounded-full capitalize';
-                span.textContent = fe.fuel_type.replace('_', ' ');
-                fuelsAContainer.appendChild(span);
+    // Clean and parse JSON (Gemini sometimes wraps in ```json)
+    const cleaned = raw.replace(/```json\n?|\n?```/g, '').trim();
+    let parsed;
+    try { parsed = JSON.parse(cleaned); }
+    catch { parsed = { productType: 'Industrial Product', category: 'Steel Rod', confidence: 'Low', note: 'Could not parse AI response precisely.' }; }
+
+    // Validate category is one of our three
+    const validCats = ['Steel Rod', 'Cotton Fabric', 'Packaged Flour'];
+    if (!validCats.includes(parsed.category)) {
+        parsed.category = mapToDBCategory(parsed.category || parsed.productType || '');
+    }
+
+    return parsed;
+}
+
+// ═══════════════════════════════════════════════════════════════
+// DEMO SIMULATION (no API key)
+// ═══════════════════════════════════════════════════════════════
+function runDemoAnalysis(filename, dataUrl) {
+    const nameLower = (filename || '').toLowerCase();
+
+    // Keyword-based category detection from filename
+    let category = 'Steel Rod'; // default
+    let productType = 'Industrial Steel Rod';
+    let confidence = 'Medium';
+
+    if (/cotton|fabric|textile|cloth|weave|loom|yarn|silk|jute/i.test(nameLower)) {
+        category = 'Cotton Fabric';
+        productType = 'Woven Cotton Textile';
+        confidence = 'High';
+    } else if (/flour|atta|wheat|grain|rice|chakki|mill|food|bake|bread/i.test(nameLower)) {
+        category = 'Packaged Flour';
+        productType = 'Packaged Wheat Flour';
+        confidence = 'High';
+    } else if (/steel|rod|iron|metal|bar|rebar|tmt|alloy|ravi|bharat|apex/i.test(nameLower)) {
+        category = 'Steel Rod';
+        productType = 'Steel Construction Rod';
+        confidence = 'High';
+    } else {
+        // Default: cycle through based on image data length (pseudo-random but deterministic)
+        const sum = dataUrl.length % 3;
+        if (sum === 1) { category = 'Cotton Fabric'; productType = 'Industrial Textile Roll'; }
+        else if (sum === 2) { category = 'Packaged Flour'; productType = 'Flour Milling Product'; }
+        confidence = 'Low';
+    }
+
+    return {
+        category,
+        productType,
+        confidence,
+        note: `Demo mode: identified from filename keywords. For accurate AI vision analysis, enter a Gemini API key above.`
+    };
+}
+
+// Maps free-form AI text to one of the three DB categories
+function mapToDBCategory(raw) {
+    const r = raw.toLowerCase();
+    if (/steel|rod|iron|metal|bar|rebar|tmt|alloy|beam/.test(r)) return 'Steel Rod';
+    if (/cotton|fabric|textile|cloth|weave|loom|yarn|silk|jute/.test(r)) return 'Cotton Fabric';
+    if (/flour|atta|wheat|grain|rice|food|bake|mill/.test(r)) return 'Packaged Flour';
+    return 'Steel Rod';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MARKET AVERAGE COMPUTATION ENGINE
+// ═══════════════════════════════════════════════════════════════
+function computeMarketAverages(category) {
+    const rawProducts = DB.getProducts();
+    const rawUsers = DB.getUsers();
+    const reports = DB.getReports();
+
+    // Get all products matching this category
+    const matchingProducts = Object.values(rawProducts)
+        .filter(p => p.category === category && p.latestScore)
+        .map(p => ({
+            ...p,
+            companyName: rawUsers[p.companyId]?.companyName || 'Unknown Company',
+            industryType: rawUsers[p.companyId]?.industry || category
+        }));
+
+    if (matchingProducts.length === 0) {
+        return { products: [], avg: 0, min: 0, max: 0, bestProduct: null, worstProduct: null, fuelBreakdown: {} };
+    }
+
+    const emissions = matchingProducts.map(p => p.latestCO2ePerUnit);
+    const avg = emissions.reduce((a, b) => a + b, 0) / emissions.length;
+    const min = Math.min(...emissions);
+    const max = Math.max(...emissions);
+
+    const bestProduct = matchingProducts.find(p => p.latestCO2ePerUnit === min);
+    const worstProduct = matchingProducts.find(p => p.latestCO2ePerUnit === max);
+
+    // Aggregate fuel-type CO2e from latest report of each product
+    const fuelCO2e = {}; // fuel_type -> total CO2e contributed across all products
+    const fuelQty = {};  // fuel_type -> total quantity
+
+    // EMISSION_FACTORS is declared globally by db.js (diesel, coal, etc.)
+    const EF = (typeof EMISSION_FACTORS !== 'undefined') ? EMISSION_FACTORS : {
+        diesel: 2.68, petrol: 2.31, lpg: 1.51, natural_gas: 2.04,
+        coal: 2.42, furnace_oil: 3.15, biomass: 0.41, electricity: 0.82
+    };
+
+    matchingProducts.forEach(product => {
+        const latestRepId = product.reportHistory[product.reportHistory.length - 1];
+        const rep = reports[latestRepId];
+        if (rep && rep.fuelEntries) {
+            rep.fuelEntries.forEach(fe => {
+                const ef = EF[fe.fuel_type] || 0;
+                const co2e = fe.quantity * ef;
+                fuelCO2e[fe.fuel_type] = (fuelCO2e[fe.fuel_type] || 0) + co2e;
+                fuelQty[fe.fuel_type] = (fuelQty[fe.fuel_type] || 0) + fe.quantity;
             });
-        } else {
-            fuelsAContainer.innerHTML = `<span class="text-xs text-text-muted">N/A</span>`;
         }
+    });
 
-        // Trend Product A
-        const trendAArrow = document.getElementById('trendAArrow');
-        const trendAText = document.getElementById('trendAText');
-        if (productA.reportHistory.length > 1) {
-            const rList = productA.reportHistory.map(id => reports[id]).filter(Boolean).sort((a,b) => new Date(a.submittedAt) - new Date(b.submittedAt));
-            const cur = rList[rList.length - 1].co2ePerUnit;
-            const prev = rList[rList.length - 2].co2ePerUnit;
-            if (cur < prev) {
-                trendAArrow.className = "text-base font-bold text-score-a";
-                trendAArrow.textContent = "↓";
-                trendAText.textContent = "Improving";
-            } else if (cur > prev) {
-                trendAArrow.className = "text-base font-bold text-error";
-                trendAArrow.textContent = "↑";
-                trendAText.textContent = "Worsening";
-            } else {
-                trendAArrow.className = "text-base font-bold text-text-muted";
-                trendAArrow.textContent = "→";
-                trendAText.textContent = "Stable";
-            }
-        } else {
-            trendAArrow.className = "text-base font-bold text-text-muted";
-            trendAArrow.textContent = "→";
-            trendAText.textContent = "Stable (First report)";
-        }
+    // Convert to per-product average
+    const fuelBreakdown = {};
+    const totalFuelCO2e = Object.values(fuelCO2e).reduce((a, b) => a + b, 0);
+    Object.keys(fuelCO2e).forEach(ft => {
+        fuelBreakdown[ft] = {
+            totalCO2e: fuelCO2e[ft],
+            avgCO2ePerProduct: fuelCO2e[ft] / matchingProducts.length,
+            pct: totalFuelCO2e > 0 ? Math.round((fuelCO2e[ft] / totalFuelCO2e) * 100) : 0
+        };
+    });
 
-        // 2. Populate Product B Details
-        document.getElementById('nameB').textContent = productB.productName;
-        document.getElementById('companyB').textContent = productB.companyName;
-        document.getElementById('indB').textContent = productB.industryType;
-        document.getElementById('footprintB').innerHTML = `${productB.latestCO2ePerUnit.toFixed(4)} kg <span class="text-sm font-semibold text-text-muted">CO₂e/unit</span>`;
-        
-        const badgeB = document.getElementById('badgeB');
-        badgeB.textContent = productB.latestScore;
-        badgeB.style.backgroundColor = SCORE_BG[productB.latestScore] || '#388E3C';
+    // Sort products by emissions (best first)
+    matchingProducts.sort((a, b) => a.latestCO2ePerUnit - b.latestCO2ePerUnit);
 
-        // Fuel pills Product B
-        const latestRepBId = productB.reportHistory[productB.reportHistory.length - 1];
-        const latestRepB = reports[latestRepBId];
-        const fuelsBContainer = document.getElementById('fuelsB');
-        fuelsBContainer.innerHTML = '';
-        if (latestRepB && latestRepB.fuelEntries) {
-            latestRepB.fuelEntries.forEach(fe => {
-                const span = document.createElement('span');
-                span.className = 'text-[10px] font-bold bg-[#eceeec] border border-surface-border text-on-surface-variant px-2 py-0.5 rounded-full capitalize';
-                span.textContent = fe.fuel_type.replace('_', ' ');
-                fuelsBContainer.appendChild(span);
-            });
-        } else {
-            fuelsBContainer.innerHTML = `<span class="text-xs text-text-muted">N/A</span>`;
-        }
+    return { products: matchingProducts, avg, min, max, bestProduct, worstProduct, fuelBreakdown };
+}
 
-        // Trend Product B
-        const trendBArrow = document.getElementById('trendBArrow');
-        const trendBText = document.getElementById('trendBText');
-        if (productB.reportHistory.length > 1) {
-            const rList = productB.reportHistory.map(id => reports[id]).filter(Boolean).sort((a,b) => new Date(a.submittedAt) - new Date(b.submittedAt));
-            const cur = rList[rList.length - 1].co2ePerUnit;
-            const prev = rList[rList.length - 2].co2ePerUnit;
-            if (cur < prev) {
-                trendBArrow.className = "text-base font-bold text-score-a";
-                trendBArrow.textContent = "↓";
-                trendBText.textContent = "Improving";
-            } else if (cur > prev) {
-                trendBArrow.className = "text-base font-bold text-error";
-                trendBArrow.textContent = "↑";
-                trendBText.textContent = "Worsening";
-            } else {
-                trendBArrow.className = "text-base font-bold text-text-muted";
-                trendBArrow.textContent = "→";
-                trendBText.textContent = "Stable";
-            }
-        } else {
-            trendBArrow.className = "text-base font-bold text-text-muted";
-            trendBArrow.textContent = "→";
-            trendBText.textContent = "Stable (First report)";
-        }
+// ═══════════════════════════════════════════════════════════════
+// RENDER VISUAL RESULTS
+// ═══════════════════════════════════════════════════════════════
+function renderVisualResults(productType, category, confidence, aiNote, usedRealAI, stats) {
+    // Identification card
+    document.getElementById('vr_productType').textContent = productType;
+    document.getElementById('vr_category').textContent = category;
+    document.getElementById('vr_industry').textContent = stats.products[0]?.industryType || category;
+    document.getElementById('vr_confidence').textContent = `${confidence} Confidence`;
 
-        // 3. Mathematical delta & Winner Highlighting
-        const fA = productA.latestCO2ePerUnit;
-        const fB = productB.latestCO2ePerUnit;
-        
-        const bannerA = document.getElementById('winnerABanner');
-        const bannerB = document.getElementById('winnerBBanner');
-        const deltaText = document.getElementById('deltaMathText');
-        const verdictText = document.getElementById('plainLanguageVerdict');
-
-        const deckA = document.getElementById('deckA');
-        const deckB = document.getElementById('deckB');
-
-        // Resets
-        bannerA.classList.add('hidden');
-        bannerB.classList.add('hidden');
-        deckA.classList.remove('border-2', 'border-score-a-plus');
-        deckB.classList.remove('border-2', 'border-score-a-plus');
-
-        let winner = null;
-        let diffKg = Math.abs(fA - fB);
-        let pct = 0;
-
-        if (fA === fB) {
-            deltaText.innerHTML = `<span class="material-symbols-outlined text-primary text-sm icon-fill shrink-0">check_circle</span> Both products have an identical footprint of <strong>${fA.toFixed(4)} kg CO₂e/unit</strong>.`;
-            bannerA.textContent = "Equal Footprint";
-            bannerB.textContent = "Equal Footprint";
-            bannerA.classList.remove('hidden', 'bg-score-a-plus');
-            bannerB.classList.remove('hidden', 'bg-score-a-plus');
-            bannerA.classList.add('bg-score-b');
-            bannerB.classList.add('bg-score-b');
-            
-            verdictText.innerHTML = `Both products are in the <strong class="font-bold">${productA.category}</strong> category. Choosing either product emits the same environmental load. Consider regional proximity to minimize transport emissions.`;
-        } else {
-            let higher, lower;
-            if (fA > fB) {
-                higher = productA;
-                lower = productB;
-                pct = Math.round(((fA - fB) / fB) * 100);
-                
-                bannerB.classList.remove('hidden', 'bg-score-b');
-                bannerB.classList.add('bg-score-a-plus');
-                bannerB.innerHTML = `<span class="material-symbols-outlined text-sm icon-fill">stars</span> Lower Carbon Choice`;
-                deckB.classList.add('border-2', 'border-score-a-plus');
-                winner = productB;
-            } else {
-                higher = productB;
-                lower = productA;
-                pct = Math.round(((fB - fA) / fA) * 100);
-                
-                bannerA.classList.remove('hidden', 'bg-score-b');
-                bannerA.classList.add('bg-score-a-plus');
-                bannerA.innerHTML = `<span class="material-symbols-outlined text-sm icon-fill">stars</span> Lower Carbon Choice`;
-                deckA.classList.add('border-2', 'border-score-a-plus');
-                winner = productA;
-            }
-
-            deltaText.innerHTML = `<span class="material-symbols-outlined text-[#006036] text-sm icon-fill shrink-0">arrow_circle_down</span> <strong>${higher.productName}</strong> emits <strong>${pct}% more</strong> CO₂ per unit than <strong>${lower.productName}</strong> (+${diffKg.toFixed(4)} kg).`;
-            
-            const savedKm = (diffKg * 6).toFixed(1);
-            verdictText.innerHTML = `Both products are in the <strong class="font-bold text-primary">${productA.category}</strong> category. Choosing <strong class="text-primary font-extrabold">${lower.productName}</strong> saves approximately <strong class="text-primary font-black">${diffKg.toFixed(3)} kg</strong> of CO₂ per unit purchased — which is equivalent to avoiding a <strong class="text-primary font-black">${savedKm} km</strong> driving journey in a standard vehicle.`;
-        }
-
-        document.getElementById('comparisonResults').classList.remove('hidden');
+    const methodLabel = document.getElementById('vr_methodLabel');
+    const methodBadge = document.getElementById('vr_methodBadge');
+    if (usedRealAI) {
+        methodLabel.textContent = 'Gemini Vision AI';
+        methodBadge.className = 'shrink-0 text-xs bg-[#e8f5e9] border border-[#c8e6c9] text-[#1B5E20] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5';
+    } else {
+        methodLabel.textContent = 'Demo Mode';
+        methodBadge.className = 'shrink-0 text-xs bg-[#fffde7] border border-[#fff176] text-[#F57F17] font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5';
     }
 
-    // Reset slot A
-    function resetA() {
-        productA = null;
-        productB = null;
-
-        // Reset inputs & panel
-        document.getElementById('inputSearchA').value = '';
-        document.getElementById('searchSlotA').classList.remove('hidden');
-        document.getElementById('selectedSlotA').classList.add('hidden');
-        document.getElementById('resetABtn').classList.add('hidden');
-
-        // Lock Slot B
-        const paneB = document.getElementById('paneB');
-        paneB.classList.add('opacity-60', 'pointer-events-none');
-        resetB();
-
-        checkCompare();
+    if (aiNote) {
+        const noteEl = document.getElementById('vr_aiNote');
+        noteEl.textContent = aiNote;
+        noteEl.classList.remove('hidden');
     }
 
-    // Reset slot B
-    function resetB() {
-        productB = null;
+    // Market stats
+    document.getElementById('vr_avg').textContent = stats.avg.toFixed(3);
+    document.getElementById('vr_min').textContent = stats.min.toFixed(3);
+    document.getElementById('vr_max').textContent = stats.max.toFixed(3);
+    document.getElementById('vr_count').textContent = stats.products.length;
+    document.getElementById('vr_marketSubtitle').textContent =
+        `Based on ${stats.products.length} verified ${category} products in EcoMark registry`;
 
-        // Reset inputs & panel
-        document.getElementById('inputSearchB').value = '';
-        document.getElementById('searchSlotB').classList.remove('hidden');
-        document.getElementById('selectedSlotB').classList.add('hidden');
-        document.getElementById('resetBBtn').classList.add('hidden');
-        document.getElementById('matchWarning').classList.add('hidden');
+    // Gas bars
+    renderGasBreakdownBars(stats.fuelBreakdown);
 
-        checkCompare();
+    // League table
+    renderProductLeagueTable(stats.products, stats.avg);
+
+    // Show results
+    document.getElementById('visualResults').classList.remove('hidden');
+    document.getElementById('visualResults').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// ─── Gas Breakdown Animated Bar Chart ───────────────────────
+function renderGasBreakdownBars(fuelBreakdown) {
+    const container = document.getElementById('vr_gasBars');
+
+    // Sort by pct descending
+    const sorted = Object.entries(fuelBreakdown).sort((a, b) => b[1].pct - a[1].pct);
+
+    if (sorted.length === 0) {
+        container.innerHTML = `<p class="text-sm text-text-muted text-center py-4">No fuel breakdown data available.</p>`;
+        return;
     }
+
+    container.innerHTML = sorted.map(([fuelType, data], i) => {
+        const meta = FUEL_META[fuelType] || { label: fuelType, color: '#6B7280', icon: '🔆' };
+        const delay = i * 0.1;
+        return `
+        <div class="flex items-center gap-4">
+            <div class="shrink-0 w-32 text-right">
+                <span class="text-xs font-bold text-on-surface">${meta.icon} ${meta.label}</span>
+            </div>
+            <div class="flex-1">
+                <div class="gas-bar-track">
+                    <div class="gas-bar-fill" style="width:${data.pct}%; background:${meta.color}; animation-delay:${delay}s;"></div>
+                </div>
+            </div>
+            <div class="shrink-0 w-32 flex items-center gap-2">
+                <span class="text-xs font-black text-on-surface">${data.pct}%</span>
+                <span class="text-[10px] text-text-muted font-medium">${data.avgCO2ePerProduct.toFixed(3)} kg avg</span>
+            </div>
+        </div>`;
+    }).join('');
+}
+
+// ─── Product League Table ─────────────────────────────────────
+function renderProductLeagueTable(products, marketAvg) {
+    const container = document.getElementById('vr_leagueTable');
+    const maxVal = products.length > 0 ? products[products.length - 1].latestCO2ePerUnit : 1;
+
+    container.innerHTML = products.map((product, rank) => {
+        const scoreBg = SCORE_BG[product.latestScore] || '#388E3C';
+        const barPct = maxVal > 0 ? Math.round((product.latestCO2ePerUnit / maxVal) * 100) : 50;
+        const vsAvgPct = marketAvg > 0 ? Math.round(((product.latestCO2ePerUnit - marketAvg) / marketAvg) * 100) : 0;
+        const isBelowAvg = product.latestCO2ePerUnit < marketAvg;
+        const vsLabel = vsAvgPct === 0
+            ? '<span class="text-[10px] text-text-muted font-bold">≈ Market avg</span>'
+            : `<span class="text-[10px] font-bold ${isBelowAvg ? 'text-score-a' : 'text-score-c'}">${isBelowAvg ? '▼' : '▲'} ${Math.abs(vsAvgPct)}% vs avg</span>`;
+
+        return `
+        <div class="league-row px-6 py-4 flex items-center gap-4">
+            <div class="shrink-0 w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-xs font-black text-text-muted">${rank + 1}</div>
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center gap-2 mb-1 flex-wrap">
+                    <p class="text-sm font-bold text-on-surface truncate">${product.productName}</p>
+                    ${vsLabel}
+                </div>
+                <p class="text-xs text-text-muted truncate mb-2">${product.companyName}</p>
+                <div class="gas-bar-track" style="height:6px;">
+                    <div class="gas-bar-fill" style="width:${barPct}%; background:${scoreBg}; height:6px; animation-delay:${rank * 0.07}s;"></div>
+                </div>
+            </div>
+            <div class="shrink-0 text-right ml-2">
+                <div class="w-9 h-9 rounded-full text-white text-sm font-black flex items-center justify-center mb-1" style="background:${scoreBg}">${product.latestScore}</div>
+                <p class="text-[10px] font-bold text-on-surface">${product.latestCO2ePerUnit.toFixed(3)}</p>
+                <p class="text-[9px] text-text-muted">kg CO₂e</p>
+            </div>
+        </div>`;
+    }).join('');
+}
 </script>
 </body>
 </html>

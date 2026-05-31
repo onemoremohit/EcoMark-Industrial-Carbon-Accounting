@@ -112,38 +112,47 @@
     </div>
     <div class="p-4 flex flex-col gap-2 flex-grow">
         <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="dashboard.html">
-            <span class="material-symbols-outlined">dashboard</span>
+    <div class="flex-grow overflow-y-auto p-3">
+        <p class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted px-3 pt-3 pb-1.5">My Work</p>
+        <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl text-sm mb-0.5" href="dashboard.html">
+            <span class="material-symbols-outlined text-[20px]">dashboard</span>
             <span>Dashboard</span>
         </a>
-        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="submit-report.html">
-            <span class="material-symbols-outlined">post_add</span>
+        <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl text-sm mb-0.5" href="submit-report.html">
+            <span class="material-symbols-outlined text-[20px]">post_add</span>
             <span>Submit Report</span>
         </a>
-        <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-200 active:scale-95 font-label-md text-label-md" href="my-products.html">
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+        <a class="flex items-center gap-3 px-3 py-2.5 bg-secondary-container text-on-secondary-container rounded-xl font-bold transition-all duration-200 text-sm mb-0.5" href="my-products.html">
+            <span class="material-symbols-outlined text-[20px] icon-fill">inventory_2</span>
             <span>My Products</span>
         </a>
-        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="eco-coins.html">
-            <span class="material-symbols-outlined">payments</span>
-            <span>Eco-Coins</span>
-        </a>
-        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="compliance.html">
-            <span class="material-symbols-outlined">policy</span>
+        <p class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted px-3 pt-4 pb-1.5">Compliance & Rewards</p>
+        <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl text-sm mb-0.5" href="compliance.html">
+            <span class="material-symbols-outlined text-[20px]">verified_user</span>
             <span>My Compliance</span>
         </a>
-        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 active:scale-95 rounded-lg font-label-md text-label-md" href="policy-guide.html">
-            <span class="material-symbols-outlined">auto_fix_high</span>
+        <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl text-sm mb-0.5" href="eco-coins.html">
+            <span class="material-symbols-outlined text-[20px]">toll</span>
+            <span>Eco-Coins</span>
+        </a>
+        <p class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted px-3 pt-4 pb-1.5">Reference</p>
+        <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl text-sm mb-0.5" href="policy-guide.html">
+            <span class="material-symbols-outlined text-[20px]">menu_book</span>
             <span>Policy Guide</span>
         </a>
+        <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl text-sm mb-0.5" href="../consumer/search.html" target="_blank">
+            <span class="material-symbols-outlined text-[20px]">open_in_new</span>
+            <span>Public Registry</span>
+        </a>
     </div>
-    <div class="p-4 border-t border-surface-border flex flex-col gap-2">
-        <div class="px-4 py-2 bg-surface-container rounded-lg mb-2">
-            <p class="font-label-sm text-label-sm text-text-muted">Logged in as:</p>
-            <p class="font-label-md text-label-md font-bold text-on-surface truncate" id="sideCompanyLabel">Loading...</p>
-            <span class="inline-block mt-1 bg-primary/10 text-primary font-bold font-label-sm text-[10px] px-2 py-0.5 rounded uppercase">Company</span>
+    <div class="p-3 border-t border-surface-border">
+        <div class="px-3 py-2.5 bg-surface-container rounded-xl mb-2">
+            <p class="text-[10px] text-text-muted font-semibold mb-0.5">Logged in as</p>
+            <p class="text-sm font-bold text-on-surface truncate" id="sideCompanyLabel">Loading...</p>
+            <span class="inline-block mt-1 bg-primary/10 text-primary font-bold text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wide">Company</span>
         </div>
-        <button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-lg font-label-md text-label-md text-left w-full">
-            <span class="material-symbols-outlined">logout</span>
+        <button id="logoutBtn" class="w-full flex items-center gap-3 px-3 py-2.5 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-xl text-sm text-left">
+            <span class="material-symbols-outlined text-[20px]">logout</span>
             <span>Log Out</span>
         </button>
     </div>
@@ -226,7 +235,7 @@
     </main>
 </div>
 
-<script src="../js/db.js"></script>
+<script src="../js/db.js?v=5"></script>
 <script src="../js/auth.js"></script>
 <script>
     // Verify Company authentication
