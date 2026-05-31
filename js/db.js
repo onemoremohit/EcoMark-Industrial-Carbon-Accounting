@@ -23,7 +23,7 @@ const COIN_TRIGGERS = {
 
 // Initialize DB if not present
 function initDB() {
-    if (!localStorage.getItem('ecomark_db_initialized')) {
+    if (!localStorage.getItem('ecomark_db_initialized_v2')) {
         const users = {
             "admin_uid": {
                 uid: "admin_uid",
@@ -32,8 +32,7 @@ function initDB() {
                 role: "admin",
                 companyName: "EcoMark regulator Bureau",
                 industry: "Government / Regulation",
-                location: "New Delhi",
-                createdAt: new Date().toISOString()
+                location: "New Delhi"
             },
             "ravi_steel_uid": {
                 uid: "ravi_steel_uid",
@@ -43,8 +42,7 @@ function initDB() {
                 companyName: "Ravi Steel Industries",
                 industry: "Manufacturing",
                 location: "Pune",
-                ecoCoins: 850,
-                createdAt: new Date(Date.now() - 60*24*60*60*1000).toISOString()
+                ecoCoins: 850
             },
             "greenwave_uid": {
                 uid: "greenwave_uid",
@@ -54,8 +52,7 @@ function initDB() {
                 companyName: "GreenWave Textiles",
                 industry: "Textile",
                 location: "Surat",
-                ecoCoins: 1450,
-                createdAt: new Date(Date.now() - 60*24*60*60*1000).toISOString()
+                ecoCoins: 1450
             },
             "sunbake_uid": {
                 uid: "sunbake_uid",
@@ -65,8 +62,27 @@ function initDB() {
                 companyName: "SunBake Foods",
                 industry: "Food Processing",
                 location: "Nashik",
-                ecoCoins: 1950,
-                createdAt: new Date(Date.now() - 60*24*60*60*1000).toISOString()
+                ecoCoins: 1950
+            },
+            "shakti_steel_uid": {
+                uid: "shakti_steel_uid",
+                email: "company4@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Shakti Steel Ltd",
+                industry: "Manufacturing",
+                location: "Mumbai",
+                ecoCoins: 500
+            },
+            "golden_grains_uid": {
+                uid: "golden_grains_uid",
+                email: "company5@ecomark.com",
+                password: "company123",
+                role: "company",
+                companyName: "Golden Grains Co",
+                industry: "Food Processing",
+                location: "Amritsar",
+                ecoCoins: 600
             }
         };
 
@@ -78,7 +94,6 @@ function initDB() {
                 category: "Manufacturing",
                 latestScore: "C",
                 latestCO2ePerUnit: 5.256,
-                qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(window.location.origin + "/consumer/product.html?productId=prod_ravi_steel"),
                 reportHistory: ["rep_ravi_q2", "rep_ravi_q3"]
             },
             "prod_greenwave_textiles": {
@@ -88,7 +103,6 @@ function initDB() {
                 category: "Textile",
                 latestScore: "A",
                 latestCO2ePerUnit: 1.022,
-                qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(window.location.origin + "/consumer/product.html?productId=prod_greenwave_textiles"),
                 reportHistory: ["rep_green_q2", "rep_green_q3"]
             },
             "prod_sunbake_foods": {
@@ -98,8 +112,25 @@ function initDB() {
                 category: "Food Processing",
                 latestScore: "A+",
                 latestCO2ePerUnit: 0.1575,
-                qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(window.location.origin + "/consumer/product.html?productId=prod_sunbake_foods"),
                 reportHistory: ["rep_sun_q2", "rep_sun_q3"]
+            },
+            "prod_shakti_steel": {
+                productId: "prod_shakti_steel",
+                companyId: "shakti_steel_uid",
+                productName: "Steel Rod Grade-50",
+                category: "Manufacturing",
+                latestScore: "B",
+                latestCO2ePerUnit: 3.120,
+                reportHistory: ["rep_shakti_q3"]
+            },
+            "prod_golden_grains": {
+                productId: "prod_golden_grains",
+                companyId: "golden_grains_uid",
+                productName: "Golden Wheat Flour",
+                category: "Food Processing",
+                latestScore: "A",
+                latestCO2ePerUnit: 0.920,
+                reportHistory: ["rep_golden_q3"]
             }
         };
 
@@ -117,8 +148,7 @@ function initDB() {
                 totalCO2e: 3017.0,
                 co2ePerUnit: 6.034,
                 score: "C",
-                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString(),
-                verified: true
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
             },
             "rep_ravi_q3": {
                 reportId: "rep_ravi_q3",
@@ -133,8 +163,7 @@ function initDB() {
                 totalCO2e: 2628.0,
                 co2ePerUnit: 5.256,
                 score: "C",
-                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString(),
-                verified: true
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
             },
             "rep_green_q2": {
                 reportId: "rep_green_q2",
@@ -149,8 +178,7 @@ function initDB() {
                 totalCO2e: 1206.0,
                 co2ePerUnit: 1.206,
                 score: "A",
-                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString(),
-                verified: true
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
             },
             "rep_green_q3": {
                 reportId: "rep_green_q3",
@@ -165,8 +193,7 @@ function initDB() {
                 totalCO2e: 1022.0,
                 co2ePerUnit: 1.022,
                 score: "A",
-                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString(),
-                verified: true
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
             },
             "rep_sun_q2": {
                 reportId: "rep_sun_q2",
@@ -181,8 +208,7 @@ function initDB() {
                 totalCO2e: 441.0,
                 co2ePerUnit: 0.2205,
                 score: "A+",
-                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString(),
-                verified: true
+                submittedAt: new Date(Date.now() - 45*24*60*60*1000).toISOString()
             },
             "rep_sun_q3": {
                 reportId: "rep_sun_q3",
@@ -197,8 +223,37 @@ function initDB() {
                 totalCO2e: 315.0,
                 co2ePerUnit: 0.1575,
                 score: "A+",
-                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString(),
-                verified: true
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_shakti_q3": {
+                reportId: "rep_shakti_q3",
+                companyId: "shakti_steel_uid",
+                productId: "prod_shakti_steel",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "coal", quantity: 600, unit: "kg" },
+                    { fuel_type: "electricity", quantity: 120, unit: "kWh" }
+                ],
+                batchSize: 500,
+                totalCO2e: 1560.0,
+                co2ePerUnit: 3.120,
+                score: "B",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
+            },
+            "rep_golden_q3": {
+                reportId: "rep_golden_q3",
+                companyId: "golden_grains_uid",
+                productId: "prod_golden_grains",
+                period: "2024-Q3",
+                fuelEntries: [
+                    { fuel_type: "lpg", quantity: 500, unit: "liters" },
+                    { fuel_type: "electricity", quantity: 1300, unit: "kWh" }
+                ],
+                batchSize: 2000,
+                totalCO2e: 1840.0,
+                co2ePerUnit: 0.920,
+                score: "A",
+                submittedAt: new Date(Date.now() - 15*24*60*60*1000).toISOString()
             }
         };
 
@@ -240,7 +295,7 @@ function initDB() {
         localStorage.setItem('ecomark_reports', JSON.stringify(reports));
         localStorage.setItem('ecomark_ecoCoinsHistory', JSON.stringify(ecoCoinsHistory));
         localStorage.setItem('ecomark_auditLogs', JSON.stringify(auditLogs));
-        localStorage.setItem('ecomark_db_initialized', 'true');
+        localStorage.setItem('ecomark_db_initialized_v2', 'true');
     }
 }
 
@@ -297,7 +352,6 @@ const DB = {
             industry,
             location,
             ecoCoins: COIN_TRIGGERS.REGISTER, // Credited +100 immediately
-            createdAt: new Date().toISOString()
         };
         users[uid] = newUser;
         DB.saveUsers(users);
@@ -382,7 +436,6 @@ const DB = {
                 category,
                 latestScore: calc.score,
                 latestCO2ePerUnit: calc.co2ePerUnit,
-                qrCodeUrl: "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=" + encodeURIComponent(window.location.origin + "/consumer/product.html?productId=" + productId),
                 reportHistory: []
             };
         } else {
@@ -404,8 +457,7 @@ const DB = {
             totalCO2e: calc.totalCO2e,
             co2ePerUnit: calc.co2ePerUnit,
             score: calc.score,
-            submittedAt: new Date().toISOString(),
-            verified: true
+            submittedAt: new Date().toISOString()
         };
         reports[reportId] = newReport;
         DB.saveReports(reports);

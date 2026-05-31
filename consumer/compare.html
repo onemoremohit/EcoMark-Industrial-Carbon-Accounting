@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Compare Product Footprints | EcoMark Public Registry</title>
+    <meta name="description" content="Compare verified industrial products side-by-side. View carbon scores, precise CO₂e differences, fuel breakdowns, and environmental lifecycle trends."/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                "outline-variant":"#bec9be","surface-dim":"#d8dad9","score-a":"#388E3C",
+                "text-main":"#1A1C1A","text-muted":"#5C635C","error-container":"#ffdad6",
+                "score-d":"#B71C1C","on-primary":"#ffffff","surface-border":"#E1E8E1",
+                "secondary-container":"#a0f399","surface":"#f8faf8","surface-variant":"#e1e3e1",
+                "surface-container":"#eceeec","on-primary-container":"#abffc6","secondary":"#1b6d24",
+                "outline":"#6f7a70","on-surface":"#191c1b","on-surface-variant":"#3f4941",
+                "on-background":"#191c1b","surface-container-low":"#f2f4f2","score-a-plus":"#1B5E20",
+                "score-b":"#F9A825","surface-container-lowest":"#ffffff","background":"#f8faf8",
+                "on-secondary-container":"#217128","on-error":"#ffffff",
+                "surface-container-high":"#e6e9e7","primary":"#006036","primary-container":"#1a7a4a",
+                "tertiary":"#1c5f21","error":"#ba1a1a","score-c":"#E65100"
+              },
+              "spacing": {
+                "stack-sm":"8px","margin-desktop":"48px","margin-mobile":"16px",
+                "stack-md":"16px","gutter":"24px","container-max":"1200px","stack-lg":"32px"
+              }
+            }
+          }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8faf8; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .icon-fill { font-variation-settings: 'FILL' 1; }
+        
+        .score-badge-large {
+            width: 72px; height: 72px; border-radius: 50%;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 28px; font-weight: 800; color: white;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+        }
+        
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); box-shadow: 0 4px 14px rgba(27, 94, 32, 0.2); }
+            50% { transform: scale(1.03); box-shadow: 0 4px 22px rgba(27, 94, 32, 0.4); }
+        }
+        
+        .winner-pill {
+            animation: pulseGlow 2s infinite ease-in-out;
+        }
+
+        .dropdown-shadow { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08); }
+        
+        .compare-pane {
+            transition: all 0.25s ease;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+
+<!-- Header -->
+<header class="flex justify-between items-center w-full px-4 md:px-12 py-4 sticky top-0 z-40 bg-white border-b border-surface-border">
+    <a href="../index.html" class="flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <span class="material-symbols-outlined text-primary text-2xl icon-fill">eco</span>
+        <span class="font-bold text-primary text-lg">EcoMark</span>
+    </a>
+    <div class="flex items-center gap-3">
+        <span class="text-xs bg-primary/10 text-primary border border-primary/20 font-bold px-3 py-1 rounded-full uppercase tracking-wider hidden sm:block">Public Registry</span>
+        <a href="search.html" class="text-sm font-semibold text-on-surface-variant hover:text-primary transition-colors">Search Products</a>
+        <a href="../register.html" class="bg-primary text-white text-sm px-4 py-2 rounded-lg font-bold hover:bg-primary-container transition-colors">Register Company</a>
+    </div>
+</header>
+
+<main class="flex-grow max-w-container-max mx-auto w-full px-4 md:px-12 py-8">
+    
+    <!-- Hero Pitch / Heading -->
+    <div class="text-center mb-8">
+        <div class="inline-flex items-center gap-2 bg-[#e8f5e9] border border-[#c8e6c9] text-secondary rounded-full px-3 py-1 text-xs font-bold mb-3">
+            <span class="material-symbols-outlined text-sm icon-fill">balance</span>
+            Strict Exact-Match Comparisons
+        </div>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-on-surface mb-2 tracking-tight">Compare Carbon Footprints</h1>
+        <p class="text-text-muted text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+            Compare lifecycle greenhouse emissions of similar products directly. Under EcoMark rules, products are only comparable if they share the exact same category and industry sector.
+        </p>
+    </div>
+
+    <!-- ── STEP 1: SELECT PRODUCT A & B ── -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter mb-8">
+        
+        <!-- PRODUCT A SLOT -->
+        <div class="bg-white border border-surface-border rounded-2xl p-6 shadow-sm flex flex-col relative compare-pane" id="paneA">
+            <div class="flex justify-between items-start mb-4">
+                <span class="bg-primary/10 text-primary text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Product A (Baseline)</span>
+                <button id="resetABtn" class="text-text-muted hover:text-error text-xs font-bold flex items-center gap-1 hidden">
+                    <span class="material-symbols-outlined text-sm">restart_alt</span> Reset
+                </button>
+            </div>
+            
+            <div id="searchSlotA">
+                <label class="block text-sm font-bold text-on-surface mb-2">Search for a product to compare</label>
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-muted">search</span>
+                    <input
+                        type="text"
+                        id="inputSearchA"
+                        placeholder="Type steel rod, wheat flour..."
+                        class="w-full pl-12 pr-4 py-3 rounded-xl border border-surface-border bg-white text-on-surface focus:outline-none focus:border-primary transition-all text-sm font-medium shadow-sm"
+                        autocomplete="off"
+                    />
+                    <!-- Autocomplete dropdown -->
+                    <div id="dropdownA" class="absolute left-0 right-0 mt-2 bg-white border border-surface-border rounded-xl dropdown-shadow hidden z-30 max-h-60 overflow-y-auto">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product A Selected Panel Content -->
+            <div id="selectedSlotA" class="hidden flex items-center gap-4 py-2">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-primary text-2xl">check_circle</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h3 class="font-bold text-on-surface truncate" id="selectedAName">Product A Name</h3>
+                    <p class="text-xs text-text-muted truncate" id="selectedACompany">Manufacturer Company</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span id="selectedACat" class="text-[10px] font-extrabold uppercase tracking-wider bg-surface-container-low text-on-surface-variant px-2.5 py-0.5 rounded-full">Manufacturing</span>
+                        <span id="selectedAInd" class="text-[10px] font-extrabold uppercase tracking-wider bg-secondary-container text-on-secondary-container px-2.5 py-0.5 rounded-full">Steel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PRODUCT B SLOT -->
+        <div class="bg-white border border-surface-border rounded-2xl p-6 shadow-sm flex flex-col relative compare-pane opacity-60 pointer-events-none" id="paneB">
+            <div class="flex justify-between items-start mb-4">
+                <span class="bg-[#1A73E8]/10 text-[#1A73E8] text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Product B (Similar comparison)</span>
+                <button id="resetBBtn" class="text-text-muted hover:text-error text-xs font-bold flex items-center gap-1 hidden">
+                    <span class="material-symbols-outlined text-sm">restart_alt</span> Reset
+                </button>
+            </div>
+            
+            <div id="searchSlotB">
+                <label class="block text-sm font-bold text-on-surface mb-2">Find a similar product to compare</label>
+                <div class="relative">
+                    <span class="absolute left-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-text-muted">search</span>
+                    <input
+                        type="text"
+                        id="inputSearchB"
+                        placeholder="Type Golden Grains, Shakti Steel..."
+                        class="w-full pl-12 pr-4 py-3 rounded-xl border border-surface-border bg-white text-on-surface focus:outline-none focus:border-primary transition-all text-sm font-medium shadow-sm"
+                        autocomplete="off"
+                    />
+                    <!-- Autocomplete dropdown -->
+                    <div id="dropdownB" class="absolute left-0 right-0 mt-2 bg-white border border-surface-border rounded-xl dropdown-shadow hidden z-30 max-h-60 overflow-y-auto">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+                <!-- Warning display when typing invalid categories -->
+                <p id="matchWarning" class="text-xs text-score-c font-semibold mt-2 hidden flex items-center gap-1">
+                    <span class="material-symbols-outlined text-xs">info</span>
+                    Only Manufacturing products in Manufacturing can be compared here.
+                </p>
+            </div>
+
+            <!-- Product B Selected Panel Content -->
+            <div id="selectedSlotB" class="hidden flex items-center gap-4 py-2">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                    <span class="material-symbols-outlined text-primary text-2xl">check_circle</span>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <h3 class="font-bold text-on-surface truncate" id="selectedBName">Product B Name</h3>
+                    <p class="text-xs text-text-muted truncate" id="selectedBCompany">Manufacturer Company</p>
+                    <div class="flex items-center gap-2 mt-1">
+                        <span id="selectedBCat" class="text-[10px] font-extrabold uppercase tracking-wider bg-surface-container-low text-on-surface-variant px-2.5 py-0.5 rounded-full">Manufacturing</span>
+                        <span id="selectedBInd" class="text-[10px] font-extrabold uppercase tracking-wider bg-secondary-container text-on-secondary-container px-2.5 py-0.5 rounded-full">Steel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ── STEP 2: COMPARISON DISPLAY ── -->
+    <div id="comparisonResults" class="hidden space-y-6">
+        
+        <!-- SIDE BY SIDE DECK -->
+        <div class="bg-white border border-surface-border rounded-2xl shadow-sm overflow-hidden">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-surface-border">
+                
+                <!-- PRODUCT A COMPARISON VIEW -->
+                <div class="p-8 flex flex-col items-center text-center relative" id="deckA">
+                    <!-- pulsing winner highlight placeholder -->
+                    <div id="winnerABanner" class="absolute top-4 left-4 right-4 bg-score-a-plus text-white text-xs font-bold py-2 px-4 rounded-full hidden flex items-center justify-center gap-1.5 winner-pill uppercase tracking-wider">
+                        <span class="material-symbols-outlined text-sm icon-fill">stars</span> Lower Carbon Choice
+                    </div>
+                    
+                    <div class="mt-8 mb-6 flex flex-col items-center">
+                        <div id="badgeA" class="score-badge-large mb-3">A</div>
+                        <h2 class="text-2xl font-extrabold text-on-surface mb-1" id="nameA">Product A</h2>
+                        <p class="text-sm text-text-muted" id="companyA">Company A</p>
+                        <span class="inline-block mt-2 text-[10px] font-extrabold uppercase tracking-wider bg-surface-container-low text-on-surface-variant px-3 py-1 rounded-full" id="indA">Manufacturing</span>
+                    </div>
+
+                    <div class="w-full border-t border-surface-border py-4">
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-1">Carbon Footprint</p>
+                        <p class="text-3xl font-black text-on-surface" id="footprintA">0.0000 kg <span class="text-sm font-semibold text-text-muted">CO₂e/unit</span></p>
+                    </div>
+
+                    <div class="w-full border-t border-surface-border py-4 flex justify-between items-center px-4">
+                        <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Fuel Type Breakdown</span>
+                        <div class="flex flex-wrap gap-1.5 justify-end" id="fuelsA">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="w-full border-t border-surface-border pt-4 pb-2 flex justify-between items-center px-4">
+                        <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Emission Trend</span>
+                        <div class="flex items-center gap-1.5" id="trendAContainer">
+                            <span class="text-base font-bold" id="trendAArrow">→</span>
+                            <span class="text-xs text-text-muted font-medium" id="trendAText">Stable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PRODUCT B COMPARISON VIEW -->
+                <div class="p-8 flex flex-col items-center text-center relative" id="deckB">
+                    <!-- pulsing winner highlight placeholder -->
+                    <div id="winnerBBanner" class="absolute top-4 left-4 right-4 bg-score-a-plus text-white text-xs font-bold py-2 px-4 rounded-full hidden flex items-center justify-center gap-1.5 winner-pill uppercase tracking-wider">
+                        <span class="material-symbols-outlined text-sm icon-fill">stars</span> Lower Carbon Choice
+                    </div>
+
+                    <div class="mt-8 mb-6 flex flex-col items-center">
+                        <div id="badgeB" class="score-badge-large mb-3">B</div>
+                        <h2 class="text-2xl font-extrabold text-on-surface mb-1" id="nameB">Product B</h2>
+                        <p class="text-sm text-text-muted" id="companyB">Company B</p>
+                        <span class="inline-block mt-2 text-[10px] font-extrabold uppercase tracking-wider bg-surface-container-low text-on-surface-variant px-3 py-1 rounded-full" id="indB">Manufacturing</span>
+                    </div>
+
+                    <div class="w-full border-t border-surface-border py-4">
+                        <p class="text-xs font-bold text-text-muted uppercase tracking-wider mb-1">Carbon Footprint</p>
+                        <p class="text-3xl font-black text-on-surface" id="footprintB">0.0000 kg <span class="text-sm font-semibold text-text-muted">CO₂e/unit</span></p>
+                    </div>
+
+                    <div class="w-full border-t border-surface-border py-4 flex justify-between items-center px-4">
+                        <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Fuel Type Breakdown</span>
+                        <div class="flex flex-wrap gap-1.5 justify-end" id="fuelsB">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+
+                    <div class="w-full border-t border-surface-border pt-4 pb-2 flex justify-between items-center px-4">
+                        <span class="text-xs font-bold text-text-muted uppercase tracking-wider">Emission Trend</span>
+                        <div class="flex items-center gap-1.5" id="trendBContainer">
+                            <span class="text-base font-bold" id="trendBArrow">→</span>
+                            <span class="text-xs text-text-muted font-medium" id="trendBText">Stable</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- MATH STATS DIFFERENCE BANNER -->
+            <div class="border-t border-surface-border bg-surface-container-low px-8 py-5 text-center flex flex-col sm:flex-row items-center justify-center gap-2">
+                <span class="material-symbols-outlined text-primary text-xl icon-fill shrink-0">calculate</span>
+                <p class="font-bold text-on-surface text-sm sm:text-base" id="deltaMathText">
+                    Product A emits 0% more CO₂ per unit than Product B.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- ── BOTTOM: WHAT THIS MEANS FOR CONSUMERS ── -->
+        <div class="bg-gradient-to-r from-[#e8f5e9] to-[#f1fdf3] border border-[#c8e6c9] rounded-2xl p-6 shadow-sm flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+                <span class="material-symbols-outlined icon-fill">campaign</span>
+            </div>
+            <div class="flex-grow">
+                <h3 class="font-bold text-primary text-base mb-1">What This Means for Consumers</h3>
+                <p class="text-on-surface-variant text-sm leading-relaxed" id="plainLanguageVerdict">
+                    Selecting the carbon-efficient product helps drive regulatory compliance and climate action forward.
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-white border-t border-surface-border py-6 px-4 md:px-12 flex flex-col md:flex-row justify-between items-center gap-4 mt-auto">
+    <div class="flex items-center gap-2">
+        <span class="material-symbols-outlined text-primary icon-fill">eco</span>
+        <span class="font-bold text-primary">EcoMark</span>
+        <span class="text-text-muted text-xs ml-3">© 2024 EcoMark Industrial Carbon Accounting</span>
+    </div>
+    <div class="flex gap-4 text-xs text-text-muted">
+        <a href="../index.html" class="hover:text-primary transition-colors">Home</a>
+        <a href="search.html" class="hover:text-primary transition-colors">Search Registry</a>
+        <a href="../compliance.html" class="hover:text-primary transition-colors">Policy Framework</a>
+    </div>
+</footer>
+
+<script src="../js/db.js"></script>
+<script>
+    const SCORE_BG = {
+        'A+': '#1B5E20', 'A': '#388E3C', 'B': '#F9A825', 'C': '#E65100', 'D': '#B71C1C'
+    };
+
+    let allProductsList = [];
+    let productA = null;
+    let productB = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const rawProducts = DB.getProducts();
+        const rawUsers = DB.getUsers();
+
+        // Flatten products with company details for search queries
+        allProductsList = Object.values(rawProducts)
+            .filter(p => p.latestScore)
+            .map(p => ({
+                ...p,
+                companyName: rawUsers[p.companyId]?.companyName || 'Unknown Company',
+                industryType: rawUsers[p.companyId]?.industry || p.category || 'Manufacturing'
+            }));
+
+        // Binds autocomplete input searches
+        bindSearch('inputSearchA', 'dropdownA', item => {
+            selectProductA(item);
+        }, () => allProductsList);
+
+        bindSearch('inputSearchB', 'dropdownB', item => {
+            selectProductB(item);
+        }, () => {
+            if (!productA) return [];
+            return allProductsList.filter(p => 
+                p.category === productA.category && 
+                p.industryType === productA.industryType &&
+                p.productId !== productA.productId
+            );
+        });
+
+        // Binds input validation alert helper
+        document.getElementById('inputSearchB').addEventListener('input', () => {
+            if (!productA) return;
+            const query = document.getElementById('inputSearchB').value.trim().toLowerCase();
+            const warningEl = document.getElementById('matchWarning');
+            
+            if (query) {
+                // Find if there are any products matching query name that are from DIFFERENT category/industry
+                const mismatchedProducts = allProductsList.filter(p => 
+                    p.productName.toLowerCase().includes(query) &&
+                    (p.category !== productA.category || p.industryType !== productA.industryType)
+                );
+                
+                if (mismatchedProducts.length > 0) {
+                    warningEl.textContent = `Only ${productA.category} products in ${productA.industryType} can be compared here.`;
+                    warningEl.classList.remove('hidden');
+                } else {
+                    warningEl.classList.add('hidden');
+                }
+            } else {
+                warningEl.classList.add('hidden');
+            }
+        });
+
+        // Setup resets
+        document.getElementById('resetABtn').addEventListener('click', resetA);
+        document.getElementById('resetBBtn').addEventListener('click', resetB);
+
+        // Check for ?productId= param to preload Product A
+        const params = new URLSearchParams(window.location.search);
+        const preloadId = params.get('productId');
+        if (preloadId) {
+            const preProduct = allProductsList.find(p => p.productId === preloadId);
+            if (preProduct) {
+                selectProductA(preProduct);
+            }
+        }
+    });
+
+    // Custom Autocomplete binder
+    function bindSearch(inputId, dropdownId, onSelect, getFilteredList) {
+        const input = document.getElementById(inputId);
+        const dropdown = document.getElementById(dropdownId);
+
+        input.addEventListener('focus', () => {
+            renderDropdown();
+        });
+
+        input.addEventListener('input', () => {
+            renderDropdown();
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', e => {
+            if (!input.contains(e.target) && !dropdown.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+
+        function renderDropdown() {
+            const list = getFilteredList();
+            const query = input.value.trim().toLowerCase();
+            
+            const filtered = list.filter(p => 
+                !query || 
+                p.productName.toLowerCase().includes(query) ||
+                p.companyName.toLowerCase().includes(query)
+            );
+
+            if (filtered.length === 0) {
+                dropdown.innerHTML = `<p class="p-3 text-xs text-text-muted text-center font-medium">No verified matches found</p>`;
+            } else {
+                dropdown.innerHTML = filtered.map(p => {
+                    const scoreBg = SCORE_BG[p.latestScore] || '#388E3C';
+                    return `
+                        <div class="flex items-center justify-between p-3 hover:bg-surface-container-low cursor-pointer border-b border-surface-border last:border-b-0"
+                             data-id="${p.productId}">
+                            <div class="min-w-0 flex-1">
+                                <p class="text-sm font-bold text-on-surface truncate mb-0.5">${p.productName}</p>
+                                <p class="text-xs text-text-muted truncate">${p.companyName}</p>
+                            </div>
+                            <div class="flex items-center gap-2 shrink-0">
+                                <span class="text-[9px] font-bold uppercase tracking-wider bg-surface-container text-on-surface-variant px-2 py-0.5 rounded-full">${p.industryType}</span>
+                                <span class="w-7 h-7 rounded-full text-white text-[10px] font-black flex items-center justify-center" style="background:${scoreBg}">${p.latestScore}</span>
+                            </div>
+                        </div>`;
+                }).join('');
+            }
+            dropdown.classList.remove('hidden');
+        }
+
+        dropdown.addEventListener('click', e => {
+            const item = e.target.closest('[data-id]');
+            if (!item) return;
+            const pid = item.dataset.id;
+            const match = getFilteredList().find(p => p.productId === pid) || allProductsList.find(p => p.productId === pid);
+            if (match) {
+                input.value = '';
+                dropdown.classList.add('hidden');
+                onSelect(match);
+            }
+        });
+    }
+
+    // Select Product A
+    function selectProductA(item) {
+        productA = item;
+        
+        // Hide Search Slot, Show Selected Panel
+        document.getElementById('searchSlotA').classList.add('hidden');
+        document.getElementById('selectedSlotA').classList.remove('hidden');
+        document.getElementById('resetABtn').classList.remove('hidden');
+        
+        // Populate labels
+        document.getElementById('selectedAName').textContent = item.productName;
+        document.getElementById('selectedACompany').textContent = item.companyName;
+        document.getElementById('selectedACat').textContent = item.category;
+        document.getElementById('selectedAInd').textContent = item.industryType;
+
+        // Unlock Product B Pane
+        const paneB = document.getElementById('paneB');
+        paneB.classList.remove('opacity-60', 'pointer-events-none');
+        document.getElementById('inputSearchB').focus();
+
+        // Trigger warning text update
+        document.getElementById('matchWarning').textContent = `Only ${item.category} products in ${item.industryType} can be compared here.`;
+
+        checkCompare();
+    }
+
+    // Select Product B
+    function selectProductB(item) {
+        productB = item;
+
+        // Hide Search Slot, Show Selected Panel
+        document.getElementById('searchSlotB').classList.add('hidden');
+        document.getElementById('selectedSlotB').classList.remove('hidden');
+        document.getElementById('resetBBtn').classList.remove('hidden');
+        document.getElementById('matchWarning').classList.add('hidden');
+
+        // Populate labels
+        document.getElementById('selectedBName').textContent = item.productName;
+        document.getElementById('selectedBCompany').textContent = item.companyName;
+        document.getElementById('selectedBCat').textContent = item.category;
+        document.getElementById('selectedBInd').textContent = item.industryType;
+
+        checkCompare();
+    }
+
+    // Check if both products are selected, and run the comparison
+    function checkCompare() {
+        if (!productA || !productB) {
+            document.getElementById('comparisonResults').classList.add('hidden');
+            return;
+        }
+
+        const reports = DB.getReports();
+
+        // 1. Populate Product A Details
+        document.getElementById('nameA').textContent = productA.productName;
+        document.getElementById('companyA').textContent = productA.companyName;
+        document.getElementById('indA').textContent = productA.industryType;
+        document.getElementById('footprintA').innerHTML = `${productA.latestCO2ePerUnit.toFixed(4)} kg <span class="text-sm font-semibold text-text-muted">CO₂e/unit</span>`;
+        
+        const badgeA = document.getElementById('badgeA');
+        badgeA.textContent = productA.latestScore;
+        badgeA.style.backgroundColor = SCORE_BG[productA.latestScore] || '#388E3C';
+
+        // Fuel pills Product A
+        const latestRepAId = productA.reportHistory[productA.reportHistory.length - 1];
+        const latestRepA = reports[latestRepAId];
+        const fuelsAContainer = document.getElementById('fuelsA');
+        fuelsAContainer.innerHTML = '';
+        if (latestRepA && latestRepA.fuelEntries) {
+            latestRepA.fuelEntries.forEach(fe => {
+                const span = document.createElement('span');
+                span.className = 'text-[10px] font-bold bg-[#eceeec] border border-surface-border text-on-surface-variant px-2 py-0.5 rounded-full capitalize';
+                span.textContent = fe.fuel_type.replace('_', ' ');
+                fuelsAContainer.appendChild(span);
+            });
+        } else {
+            fuelsAContainer.innerHTML = `<span class="text-xs text-text-muted">N/A</span>`;
+        }
+
+        // Trend Product A
+        const trendAArrow = document.getElementById('trendAArrow');
+        const trendAText = document.getElementById('trendAText');
+        if (productA.reportHistory.length > 1) {
+            const rList = productA.reportHistory.map(id => reports[id]).filter(Boolean).sort((a,b) => new Date(a.submittedAt) - new Date(b.submittedAt));
+            const cur = rList[rList.length - 1].co2ePerUnit;
+            const prev = rList[rList.length - 2].co2ePerUnit;
+            if (cur < prev) {
+                trendAArrow.className = "text-base font-bold text-score-a";
+                trendAArrow.textContent = "↓";
+                trendAText.textContent = "Improving";
+            } else if (cur > prev) {
+                trendAArrow.className = "text-base font-bold text-error";
+                trendAArrow.textContent = "↑";
+                trendAText.textContent = "Worsening";
+            } else {
+                trendAArrow.className = "text-base font-bold text-text-muted";
+                trendAArrow.textContent = "→";
+                trendAText.textContent = "Stable";
+            }
+        } else {
+            trendAArrow.className = "text-base font-bold text-text-muted";
+            trendAArrow.textContent = "→";
+            trendAText.textContent = "Stable (First report)";
+        }
+
+        // 2. Populate Product B Details
+        document.getElementById('nameB').textContent = productB.productName;
+        document.getElementById('companyB').textContent = productB.companyName;
+        document.getElementById('indB').textContent = productB.industryType;
+        document.getElementById('footprintB').innerHTML = `${productB.latestCO2ePerUnit.toFixed(4)} kg <span class="text-sm font-semibold text-text-muted">CO₂e/unit</span>`;
+        
+        const badgeB = document.getElementById('badgeB');
+        badgeB.textContent = productB.latestScore;
+        badgeB.style.backgroundColor = SCORE_BG[productB.latestScore] || '#388E3C';
+
+        // Fuel pills Product B
+        const latestRepBId = productB.reportHistory[productB.reportHistory.length - 1];
+        const latestRepB = reports[latestRepBId];
+        const fuelsBContainer = document.getElementById('fuelsB');
+        fuelsBContainer.innerHTML = '';
+        if (latestRepB && latestRepB.fuelEntries) {
+            latestRepB.fuelEntries.forEach(fe => {
+                const span = document.createElement('span');
+                span.className = 'text-[10px] font-bold bg-[#eceeec] border border-surface-border text-on-surface-variant px-2 py-0.5 rounded-full capitalize';
+                span.textContent = fe.fuel_type.replace('_', ' ');
+                fuelsBContainer.appendChild(span);
+            });
+        } else {
+            fuelsBContainer.innerHTML = `<span class="text-xs text-text-muted">N/A</span>`;
+        }
+
+        // Trend Product B
+        const trendBArrow = document.getElementById('trendBArrow');
+        const trendBText = document.getElementById('trendBText');
+        if (productB.reportHistory.length > 1) {
+            const rList = productB.reportHistory.map(id => reports[id]).filter(Boolean).sort((a,b) => new Date(a.submittedAt) - new Date(b.submittedAt));
+            const cur = rList[rList.length - 1].co2ePerUnit;
+            const prev = rList[rList.length - 2].co2ePerUnit;
+            if (cur < prev) {
+                trendBArrow.className = "text-base font-bold text-score-a";
+                trendBArrow.textContent = "↓";
+                trendBText.textContent = "Improving";
+            } else if (cur > prev) {
+                trendBArrow.className = "text-base font-bold text-error";
+                trendBArrow.textContent = "↑";
+                trendBText.textContent = "Worsening";
+            } else {
+                trendBArrow.className = "text-base font-bold text-text-muted";
+                trendBArrow.textContent = "→";
+                trendBText.textContent = "Stable";
+            }
+        } else {
+            trendBArrow.className = "text-base font-bold text-text-muted";
+            trendBArrow.textContent = "→";
+            trendBText.textContent = "Stable (First report)";
+        }
+
+        // 3. Mathematical delta & Winner Highlighting
+        const fA = productA.latestCO2ePerUnit;
+        const fB = productB.latestCO2ePerUnit;
+        
+        const bannerA = document.getElementById('winnerABanner');
+        const bannerB = document.getElementById('winnerBBanner');
+        const deltaText = document.getElementById('deltaMathText');
+        const verdictText = document.getElementById('plainLanguageVerdict');
+
+        const deckA = document.getElementById('deckA');
+        const deckB = document.getElementById('deckB');
+
+        // Resets
+        bannerA.classList.add('hidden');
+        bannerB.classList.add('hidden');
+        deckA.classList.remove('border-2', 'border-score-a-plus');
+        deckB.classList.remove('border-2', 'border-score-a-plus');
+
+        let winner = null;
+        let diffKg = Math.abs(fA - fB);
+        let pct = 0;
+
+        if (fA === fB) {
+            deltaText.innerHTML = `<span class="material-symbols-outlined text-primary text-sm icon-fill shrink-0">check_circle</span> Both products have an identical footprint of <strong>${fA.toFixed(4)} kg CO₂e/unit</strong>.`;
+            bannerA.textContent = "Equal Footprint";
+            bannerB.textContent = "Equal Footprint";
+            bannerA.classList.remove('hidden', 'bg-score-a-plus');
+            bannerB.classList.remove('hidden', 'bg-score-a-plus');
+            bannerA.classList.add('bg-score-b');
+            bannerB.classList.add('bg-score-b');
+            
+            verdictText.innerHTML = `Both products are in the <strong class="font-bold">${productA.category}</strong> category. Choosing either product emits the same environmental load. Consider regional proximity to minimize transport emissions.`;
+        } else {
+            let higher, lower;
+            if (fA > fB) {
+                higher = productA;
+                lower = productB;
+                pct = Math.round(((fA - fB) / fB) * 100);
+                
+                bannerB.classList.remove('hidden', 'bg-score-b');
+                bannerB.classList.add('bg-score-a-plus');
+                bannerB.innerHTML = `<span class="material-symbols-outlined text-sm icon-fill">stars</span> Lower Carbon Choice`;
+                deckB.classList.add('border-2', 'border-score-a-plus');
+                winner = productB;
+            } else {
+                higher = productB;
+                lower = productA;
+                pct = Math.round(((fB - fA) / fA) * 100);
+                
+                bannerA.classList.remove('hidden', 'bg-score-b');
+                bannerA.classList.add('bg-score-a-plus');
+                bannerA.innerHTML = `<span class="material-symbols-outlined text-sm icon-fill">stars</span> Lower Carbon Choice`;
+                deckA.classList.add('border-2', 'border-score-a-plus');
+                winner = productA;
+            }
+
+            deltaText.innerHTML = `<span class="material-symbols-outlined text-[#006036] text-sm icon-fill shrink-0">arrow_circle_down</span> <strong>${higher.productName}</strong> emits <strong>${pct}% more</strong> CO₂ per unit than <strong>${lower.productName}</strong> (+${diffKg.toFixed(4)} kg).`;
+            
+            const savedKm = (diffKg * 6).toFixed(1);
+            verdictText.innerHTML = `Both products are in the <strong class="font-bold text-primary">${productA.category}</strong> category. Choosing <strong class="text-primary font-extrabold">${lower.productName}</strong> saves approximately <strong class="text-primary font-black">${diffKg.toFixed(3)} kg</strong> of CO₂ per unit purchased — which is equivalent to avoiding a <strong class="text-primary font-black">${savedKm} km</strong> driving journey in a standard vehicle.`;
+        }
+
+        document.getElementById('comparisonResults').classList.remove('hidden');
+    }
+
+    // Reset slot A
+    function resetA() {
+        productA = null;
+        productB = null;
+
+        // Reset inputs & panel
+        document.getElementById('inputSearchA').value = '';
+        document.getElementById('searchSlotA').classList.remove('hidden');
+        document.getElementById('selectedSlotA').classList.add('hidden');
+        document.getElementById('resetABtn').classList.add('hidden');
+
+        // Lock Slot B
+        const paneB = document.getElementById('paneB');
+        paneB.classList.add('opacity-60', 'pointer-events-none');
+        resetB();
+
+        checkCompare();
+    }
+
+    // Reset slot B
+    function resetB() {
+        productB = null;
+
+        // Reset inputs & panel
+        document.getElementById('inputSearchB').value = '';
+        document.getElementById('searchSlotB').classList.remove('hidden');
+        document.getElementById('selectedSlotB').classList.add('hidden');
+        document.getElementById('resetBBtn').classList.add('hidden');
+        document.getElementById('matchWarning').classList.add('hidden');
+
+        checkCompare();
+    }
+</script>
+</body>
+</html>

@@ -235,9 +235,9 @@
     </div>
 
     <div class="flex justify-center mt-8 gap-4 flex-wrap">
-        <a href="../index.html" class="bg-primary text-on-primary px-8 py-3 rounded hover:bg-surface-tint transition-colors shadow-sm hover:shadow-md font-label-md text-label-md flex items-center gap-2 font-bold">
-            Learn More About EcoMark
-            <span class="material-symbols-outlined text-sm">open_in_new</span>
+        <a id="compareLink" href="compare.html" class="bg-primary text-on-primary px-8 py-3 rounded hover:bg-surface-tint transition-colors shadow-sm hover:shadow-md font-label-md text-label-md flex items-center gap-2 font-bold">
+            <span class="material-symbols-outlined text-sm icon-fill">balance</span>
+            Compare with Similar Products
         </a>
         <a id="labelGenLink" href="label-generator.html" class="border border-primary text-primary px-8 py-3 rounded hover:bg-[#e8f5e9] transition-colors font-label-md text-label-md flex items-center gap-2 font-bold">
             <span class="material-symbols-outlined text-sm">label</span>
@@ -455,9 +455,12 @@
             }).join('');
         }
 
-        // ── Label generator link ─────────────────────────────────────────────
+        // ── Label generator & compare links ──────────────────────────────────
         const labelLink = document.getElementById('labelGenLink');
         if (labelLink) labelLink.href = `label-generator.html?productId=${productId}`;
+
+        const compLink = document.getElementById('compareLink');
+        if (compLink) compLink.href = `compare.html?productId=${productId}`;
     });</script>
 </body>
 </html>
