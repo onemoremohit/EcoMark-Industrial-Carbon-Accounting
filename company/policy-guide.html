@@ -69,18 +69,23 @@
 
 <!-- Navigation Drawer (Desktop) -->
 <nav class="w-64 h-screen border-r border-surface-border bg-surface hidden lg:flex flex-col sticky top-0 z-50">
-    <div class="p-6 border-b border-surface-border">
-        <a href="../index.html" class="flex items-center gap-3">
-            <span class="material-symbols-outlined text-primary text-3xl font-bold">eco</span>
+    <div class="p-5 border-b border-surface-border">
+        <a href="../index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <span class="material-symbols-outlined text-primary text-3xl font-bold icon-fill">eco</span>
             <div>
-                <h2 class="font-headline-md text-headline-md font-bold text-primary">EcoMark</h2>
-                <p class="font-label-sm text-label-sm text-text-muted">Carbon Transparency</p>
+                <h2 class="font-bold text-primary text-base leading-tight">EcoMark</h2>
+                <p class="text-[11px] text-text-muted font-medium">Industry Portal</p>
             </div>
         </a>
     </div>
     <div class="flex-grow overflow-y-auto p-3">
         <!-- MY WORK -->
-        <p class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted px-3 pt-3 pb-1.5">My Work</p>
+        <div class="px-3 pt-3 pb-1.5">
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">MY WORK</span>
+                <div class="h-[1px] bg-surface-border flex-grow"></div>
+            </div>
+        </div>
         <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl text-sm mb-0.5" href="dashboard.html">
             <span class="material-symbols-outlined text-[20px]">dashboard</span>
             <span>Dashboard</span>
@@ -93,8 +98,14 @@
             <span class="material-symbols-outlined text-[20px]">inventory_2</span>
             <span>My Products</span>
         </a>
+
         <!-- COMPLIANCE & REWARDS -->
-        <p class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted px-3 pt-4 pb-1.5">Compliance & Rewards</p>
+        <div class="px-3 pt-4 pb-1.5">
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">COMPLIANCE & REWARDS</span>
+                <div class="h-[1px] bg-surface-border flex-grow"></div>
+            </div>
+        </div>
         <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl text-sm mb-0.5" href="compliance.html">
             <span class="material-symbols-outlined text-[20px]">verified_user</span>
             <span>My Compliance</span>
@@ -103,8 +114,14 @@
             <span class="material-symbols-outlined text-[20px]">toll</span>
             <span>Eco-Coins</span>
         </a>
+
         <!-- REFERENCE -->
-        <p class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted px-3 pt-4 pb-1.5">Reference</p>
+        <div class="px-3 pt-4 pb-1.5">
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">REFERENCE</span>
+                <div class="h-[1px] bg-surface-border flex-grow"></div>
+            </div>
+        </div>
         <a class="flex items-center gap-3 px-3 py-2.5 bg-secondary-container text-on-secondary-container rounded-xl font-bold transition-all duration-200 text-sm mb-0.5" href="policy-guide.html">
             <span class="material-symbols-outlined text-[20px] icon-fill">menu_book</span>
             <span>Policy Guide</span>
@@ -113,14 +130,20 @@
             <span class="material-symbols-outlined text-[20px]">open_in_new</span>
             <span>Public Registry</span>
         </a>
-    </div>
-    <div class="p-3 border-t border-surface-border">
-        <div class="px-3 py-2.5 bg-surface-container rounded-xl mb-2">
-            <p class="text-[10px] text-text-muted font-semibold mb-0.5">Logged in as</p>
-            <p class="text-sm font-bold text-on-surface truncate" id="sideCompanyLabel">Loading...</p>
-            <span class="inline-block mt-1 bg-primary/10 text-primary font-bold text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wide">Company</span>
+
+        <!-- ACCOUNT -->
+        <div class="px-3 pt-4 pb-1.5">
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">ACCOUNT</span>
+                <div class="h-[1px] bg-surface-border flex-grow"></div>
+            </div>
         </div>
-        <button id="logoutBtn" class="w-full flex items-center gap-3 px-3 py-2.5 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-xl text-sm text-left">
+        <div class="px-3 py-2 bg-surface-container rounded-xl mb-2 mt-1">
+            <p class="text-[9px] text-text-muted font-semibold uppercase tracking-wider mb-0.5">Logged in as</p>
+            <p class="text-xs font-bold text-on-surface truncate" id="sideCompanyLabel">Loading...</p>
+            <span class="inline-block mt-1 bg-primary/10 text-primary font-bold text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wide">Company</span>
+        </div>
+        <button id="logoutBtn" class="w-full flex items-center gap-3 px-3 py-2.5 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-xl text-sm text-left mb-1">
             <span class="material-symbols-outlined text-[20px]">logout</span>
             <span>Log Out</span>
         </button>
@@ -130,15 +153,99 @@
 <!-- Main Canvas -->
 <div class="flex-1 flex flex-col min-h-screen">
     <!-- Mobile Header -->
-    <header class="flex justify-between items-center px-4 py-4 sticky top-0 z-40 bg-surface border-b border-surface-border lg:hidden">
-        <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-primary icon-fill">eco</span>
-            <h1 class="font-bold text-primary text-lg">EcoMark</h1>
+    <header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40 bg-surface border-b border-surface-border lg:hidden">
+        <div class="flex items-center gap-4">
+            <button onclick="document.getElementById('mobileDrawer').classList.remove('hidden')" class="text-on-surface-variant p-2 hover:bg-surface-container-low rounded-full transition-colors" id="mobileMenuBtn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <h1 class="font-title-lg text-title-lg text-primary font-bold" id="topCompanyLabel">EcoMark</h1>
         </div>
-        <button id="logoutBtnMobile" class="p-2 text-error hover:bg-error-container/20 rounded-full">
-            <span class="material-symbols-outlined">logout</span>
-        </button>
+        <div class="flex items-center gap-3">
+            <button id="logoutBtnMobile" class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
+                <span class="material-symbols-outlined">logout</span>
+            </button>
+        </div>
     </header>
+
+    <!-- Mobile Drawer overlay -->
+    <div id="mobileDrawer" onclick="if(event.target === this) this.classList.add('hidden')" class="fixed inset-0 bg-black/50 z-50 hidden transition-opacity">
+        <div class="w-72 h-full bg-white flex flex-col shadow-2xl">
+            <div class="p-5 border-b border-surface-border flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-2xl icon-fill">eco</span>
+                    <span class="font-bold text-primary text-base">EcoMark</span>
+                </div>
+                <button onclick="document.getElementById('mobileDrawer').classList.add('hidden')" class="p-2 rounded-full hover:bg-surface-container">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="p-3 flex-grow overflow-y-auto">
+                <!-- MY WORK -->
+                <div class="px-3 pt-2 pb-1.5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">MY WORK</span>
+                        <div class="h-[1px] bg-surface-border flex-grow"></div>
+                    </div>
+                </div>
+                <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm mb-0.5" href="dashboard.html">
+                    <span class="material-symbols-outlined text-[20px]">dashboard</span>
+                    <span>Dashboard</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm mb-0.5" href="submit-report.html">
+                    <span class="material-symbols-outlined text-[20px]">post_add</span>
+                    <span>Submit Report</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm mb-0.5" href="my-products.html">
+                    <span class="material-symbols-outlined text-[20px]">inventory_2</span>
+                    <span>My Products</span>
+                </a>
+
+                <!-- COMPLIANCE & REWARDS -->
+                <div class="px-3 pt-4 pb-1.5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">COMPLIANCE & REWARDS</span>
+                        <div class="h-[1px] bg-surface-border flex-grow"></div>
+                    </div>
+                </div>
+                <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm mb-0.5" href="compliance.html">
+                    <span class="material-symbols-outlined text-[20px]">verified_user</span>
+                    <span>My Compliance</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm mb-0.5" href="eco-coins.html">
+                    <span class="material-symbols-outlined text-[20px]">toll</span>
+                    <span>Eco-Coins</span>
+                </a>
+
+                <!-- REFERENCE -->
+                <div class="px-3 pt-4 pb-1.5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">REFERENCE</span>
+                        <div class="h-[1px] bg-surface-border flex-grow"></div>
+                    </div>
+                </div>
+                <a class="flex items-center gap-3 px-3 py-2.5 bg-secondary-container text-on-secondary-container rounded-xl font-bold text-sm mb-0.5" href="policy-guide.html">
+                    <span class="material-symbols-outlined text-[20px] icon-fill">menu_book</span>
+                    <span>Policy Guide</span>
+                </a>
+                <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm mb-0.5" href="../consumer/search.html">
+                    <span class="material-symbols-outlined text-[20px]">open_in_new</span>
+                    <span>Public Registry</span>
+                </a>
+
+                <!-- ACCOUNT -->
+                <div class="px-3 pt-4 pb-1.5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">ACCOUNT</span>
+                        <div class="h-[1px] bg-surface-border flex-grow"></div>
+                    </div>
+                </div>
+                <button id="logoutBtnMobileDrawer" onclick="DB.logout()" class="w-full flex items-center gap-3 px-3 py-2.5 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-xl text-sm text-left mb-1">
+                    <span class="material-symbols-outlined text-[20px]">logout</span>
+                    <span>Log Out</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <main class="flex-1 px-4 md:px-12 py-8 max-w-container-max mx-auto w-full space-y-8">
 
@@ -633,6 +740,8 @@
     document.addEventListener('DOMContentLoaded', () => {
         if (!user) return;
         document.getElementById('sideCompanyLabel').textContent = user.companyName;
+        const topLabel = document.getElementById('topCompanyLabel');
+        if (topLabel) topLabel.textContent = user.companyName;
 
         const allReports = Object.values(DB.getReports())
             .filter(r => r.companyId === user.uid)

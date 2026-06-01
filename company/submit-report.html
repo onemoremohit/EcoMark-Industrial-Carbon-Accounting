@@ -113,9 +113,25 @@
             </div>
         </a>
     </div>
+<!-- Navigation Drawer (Desktop) -->
+<nav class="w-64 h-screen border-r border-surface-border bg-surface hidden lg:flex flex-col sticky top-0 z-50">
+    <div class="p-5 border-b border-surface-border">
+        <a href="../index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <span class="material-symbols-outlined text-primary text-3xl font-bold icon-fill">eco</span>
+            <div>
+                <h2 class="font-headline-md text-headline-md font-bold text-primary">EcoMark</h2>
+                <p class="font-label-sm text-label-sm text-text-muted">Carbon Transparency</p>
+            </div>
+        </a>
+    </div>
     <div class="flex-grow overflow-y-auto p-3">
         <!-- MY WORK -->
-        <p class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted px-3 pt-3 pb-1.5">My Work</p>
+        <div class="px-3 pt-3 pb-1.5">
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">MY WORK</span>
+                <div class="h-[1px] bg-surface-border flex-grow"></div>
+            </div>
+        </div>
         <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl text-sm mb-0.5" href="dashboard.html">
             <span class="material-symbols-outlined text-[20px]">dashboard</span>
             <span>Dashboard</span>
@@ -128,8 +144,14 @@
             <span class="material-symbols-outlined text-[20px]">inventory_2</span>
             <span>My Products</span>
         </a>
+
         <!-- COMPLIANCE & REWARDS -->
-        <p class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted px-3 pt-4 pb-1.5">Compliance & Rewards</p>
+        <div class="px-3 pt-4 pb-1.5">
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">COMPLIANCE & REWARDS</span>
+                <div class="h-[1px] bg-surface-border flex-grow"></div>
+            </div>
+        </div>
         <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl text-sm mb-0.5" href="compliance.html">
             <span class="material-symbols-outlined text-[20px]">verified_user</span>
             <span>My Compliance</span>
@@ -138,8 +160,14 @@
             <span class="material-symbols-outlined text-[20px]">toll</span>
             <span>Eco-Coins</span>
         </a>
+
         <!-- REFERENCE -->
-        <p class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted px-3 pt-4 pb-1.5">Reference</p>
+        <div class="px-3 pt-4 pb-1.5">
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">REFERENCE</span>
+                <div class="h-[1px] bg-surface-border flex-grow"></div>
+            </div>
+        </div>
         <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl text-sm mb-0.5" href="policy-guide.html">
             <span class="material-symbols-outlined text-[20px]">menu_book</span>
             <span>Policy Guide</span>
@@ -148,14 +176,20 @@
             <span class="material-symbols-outlined text-[20px]">open_in_new</span>
             <span>Public Registry</span>
         </a>
-    </div>
-    <div class="p-3 border-t border-surface-border">
-        <div class="px-3 py-2.5 bg-surface-container rounded-xl mb-2">
-            <p class="text-[10px] text-text-muted font-semibold mb-0.5">Logged in as</p>
-            <p class="text-sm font-bold text-on-surface truncate" id="sideCompanyLabel">Loading...</p>
-            <span class="inline-block mt-1 bg-primary/10 text-primary font-bold text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wide">Company</span>
+
+        <!-- ACCOUNT -->
+        <div class="px-3 pt-4 pb-1.5">
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">ACCOUNT</span>
+                <div class="h-[1px] bg-surface-border flex-grow"></div>
+            </div>
         </div>
-        <button id="logoutBtn" class="w-full flex items-center gap-3 px-3 py-2.5 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-xl text-sm text-left">
+        <div class="px-3 py-2 bg-surface-container rounded-xl mb-2 mt-1">
+            <p class="text-[9px] text-text-muted font-semibold uppercase tracking-wider mb-0.5">Logged in as</p>
+            <p class="text-xs font-bold text-on-surface truncate" id="sideCompanyLabel">Loading...</p>
+            <span class="inline-block mt-1 bg-primary/10 text-primary font-bold text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wide">Company</span>
+        </div>
+        <button id="logoutBtn" class="w-full flex items-center gap-3 px-3 py-2.5 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-xl text-sm text-left mb-1">
             <span class="material-symbols-outlined text-[20px]">logout</span>
             <span>Log Out</span>
         </button>
@@ -218,7 +252,13 @@
                 </button>
             </div>
             <div class="p-3 flex-grow overflow-y-auto">
-                <p class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted px-3 pt-2 pb-1.5">My Work</p>
+                <!-- MY WORK -->
+                <div class="px-3 pt-2 pb-1.5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">MY WORK</span>
+                        <div class="h-[1px] bg-surface-border flex-grow"></div>
+                    </div>
+                </div>
                 <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm mb-0.5" href="dashboard.html">
                     <span class="material-symbols-outlined text-[20px]">dashboard</span>
                     <span>Dashboard</span>
@@ -231,7 +271,14 @@
                     <span class="material-symbols-outlined text-[20px]">inventory_2</span>
                     <span>My Products</span>
                 </a>
-                <p class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted px-3 pt-4 pb-1.5">Compliance & Rewards</p>
+
+                <!-- COMPLIANCE & REWARDS -->
+                <div class="px-3 pt-4 pb-1.5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">COMPLIANCE & REWARDS</span>
+                        <div class="h-[1px] bg-surface-border flex-grow"></div>
+                    </div>
+                </div>
                 <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm mb-0.5" href="compliance.html">
                     <span class="material-symbols-outlined text-[20px]">verified_user</span>
                     <span>My Compliance</span>
@@ -240,7 +287,14 @@
                     <span class="material-symbols-outlined text-[20px]">toll</span>
                     <span>Eco-Coins</span>
                 </a>
-                <p class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted px-3 pt-4 pb-1.5">Reference</p>
+
+                <!-- REFERENCE -->
+                <div class="px-3 pt-4 pb-1.5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">REFERENCE</span>
+                        <div class="h-[1px] bg-surface-border flex-grow"></div>
+                    </div>
+                </div>
                 <a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm mb-0.5" href="policy-guide.html">
                     <span class="material-symbols-outlined text-[20px]">menu_book</span>
                     <span>Policy Guide</span>
@@ -249,6 +303,18 @@
                     <span class="material-symbols-outlined text-[20px]">open_in_new</span>
                     <span>Public Registry</span>
                 </a>
+
+                <!-- ACCOUNT -->
+                <div class="px-3 pt-4 pb-1.5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">ACCOUNT</span>
+                        <div class="h-[1px] bg-surface-border flex-grow"></div>
+                    </div>
+                </div>
+                <button id="logoutBtnMobileDrawer" onclick="DB.logout()" class="w-full flex items-center gap-3 px-3 py-2.5 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-xl text-sm text-left mb-1">
+                    <span class="material-symbols-outlined text-[20px]">logout</span>
+                    <span>Log Out</span>
+                </button>
             </div>
         </div>
     </div>

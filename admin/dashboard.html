@@ -55,37 +55,102 @@
             0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; }
         }
         .alert-pulse { animation: shimmer 2s infinite; }
+
+        /* Custom Admin Sidebar Button Styles */
+        .admin-sidebar-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.2s;
+            cursor: pointer;
+            width: 100%;
+            text-align: left;
+            color: #3f4941;
+            margin-bottom: 2px;
+        }
+        .admin-sidebar-btn:hover {
+            background-color: #f2f4f2;
+        }
+        .admin-sidebar-btn.active {
+            background-color: #E8F0FE; /* Regal Indigo/Blue container */
+            color: #1A73E8; /* Regal Indigo/Blue */
+            font-weight: 700;
+        }
+        .admin-sidebar-btn.active .material-symbols-outlined {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            color: #1A73E8;
+        }
     </style>
 </head>
 <body class="bg-surface text-on-surface font-body-md min-h-screen flex flex-col lg:flex-row font-sans" style="font-family:'Inter',sans-serif;">
 
 <!-- Navigation Drawer (Regulator Desktop) -->
 <nav class="hidden lg:flex flex-col h-screen sticky top-0 w-64 border-r border-surface-border bg-surface shrink-0 z-50">
-    <div class="p-6 border-b border-surface-border flex items-center gap-4">
-        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary font-bold text-lg shrink-0">R</div>
-        <div>
-            <h1 class="font-bold text-primary text-lg">EcoMark</h1>
-            <p class="text-xs text-on-surface-variant font-semibold">Regulator Portal</p>
-        </div>
-    </div>
-    <div class="p-4 flex-grow space-y-1">
-        <a class="flex items-center gap-3 px-4 py-3 bg-secondary-container text-on-secondary-container rounded-lg font-bold transition-all duration-200 text-sm" href="#">
-            <span class="material-symbols-outlined icon-fill text-xl">dashboard</span>
-            <span>Overview Portal</span>
-        </a>
-        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-lg text-sm" href="../compliance.html" target="_blank">
-            <span class="material-symbols-outlined text-xl">policy</span>
-            <span>Policy Framework</span>
+    <div class="p-5 border-b border-surface-border">
+        <a href="../index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <span class="material-symbols-outlined text-[#1A73E8] text-3xl font-bold icon-fill">eco</span>
+            <div>
+                <h2 class="font-bold text-[#1A73E8] text-base leading-tight">EcoMark</h2>
+                <p class="text-[11px] text-text-muted font-medium">Regulator Portal</p>
+            </div>
         </a>
     </div>
-    <div class="p-4 border-t border-surface-border flex flex-col gap-2">
-        <div class="px-4 py-2 bg-surface-container rounded-lg mb-2">
-            <p class="text-xs text-text-muted">Logged in as:</p>
-            <p class="text-sm font-bold text-on-surface truncate" id="sideUserLabel">Regulator</p>
-            <span class="inline-block mt-1 bg-red-100 text-score-d font-bold text-[10px] px-2 py-0.5 rounded uppercase">Admin</span>
+    <div class="flex-grow overflow-y-auto p-3">
+        <!-- OVERSIGHT -->
+        <div class="px-3 pt-3 pb-1.5">
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">OVERSIGHT</span>
+                <div class="h-[1px] bg-surface-border flex-grow"></div>
+            </div>
         </div>
-        <button id="logoutBtn" class="flex items-center gap-3 px-4 py-3 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-lg text-sm text-left w-full">
-            <span class="material-symbols-outlined">logout</span>
+        <button class="admin-sidebar-btn active" data-tab="analytics" onclick="switchTab('analytics')">
+            <span class="material-symbols-outlined text-[20px]">dashboard</span>
+            <span>Dashboard</span>
+        </button>
+        <button class="admin-sidebar-btn" data-tab="compliance" onclick="switchTab('compliance')">
+            <span class="material-symbols-outlined text-[20px]">verified_user</span>
+            <span>Verify Reports</span>
+            <span id="complianceBadgeSidebar" class="ml-auto bg-error text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden">!</span>
+        </button>
+
+        <!-- DATA -->
+        <div class="px-3 pt-4 pb-1.5">
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">DATA</span>
+                <div class="h-[1px] bg-surface-border flex-grow"></div>
+            </div>
+        </div>
+        <button class="admin-sidebar-btn" data-tab="registry" onclick="switchTab('registry')">
+            <span class="material-symbols-outlined text-[20px]">domain</span>
+            <span>All Companies</span>
+        </button>
+        <button class="admin-sidebar-btn" data-tab="auditlog" onclick="switchTab('auditlog')">
+            <span class="material-symbols-outlined text-[20px]">history</span>
+            <span>Audit Log</span>
+        </button>
+        <button class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-low transition-colors duration-200 rounded-xl text-sm mb-0.5 w-full text-left" onclick="document.getElementById('csvExportBtn').click()">
+            <span class="material-symbols-outlined text-[20px]">download</span>
+            <span>Export Ledger</span>
+        </button>
+
+        <!-- ACCOUNT -->
+        <div class="px-3 pt-4 pb-1.5">
+            <div class="flex items-center gap-2">
+                <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">ACCOUNT</span>
+                <div class="h-[1px] bg-surface-border flex-grow"></div>
+            </div>
+        </div>
+        <div class="px-3 py-2 bg-surface-container rounded-xl mb-2 mt-1">
+            <p class="text-[9px] text-text-muted font-semibold uppercase tracking-wider mb-0.5">Logged in as</p>
+            <p class="text-xs font-bold text-on-surface truncate" id="sideUserLabel">Regulator</p>
+            <span class="inline-block mt-1 bg-indigo-50 text-indigo-700 font-bold text-[9px] px-2 py-0.5 rounded-full uppercase tracking-wide">Admin</span>
+        </div>
+        <button id="logoutBtn" class="w-full flex items-center gap-3 px-3 py-2.5 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-xl text-sm text-left mb-1">
+            <span class="material-symbols-outlined text-[20px]">logout</span>
             <span>Log Out</span>
         </button>
     </div>
@@ -93,13 +158,85 @@
 
 <!-- Main Content Wrapper -->
 <div class="flex-1 flex flex-col min-w-0">
-    <!-- TopAppBar (Mobile) -->
-    <header class="flex justify-between items-center w-full px-4 md:px-12 py-4 sticky top-0 z-40 bg-surface border-b border-surface-border lg:hidden">
-        <span class="font-bold text-primary text-lg">EcoMark Regulator</span>
-        <button id="logoutBtnMobile" class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
-            <span class="material-symbols-outlined">logout</span>
-        </button>
+    <!-- TopAppBar (Mobile Header) -->
+    <header class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 sticky top-0 z-40 bg-surface border-b border-surface-border lg:hidden">
+        <div class="flex items-center gap-4">
+            <button onclick="document.getElementById('mobileDrawer').classList.remove('hidden')" class="text-on-surface-variant p-2 hover:bg-surface-container-low rounded-full transition-colors" id="mobileMenuBtn">
+                <span class="material-symbols-outlined">menu</span>
+            </button>
+            <h1 class="font-title-lg text-title-lg text-primary font-bold" id="topUserLabel">EcoMark Regulator</h1>
+        </div>
+        <div class="flex items-center gap-3">
+            <button id="logoutBtnMobile" class="p-2 text-error hover:bg-error-container/20 rounded-full transition-colors">
+                <span class="material-symbols-outlined">logout</span>
+            </button>
+        </div>
     </header>
+
+    <!-- Mobile Drawer overlay -->
+    <div id="mobileDrawer" onclick="if(event.target === this) this.classList.add('hidden')" class="fixed inset-0 bg-black/50 z-50 hidden transition-opacity">
+        <div class="w-72 h-full bg-white flex flex-col shadow-2xl">
+            <div class="p-5 border-b border-surface-border flex justify-between items-center">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-[#1A73E8] text-2xl icon-fill">eco</span>
+                    <span class="font-bold text-[#1A73E8] text-base">EcoMark</span>
+                </div>
+                <button onclick="document.getElementById('mobileDrawer').classList.add('hidden')" class="p-2 rounded-full hover:bg-surface-container">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="p-3 flex-grow overflow-y-auto">
+                <!-- OVERSIGHT -->
+                <div class="px-3 pt-2 pb-1.5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">OVERSIGHT</span>
+                        <div class="h-[1px] bg-surface-border flex-grow"></div>
+                    </div>
+                </div>
+                <button class="admin-sidebar-btn active" data-tab="analytics" onclick="switchTab('analytics'); document.getElementById('mobileDrawer').classList.add('hidden')">
+                    <span class="material-symbols-outlined text-[20px]">dashboard</span>
+                    <span>Dashboard</span>
+                </button>
+                <button class="admin-sidebar-btn" data-tab="compliance" onclick="switchTab('compliance'); document.getElementById('mobileDrawer').classList.add('hidden')">
+                    <span class="material-symbols-outlined text-[20px]">verified_user</span>
+                    <span>Verify Reports</span>
+                    <span id="complianceBadgeMobile" class="ml-auto bg-error text-white text-[10px] font-bold px-1.5 py-0.5 rounded-full hidden">!</span>
+                </button>
+
+                <!-- DATA -->
+                <div class="px-3 pt-4 pb-1.5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">DATA</span>
+                        <div class="h-[1px] bg-surface-border flex-grow"></div>
+                    </div>
+                </div>
+                <button class="admin-sidebar-btn" data-tab="registry" onclick="switchTab('registry'); document.getElementById('mobileDrawer').classList.add('hidden')">
+                    <span class="material-symbols-outlined text-[20px]">domain</span>
+                    <span>All Companies</span>
+                </button>
+                <button class="admin-sidebar-btn" data-tab="auditlog" onclick="switchTab('auditlog'); document.getElementById('mobileDrawer').classList.add('hidden')">
+                    <span class="material-symbols-outlined text-[20px]">history</span>
+                    <span>Audit Log</span>
+                </button>
+                <button class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container rounded-xl text-sm mb-0.5 w-full text-left" onclick="document.getElementById('csvExportBtn').click(); document.getElementById('mobileDrawer').classList.add('hidden')">
+                    <span class="material-symbols-outlined text-[20px]">download</span>
+                    <span>Export Ledger</span>
+                </button>
+
+                <!-- ACCOUNT -->
+                <div class="px-3 pt-4 pb-1.5">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-text-muted">ACCOUNT</span>
+                        <div class="h-[1px] bg-surface-border flex-grow"></div>
+                    </div>
+                </div>
+                <button id="logoutBtnMobileDrawer" onclick="DB.logout()" class="w-full flex items-center gap-3 px-3 py-2.5 text-error hover:bg-error-container/20 transition-colors duration-200 rounded-xl text-sm text-left mb-1">
+                    <span class="material-symbols-outlined text-[20px]">logout</span>
+                    <span>Log Out</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Canvas -->
     <main class="flex-1 p-4 md:p-12 bg-surface overflow-y-auto">
@@ -177,7 +314,7 @@
 
             <!-- Tab Navigation -->
             <div class="bg-white border border-surface-border rounded-xl overflow-hidden shadow-sm">
-                <div class="flex gap-2 p-3 border-b border-surface-border bg-surface-container-low">
+                <div class="hidden gap-2 p-3 border-b border-surface-border bg-surface-container-low">
                     <button class="tab-btn active" onclick="switchTab('analytics')" id="tab-analytics">Analytics</button>
                     <button class="tab-btn" onclick="switchTab('compliance')" id="tab-compliance">
                         Compliance Enforcement
@@ -385,11 +522,22 @@
         document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
         document.getElementById('tab-' + name).classList.add('active');
         document.getElementById('tabContent-' + name).classList.add('active');
+
+        // Sync admin sidebar and mobile drawer buttons
+        document.querySelectorAll('.admin-sidebar-btn').forEach(btn => {
+            if (btn.getAttribute('data-tab') === name) {
+                btn.classList.add('active');
+            } else {
+                btn.classList.remove('active');
+            }
+        });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
         if (!user) return;
         document.getElementById('sideUserLabel').textContent = user.companyName;
+        const topLabel = document.getElementById('topUserLabel');
+        if (topLabel) topLabel.textContent = user.companyName;
 
         const allUsers = DB.getUsers();
         const allProducts = DB.getProducts();
@@ -448,17 +596,23 @@
         const alertText = document.getElementById('alertText');
         if (nonCompliantCount > 0) {
             alertText.textContent = `${nonCompliantCount} facilit${nonCompliantCount > 1 ? 'ies' : 'y'} classified as Non-Compliant (Score D or missing reports). Review the Compliance Enforcement tab to issue notices.`;
+            document.getElementById('complianceBadgeSidebar').classList.remove('hidden');
+            document.getElementById('complianceBadgeMobile').classList.remove('hidden');
         } else if (atRiskCount > 0) {
             alertBanner.className = alertBanner.className.replace('bg-[#fff8f7] border-[#ffb4ab]', 'bg-[#fffde7] border-[#fff176]');
             alertBanner.querySelector('.material-symbols-outlined').className = 'material-symbols-outlined text-[#F57F17] icon-fill shrink-0';
             alertBanner.querySelector('p.font-bold').className = 'font-bold text-[#F57F17] text-sm';
             alertText.textContent = `${atRiskCount} facilit${atRiskCount > 1 ? 'ies' : 'y'} at risk — only 1 quarterly report filed. Deadline monitoring active.`;
+            document.getElementById('complianceBadgeSidebar').classList.add('hidden');
+            document.getElementById('complianceBadgeMobile').classList.add('hidden');
         } else {
             alertBanner.className = alertBanner.className.replace('bg-[#fff8f7] border-[#ffb4ab]', 'bg-[#e8f5e9] border-[#c8e6c9]');
             alertBanner.querySelector('.material-symbols-outlined').className = 'material-symbols-outlined text-[#1B5E20] icon-fill shrink-0';
             alertBanner.querySelector('p.font-bold').className = 'font-bold text-[#1B5E20] text-sm';
             alertText.textContent = 'All registered facilities are currently compliant. No action required.';
             document.getElementById('complianceBadge').style.display = 'none';
+            document.getElementById('complianceBadgeSidebar').classList.add('hidden');
+            document.getElementById('complianceBadgeMobile').classList.add('hidden');
         }
 
         // ── Charts ──
