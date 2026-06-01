@@ -284,6 +284,10 @@
 
         if (!productId) { showSelector(); return; }
 
+        renderLabel(productId);
+    });
+
+    function renderLabel(productId) {
         const products = DB.getProducts();
         const product  = products[productId];
         if (!product || !product.latestScore) { showError(); return; }
@@ -294,6 +298,17 @@
         const co2     = product.latestCO2ePerUnit;
         const bg      = SCORE_BG[score] || '#388E3C';
         const verifyUrl = `https://ecomark.app/verify?id=${productId}`;
+
+        // Hide selector and error states, show standard layout elements
+        document.getElementById('errorState').classList.add('hidden');
+        document.getElementById('selectorState').classList.add('hidden');
+
+        document.getElementById('instructions').classList.remove('hidden');
+        document.getElementById('printLabel').classList.remove('hidden');
+        if (document.getElementById('variantBtns')) document.getElementById('variantBtns').classList.remove('hidden');
+        document.getElementById('detailsTable').classList.remove('hidden');
+        document.getElementById('footerCtAs').classList.remove('hidden');
+        document.getElementById('printBtn').classList.remove('hidden');
 
         // ── Populate label ──────────────────────────────────────────────
         document.getElementById('labelProductName').textContent = product.productName;
@@ -335,7 +350,11 @@
 
         // ── Page title ──────────────────────────────────────────────────
         document.title = `Label — ${product.productName} | EcoMark`;
-    });
+
+        // Update url query string without reloading the page
+        const newUrl = window.location.pathname + `?productId=${productId}`;
+        window.history.pushState({ path: newUrl }, '', newUrl);
+    }
 
     function showSelector() {
         // Hide standard label layout elements
@@ -384,7 +403,7 @@
         generateBtn.addEventListener('click', () => {
             const val = select.value;
             if (val) {
-                window.location.search = `?productId=${val}`;
+                renderLabel(val);
             }
         });
 
