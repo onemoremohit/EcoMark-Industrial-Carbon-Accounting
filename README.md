@@ -1,5 +1,7 @@
 # EcoMark — Industrial Carbon Transparency Platform
 
+🌐 **Live Deployment:** [https://ecomark-carbon-registry.web.app](https://ecomark-carbon-registry.web.app)
+
 Welcome to **EcoMark**, an investor-ready, compliance-grade carbon transparency platform engineered for India's industrial sector. It implements verifiable carbon accounting aligned with **IPCC AR5**, **ISO 14064-1**, **SEBI BRSR**, **BEE PAT**, and **EU CBAM** — running entirely in the browser with full `localStorage` persistence and zero server setup.
 
 ---
@@ -172,7 +174,7 @@ Open **`index.html`** in any modern browser. The entire platform runs client-sid
 ---
 
 ### 8. Printable Carbon Label
-
+*(Note: To maintain focus, "Labels" has been removed from the top navigation bar and is only accessible contextually from a product details page).*
 1. Open `consumer/label-generator.html?productId=prod_ravi_steel`
 2. Label renders at 340×189px (90×50mm at 96dpi):
    - EcoMark logo, Product name, Company, Score badge (colour-coded), CO₂e/unit, live QR code, "Scan to verify at ecomark.app"
@@ -182,13 +184,18 @@ Open **`index.html`** in any modern browser. The entire platform runs client-sid
 ---
 
 ### 9. Regulator / Admin Portal
-
+*(Note: Regulator view has been refactored to use a company-congruent sidebar layout with a distinct Regal Indigo/Blue accent color to distinguish the view, with horizontal tabs hidden).*
 1. Log out → login as `admin@ecomark.com / admin`
-2. **Analytics tab**: KPI cards, emissions chart, Eco-Coin leaderboard
-3. **Compliance Enforcement tab**: per-company status cards with **Issue Notice** and **Send Reminder** buttons — all actions are logged to the tamper-evident audit trail
-4. **Facility Registry tab**: sortable, filterable table of all registered companies
-5. **Audit Log tab**: WORM-style log with lock icons for every action
-6. Click **Export Ledger (CSV)** — downloads all company audit data as a spreadsheet
+2. Navigate via the sidebar sections:
+   - **OVERSIGHT**:
+     - **Dashboard**: Switches to the Analytics tab (KPI cards, emissions chart, Eco-Coin leaderboard)
+     - **Verify Reports**: Switches to the Compliance Enforcement tab (per-company status cards with **Issue Notice** and **Send Reminder** buttons — all actions are logged to the tamper-evident audit trail)
+   - **DATA**:
+     - **All Companies**: Switches to the Facility Registry tab (sortable, filterable table of all registered companies)
+     - **Audit Log**: Switches to the Audit Log tab (WORM-style log with lock icons for every action)
+     - **Export Ledger**: Triggers compilation and download of all company audit data as a spreadsheet (CSV)
+   - **ACCOUNT**:
+     - **Log Out**: Securely signs out the active session.
 
 ---
 
